@@ -14,7 +14,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const drawerWidth = 240;
 
@@ -85,18 +85,19 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function Sidebar() {
     const user = useSelector((store) => store.user);
+    const dispatch = useDispatch();
 
-  const theme = useTheme();
-  const history = useHistory();
-  const [open, setOpen] = React.useState(false);
+    const theme = useTheme();
+    const history = useHistory();
+    const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+    const handleDrawerOpen = () => {
+      setOpen(true);
+    };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+    const handleDrawerClose = () => {
+      setOpen(false);
+    };
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -154,7 +155,7 @@ export default function Sidebar() {
         </ListItem>
         }
         {user.id ?
-            <ListItem button onClick={() => (history.push('/about'))}>
+            <ListItem button onClick={() => dispatch({ type: 'LOGOUT' })}>
                 <ListItemIcon>
                     <InboxIcon />
                 </ListItemIcon>

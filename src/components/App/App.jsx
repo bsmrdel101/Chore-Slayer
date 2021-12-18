@@ -21,6 +21,7 @@ import Game from '../Game/Game';
 import Deck from '../Deck/Deck';
 import Stats from '../Stats/Stats';
 import Help from '../Help/Help';
+import LogOutButton from '../LogOutButton/LogOutButton';
 
 import './App.css';
 
@@ -93,6 +94,14 @@ function App() {
             path="/help"
           >
             <Help />
+          </ProtectedRoute>
+
+          {/* Log Out */}
+          <ProtectedRoute
+            exact
+            path="/logOut"
+          >
+            <LogOutButton />
           </ProtectedRoute>
 
           <Route
