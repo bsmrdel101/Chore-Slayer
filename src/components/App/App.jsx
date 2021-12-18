@@ -36,7 +36,9 @@ function App() {
   return (
     <Router>
       <div>
-        <Sidebar />
+        {user.id &&
+          <Sidebar />
+        }
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -50,7 +52,7 @@ function App() {
             exact
             path="/user"
           >
-            <UserPage />
+            <Tasks />
           </ProtectedRoute>
 
           {/* Task page */}

@@ -109,38 +109,50 @@ export default function Sidebar() {
         </DrawerHeader>
         <Divider />
         <List>
-        <ListItem button onClick={() => (history.push('/tasks'))}>
-            <ListItemIcon>
-                <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Tasks"/>
-        </ListItem>
-        <ListItem button onClick={() => (history.push('/game'))}>
-            <ListItemIcon>
-                <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Game"/>
-        </ListItem>
-        <ListItem button onClick={() => (history.push('/deck'))}>
-            <ListItemIcon>
-                <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Deck"/>
-        </ListItem>
-        <ListItem button onClick={() => (history.push('/stats'))}>
-            <ListItemIcon>
-                <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Game Stats"/>
-        </ListItem>
+        {user.id &&
+            <ListItem button onClick={() => (history.push('/tasks'))}>
+                <ListItemIcon>
+                    <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Tasks"/>
+            </ListItem>
+        }
+        {user.id &&
+            <ListItem button onClick={() => (history.push('/game'))}>
+                <ListItemIcon>
+                    <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Game"/>
+            </ListItem>
+        }
+        {user.id &&
+            <ListItem button onClick={() => (history.push('/deck'))}>
+                <ListItemIcon>
+                    <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Deck"/>
+            </ListItem>
+        }
+        {user.id &&
+            <ListItem button onClick={() => (history.push('/stats'))}>
+                <ListItemIcon>
+                    <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Game Stats"/>
+            </ListItem>
+        }
         </List>
-        <Divider />
+        {user.id &&
+            <Divider />
+        }
+        {user.id &&
         <ListItem button onClick={() => (history.push('/help'))}>
             <ListItemIcon>
                 <InboxIcon />
             </ListItemIcon>
             <ListItemText primary="Help"/>
         </ListItem>
+        }
         {user.id ?
             <ListItem button onClick={() => (history.push('/about'))}>
                 <ListItemIcon>
