@@ -18,6 +18,7 @@ function AddTask() {
     const addTask = (event) => {
         event.preventDefault();
         console.log({name: newName, description: newDescription, difficulty: newDifficulty});
+        history.push('/tasks');
         dispatch({
             type: 'ADD_TASK',
             payload: {name: newName, description: newDescription, difficulty: newDifficulty}
