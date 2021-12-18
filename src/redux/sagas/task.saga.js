@@ -4,7 +4,6 @@ import axios from 'axios';
 // Saga GET route
 function* fetchTasks(action) {
     try {
-      console.log(action);
       // Make an axios request to the server for tasks
       const response = yield axios({
         method: 'GET',
