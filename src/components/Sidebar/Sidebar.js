@@ -112,19 +112,19 @@ export default function Sidebar() {
             </ListItemIcon>
             <ListItemText primary="Tasks"/>
         </ListItem>
-        <ListItem button onClick={() => (history.push('/user'))}>
+        <ListItem button onClick={() => (history.push('/game'))}>
             <ListItemIcon>
                 <InboxIcon />
             </ListItemIcon>
             <ListItemText primary="Game"/>
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => (history.push('/deck'))}>
             <ListItemIcon>
                 <InboxIcon />
             </ListItemIcon>
             <ListItemText primary="Deck"/>
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => (history.push('/stats'))}>
             <ListItemIcon>
                 <InboxIcon />
             </ListItemIcon>
@@ -132,7 +132,7 @@ export default function Sidebar() {
         </ListItem>
         </List>
         <Divider />
-        <ListItem button>
+        <ListItem button onClick={() => (history.push('/help'))}>
             <ListItemIcon>
                 <InboxIcon />
             </ListItemIcon>
