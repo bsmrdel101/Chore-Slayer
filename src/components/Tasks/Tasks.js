@@ -56,7 +56,11 @@ function Tasks() {
                 <Grid item xs={8}>
                     <Item>
                         <div>
-                            <p>side 2</p>
+                            <h2>Tasks Left: {taskReducer.length}</h2>
+                            <h2>Tasks Completed: 0</h2>
+                            <hr />
+                            <h2>New Card: 0/3</h2>
+                            <h2>Stat Increase: 0/5</h2>
                         </div>
                     </Item>
                 </Grid>
