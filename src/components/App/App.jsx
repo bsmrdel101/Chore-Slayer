@@ -10,15 +10,21 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
+// Import components
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Sidebar from '../Sidebar/Sidebar';
+import Tasks from '../Tasks/Tasks';
+import Game from '../Game/Game';
+import Deck from '../Deck/Deck';
+import Stats from '../Stats/Stats';
+import Help from '../Help/Help';
 
 import './App.css';
-import Sidebar from '../Sidebar/Sidebar';
 
 function App() {
   const dispatch = useDispatch();

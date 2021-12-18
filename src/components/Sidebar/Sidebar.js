@@ -13,6 +13,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
+import { useHistory } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -83,6 +84,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function Sidebar() {
   const theme = useTheme();
+  const history = useHistory();
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -104,13 +106,13 @@ export default function Sidebar() {
         </DrawerHeader>
         <Divider />
         <List>
-        <ListItem button>
+        <ListItem button onClick={() => (history.push('/tasks'))}>
             <ListItemIcon>
                 <InboxIcon />
             </ListItemIcon>
             <ListItemText primary="Tasks"/>
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => (history.push('/user'))}>
             <ListItemIcon>
                 <InboxIcon />
             </ListItemIcon>
