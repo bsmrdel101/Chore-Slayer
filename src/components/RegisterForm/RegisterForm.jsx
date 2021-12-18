@@ -15,6 +15,8 @@ function RegisterForm() {
       payload: {
         username: username,
         password: password,
+        max_hp: 15,
+        new_user: true
       },
     });
   }; // end registerUser
