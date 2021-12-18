@@ -15,6 +15,12 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import TaskIcon from '@mui/icons-material/Task';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import Inventory2Icon from '@mui/icons-material/Inventory2';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import HelpIcon from '@mui/icons-material/Help';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const drawerWidth = 240;
 
@@ -113,7 +119,7 @@ export default function Sidebar() {
         {user.id &&
             <ListItem button onClick={() => (history.push('/tasks'))}>
                 <ListItemIcon>
-                    <InboxIcon />
+                    <TaskIcon />
                 </ListItemIcon>
                 <ListItemText primary="Tasks"/>
             </ListItem>
@@ -121,7 +127,7 @@ export default function Sidebar() {
         {user.id &&
             <ListItem button onClick={() => (history.push('/game'))}>
                 <ListItemIcon>
-                    <InboxIcon />
+                    <SportsEsportsIcon />
                 </ListItemIcon>
                 <ListItemText primary="Game"/>
             </ListItem>
@@ -129,7 +135,7 @@ export default function Sidebar() {
         {user.id &&
             <ListItem button onClick={() => (history.push('/deck'))}>
                 <ListItemIcon>
-                    <InboxIcon />
+                    <Inventory2Icon />
                 </ListItemIcon>
                 <ListItemText primary="Deck"/>
             </ListItem>
@@ -137,7 +143,7 @@ export default function Sidebar() {
         {user.id &&
             <ListItem button onClick={() => (history.push('/stats'))}>
                 <ListItemIcon>
-                    <InboxIcon />
+                    <BarChartIcon />
                 </ListItemIcon>
                 <ListItemText primary="Game Stats"/>
             </ListItem>
@@ -149,7 +155,7 @@ export default function Sidebar() {
         {user.id &&
         <ListItem button onClick={() => (history.push('/help'))}>
             <ListItemIcon>
-                <InboxIcon />
+                <HelpIcon />
             </ListItemIcon>
             <ListItemText primary="Help"/>
         </ListItem>
@@ -157,7 +163,7 @@ export default function Sidebar() {
         {user.id ?
             <ListItem button onClick={() => dispatch({ type: 'LOGOUT' })}>
                 <ListItemIcon>
-                    <InboxIcon />
+                    <LogoutIcon />
                 </ListItemIcon>
                 <ListItemText primary="Logout"/>
             </ListItem>

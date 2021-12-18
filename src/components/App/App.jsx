@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 // Import components
-import UserPage from '../UserPage/UserPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
@@ -21,7 +20,6 @@ import Game from '../Game/Game';
 import Deck from '../Deck/Deck';
 import Stats from '../Stats/Stats';
 import Help from '../Help/Help';
-import LogOutButton from '../LogOutButton/LogOutButton';
 
 import './App.css';
 
@@ -94,14 +92,6 @@ function App() {
             path="/help"
           >
             <Help />
-          </ProtectedRoute>
-
-          {/* Log Out */}
-          <ProtectedRoute
-            exact
-            path="/logOut"
-          >
-            <LogOutButton />
           </ProtectedRoute>
 
           <Route

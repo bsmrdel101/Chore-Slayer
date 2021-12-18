@@ -2,7 +2,7 @@
 function Tasks() {
     return (
         <>
-            <p>tasks</p>
+            
         </>
     );
 }
