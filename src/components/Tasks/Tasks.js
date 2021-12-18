@@ -33,26 +33,26 @@ function Tasks() {
         <>
             <h1>Chores</h1>
             <Grid container spacing={2} columns={16}>
-            <Grid item xs={8}>
-                <Item>
-                    <div className='task-list'>
-                        {taskReducer.map((task) => {
-                            return (
-                                <div key={task.id}>
-                                    <TaskCard task={task}/>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </Item>
-            </Grid>
-            <Grid item xs={8}>
-                <Item>
-                    <div>
-                        <p>side 2</p>
-                    </div>
-                </Item>
-            </Grid>
+                <Grid item xs={8}>
+                    <Item>
+                        <div className='task-list'>
+                            {taskReducer.map((task) => {
+                                return (
+                                    <div key={task.id}>
+                                        <TaskCard task={task}/>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </Item>
+                </Grid>
+                <Grid item xs={8}>
+                    <Item>
+                        <div>
+                            <p>side 2</p>
+                        </div>
+                    </Item>
+                </Grid>
             </Grid>
         </>    
     );
