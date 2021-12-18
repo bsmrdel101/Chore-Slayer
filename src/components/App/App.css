@@ -24,3 +24,11 @@ body {
     background-color: grey;
     padding: 30px;
 }
+
+.add-task-btn {
+    padding: 0 25px;
+    font-size: 40px;
+    color: white;
+    background-color: rgb(56, 56, 163);
+    margin-bottom: 3vh;
+}
