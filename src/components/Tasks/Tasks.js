@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import TaskCard from "../TaskCard/TaskCard";
 import { styled } from '@mui/material/styles';
@@ -8,85 +8,98 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import * as React from 'react';
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
+import { TextField } from "@mui/material";
+import { Button } from "@mui/material";
 
 function Tasks() {
     const dispatch = useDispatch();
     const taskReducer = useSelector((store) => store.taskReducer);
 
+    // local state for add task form
+    let [newName, setNewName] = useState('');
+    let [newDescription, setNewDescription] = useState('');
+    // TODO add functionality to add difficulty
+    let [newDifficulty, setNewDifficulty] = useState(1);
+
     useEffect(() => {
+        // Render all of the task cards on the DOM when the page loads
         fetchTasks();
     }, [])
 
+    // GET tasks
     const fetchTasks = () => {
         dispatch({
             type: 'FETCH_TASKS'
         });
     }
 
+    // POST task
+    const addTask = () => {
+        console.log({name: newName, description: newDescription, difficulty: newDifficulty});
+        // dispatch({
+        //     type: 'ADD_TASK',
+        //     payload: {name: newName, description: newDescription, difficulty: newDifficulty}
+        // });
+    }
+
+    // Handles the multiple grid items inside the Grid MUI component
+    const Item = styled(Paper)(({ theme }) => ({
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    }));
+
+    // All of this is for the add task modal
     const StyledModal = styled(ModalUnstyled)`
-  position: fixed;
-  z-index: 1300;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+    position: fixed;
+    z-index: 1300;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    `;
 
-const Backdrop = styled('div')`
-  z-index: -1;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  -webkit-tap-highlight-color: transparent;
-`;
+    const Backdrop = styled('div')`
+    z-index: -1;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-tap-highlight-color: transparent;
+    `;
 
-const style = {
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  p: 2,
-  px: 4,
-  pb: 3,
-};
+    const style = {
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    p: 2,
+    px: 4,
+    pb: 3,
+    };
 
-const [open, setOpen] = React.useState(false);
-const handleOpen = () => setOpen(true);
-const handleClose = () => setOpen(false);
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    // End of add task modal
 
     return (
         <>
             <h1>Chores</h1>
-            <div>
-                <button className="add-task-btn" onClick={handleOpen}>+</button>
-                <StyledModal
-                    aria-labelledby="unstyled-modal-title"
-                    aria-describedby="unstyled-modal-description"
-                    open={open}
-                    onClose={handleClose}
-                    BackdropComponent={Backdrop}
-                >
-                    <Box sx={style}>
-                    <h2 id="unstyled-modal-title">Add a Task</h2>
-                    <form>
-                        
-                    </form>
-                    </Box>
-                </StyledModal>
-            </div>
+            <button className="add-task-btn" onClick={handleOpen}>+</button>
+            {/* <form onSubmit={addTask}>
+                <TextField label="Standard" variant="standard" value={newName}
+                    onChange={(event) => setNewName(event.target.value)} />
+                <TextField label="Standard" variant="standard" value={newDescription}
+                    onChange={(event) => setNewDescription(event.target.value)} />
+                <Button variant="text" type="submit">Save</Button>
+                <Button variant="text" onClick={handleClose}>Cancel</Button>
+            </form> */}
             <Grid container spacing={2} columns={16}>
                 <Grid item xs={8}>
                     <Item>
