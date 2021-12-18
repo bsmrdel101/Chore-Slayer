@@ -20,18 +20,7 @@ body {
     margin-top: 2vh;
 }
 
-.dif-meter {
-    display: flex;
-    justify-content: flex-end;
-}
-
 .task-list {
     background-color: grey;
-    padding: 20px;
-    min-width: 20em;
-    flex-direction: column;
-}
-
-.task-page-container {
-    display: flex;
+    padding: 30px;
 }
