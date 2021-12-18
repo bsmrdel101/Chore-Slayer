@@ -42,4 +42,21 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     // endpoint functionality
   });
 
+router.delete('/:id', (req, res) => {
+  // endpoint functionality
+  const sqlText =`DELETE FROM "tasks" WHERE "id"=$1 AND "user_id"=$2`
+    
+  const sqlValues = [
+    req.params.id, 
+    req.user.id,     
+  ]
+console.log('this is sqlValues', sqlValues);
+   pool.query(sqlText, sqlValues)
+    .then((dbres) => res.sendStatus(201))
+    .catch((dberror) => {
+      console.log('Opps you messed up DB error', dberror);
+      res.sendStatus(500)
+    })   
+});
+
 module.exports = router;

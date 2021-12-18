@@ -3,8 +3,18 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import { useDispatch } from 'react-redux';
 
 function TaskCard({task}) {
+    const dispatch = useDispatch();
+
+    const deleteTask = () => {
+        dispatch({
+            type: 'DELETE_TASK',
+            payload: task.id
+        })
+    }
+
     return (
         <>
             <div>
@@ -27,9 +37,9 @@ function TaskCard({task}) {
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-                        <Button size="small" color="primary">
-                        Share
-                        </Button>
+                        <Button size="small" variant="contained" color="success">Complete</Button>
+                        <Button size="small" color="primary">Edit</Button>
+                        <Button size="small" color="error" onClick={deleteTask}>Remove</Button>
                     </CardActions>
                 </Card>
             </div>

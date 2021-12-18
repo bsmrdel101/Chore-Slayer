@@ -39,10 +39,29 @@ function* addTask(action) {
     }
   }
 
+// Saga DELETE route
+function* deleteTask(action) {
+    try {
+      console.log(action);
+      // Make an axios request to the server
+      const response = yield axios({
+        method: 'DELETE',
+        url: `/api/tasks/${action.payload}`
+      })
+      // Update the tasks
+      yield put({
+        type: 'FETCH_TASKS'
+      });
+    } catch(err) {
+      console.error('GET error: ', err);
+    }
+}
+
 
 function* taskSaga() {
     yield takeLatest('FETCH_TASKS', fetchTasks);
     yield takeLatest('ADD_TASK', addTask);
+    yield takeLatest('DELETE_TASK', deleteTask);
   }
   
   export default taskSaga;
