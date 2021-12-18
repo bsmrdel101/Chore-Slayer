@@ -20,9 +20,29 @@ function* fetchTasks(action) {
     }
 }
 
+// Saga POST route
+function* addTask(action) {
+    try {
+        console.log(action.payload);
+        // Axios POST /api/tasks as an object
+        const response = yield axios({
+            method: 'POST',
+            url: '/api/tasks',
+            data: action.payload
+        })
+        // Update the tasks
+        yield put({
+          type: 'FETCH_TASKS'
+        })
+    } catch(err) {
+      console.error(err);
+    }
+  }
+
 
 function* taskSaga() {
     yield takeLatest('FETCH_TASKS', fetchTasks);
+    yield takeLatest('ADD_TASK', addTask);
   }
   
   export default taskSaga;
