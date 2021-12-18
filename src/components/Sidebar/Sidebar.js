@@ -14,6 +14,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const drawerWidth = 240;
 
@@ -83,6 +84,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function Sidebar() {
+    const user = useSelector((store) => store.user);
+
   const theme = useTheme();
   const history = useHistory();
   const [open, setOpen] = React.useState(false);
@@ -138,10 +141,22 @@ export default function Sidebar() {
             </ListItemIcon>
             <ListItemText primary="Help"/>
         </ListItem>
+        {user.id ?
+            <ListItem button onClick={() => (history.push('/about'))}>
+                <ListItemIcon>
+                    <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Logout"/>
+            </ListItem>
+        :
+            <ListItem button onClick={() => (history.push('/login'))}>
+                <ListItemIcon>
+                    <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Login / Register"/>
+            </ListItem>
+        }
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-
-      </Box>
     </Box>
   );
 }
