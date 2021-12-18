@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import { Button } from '@mui/material';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -31,49 +32,33 @@ function LoginForm() {
   }; // end login
 
   return (
-    <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
-      {errors.loginMessage && (
-        <h3 className="alert" role="alert">
-          {errors.loginMessage}
-        </h3>
-      )}
-      <div>
-      <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-        <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-        <TextField id="username-input" label="Username" variant="standard" />
-      </Box>
-        {/* <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
+    <center>
+      <form className="formPanel" onSubmit={login}>
+        <h2>Login</h2>
+        {errors.loginMessage && (
+          <h3 className="alert" role="alert">
+            {errors.loginMessage}
+          </h3>
+        )}
+        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+          <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+          <TextField id="username-input" label="Username" variant="standard" 
             required
             value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label> */}
-      </div>
-      <div>
-        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <VpnKeyIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-          <TextField id="password-input" label="Password" variant="standard" type="password"/>
+            onChange={(event) => setUsername(event.target.value)} />
         </Box>
-        {/* <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            required
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label> */}
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
-      </div>
-    </form>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+            <VpnKeyIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+            <TextField id="password-input" label="Password" variant="standard" type="password"
+              required
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}/>
+          </Box>
+        <div>
+          <Button variant="contained" type="submit" value="Log In">Submit</Button>
+        </div>
+      </form>
+    </center>
   );
 }
 
