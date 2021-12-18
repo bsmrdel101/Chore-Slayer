@@ -4,6 +4,8 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { useDispatch } from 'react-redux';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 function TaskCard({task}) {
     const dispatch = useDispatch();
@@ -38,8 +40,8 @@ function TaskCard({task}) {
                     </CardActionArea>
                     <CardActions>
                         <Button size="small" variant="contained" color="success">Complete</Button>
-                        <Button size="small" color="primary">Edit</Button>
-                        <Button size="small" color="error" onClick={deleteTask}>Remove</Button>
+                        <Button size="small" color="primary"><EditIcon/></Button>
+                        <Button size="small" color="error" onClick={deleteTask}><DeleteIcon/></Button>
                     </CardActions>
                 </Card>
             </div>
