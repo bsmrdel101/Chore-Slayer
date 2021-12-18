@@ -15,21 +15,28 @@ function AddTask() {
     let [newDifficulty, setNewDifficulty] = useState(1);
     
     // POST task
-    const addTask = () => {
+    const addTask = (event) => {
+        event.preventDefault();
         console.log({name: newName, description: newDescription, difficulty: newDifficulty});
-        // dispatch({
-        //     type: 'ADD_TASK',
-        //     payload: {name: newName, description: newDescription, difficulty: newDifficulty}
-        // });
+        dispatch({
+            type: 'ADD_TASK',
+            payload: {name: newName, description: newDescription, difficulty: newDifficulty}
+        });
     }
 
     return (
         <>
             <form onSubmit={addTask}>
-                <TextField label="Standard" variant="standard" value={newName}
+                <TextField label="Name" variant="outlined" value={newName}
                     onChange={(event) => setNewName(event.target.value)} />
-                <TextField label="Standard" variant="standard" value={newDescription}
-                    onChange={(event) => setNewDescription(event.target.value)} />
+                <TextField
+                    label="Description"
+                    multiline
+                    rows={4}
+                    variant="outlined"
+                    value={newDescription}
+                    onChange={(event) => setNewDescription(event.target.value)}
+                />
                 <Button variant="text" type="submit">Save</Button>
                 <Button variant="text" onClick={() => history.push('/tasks')}>Cancel</Button>
             </form>
