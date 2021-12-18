@@ -54,7 +54,7 @@ function LoginForm() {
               value={password}
               onChange={(event) => setPassword(event.target.value)}/>
           </Box>
-        <div>
+        <div className='top-margin-btn'>
           <Button variant="contained" type="submit" value="Log In">Submit</Button>
         </div>
       </form>

@@ -10,7 +10,8 @@ function LoginPage() {
     <div>
       <LoginForm />
 
-      <center>
+      <center className='top-margin-btn'>
+        <h4>Don't have an account?</h4>
         <Button
           variant="outlined"
           type="button"

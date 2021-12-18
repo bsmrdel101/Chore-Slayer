@@ -8,3 +8,7 @@ body {
     padding: 3em;
     text-align: center;
 }
+
+.top-margin-btn {
+    margin-top: 1em;
+}
