@@ -8,7 +8,7 @@ function* fetchTasks(action) {
       // Make an axios request to the server for tasks
       const response = yield axios({
         method: 'GET',
-        url: '/api/plant'
+        url: '/api/tasks'
       })
       // Update the tasks
       console.log(response.data);
