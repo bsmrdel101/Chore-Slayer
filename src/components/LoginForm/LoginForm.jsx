@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
 
+// MUI
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
+
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +39,11 @@ function LoginForm() {
         </h3>
       )}
       <div>
-        <label htmlFor="username">
+      <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+        <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+        <TextField id="username-input" label="Username" variant="standard" />
+      </Box>
+        {/* <label htmlFor="username">
           Username:
           <input
             type="text"
@@ -42,10 +52,14 @@ function LoginForm() {
             value={username}
             onChange={(event) => setUsername(event.target.value)}
           />
-        </label>
+        </label> */}
       </div>
       <div>
-        <label htmlFor="password">
+        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+          <VpnKeyIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+          <TextField id="password-input" label="Password" variant="standard" type="password"/>
+        </Box>
+        {/* <label htmlFor="password">
           Password:
           <input
             type="password"
@@ -54,7 +68,7 @@ function LoginForm() {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-        </label>
+        </label> */}
       </div>
       <div>
         <input className="btn" type="submit" name="submit" value="Log In" />
