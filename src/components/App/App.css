@@ -1,7 +1,9 @@
+/* Other styles */
 body {
     padding-left: 100px;
 }
 
+/* Login/registration forms */
 .formPanel {
     display: inline-block;
     background-color: rgb(207, 207, 207);
@@ -11,4 +13,25 @@ body {
 
 .top-margin-btn {
     margin-top: 1em;
+}
+
+/* Tasks */
+.task-card {
+    margin-top: 2vh;
+}
+
+.dif-meter {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.task-list {
+    background-color: grey;
+    padding: 20px;
+    min-width: 20em;
+    flex-direction: column;
+}
+
+.task-page-container {
+    display: flex;
 }

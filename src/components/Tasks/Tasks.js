@@ -20,9 +20,15 @@ function Tasks() {
     return (
         <>
             <h1>Chores</h1>
-            {taskReducer.map((task) => {
-                return <TaskCard key={task.id} task={task}/>
-            })}
+            <div className="task-page-container">
+                {taskReducer.map((task) => {
+                    return (
+                        <div key={task.id} className='task-list'>
+                            <TaskCard task={task}/>
+                        </div>
+                    );
+                })}
+            </div>
         </>
     );
 }
