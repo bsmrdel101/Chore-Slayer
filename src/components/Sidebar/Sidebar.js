@@ -103,7 +103,7 @@ export default function Sidebar() {
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={open === true ? handleDrawerClose : handleDrawerOpen}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            {open === false ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
