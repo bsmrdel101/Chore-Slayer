@@ -65,7 +65,6 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     SET "name" = $1, "description" = $2
     WHERE "id" = $3;
     `
-    
     const sqlValues = [
         req.body.name,
         req.body.description,

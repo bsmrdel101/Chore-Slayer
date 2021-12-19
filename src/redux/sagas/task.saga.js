@@ -58,13 +58,14 @@ function* deleteTask(action) {
 }
 
 // Saga PUT route
-function* deleteTask(action) {
+function* editTask(action) {
     try {
       console.log(action);
       // Make an axios request to the server
       const response = yield axios({
         method: 'PUT',
-        url: `/api/tasks/${action.payload.id}`
+        url: `/api/tasks/${action.payload.id}`,
+        data: action.payload
       })
       // Update the tasks
       yield put({
