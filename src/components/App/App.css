@@ -32,3 +32,18 @@ body {
     background-color: rgb(56, 56, 163);
     margin-bottom: 3vh;
 }
+
+/* Game styles */
+.board {
+    background-color: rgb(177, 177, 177);
+    border: 3px solid rgb(85, 85, 85);
+}
+
+.stat-block {
+    background-color: rgb(177, 177, 177);
+    border: 3px solid rgb(85, 85, 85);
+}
+
+.deck-picture {
+    background-color: grey;
+}
