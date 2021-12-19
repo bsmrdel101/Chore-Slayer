@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import { useDispatch } from 'react-redux';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import Swal from 'sweetalert2';
 
 function TaskCard({task}) {
     const dispatch = useDispatch();
@@ -14,6 +15,26 @@ function TaskCard({task}) {
         dispatch({
             type: 'DELETE_TASK',
             payload: task.id
+        })
+    }
+
+    // Show a form to the user
+    // Use form data in a PUT route
+    const handleEdit = () => {
+        Swal.fire({
+            title: 'Edit Task',
+            html: `<input type="text" id="name" class="swal2-input" placeholder="Name">
+            <input type="text" id="description" class="swal2-input" placeholder="Description">`,
+            confirmButtonText: 'Save Changes',
+            focusConfirm: false,
+            preConfirm: () => {
+              const name = Swal.getPopup().querySelector('#name').value
+              const description = Swal.getPopup().querySelector('#description').value
+              dispatch({
+                  type: 'EDIT_TASK',
+                  payload: {id: task.id, name: name, description: description}
+              })
+            }
         })
     }
 
@@ -40,7 +61,7 @@ function TaskCard({task}) {
                     </CardActionArea>
                     <CardActions>
                         <Button size="small" variant="contained" color="success">Complete</Button>
-                        <Button size="small" color="primary"><EditIcon/></Button>
+                        <Button size="small" color="primary" onClick={handleEdit}><EditIcon/></Button>
                         <Button size="small" color="error" onClick={deleteTask}><DeleteIcon/></Button>
                     </CardActions>
                 </Card>
