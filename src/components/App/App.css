@@ -1,7 +1,9 @@
+/* Other styles */
 body {
     padding-left: 100px;
 }
 
+/* Login/registration forms */
 .formPanel {
     display: inline-block;
     background-color: rgb(207, 207, 207);
@@ -11,4 +13,37 @@ body {
 
 .top-margin-btn {
     margin-top: 1em;
+}
+
+/* Tasks */
+.task-card {
+    margin-top: 2vh;
+}
+
+.task-list {
+    background-color: grey;
+    padding: 30px;
+}
+
+.add-task-btn {
+    padding: 0 25px;
+    font-size: 40px;
+    color: white;
+    background-color: rgb(56, 56, 163);
+    margin-bottom: 3vh;
+}
+
+/* Game styles */
+.board {
+    background-color: rgb(177, 177, 177);
+    border: 3px solid rgb(85, 85, 85);
+}
+
+.stat-block {
+    background-color: rgb(177, 177, 177);
+    border: 3px solid rgb(85, 85, 85);
+}
+
+.deck-picture {
+    background-color: grey;
 }

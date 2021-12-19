@@ -20,6 +20,7 @@ import Game from '../Game/Game';
 import Deck from '../Deck/Deck';
 import Stats from '../Stats/Stats';
 import Help from '../Help/Help';
+import AddTask from '../AddTask/AddTask';
 
 import './App.css';
 
@@ -60,6 +61,14 @@ function App() {
             path="/tasks"
           >
             <Tasks />
+          </ProtectedRoute>
+
+          {/* Add Task page */}
+          <ProtectedRoute
+            exact
+            path="/add"
+          >
+            <AddTask />
           </ProtectedRoute>
 
           {/* Game page */}
