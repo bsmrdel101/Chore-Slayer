@@ -50,6 +50,7 @@ body {
 
 .hand-container {
     display: flex;
+    justify-content: center;
     gap: 1rem;
     background-color: rgb(190, 190, 190);
     padding: 10px;

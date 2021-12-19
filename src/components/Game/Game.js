@@ -1,7 +1,10 @@
 import { Grid } from "@mui/material";
 import GameCard from "../GameCard/GameCard";
+import { useSelector } from "react-redux";
 
 function Game() {
+    const hand = useSelector((store) => store.hand);
+
     return (
         <>
             <Grid container spacing={3}>
@@ -29,7 +32,9 @@ function Game() {
 
             {/* Holds the player's hand */}
             <div className="hand-container">
-                
+                {hand.map((card) => {
+                    return <GameCard key={card.id} card={card}/>
+                })}
             </div>
         </>
     );

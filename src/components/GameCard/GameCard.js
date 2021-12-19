@@ -5,24 +5,23 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-function GameCard() {
+function GameCard({card}) {
     return (
         <>
-            <Card sx={{ maxWidth: 345 }}>
+            <Card sx={{ flexGrow: 1, maxWidth: 200 }}>
                 <CardActionArea>
+                    <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                        {card.name}
+                    </Typography>
                     <CardMedia
                     component="img"
-                    height="140"
-                    image="/static/images/cards/contemplative-reptile.jpg"
-                    alt="green iguana"
+                    height="80"
+                    image={card.token}
+                    alt="token"
                     />
                     <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Lizard
-                    </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                        species, ranging across all continents except Antarctica
+                        {card.description}
                     </Typography>
                     </CardContent>
                 </CardActionArea>
