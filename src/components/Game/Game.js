@@ -1,4 +1,5 @@
 import { Grid } from "@mui/material";
+import GameCard from "../GameCard/GameCard";
 
 function Game() {
     return (
@@ -25,6 +26,11 @@ function Game() {
                 <Grid item xs={2} className="stat-block">
                 </Grid>
             </Grid>
+
+            {/* Holds the player's hand */}
+            <div className="hand-container">
+                
+            </div>
         </>
     );
 }

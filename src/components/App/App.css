@@ -47,3 +47,12 @@ body {
 .deck-picture {
     background-color: grey;
 }
+
+.hand-container {
+    display: flex;
+    gap: 1rem;
+    background-color: rgb(190, 190, 190);
+    padding: 10px;
+    margin-top: 10vh;
+    margin-right: 27px;
+}
