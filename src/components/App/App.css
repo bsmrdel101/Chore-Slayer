@@ -54,6 +54,17 @@ body {
     gap: 1rem;
     background-color: rgb(190, 190, 190);
     padding: 10px;
-    margin-top: 10vh;
+    margin-top: 3vh;
     margin-right: 27px;
+}
+
+#end-turn-btn {
+    display: flex;
+    justify-content: center;
+}
+
+#end-turn-btn button {
+    margin-top: 3vh;
+    padding: 10px 5rem;
+    font-size: 25px;
 }

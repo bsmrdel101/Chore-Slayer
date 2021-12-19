@@ -29,6 +29,9 @@ function Game() {
                 <Grid item xs={2} className="stat-block">
                 </Grid>
             </Grid>
+            <div id="end-turn-btn">
+                <button>End Turn</button>
+            </div>
 
             {/* Holds the player's hand */}
             <div className="hand-container">
