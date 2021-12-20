@@ -21,20 +21,20 @@ function Game() {
     useEffect(() => {
         fetchHand();
         fetchDeck();
-        if (card2 === card1 || card3 || card4 || card5) {card2 = getRandomInt(0, deckSize);}
-        if (card3 === card1 || card2 || card4 || card5) {card3 = getRandomInt(0, deckSize);}
-        if (card4 === card1 || card3 || card2 || card5) {card4 = getRandomInt(0, deckSize);}
-        if (card5 === card1 || card3 || card4 || card2) {card5 = getRandomInt(0, deckSize);}
+        while (card2 === card1 || card2 === card3 || card2 === card4 || card2 === card5) {card2 = getRandomInt(1, deckSize);}
+        while (card3 === card1 || card3 === card2 || card3 === card4 || card3 === card5) {card3 = getRandomInt(1, deckSize);}
+        while (card4 === card1 || card4 === card3 || card4 === card2 || card4 === card5) {card4 = getRandomInt(1, deckSize);}
+        while (card5 === card1 || card5 === card3 || card5 === card4 || card5 === card2) {card5 = getRandomInt(1, deckSize);}
         console.log('hand: ', {card1: card1, card2: card2, card3: card3, card4: card4, card5: card5});
     }, []);
 
     // Pick 5 random cards and set it in the local hand state
     const fetchHand = () => {
-        card1 = getRandomInt(0, deckSize);
-        card2 = getRandomInt(0, deckSize);
-        card3 = getRandomInt(0, deckSize);
-        card4 = getRandomInt(0, deckSize);
-        card5 = getRandomInt(0, deckSize);
+        card1 = getRandomInt(1, deckSize);
+        card2 = getRandomInt(1, deckSize);
+        card3 = getRandomInt(1, deckSize);
+        card4 = getRandomInt(1, deckSize);
+        card5 = getRandomInt(1, deckSize);
     }
 
     // Gets all of the cards in the user's deck
