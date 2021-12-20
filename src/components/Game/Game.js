@@ -1,24 +1,53 @@
 import { Grid } from "@mui/material";
 import GameCard from "../GameCard/GameCard";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Game() {
-    const hand = useSelector((store) => store.hand);
+    // Declare hand variables
+    let card1
+    let card2
+    let card3
+    let card4
+    let card5
+    // Number of cards in the deck
+    const deckSize = 13;
+    // const hand = useSelector((store) => store.hand);
+    let [hand, setHand] = useState([]);
+    const deckReducer = useSelector((store) => store.deckReducer);
     const playerBoard = useSelector((store) => store.playerBoard);
     const dispatch = useDispatch();
 
     useEffect(() => {
         fetchHand();
+        fetchDeck();
+        if (card2 === card1 || card3 || card4 || card5) {card2 = getRandomInt(0, deckSize);}
+        if (card3 === card1 || card2 || card4 || card5) {card3 = getRandomInt(0, deckSize);}
+        if (card4 === card1 || card3 || card2 || card5) {card4 = getRandomInt(0, deckSize);}
+        if (card5 === card1 || card3 || card4 || card2) {card5 = getRandomInt(0, deckSize);}
+        console.log('hand: ', {card1: card1, card2: card2, card3: card3, card4: card4, card5: card5});
     }, []);
 
+    // Pick 5 random cards and set it in the local hand state
     const fetchHand = () => {
+        card1 = getRandomInt(0, deckSize);
+        card2 = getRandomInt(0, deckSize);
+        card3 = getRandomInt(0, deckSize);
+        card4 = getRandomInt(0, deckSize);
+        card5 = getRandomInt(0, deckSize);
+    }
+
+    // Gets all of the cards in the user's deck
+    const fetchDeck = () => {
         dispatch({
-            type: 'FETCH_HAND',
-            payload: getRandomInt(1, 13)
+            type: 'FETCH_DECK'
         });
     }
 
+    console.log('deck', deckReducer);
+
+    // Gets a random number
+    // Takes in parameters of min/max
     function getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max + 1);
@@ -54,8 +83,6 @@ function Game() {
             </div>
 
             {/* Holds the player's hand */}
-            {console.log('hand', hand)}
-            
             <div className="hand-container">
                 {hand.map((card) => {
                     return <GameCard key={card.id} card={card}/>;

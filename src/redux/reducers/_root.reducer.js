@@ -5,6 +5,7 @@ import taskReducer from './task.reducer';
 import hand from './card.reducer';
 import playerBoard from './playerBoard.reducer';
 import enemyBoard from './enemyBoard.reducer';
+import deckReducer from './deck.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   taskReducer,
   hand,
   playerBoard,
-  enemyBoard
+  enemyBoard,
+  deckReducer
 });
 
 export default rootReducer;
