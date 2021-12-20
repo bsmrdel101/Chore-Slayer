@@ -19,6 +19,9 @@ function GameCard({card}) {
                     alt="token"
                     />
                     <CardContent>
+                    <Typography varient="h6" textAlign={"center"}>
+                        Energy: {card.cost}
+                    </Typography>
                     <Typography variant="body2" color="text.secondary">
                         {card.description}
                     </Typography>
