@@ -36,7 +36,7 @@ function Game() {
             {/* Holds the player's hand */}
             <div className="hand-container">
                 {hand.map((card) => {
-                    return <GameCard key={card.id} card={card}/>
+                    return <GameCard key={card.id} card={card}/>;
                 })}
             </div>
         </>
