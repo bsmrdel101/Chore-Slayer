@@ -1,9 +1,17 @@
 import { Grid } from "@mui/material";
 import GameCard from "../GameCard/GameCard";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 function Game() {
     const hand = useSelector((store) => store.hand);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_HAND'
+        });
+    }, []);
 
     return (
         <>
@@ -34,6 +42,8 @@ function Game() {
             </div>
 
             {/* Holds the player's hand */}
+            {console.log('hand', hand)}
+            
             <div className="hand-container">
                 {hand.map((card) => {
                     return <GameCard key={card.id} card={card}/>;

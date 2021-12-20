@@ -8,7 +8,6 @@ function* fetchHand(action) {
         method: 'GET',
         url: '/api/hand'
       })
-      console.log(response.data);
       yield put({
         type: 'GET_HAND',
         payload: response.data
