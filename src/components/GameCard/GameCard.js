@@ -15,7 +15,6 @@ function GameCard({card}) {
                     </Typography>
                     <CardMedia
                     component="img"
-                    height="80"
                     image={card.token}
                     alt="token"
                     />
