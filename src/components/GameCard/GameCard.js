@@ -4,8 +4,11 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import { useDispatch } from 'react-redux';
 
 function GameCard({card}) {
+    const dispatch = useDispatch();
+
     const handleClick = () => {
         
     }
@@ -27,6 +30,18 @@ function GameCard({card}) {
                         Energy: {card.cost}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
+                        {card.block_amount &&
+                            <>
+                                Block: {card.block_amount}
+                                <br/>
+                            </>
+                        }
+                        {card.attack_amount &&
+                            <>
+                                Damage: {card.attack_amount}
+                                <br/>
+                            </>
+                        }
                         {card.description}
                     </Typography>
                     </CardContent>

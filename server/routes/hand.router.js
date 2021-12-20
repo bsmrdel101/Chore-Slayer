@@ -8,23 +8,17 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
-router.get('/:card_id_one&:card_id_two&:card_id_three&:card_id_four&:card_id_five&:card_id_six&:card_id_seven', rejectUnauthenticated, (req, res) => {
+router.get('/:card_id', rejectUnauthenticated, (req, res) => {
     const sqlText = `
     SELECT * FROM "cards"
 	JOIN "deck"
 		ON "cards"."id"="deck"."card_id"
-	WHERE "user_id"=$1 AND "card_id"=$2 OR "card_id"=$3 OR "card_id"=$4 OR "card_id"=$5 OR "card_id"=$6 OR "card_id"=$7 OR "card_id"=$8
+	WHERE "user_id"=$1 AND "card_id"=$2
     LIMIT 5;
     `
     const sqlValues = [
         req.user.id,
-        req.params.card_id_one,
-        req.params.card_id_two,
-        req.params.card_id_three,
-        req.params.card_id_four,
-        req.params.card_id_five,
-        req.params.card_id_six,
-        req.params.card_id_seven
+        req.params.card_id
     ]
     pool.query(sqlText, sqlValues)
         .then((dbres) => res.send(dbres.rows))

@@ -12,17 +12,10 @@ function Game() {
         fetchHand();
     }, []);
 
-    if (hand.length === 2 || hand.length === 3 || hand.length === 4) {
-        dispatch({
-            type: 'FETCH_HAND',
-            payload: {one: getRandomInt(1, 13), two: getRandomInt(1, 13), three: getRandomInt(1, 13), four: getRandomInt(1, 13), five: getRandomInt(1, 13), six: getRandomInt(1, 13), seven: getRandomInt(1, 13)}
-        });
-    }
-
     const fetchHand = () => {
         dispatch({
             type: 'FETCH_HAND',
-            payload: {one: getRandomInt(1, 13), two: getRandomInt(1, 13), three: getRandomInt(1, 13), four: getRandomInt(1, 13), five: getRandomInt(1, 13), six: getRandomInt(1, 13), seven: getRandomInt(1, 13)}
+            payload: getRandomInt(1, 13)
         });
     }
 

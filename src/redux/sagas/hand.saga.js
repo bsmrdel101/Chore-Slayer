@@ -6,7 +6,7 @@ function* fetchHand(action) {
     try {
       const response = yield axios({
         method: 'GET',
-        url: `/api/hand/${action.payload.one}&${action.payload.two}&${action.payload.three}&${action.payload.four}&${action.payload.five}&${action.payload.six}&${action.payload.seven}`
+        url: `/api/hand/${action.payload}`
       })
       yield put({
         type: 'GET_HAND',
