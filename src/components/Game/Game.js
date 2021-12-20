@@ -5,13 +5,32 @@ import { useEffect } from "react";
 
 function Game() {
     const hand = useSelector((store) => store.hand);
+    const playerBoard = useSelector((store) => store.playerBoard);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch({
-            type: 'FETCH_HAND'
-        });
+        fetchHand();
     }, []);
+
+    if (hand.length === 2 || hand.length === 3 || hand.length === 4) {
+        dispatch({
+            type: 'FETCH_HAND',
+            payload: {one: getRandomInt(1, 13), two: getRandomInt(1, 13), three: getRandomInt(1, 13), four: getRandomInt(1, 13), five: getRandomInt(1, 13), six: getRandomInt(1, 13), seven: getRandomInt(1, 13)}
+        });
+    }
+
+    const fetchHand = () => {
+        dispatch({
+            type: 'FETCH_HAND',
+            payload: {one: getRandomInt(1, 13), two: getRandomInt(1, 13), three: getRandomInt(1, 13), four: getRandomInt(1, 13), five: getRandomInt(1, 13), six: getRandomInt(1, 13), seven: getRandomInt(1, 13)}
+        });
+    }
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max + 1);
+        return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+    }
 
     return (
         <>

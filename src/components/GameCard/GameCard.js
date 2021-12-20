@@ -6,9 +6,13 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
 function GameCard({card}) {
+    const handleClick = () => {
+        
+    }
+
     return (
         <>
-            <Card sx={{ flexGrow: 1, maxWidth: 200 }}>
+            <Card sx={{ flexGrow: 1, maxWidth: 200 }} onClick={handleClick} className="card">
                 <CardActionArea>
                     <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                         {card.name}

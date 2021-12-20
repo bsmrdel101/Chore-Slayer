@@ -6,7 +6,7 @@ function* fetchHand(action) {
     try {
       const response = yield axios({
         method: 'GET',
-        url: '/api/hand'
+        url: `/api/hand/${action.payload.one}&${action.payload.two}&${action.payload.three}&${action.payload.four}&${action.payload.five}&${action.payload.six}&${action.payload.seven}`
       })
       yield put({
         type: 'GET_HAND',
@@ -17,8 +17,8 @@ function* fetchHand(action) {
     }
 }
 
-function* taskSaga() {
+function* handSaga() {
     yield takeLatest('FETCH_HAND', fetchHand);
   }
   
-  export default taskSaga;
+export default handSaga;
