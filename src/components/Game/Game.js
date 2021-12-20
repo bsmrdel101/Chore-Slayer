@@ -12,29 +12,40 @@ function Game() {
     let card5
     // Number of cards in the deck
     const deckSize = 13;
-    // const hand = useSelector((store) => store.hand);
-    let [hand, setHand] = useState([]);
+    const hand = useSelector((store) => store.hand);
     const deckReducer = useSelector((store) => store.deckReducer);
     const playerBoard = useSelector((store) => store.playerBoard);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchHand();
+        randomHandGen();
         fetchDeck();
-        while (card2 === card1 || card2 === card3 || card2 === card4 || card2 === card5) {card2 = getRandomInt(1, deckSize);}
-        while (card3 === card1 || card3 === card2 || card3 === card4 || card3 === card5) {card3 = getRandomInt(1, deckSize);}
-        while (card4 === card1 || card4 === card3 || card4 === card2 || card4 === card5) {card4 = getRandomInt(1, deckSize);}
-        while (card5 === card1 || card5 === card3 || card5 === card4 || card5 === card2) {card5 = getRandomInt(1, deckSize);}
-        console.log('hand: ', {card1: card1, card2: card2, card3: card3, card4: card4, card5: card5});
+        console.log({card1: card1, card2: card2, card3: card3, card4: card4, card5: card5});
+        while (card1 === 3) {card1 = getRandomInt(1, deckSize);}
+        while (card2 === card1 || card2 === card3 || card2 === card4 || card2 === card5 || card2 === 3) {card2 = getRandomInt(1, deckSize);}
+        while (card3 === card1 || card3 === card2 || card3 === card4 || card3 === card5 || card3 === 3) {card3 = getRandomInt(1, deckSize);}
+        while (card4 === card1 || card4 === card3 || card4 === card2 || card4 === card5 || card4 === 3) {card4 = getRandomInt(1, deckSize);}
+        while (card5 === card1 || card5 === card3 || card5 === card4 || card5 === card2 || card5 === 3) {card5 = getRandomInt(1, deckSize);}
+        fetchHand();
     }, []);
 
     // Pick 5 random cards and set it in the local hand state
-    const fetchHand = () => {
+    const randomHandGen = () => {
         card1 = getRandomInt(1, deckSize);
         card2 = getRandomInt(1, deckSize);
         card3 = getRandomInt(1, deckSize);
         card4 = getRandomInt(1, deckSize);
         card5 = getRandomInt(1, deckSize);
+    }
+
+    // Gets the cards in hand
+    const fetchHand = () => {
+        console.log({card1: card1, card2: card2, card3: card3, card4: card4, card5: card5}); 
+        dispatch({
+            type: 'FETCH_HAND',
+            payload: {card1: card1, card2: card2, card3: card3, card4: card4, card5: card5}
+        });
+        console.log('This: ', hand);
     }
 
     // Gets all of the cards in the user's deck

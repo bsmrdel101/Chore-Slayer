@@ -9,9 +9,14 @@ const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    pool.query(`
+    const sqlText = (`
         SELECT * FROM "deck"
-    `)
+        WHERE "user_id"=$1;
+    `);
+    const sqlValues = [
+        req.user.id
+    ];
+    pool.query(sqlText, sqlValues)
         .then((dbres) => res.send(dbres.rows))
         .catch((dberror) => {
         console.log('Opps you messed up DB error', dberror);
