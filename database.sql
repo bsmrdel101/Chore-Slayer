@@ -43,9 +43,11 @@ CREATE TABLE "deck" (
 
 CREATE TABLE "hand" (
 	"id" SERIAL PRIMARY KEY,
-    "user_id" INTEGER REFERENCES "user",
-    "card_id" INTEGER REFERENCES "cards"
+    "hand_user_id" INTEGER REFERENCES "user",
+    "hand_card_id" INTEGER REFERENCES "cards",
+    "deck_id" INTEGER REFERENCES "deck"
 );
+
 
 -- ** Test SQL **
 

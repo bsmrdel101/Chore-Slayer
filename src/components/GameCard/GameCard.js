@@ -5,12 +5,17 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function GameCard({card}) {
+    const hand = useSelector((store) => store.hand);
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        
+        dispatch({
+            type: 'SELECT_CARD'
+        })
+        console.log('The new hand', hand); 
     }
 
     return (

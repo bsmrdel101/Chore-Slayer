@@ -9,13 +9,6 @@ const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
 router.get('/:card1&:card2&:card3&:card4&:card5', rejectUnauthenticated, (req, res) => {
-    // const sqlText = `
-    // SELECT * FROM "cards"
-	// JOIN "deck"
-	// 	ON "cards"."id"="deck"."card_id"
-	// WHERE "user_id"=$1 AND "card_id"=$2 OR "card_id"=$3 OR "card_id"=$4 OR "card_id"=$5 OR "card_id"=$6
-    // LIMIT 5;
-    // `
     const sqlText = `
     SELECT * FROM "cards"
 	JOIN "deck"
