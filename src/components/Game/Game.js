@@ -4,16 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
 function Game() {
-    // Declare hand variables
-    // let card1
-    // let card2
-    // let card3
-    // let card4
-    // let card5
-
-    // const hand = useSelector((store) => store.hand);
+    const hand = useSelector((store) => store.hand);
     const deckReducer = useSelector((store) => store.deckReducer);
     let [baseHand, setBaseHand] = useState([]);
+    let [modifiedHand, setModifiedHand] = useState([]);
     const playerBoard = useSelector((store) => store.playerBoard);
     const dispatch = useDispatch();
 
@@ -23,7 +17,7 @@ function Game() {
     useEffect(() => {
         fetchDeck();
         deckReducer.forEach(card => {
-            setBaseHand(baseHand.push({user_id: card.user_id, card_id: card.card_id}));
+            setBaseHand(baseHand.push(card.card_id));
         });
         shuffleArray(baseHand)
         console.log(baseHand);
@@ -32,9 +26,11 @@ function Game() {
             console.log(baseHand);
             baseHand.splice(0, 1);
             console.log('card', card);
+            modifiedHand.push(card);
+            console.log('modified hand', modifiedHand);
         }
         console.log(baseHand);
-        // fetchHand();
+        fetchHand();
     }, []);
 
     const shuffleArray = (array) => {
@@ -46,14 +42,13 @@ function Game() {
         }
     }
 
-    // Gets the cards in hand
-    // const fetchHand = () => {
-    //     console.log({card1: card1, card2: card2, card3: card3, card4: card4, card5: card5}); 
-    //     dispatch({
-    //         type: 'FETCH_HAND',
-    //         payload: {card1: card1, card2: card2, card3: card3, card4: card4, card5: card5}
-    //     });
-    // }
+    // Renders the cards in hand
+    const fetchHand = () => {
+        dispatch({
+            type: 'FETCH_HAND',
+            payload: {card1: modifiedHand[0], card2: modifiedHand[1], card3: modifiedHand[2], card4: modifiedHand[3], card5: modifiedHand[4]}
+        });
+    }
 
     // Gets all of the cards in the user's deck
     const fetchDeck = () => {
@@ -102,11 +97,11 @@ function Game() {
             </div>
 
             {/* Holds the player's hand */}
-            {/* <div className="hand-container">
+            <div className="hand-container">
                 {hand.map((card) => {
                     return <GameCard key={card.id} card={card}/>;
                 })}
-            </div> */}
+            </div>
         </>
     );
 }
