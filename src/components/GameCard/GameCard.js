@@ -43,6 +43,16 @@ function GameCard({card}) {
             type: 'ADD_BLOCK',
             payload: element.block_amount
         });
+        switch (element.card_id) {
+            case 5: // Swap block
+                dispatch({type: 'SWAP_BLOCK'})
+                break;
+            case 6: // Break formation
+                console.log('TODO: Break Formation');
+                break;
+            default:
+                break;
+        }
     }    
 
     const handleAttackCard = (element) => {
