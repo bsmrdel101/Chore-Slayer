@@ -21,25 +21,19 @@ function Game() {
     const deckSize = deckReducer.length - 1;
 
     useEffect(() => {
-        // randomHandGen();
         fetchDeck();
         deckReducer.forEach(card => {
-            setBaseHand(baseHand.push(card.card_id));
+            setBaseHand(baseHand.push({user_id: card.user_id, card_id: card.card_id}));
         });
         shuffleArray(baseHand)
         console.log(baseHand);
         for (let i = 0; i < 5; i++) {
-            const element = baseHand[0];
+            const card = baseHand[0];
             console.log(baseHand);
             baseHand.splice(0, 1);
-            console.log(element);
+            console.log('card', card);
         }
         console.log(baseHand);
-        // while (card1 === 3) {card1 = getRandomInt(1, deckSize);}
-        // while (card2 === card1 || card2 === card3 || card2 === card4 || card2 === card5 || card2 === 3) {card2 = getRandomInt(1, deckSize);}
-        // while (card3 === card1 || card3 === card2 || card3 === card4 || card3 === card5 || card3 === 3) {card3 = getRandomInt(1, deckSize);}
-        // while (card4 === card1 || card4 === card3 || card4 === card2 || card4 === card5 || card4 === 3) {card4 = getRandomInt(1, deckSize);}
-        // while (card5 === card1 || card5 === card3 || card5 === card4 || card5 === card2 || card5 === 3) {card5 = getRandomInt(1, deckSize);}
         // fetchHand();
     }, []);
 
@@ -52,23 +46,14 @@ function Game() {
         }
     }
 
-    // Pick 5 random cards and set it in the local hand state
-    const randomHandGen = () => {
-        card1 = getRandomInt(1, deckSize);
-        card2 = getRandomInt(1, deckSize);
-        card3 = getRandomInt(1, deckSize);
-        card4 = getRandomInt(1, deckSize);
-        card5 = getRandomInt(1, deckSize);
-    }
-
     // Gets the cards in hand
-    const fetchHand = () => {
-        console.log({card1: card1, card2: card2, card3: card3, card4: card4, card5: card5}); 
-        dispatch({
-            type: 'FETCH_HAND',
-            payload: {card1: card1, card2: card2, card3: card3, card4: card4, card5: card5}
-        });
-    }
+    // const fetchHand = () => {
+    //     console.log({card1: card1, card2: card2, card3: card3, card4: card4, card5: card5}); 
+    //     dispatch({
+    //         type: 'FETCH_HAND',
+    //         payload: {card1: card1, card2: card2, card3: card3, card4: card4, card5: card5}
+    //     });
+    // }
 
     // Gets all of the cards in the user's deck
     const fetchDeck = () => {
