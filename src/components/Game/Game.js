@@ -8,6 +8,7 @@ function Game() {
     const deckReducer = useSelector((store) => store.deckReducer);
     let [baseHand, setBaseHand] = useState([]);
     let [modifiedHand, setModifiedHand] = useState([]);
+    let [discardPile, setDiscardPile] = useState([]);
     const playerBoard = useSelector((store) => store.playerBoard);
     const dispatch = useDispatch();
 
@@ -19,17 +20,16 @@ function Game() {
         deckReducer.forEach(card => {
             setBaseHand(baseHand.push(card.card_id));
         });
-        shuffleArray(baseHand)
-        console.log(baseHand);
+        shuffleArray(baseHand);
         for (let i = 0; i < 5; i++) {
             const card = baseHand[0];
-            console.log(baseHand);
+            discardPile.push(...baseHand.splice(0, 1));
             baseHand.splice(0, 1);
             console.log('card', card);
             modifiedHand.push(card);
             console.log('modified hand', modifiedHand);
         }
-        console.log(baseHand);
+        console.log('discardPile', discardPile);
         fetchHand();
     }, []);
 
@@ -58,7 +58,6 @@ function Game() {
     }
 
     console.log('deck', deckReducer);
-    // console.log('This: ', hand);
 
     // Gets a random number
     // Takes in parameters of min/max
