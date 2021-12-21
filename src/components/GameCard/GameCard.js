@@ -56,11 +56,11 @@ function GameCard({card}) {
     }    
 
     const handleAttackCard = (element) => {
-
+        console.log('Attack: ', element.attack_amount);
     }    
 
     const handleMinionCard = (element) => {
-        
+        console.log('Health: ', element.health, 'Dmg', element.damage);
     }    
 
     return (

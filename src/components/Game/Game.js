@@ -41,6 +41,7 @@ function Game() {
                     <p>Block: 0</p>
                     <p>Health: 20</p>
                     <p>Threat: 0</p>
+                    <p>Energy: 5</p>
                 </Grid>
             </Grid>
             <Grid container spacing={3}>
@@ -55,6 +56,7 @@ function Game() {
                     <p>Block: {statBlock.block}</p>
                     <p>Health: {statBlock.hp}</p>
                     <p>Threat: {statBlock.threat}</p>
+                    <p>Energy: {statBlock.energy}</p>
                 </Grid>
             </Grid>
             <div id="end-turn-btn">

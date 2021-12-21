@@ -1,4 +1,4 @@
-const statBlock = (state = {block: 0, hp: 20, threat: 0}, action) => {
+const statBlock = (state = {block: 0, hp: 20, threat: 0, energy: 5}, action) => {
     let copyOfState;
     switch (action.type) {
         case 'ADD_BLOCK':
