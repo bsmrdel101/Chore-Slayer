@@ -38,7 +38,9 @@ function Game() {
                 <Grid item xs={6} className="board" marginRight={"3rem"}>
                 </Grid>
                 <Grid item xs={2} className="stat-block">
-                    <p>Block: {statBlock.block}</p>
+                    <p>Block: 0</p>
+                    <p>Health: 20</p>
+                    <p>Threat: 0</p>
                 </Grid>
             </Grid>
             <Grid container spacing={3}>
@@ -50,6 +52,9 @@ function Game() {
                 <Grid item xs={6} className="board" marginRight={"3rem"}>
                 </Grid>
                 <Grid item xs={2} className="stat-block">
+                    <p>Block: {statBlock.block}</p>
+                    <p>Health: {statBlock.hp}</p>
+                    <p>Threat: {statBlock.threat}</p>
                 </Grid>
             </Grid>
             <div id="end-turn-btn">
