@@ -16,19 +16,19 @@ function GameCard({card}) {
         for (let element of hand) {
             if (element.card_id === selectedCard) {
                 console.log(element);
-                // switch (element.type) {
-                //     case block:
-                        
-                //         break;
-                //     case attack:
-                    
-                //         break;
-                //     case minion:
-                    
-                //         break;
-                //     default:
-                //         break;
-                // }
+                switch (element.type) {
+                    case 'block':
+                        handleBlockCard(element);
+                        break;
+                    case 'attack':
+                        handleAttackCard(element);
+                        break;
+                    case 'minion':
+                        handleMinionCard(element);
+                        break;
+                    default:
+                        break;
+                }
                 dispatch({
                     type: 'SELECT_CARD',
                     payload: index
@@ -37,6 +37,21 @@ function GameCard({card}) {
             index++;
         }
     }
+
+    const handleBlockCard = (element) => {
+        element.block_amount && dispatch({
+            type: 'ADD_BLOCK',
+            payload: element.block_amount
+        });
+    }    
+
+    const handleAttackCard = (element) => {
+
+    }    
+
+    const handleMinionCard = (element) => {
+        
+    }    
 
     return (
         <>

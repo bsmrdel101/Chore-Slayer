@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 function Game() {
     const hand = useSelector((store) => store.hand);
-    const deckReducer = useSelector((store) => store.deckReducer);
+    const statBlock = useSelector((store) => store.statBlock);
     const playerBoard = useSelector((store) => store.playerBoard);
     const dispatch = useDispatch();
 
@@ -38,6 +38,7 @@ function Game() {
                 <Grid item xs={6} className="board" marginRight={"3rem"}>
                 </Grid>
                 <Grid item xs={2} className="stat-block">
+                    <p>Block: {statBlock.block}</p>
                 </Grid>
             </Grid>
             <Grid container spacing={3}>

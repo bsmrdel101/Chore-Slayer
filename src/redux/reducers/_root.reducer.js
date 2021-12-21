@@ -6,6 +6,7 @@ import hand from './card.reducer';
 import playerBoard from './playerBoard.reducer';
 import enemyBoard from './enemyBoard.reducer';
 import deckReducer from './deck.reducer';
+import statBlock from './statBlock.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   hand,
   playerBoard,
   enemyBoard,
-  deckReducer
+  deckReducer,
+  statBlock
 });
 
 export default rootReducer;
