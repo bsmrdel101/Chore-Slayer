@@ -2,6 +2,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 // Saga GET route
+// Retrieves the 5 random cards selected from the database
 function* fetchHand(action) {
     try {
       const response = yield axios({

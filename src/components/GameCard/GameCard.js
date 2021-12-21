@@ -11,8 +11,8 @@ function GameCard({card}) {
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        console.log(hand);
         let selectedCard = card.card_id;
+        let index = 0;
         for (let element of hand) {
             if (element.card_id === selectedCard) {
                 console.log(element);
@@ -31,9 +31,10 @@ function GameCard({card}) {
                 // }
                 dispatch({
                     type: 'SELECT_CARD',
-                    payload: element
+                    payload: index
                 })
             }
+            index++;
         }
     }
 
@@ -48,6 +49,7 @@ function GameCard({card}) {
                     component="img"
                     image={card.token}
                     alt="token"
+                    draggable="false"
                     />
                     <CardContent>
                     <Typography varient="h6" textAlign={"center"}>

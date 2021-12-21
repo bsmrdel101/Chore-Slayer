@@ -22,7 +22,6 @@ function* fetchDeck(action) {
         // Shuffle the rows of data
         let baseHand = [];
         let modifiedHand = [];
-        let discardPile = [];
 
         for (let card of response.data) {
             baseHand.push(card.card_id);
@@ -35,11 +34,9 @@ function* fetchDeck(action) {
             console.log('base hand: ', baseHand);
             console.log('card', card);
             baseHand.splice(0, 1);
-            discardPile.push(card);
             modifiedHand.push(card);
         }
         console.log('**** Outcome ****');
-        console.log('discardPile', discardPile);
         console.log('modified hand', modifiedHand);
         console.log('base hand', baseHand);
 

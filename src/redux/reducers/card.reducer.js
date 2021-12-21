@@ -3,7 +3,9 @@ const hand = (state = [], action) => {
         case 'GET_HAND':
             return action.payload;
         case 'SELECT_CARD':
-            return state.splice(action.payload, 1);
+            let copyOfState = [...state];
+            copyOfState.splice(action.payload, 1);
+            return copyOfState;
         default:
             return state;
     }
