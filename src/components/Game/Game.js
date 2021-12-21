@@ -12,26 +12,32 @@ function Game() {
     const playerBoard = useSelector((store) => store.playerBoard);
     const dispatch = useDispatch();
 
-    // Number of cards in the deck
-    const deckSize = deckReducer.length - 1;
-
     useEffect(() => {
         fetchDeck();
+        // handleHandShuffle();
+        // fetchHand();
+    }, []);
+
+    // Loop through all the cards in our deck and copy them all into a local state called baseHand
+    // Shuffle the card order inside the baseHand array, to randomize the cards
+    // Loop through the base hand
+        // Take the card at index 0 and push it into the modified hand which will store the cards you see on screen
+        // Add the card to the discard pile so it can't be drawn again
+        // Splice the card at index 0
+    const handleHandShuffle = () => {
         deckReducer.forEach(card => {
             setBaseHand(baseHand.push(card.card_id));
         });
         shuffleArray(baseHand);
         for (let i = 0; i < 5; i++) {
             const card = baseHand[0];
-            discardPile.push(...baseHand.splice(0, 1));
             baseHand.splice(0, 1);
-            console.log('card', card);
-            modifiedHand.push(card);
+            setDiscardPile(discardPile.push(card));
+            setModifiedHand(modifiedHand.push(card));
             console.log('modified hand', modifiedHand);
         }
         console.log('discardPile', discardPile);
-        fetchHand();
-    }, []);
+    }
 
     const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -44,6 +50,7 @@ function Game() {
 
     // Renders the cards in hand
     const fetchHand = () => {
+        console.log('HERE', modifiedHand);
         dispatch({
             type: 'FETCH_HAND',
             payload: {card1: modifiedHand[0], card2: modifiedHand[1], card3: modifiedHand[2], card4: modifiedHand[3], card5: modifiedHand[4]}
@@ -97,7 +104,7 @@ function Game() {
 
             {/* Holds the player's hand */}
             <div className="hand-container">
-                {hand.map((card) => {
+                {hand.length > 0 && hand.map((card) => {
                     return <GameCard key={card.id} card={card}/>;
                 })}
             </div>
