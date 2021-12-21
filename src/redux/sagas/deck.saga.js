@@ -1,22 +1,8 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
-// import { useDispatch } from 'react-redux';
 
-// const handleHandShuffle = (response) => {
-//     response.forEach(card => {
-//         baseHand.push(card.card_id);
-//     });
-//     shuffleArray(baseHand);
-//     for (let i = 0; i < 5; i++) {
-//         const card = baseHand[0];
-//         baseHand.splice(0, 1);
-//         discardPile.push(card);
-//         modifiedHand.push(card);
-//         console.log('modified hand', modifiedHand);
-//     }
-//     console.log('discardPile', discardPile);
-// }
-
+// Gets a random number
+// Takes in parameters of min/max
 const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -25,14 +11,6 @@ const shuffleArray = (array) => {
       array[j] = temp;
     }
 }
-
-// const fetchHand = () => {
-//     console.log('HERE', modifiedHand);
-//     dispatch({
-//         type: 'FETCH_HAND',
-//         payload: {card1: modifiedHand[0], card2: modifiedHand[1], card3: modifiedHand[2], card4: modifiedHand[3], card5: modifiedHand[4]}
-//     });
-// }
 
 // Saga GET route
 function* fetchDeck(action) {
@@ -45,12 +23,13 @@ function* fetchDeck(action) {
         let baseHand = [];
         let modifiedHand = [];
         let discardPile = [];
-        // const dispatch = useDispatch();
 
         for (let card of response.data) {
             baseHand.push(card.card_id);
         }
         shuffleArray(baseHand);
+        console.log('deck reducer: ', response.data);
+        console.log('**** Hand Process ****');
         for (let i = 0; i < 5; i++) {
             const card = baseHand[0];
             console.log('base hand: ', baseHand);
@@ -59,12 +38,12 @@ function* fetchDeck(action) {
             discardPile.push(card);
             modifiedHand.push(card);
         }
+        console.log('**** Outcome ****');
         console.log('discardPile', discardPile);
         console.log('modified hand', modifiedHand);
+        console.log('base hand', baseHand);
 
       yield put({
-        // type: 'GET_DECK',
-        // payload: response.data
         type: 'FETCH_HAND',
         payload: {card1: modifiedHand[0], card2: modifiedHand[1], card3: modifiedHand[2], card4: modifiedHand[3], card5: modifiedHand[4]}
       });
