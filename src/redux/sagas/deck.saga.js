@@ -23,10 +23,12 @@ function* fetchDeck(action) {
         let baseHand;
         let modifiedHand;
         
+        // Action.payload 1 is what identifies the initial dispatch
         if (action.payload === 1) {
             baseHand = [];
             modifiedHand = [];
         } else {
+            // baseHand and modifiedHand are set to the current values of the deck and hand reducers
             baseHand = action.payload.deck;
             modifiedHand = [];
             for (let card of action.payload.hand) {
@@ -35,6 +37,8 @@ function* fetchDeck(action) {
             console.log('Deck: ', baseHand, 'Hand: ', modifiedHand);
         }
 
+        // If this is the initial dispatch then shuffle the deck and GET the cards
+        // else fill the hand the max
         if (action.payload === 1) {
             for (let card of response.data) {
                 baseHand.push(card.card_id);

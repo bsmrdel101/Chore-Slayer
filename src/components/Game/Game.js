@@ -30,10 +30,17 @@ function Game() {
     }
 
     const handleEndTurn = () => {
-        dispatch({
-            type: 'FETCH_DECK',
-            payload: {deck: deckReducer, hand: hand}
-        })
+        if (deckReducer.length === 0) {
+            dispatch({
+                type: 'FETCH_DECK',
+                payload: 1
+            });
+        } else {
+            dispatch({
+                type: 'FETCH_DECK',
+                payload: {deck: deckReducer, hand: hand}
+            })
+        }
     }
 
     return (
