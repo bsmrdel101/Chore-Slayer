@@ -39,7 +39,7 @@ body {
     border: 3px solid rgb(85, 85, 85);
 }
 
-.stat-block {
+.stat-block-container {
     background-color: rgb(177, 177, 177);
     border: 3px solid rgb(85, 85, 85);
 }

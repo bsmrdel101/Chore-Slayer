@@ -6,6 +6,7 @@ import { useEffect } from "react";
 function Game() {
     const hand = useSelector((store) => store.hand);
     const statBlock = useSelector((store) => store.statBlock);
+    const deckReducer = useSelector((store) => store.deckReducer);
     const playerBoard = useSelector((store) => store.playerBoard);
     const dispatch = useDispatch();
 
@@ -23,8 +24,16 @@ function Game() {
     // Gets all of the cards in the user's deck
     const fetchDeck = () => {
         dispatch({
-            type: 'FETCH_DECK'
+            type: 'FETCH_DECK',
+            payload: 1
         });
+    }
+
+    const handleEndTurn = () => {
+        dispatch({
+            type: 'FETCH_DECK',
+            payload: {deck: deckReducer, hand: hand}
+        })
     }
 
     return (
@@ -37,30 +46,34 @@ function Game() {
                 </Grid>
                 <Grid item xs={6} className="board" marginRight={"3rem"}>
                 </Grid>
-                <Grid item xs={2} className="stat-block">
-                    <p>Block: 0</p>
-                    <p>Health: 20</p>
-                    <p>Threat: 0</p>
-                    <p>Energy: 5</p>
+                <Grid item xs={2} className="stat-block-container" paddingBottom={"10px"}>
+                    <div className="stat-block">
+                        <p>Block: 0</p>
+                        <p>Health: 20</p>
+                        <p>Threat: 0</p>
+                        <p>Energy: 5</p>
+                    </div>
                 </Grid>
             </Grid>
             <Grid container spacing={3}>
                 <Grid item xs className="deck-picture" marginRight={"3rem"} marginLeft={"3rem"}>
-                    <p>Deck</p>
+                    <p>Deck {deckReducer.length}</p>
                     <br/>
                     <br/>
                 </Grid>
                 <Grid item xs={6} className="board" marginRight={"3rem"}>
                 </Grid>
-                <Grid item xs={2} className="stat-block">
-                    <p>Block: {statBlock.block}</p>
-                    <p>Health: {statBlock.hp}</p>
-                    <p>Threat: {statBlock.threat}</p>
-                    <p>Energy: {statBlock.energy}</p>
+                <Grid item xs={2} className="stat-block-container">
+                    <div className="stat-block">
+                        <p>Block: {statBlock.block}</p>
+                        <p>Health: {statBlock.hp}</p>
+                        <p>Threat: {statBlock.threat}</p>
+                        <p>Energy: {statBlock.energy}</p>
+                    </div>
                 </Grid>
             </Grid>
             <div id="end-turn-btn">
-                <button>End Turn</button>
+                <button onClick={handleEndTurn}>End Turn</button>
             </div>
 
             {/* Holds the player's hand */}
