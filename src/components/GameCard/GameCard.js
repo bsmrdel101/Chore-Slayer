@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
-function GameCard({card}) {
+function GameCard({card, round}) {
     const hand = useSelector((store) => store.hand);
     const dispatch = useDispatch();
 
