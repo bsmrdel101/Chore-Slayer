@@ -9,7 +9,6 @@ function Game() {
     const deckReducer = useSelector((store) => store.deckReducer);
     const playerBoard = useSelector((store) => store.playerBoard);
     let [round, setRound] = useState(1);
-    let [playerTurn, setPlayerTurn] = setState(true);
     const dispatch = useDispatch();
 
     
