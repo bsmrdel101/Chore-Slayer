@@ -16,8 +16,6 @@ const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5}, ac
         case 'DEAL_ENEMY_DAMAGE':
             copyOfState = {...state};
             copyOfState.health -= action.payload;
-            copyOfState.block = 1;
-            copyOfState.threat = 3;
             return copyOfState;
         case 'REMOVE_ENEMY_ENERGY':
             copyOfState = {...state};

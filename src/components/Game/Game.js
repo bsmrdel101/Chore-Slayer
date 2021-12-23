@@ -32,7 +32,6 @@ function Game() {
 
     const handleEndTurn = () => {
         const enemyDefence = enemy.threat + enemy.block;
-        setRound(round + 1);
         dispatch({
             type: 'RESET_PLAYER_ENERGY'
         })
@@ -54,6 +53,12 @@ function Game() {
                 payload: {deck: deckReducer, hand: hand}
             })
         }
+        handleEnemyTurn();
+    }
+
+    // Enemy turn handler
+    const handleEnemyTurn = () => {
+        
     }
 
     return (

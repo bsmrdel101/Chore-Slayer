@@ -6,11 +6,13 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2'
+import { Alert } from '@mui/material';
 
 function GameCard({card, round}) {
     const hand = useSelector((store) => store.hand);
     const playerStatBlock = useSelector((store) => store.playerStatBlock);
     const playerBoard = useSelector((store) => store.playerBoard);
+    const enemyBoard = useSelector((store) => store.enemyBoard);
     const dispatch = useDispatch();
 
     const handleClick = () => {
@@ -99,7 +101,26 @@ function GameCard({card, round}) {
     }    
 
     const handleAttackCard = (element) => {
-        console.log('Attack: ', element.attack_amount);
+        // TODO: Make minion selectable
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })      
+        Toast.fire({
+            icon: 'info',
+            title: 'Select an enemy minion to attack'
+        })
+        // dispatch({
+        //     type: 'ATTACK_ENEMY_MINION',
+        //     payload: {id: element.minionId, attack: element.attack_amount}
+        // })
     }    
 
     const handleMinionCard = (element) => {
