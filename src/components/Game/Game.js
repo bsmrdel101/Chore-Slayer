@@ -2,16 +2,16 @@ import { Grid } from "@mui/material";
 import GameCard from "../GameCard/GameCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import playerStatBlock from "../../redux/reducers/playerStatBlock.reducer";
 
 function Game() {
     const hand = useSelector((store) => store.hand);
-    const playerStatBlock = useSelector((store) => store.playerStatBlock);
+    const player = useSelector((store) => store.playerStatBlock);
+    const enemy = useSelector((store) => store.enemyStatBlock);
     const deckReducer = useSelector((store) => store.deckReducer);
     let [round, setRound] = useState(0);
     const dispatch = useDispatch();
     const playerBoard = useSelector((store) => store.playerBoard);
-    
+
     useEffect(() => {
         // Loop through all the cards in our deck and copy them all into a local state called baseHand
         // Shuffle the card order inside the baseHand array, to randomize the cards
@@ -31,14 +31,18 @@ function Game() {
     }
 
     const handleEndTurn = () => {
+        const enemyDefence = enemy.threat + enemy.block;
         setRound(round + 1);
         dispatch({
             type: 'RESET_PLAYER_ENERGY'
         })
-        // Deals dmg to enemy equal to players threat
-        dispatch({
-            type: 'DEAL_ENEMY_DAMAGE'
-        })
+        if (player.threat > enemyDefence) {
+            // Deals dmg to enemy equal to players threat
+            dispatch({
+                type: 'DEAL_ENEMY_DAMAGE',
+                payload: player.threat - enemyDefence
+            })
+        }
         if (deckReducer.length === 0) {
             dispatch({
                 type: 'FETCH_DECK',
@@ -64,10 +68,10 @@ function Game() {
                 </Grid>
                 <Grid item xs={2} className="stat-block-container" paddingBottom={"10px"}>
                     <div className="stat-block">
-                        <p>Block: 0</p>
-                        <p>Health: 20</p>
-                        <p>Threat: 0</p>
-                        <p>Energy: 5</p>
+                        <p>Block: {enemy.block}</p>
+                        <p>Health: {enemy.health}</p>
+                        <p>Threat: {enemy.threat}</p>
+                        <p>Energy: {enemy.energy}</p>
                     </div>
                 </Grid>
             </Grid>
@@ -84,10 +88,10 @@ function Game() {
                 </Grid>
                 <Grid item xs={2} className="stat-block-container">
                     <div className="stat-block">
-                        <p>Block: {playerStatBlock.block}</p>
-                        <p>Health: {playerStatBlock.health}</p>
-                        <p>Threat: {playerStatBlock.threat}</p>
-                        <p>Energy: {playerStatBlock.energy}</p>
+                        <p>Block: {player.block}</p>
+                        <p>Health: {player.health}</p>
+                        <p>Threat: {player.threat}</p>
+                        <p>Energy: {player.energy}</p>
                     </div>
                 </Grid>
             </Grid>
