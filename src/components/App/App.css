@@ -39,11 +39,36 @@ body {
     border: 3px solid rgb(85, 85, 85);
 }
 
-.stat-block {
+.stat-block-container {
     background-color: rgb(177, 177, 177);
     border: 3px solid rgb(85, 85, 85);
 }
 
 .deck-picture {
     background-color: grey;
+}
+
+.hand-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    background-color: rgb(190, 190, 190);
+    padding: 10px;
+    margin-top: 3vh;
+    margin-right: 27px;
+}
+
+#end-turn-btn {
+    display: flex;
+    justify-content: center;
+}
+
+#end-turn-btn button {
+    margin-top: 3vh;
+    padding: 10px 5rem;
+    font-size: 25px;
+}
+
+.card:hover {
+    transform:translateY(-25px);
 }
