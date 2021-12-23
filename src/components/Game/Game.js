@@ -7,10 +7,9 @@ function Game() {
     const hand = useSelector((store) => store.hand);
     const statBlock = useSelector((store) => store.statBlock);
     const deckReducer = useSelector((store) => store.deckReducer);
-    const playerBoard = useSelector((store) => store.playerBoard);
     let [round, setRound] = useState(1);
     const dispatch = useDispatch();
-
+    const playerBoard = useSelector((store) => store.playerBoard);
     
     useEffect(() => {
         // Loop through all the cards in our deck and copy them all into a local state called baseHand
@@ -32,6 +31,9 @@ function Game() {
 
     const handleEndTurn = () => {
         setRound(round + 1);
+        dispatch({
+            type: 'RESET_ENERGY'
+        })
         if (deckReducer.length === 0) {
             dispatch({
                 type: 'FETCH_DECK',
@@ -71,6 +73,9 @@ function Game() {
                     <br/>
                 </Grid>
                 <Grid item xs={6} className="board" marginRight={"3rem"}>
+                    {playerBoard.map((minion, i) => {
+                        return <p key={i}>{minion.damage} / {minion.health}</p>;
+                    })}
                 </Grid>
                 <Grid item xs={2} className="stat-block-container">
                     <div className="stat-block">

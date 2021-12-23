@@ -23,6 +23,7 @@ import HelpIcon from '@mui/icons-material/Help';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Swal from 'sweetalert2'
 
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -131,9 +132,11 @@ export default function Sidebar() {
       showCancelButton: true,
       confirmButtonText: 'Okay',
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        history.push('/tasks')
+        history.push('/tasks');
+        dispatch({
+          type: 'RESET_GAME'
+        });
       }
     })
   }

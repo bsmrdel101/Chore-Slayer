@@ -13,6 +13,14 @@ const statBlock = (state = {block: 0, hp: 20, threat: 0, energy: 5}, action) => 
             copyOfState = {...state};
             copyOfState.energy -= action.payload;
             return copyOfState;
+        case 'RESET_ENERGY':
+            copyOfState = {...state};
+            copyOfState.energy = 5;
+            return copyOfState;
+        case 'RESET_GAME':
+            copyOfState = {...state};
+            copyOfState = {block: 0, hp: 20, threat: 0, energy: 5};
+            return copyOfState;
         default:
             return state;
     }

@@ -84,7 +84,11 @@ function GameCard({card, round}) {
     }    
 
     const handleMinionCard = (element) => {
-        console.log('Health: ', element.health, 'Dmg', element.damage);
+        console.log('Dmg', element.damage, 'Health: ', element.health);
+        dispatch({
+            type: 'SUMMON_MINION',
+            payload: {damage: element.damage, health: element.health}
+        })
     }    
 
     return (
