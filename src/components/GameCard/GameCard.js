@@ -5,36 +5,60 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2'
 
 function GameCard({card, round}) {
     const hand = useSelector((store) => store.hand);
+    const statBlock = useSelector((store) => store.statBlock);
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        let selectedCard = card.card_id;
-        let index = 0;
-        for (let element of hand) {
-            if (element.card_id === selectedCard) {
-                console.log(element);
-                switch (element.type) {
-                    case 'block':
-                        handleBlockCard(element);
-                        break;
-                    case 'attack':
-                        handleAttackCard(element);
-                        break;
-                    case 'minion':
-                        handleMinionCard(element);
-                        break;
-                    default:
-                        break;
+        if (card.cost <= statBlock.energy) {
+            let selectedCard = card.card_id;
+            let index = 0;
+            for (let element of hand) {
+                if (element.card_id === selectedCard) {
+                    console.log(element);
+                    switch (element.type) {
+                        case 'block':
+                            handleBlockCard(element);
+                            break;
+                        case 'attack':
+                            handleAttackCard(element);
+                            break;
+                        case 'minion':
+                            handleMinionCard(element);
+                            break;
+                        default:
+                            break;
+                    }
+                    dispatch({
+                        type: 'SELECT_CARD',
+                        payload: index
+                    })
                 }
-                dispatch({
-                    type: 'SELECT_CARD',
-                    payload: index
-                })
+                index++;
             }
-            index++;
+            dispatch({
+                type: 'REMOVE_ENERGY',
+                payload: card.cost
+            })
+        } else {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })      
+              Toast.fire({
+                icon: 'error',
+                title: 'Not enough energy'
+            })
         }
     }
 
