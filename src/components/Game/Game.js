@@ -2,10 +2,11 @@ import { Grid } from "@mui/material";
 import GameCard from "../GameCard/GameCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import playerStatBlock from "../../redux/reducers/playerStatBlock.reducer";
 
 function Game() {
     const hand = useSelector((store) => store.hand);
-    const statBlock = useSelector((store) => store.statBlock);
+    const playerStatBlock = useSelector((store) => store.playerStatBlock);
     const deckReducer = useSelector((store) => store.deckReducer);
     let [round, setRound] = useState(0);
     const dispatch = useDispatch();
@@ -32,7 +33,11 @@ function Game() {
     const handleEndTurn = () => {
         setRound(round + 1);
         dispatch({
-            type: 'RESET_ENERGY'
+            type: 'RESET_PLAYER_ENERGY'
+        })
+        // Deals dmg to enemy equal to players threat
+        dispatch({
+            type: 'DEAL_ENEMY_DAMAGE'
         })
         if (deckReducer.length === 0) {
             dispatch({
@@ -79,10 +84,10 @@ function Game() {
                 </Grid>
                 <Grid item xs={2} className="stat-block-container">
                     <div className="stat-block">
-                        <p>Block: {statBlock.block}</p>
-                        <p>Health: {statBlock.hp}</p>
-                        <p>Threat: {statBlock.threat}</p>
-                        <p>Energy: {statBlock.energy}</p>
+                        <p>Block: {playerStatBlock.block}</p>
+                        <p>Health: {playerStatBlock.health}</p>
+                        <p>Threat: {playerStatBlock.threat}</p>
+                        <p>Energy: {playerStatBlock.energy}</p>
                     </div>
                 </Grid>
             </Grid>

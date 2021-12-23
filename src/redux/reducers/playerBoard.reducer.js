@@ -1,7 +1,7 @@
 const playerBoard = (state = [], action) => {
     let copyOfState;
     switch (action.type) {
-        case 'SUMMON_MINION':
+        case 'SUMMON_PLAYER_MINION':
             copyOfState = [...state];
             copyOfState.push(action.payload);
             return copyOfState;

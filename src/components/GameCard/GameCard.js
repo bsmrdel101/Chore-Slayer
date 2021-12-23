@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'
 
 function GameCard({card, round}) {
     const hand = useSelector((store) => store.hand);
-    const statBlock = useSelector((store) => store.statBlock);
+    const playerStatBlock = useSelector((store) => store.playerStatBlock);
     const playerBoard = useSelector((store) => store.playerBoard);
     const dispatch = useDispatch();
 
@@ -31,7 +31,7 @@ function GameCard({card, round}) {
                 title: 'Max number of minions on board'
             })
         } else {
-            if (card.cost <= statBlock.energy) {
+            if (card.cost <= playerStatBlock.energy) {
                 let selectedCard = card.card_id;
                 let index = 0;
                 for (let element of hand) {
@@ -58,7 +58,7 @@ function GameCard({card, round}) {
                     index++;
                 }
                 dispatch({
-                    type: 'REMOVE_ENERGY',
+                    type: 'REMOVE_PLAYER_ENERGY',
                     payload: card.cost
                 })
             } else {
@@ -83,12 +83,12 @@ function GameCard({card, round}) {
 
     const handleBlockCard = (element) => {
         element.block_amount && dispatch({
-            type: 'ADD_BLOCK',
+            type: 'ADD_PLAYER_BLOCK',
             payload: element.block_amount
         });
         switch (element.card_id) {
             case 5: // Swap block
-                dispatch({type: 'SWAP_BLOCK'})
+                dispatch({type: 'SWAP_PLAYER_BLOCK'})
                 break;
             case 6: // Break formation
                 console.log('TODO: Break Formation');
@@ -104,11 +104,11 @@ function GameCard({card, round}) {
 
     const handleMinionCard = (element) => {
         dispatch({
-            type: 'SUMMON_MINION',
+            type: 'SUMMON_PLAYER_MINION',
             payload: {damage: element.damage, health: element.health}
         })
         dispatch({
-            type: 'ADD_THREAT',
+            type: 'ADD_PLAYER_THREAT',
             payload: element.damage
         })
     }    
