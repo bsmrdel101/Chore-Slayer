@@ -7,7 +7,7 @@ function Game() {
     const hand = useSelector((store) => store.hand);
     const statBlock = useSelector((store) => store.statBlock);
     const deckReducer = useSelector((store) => store.deckReducer);
-    let [round, setRound] = useState(1);
+    let [round, setRound] = useState(0);
     const dispatch = useDispatch();
     const playerBoard = useSelector((store) => store.playerBoard);
     

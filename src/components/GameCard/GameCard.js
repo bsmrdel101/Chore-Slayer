@@ -10,40 +10,11 @@ import Swal from 'sweetalert2'
 function GameCard({card, round}) {
     const hand = useSelector((store) => store.hand);
     const statBlock = useSelector((store) => store.statBlock);
+    const playerBoard = useSelector((store) => store.playerBoard);
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        if (card.cost <= statBlock.energy) {
-            let selectedCard = card.card_id;
-            let index = 0;
-            for (let element of hand) {
-                if (element.card_id === selectedCard) {
-                    console.log(element);
-                    switch (element.type) {
-                        case 'block':
-                            handleBlockCard(element);
-                            break;
-                        case 'attack':
-                            handleAttackCard(element);
-                            break;
-                        case 'minion':
-                            handleMinionCard(element);
-                            break;
-                        default:
-                            break;
-                    }
-                    dispatch({
-                        type: 'SELECT_CARD',
-                        payload: index
-                    })
-                }
-                index++;
-            }
-            dispatch({
-                type: 'REMOVE_ENERGY',
-                payload: card.cost
-            })
-        } else {
+        if (card.type === 'minion' && playerBoard.length === 5) {
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
@@ -51,14 +22,62 @@ function GameCard({card, round}) {
                 timer: 1500,
                 timerProgressBar: true,
                 didOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
                 }
             })      
-              Toast.fire({
-                icon: 'error',
-                title: 'Not enough energy'
+            Toast.fire({
+                icon: 'warning',
+                title: 'Max number of minions on board'
             })
+        } else {
+            if (card.cost <= statBlock.energy) {
+                let selectedCard = card.card_id;
+                let index = 0;
+                for (let element of hand) {
+                    if (element.card_id === selectedCard) {
+                        console.log(element);
+                        switch (element.type) {
+                            case 'block':
+                                handleBlockCard(element);
+                                break;
+                            case 'attack':
+                                handleAttackCard(element);
+                                break;
+                            case 'minion':
+                                handleMinionCard(element);
+                                break;
+                            default:
+                                break;
+                        }
+                        dispatch({
+                            type: 'SELECT_CARD',
+                            payload: index
+                        })
+                    }
+                    index++;
+                }
+                dispatch({
+                    type: 'REMOVE_ENERGY',
+                    payload: card.cost
+                })
+            } else {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })      
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Not enough energy'
+                })
+            }
         }
     }
 
@@ -84,10 +103,13 @@ function GameCard({card, round}) {
     }    
 
     const handleMinionCard = (element) => {
-        console.log('Dmg', element.damage, 'Health: ', element.health);
         dispatch({
             type: 'SUMMON_MINION',
             payload: {damage: element.damage, health: element.health}
+        })
+        dispatch({
+            type: 'ADD_THREAT',
+            payload: element.damage
         })
     }    
 
