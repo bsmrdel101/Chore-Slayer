@@ -1,13 +1,14 @@
 import { Grid } from "@mui/material";
 import GameCard from "../GameCard/GameCard";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Game() {
     const hand = useSelector((store) => store.hand);
     const statBlock = useSelector((store) => store.statBlock);
     const deckReducer = useSelector((store) => store.deckReducer);
     const playerBoard = useSelector((store) => store.playerBoard);
+    let [round, setRound] = useState(1);
     const dispatch = useDispatch();
 
     
@@ -30,6 +31,7 @@ function Game() {
     }
 
     const handleEndTurn = () => {
+        setRound(round + 1);
         if (deckReducer.length === 0) {
             dispatch({
                 type: 'FETCH_DECK',
@@ -47,7 +49,7 @@ function Game() {
         <>
             <Grid container spacing={3}>
                 <Grid item xs>
-                    <h1>Turn 1</h1>
+                    <h1>Turn {round}</h1>
                     <br/>
                     <br/>
                 </Grid>
