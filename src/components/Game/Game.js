@@ -147,21 +147,60 @@ function Game() {
             }
         }
 
-        let type = '';
+        // Adds up the scores to see what type of card it will be
+        let cardType = '';
         if (attackScore > highestScore) {
-            type = 'attack';
+            cardType = 'attack';
             highestScore = attackScore;
+            attackScore = 0;
         }
         if (blockScore > highestScore) {
-            type = 'block';
+            cardType = 'block';
             highestScore = blockScore;
+            blockScore = 0;
         }
         if (minionScore > highestScore) {
-            type = 'minion';
+            cardType = 'minion';
             highestScore = minionScore;
+            minionScore = 0
         }
-        console.log(type);
-
+        console.log(cardType);
+        for (let card of enemyHand) {
+            if (card.cost <= enemy.energy) {
+                // Determines what cardType of block card will get played
+                if (cardType === 'block') {
+                    switch (card.card_id) {
+                        case 5:
+                            let blockDiff = player.block - enemy.block;
+                            if (blockDiff > 1) {
+                                selectedCards.push(card.card_id);
+                                console.log(card.name);
+                            }
+                            break;
+                        case 6:
+                            if (player.block > 5 || player.block >= 3 && enemy.block < 3) {
+                                selectedCards.push(card.card_id);
+                                console.log(card.name);
+                            }
+                            break;
+                        default:
+                            selectedCards.push(card.card_id);
+                            console.log(card.name);
+                            break;
+                    }
+                }
+                // Determines what type of attack card will get played
+                if (cardType === 'attack') {
+                    selectedCards.push(card.card_id);
+                    console.log(card.name);
+                }
+                // Determines what cardType of minion card will get played
+                if (cardType === 'minion') {
+                    selectedCards.push(card.card_id);
+                    console.log(card.name);
+                }
+            }
+        } // End of loop
         console.log(blockScore, attackScore, minionScore, 'Card: ', selectedCards);
     }
 
