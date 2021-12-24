@@ -59,10 +59,13 @@ function Game() {
 
     // Deals damage to a minion that the player has selected
     const handlePlayerAttack = (i) => {
-        dispatch({
-            type: 'ATTACK_ENEMY_MINION',
-            payload: {id: i, attack: player.element.attack_amount}
-        })
+        if (player.canAttack === true) {
+            dispatch({
+                type: 'ATTACK_ENEMY_MINION',
+                payload: {id: i, attack: player.element.attack_amount}
+            })
+        }
+        player.canAttack = false;
     }
 
     // Enemy turn handler
