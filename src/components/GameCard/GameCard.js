@@ -6,11 +6,11 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2'
-import { Alert } from '@mui/material';
+import { useState } from 'react';
 
 function GameCard({card, round}) {
     const hand = useSelector((store) => store.hand);
-    const playerStatBlock = useSelector((store) => store.playerStatBlock);
+    const player = useSelector((store) => store.playerStatBlock);
     const playerBoard = useSelector((store) => store.playerBoard);
     const enemyBoard = useSelector((store) => store.enemyBoard);
     const dispatch = useDispatch();
@@ -33,7 +33,7 @@ function GameCard({card, round}) {
                 title: 'Max number of minions on board'
             })
         } else {
-            if (card.cost <= playerStatBlock.energy) {
+            if (card.cost <= player.energy) {
                 let selectedCard = card.card_id;
                 let index = 0;
                 for (let element of hand) {
@@ -101,7 +101,6 @@ function GameCard({card, round}) {
     }    
 
     const handleAttackCard = (element) => {
-        // TODO: Make minion selectable
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -117,10 +116,15 @@ function GameCard({card, round}) {
             icon: 'info',
             title: 'Select an enemy minion to attack'
         })
-        // dispatch({
-        //     type: 'ATTACK_ENEMY_MINION',
-        //     payload: {id: element.minionId, attack: element.attack_amount}
-        // })
+        dispatch({
+            type: 'PLAYER_CAN_ATTACK',
+            payload: true
+        })
+        // Passes the data of the card played to the reducer so Game.js can access it
+        dispatch({
+            type: 'ELEMENT',
+            payload: element
+        })
     }    
 
     const handleMinionCard = (element) => {

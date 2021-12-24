@@ -18,6 +18,7 @@ body {
 /* Tasks */
 .task-card {
     margin-top: 2vh;
+    cursor: pointer;
 }
 
 .task-list {

@@ -58,6 +58,10 @@ function* fetchDeck(action) {
             console.log('base hand', baseHand);
         } else {
             for (let i = modifiedHand.length; i < 5; i++) {
+              // Only lets the loop iterate one more time if there's 1 card left in the deck
+              if (baseHand.length === 1) {
+                i = 4;
+              }
                 const card = baseHand[0];
                 console.log('base hand: ', baseHand);
                 console.log('card', card);

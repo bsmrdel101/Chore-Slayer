@@ -11,6 +11,7 @@ function Game() {
     let [round, setRound] = useState(0);
     const dispatch = useDispatch();
     const playerBoard = useSelector((store) => store.playerBoard);
+    const enemyBoard = useSelector((store) => store.enemyBoard);
 
     useEffect(() => {
         // Loop through all the cards in our deck and copy them all into a local state called baseHand
@@ -56,9 +57,20 @@ function Game() {
         handleEnemyTurn();
     }
 
+    // Deals damage to a minion that the player has selected
+    const handlePlayerAttack = (i) => {
+        dispatch({
+            type: 'ATTACK_ENEMY_MINION',
+            payload: {id: i, attack: player.element.attack_amount}
+        })
+    }
+
     // Enemy turn handler
     const handleEnemyTurn = () => {
-        
+        dispatch({
+            type: 'SUMMON_ENEMY_MINION',
+            payload: {health: 4, damage: 2}
+        })
     }
 
     return (
@@ -70,6 +82,9 @@ function Game() {
                     <br/>
                 </Grid>
                 <Grid item xs={6} className="board" marginRight={"3rem"}>
+                    {enemyBoard.map((minion, i) => {
+                        return <p key={i} onClick={() => handlePlayerAttack(i)}>{minion.damage} / {minion.health}</p>;
+                    })}
                 </Grid>
                 <Grid item xs={2} className="stat-block-container" paddingBottom={"10px"}>
                     <div className="stat-block">
