@@ -12,6 +12,12 @@ const shuffleArray = (array) => {
     }
 }
 
+const getRandomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max + 1);
+  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}
+
 // Saga GET route
 function* fetchDeck(action) {
     try {
@@ -59,9 +65,15 @@ function* fetchDeck(action) {
         } else {
             for (let i = modifiedHand.length; i < 5; i++) {
               // Only lets the loop iterate one more time if there's 1 card left in the deck
-              if (baseHand.length === 1) {
-                i = 4;
+              console.log(baseHand);
+              if (baseHand.length === 0) {
+                let int = getRandomInt(0, response.data.length);
+                while (int === 3) {
+                  int = getRandomInt(0, response.data.length);
+                }
+                baseHand.push(response.data[int].card_id);
               }
+              console.log(baseHand);
                 const card = baseHand[0];
                 console.log('base hand: ', baseHand);
                 console.log('card', card);
