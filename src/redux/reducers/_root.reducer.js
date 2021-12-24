@@ -2,12 +2,14 @@ import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
 import taskReducer from './task.reducer';
-import hand from './card.reducer';
+import hand from './playerHand.reducer';
 import playerBoard from './playerBoard.reducer';
 import enemyBoard from './enemyBoard.reducer';
 import deckReducer from './deck.reducer';
 import playerStatBlock from './playerStatBlock.reducer';
 import enemyStatBlock from './EnemyStatBlock.reducer';
+import enemyHand from './enemyHand.reducer';
+import enemyDeck from './enemyDeck.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -24,7 +26,9 @@ const rootReducer = combineReducers({
   enemyBoard,
   deckReducer,
   playerStatBlock,
-  enemyStatBlock
+  enemyStatBlock,
+  enemyHand,
+  enemyDeck
 });
 
 export default rootReducer;
