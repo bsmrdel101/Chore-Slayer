@@ -8,7 +8,7 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/', (req, res) => {
     const sqlText = (`
         SELECT * FROM "deck"
         WHERE "user_id"=$1;

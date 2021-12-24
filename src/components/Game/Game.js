@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 import GameCard from "../GameCard/GameCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import enemyStatBlock from "../../redux/reducers/EnemyStatBlock.reducer";
 
 function Game() {
     const hand = useSelector((store) => store.hand);
@@ -78,13 +79,90 @@ function Game() {
             dispatch({
                 type: 'FETCH_ENEMY_DECK',
                 payload: 1
-            });
+            })
         } else {
             dispatch({
                 type: 'FETCH_ENEMY_DECK',
                 payload: {deck: enemyDeck, hand: enemyHand}
             })
         }
+        // AI turn handler
+        // Scores for different actions will be added up conditionally
+        // AI executes the action with the highest score at the end
+        let blockScore = 0;
+        let attackScore = 0;
+        let minionScore = 0;
+        let selectedCards = [];
+        let highestScore = 0;
+        
+        for (let card of enemyHand) {
+            switch (card.type) {
+                case 'block':
+                    blockScore = 1;
+                    break;
+                case 'attack':
+                    attackScore = 1;
+                    break;
+                case 'minion':
+                    minionScore = 1;
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (attackScore > 0) {
+            switch (true) {
+                case playerBoard.length === 1:
+                    attackScore += 1;
+                    break;
+                case playerBoard.length > 2:
+                    attackScore += 4; 
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        if (blockScore > 0) {
+            switch (true) {
+                case enemy.threat >= player.threat:
+                    blockScore -= 3;
+                    break;
+                case enemy.block === 0:
+                    blockScore += 2;
+                default:
+                    break;
+            }
+        }
+
+        if (minionScore > 0) {
+            if (enemyBoard.length === 0) {
+                minionScore += 3;
+            }
+            if (playerBoard.length > 2) {
+                minionScore += 3;
+            }
+            if (playerBoard.length === 0) {
+                minionScore += 1;
+            }
+        }
+
+        let type = '';
+        if (attackScore > highestScore) {
+            type = 'attack';
+            highestScore = attackScore;
+        }
+        if (blockScore > highestScore) {
+            type = 'block';
+            highestScore = blockScore;
+        }
+        if (minionScore > highestScore) {
+            type = 'minion';
+            highestScore = minionScore;
+        }
+        console.log(type);
+
+        console.log(blockScore, attackScore, minionScore, 'Card: ', selectedCards);
     }
 
     return (

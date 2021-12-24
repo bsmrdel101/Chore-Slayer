@@ -68,7 +68,7 @@ function* fetchDeck(action) {
                 baseHand.push(card.card_id);
             }
             shuffleArray(baseHand);
-            console.log('deck reducer: ', response.data);
+            console.log('Enemy deck: ', response.data);
             console.log('**** Hand Process ****');
             for (let i = modifiedHand.length; i < 5; i++) {
                 const card = baseHand[0];
@@ -115,9 +115,9 @@ function* fetchDeck(action) {
     }
 }
 
-function* deckSaga() {
+function* enemySaga() {
     yield takeLatest('FETCH_ENEMY_DECK', fetchDeck);
     yield takeLatest('FETCH_ENEMY_HAND', fetchHand);
   }
   
-export default deckSaga;
+export default enemySaga;
