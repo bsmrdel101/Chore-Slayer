@@ -9,6 +9,7 @@ function Game() {
     const enemy = useSelector((store) => store.enemyStatBlock);
     const deckReducer = useSelector((store) => store.deckReducer);
     const enemyDeck = useSelector((store) => store.enemyDeck);
+    const enemyHand = useSelector((store) => store.enemyHand);
     let [round, setRound] = useState(0);
     const dispatch = useDispatch();
     const playerBoard = useSelector((store) => store.playerBoard);
@@ -73,7 +74,7 @@ function Game() {
     const handleEnemyTurn = () => {
         const playerDefence = player.threat + player.block;
 
-        if (deckReducer.length === 0) {
+        if (enemyDeck.length === 0) {
             dispatch({
                 type: 'FETCH_ENEMY_DECK',
                 payload: 1
@@ -81,7 +82,7 @@ function Game() {
         } else {
             dispatch({
                 type: 'FETCH_ENEMY_DECK',
-                payload: {deck: deckReducer, hand: hand}
+                payload: {deck: enemyDeck, hand: enemyHand}
             })
         }
     }
