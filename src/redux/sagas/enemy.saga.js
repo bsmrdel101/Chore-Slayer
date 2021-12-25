@@ -129,6 +129,9 @@ function* fetchDeck(action) {
               }
               if (attackScore > 0) {
                   switch (true) {
+                    case action.payload.playerBoard.length === 0:
+                      attackScore -= 50;
+                      break;
                       case action.payload.playerBoard.length === 1:
                           attackScore += 1;
                           break;
@@ -173,13 +176,11 @@ function* fetchDeck(action) {
                   highestScore = attackScore;
                   attackScore = 0;
               }
-              console.log(cardType);
               if (blockScore > highestScore) {
                   cardType = 'block';
                   highestScore = blockScore;
                   blockScore = 0;
               }
-              console.log(cardType);
               if (minionScore > highestScore) {
                   cardType = 'minion';
                   highestScore = minionScore;
@@ -247,10 +248,32 @@ function* fetchDeck(action) {
                                 }
                                 break;
                             case 'attack':
-                                
+                                if (action.payload.playerBoard.length > 0) {
+                                  let lowestHp = 50;
+                                  let minionId;
+                                  for (let minion of action.payload.playerBoard) {
+                                    if (minion.health < lowestHp) {
+                                      minionId = minion.card_id;
+                                      lowestHp = minion.health;
+                                    }
+                                  }
+                                  yield put({
+                                    type: 'ATTACK_PLAYER_MINION',
+                                    payload: {id: minionId, attack: card.attack_amount}
+                                  })
+                                } else {
+                                  console.log('* Player had no minions to attack *');
+                                }
                                 break;
                             case 'minion':
-                                
+                              yield put({
+                                type: 'SUMMON_ENEMY_MINION',
+                                payload: {damage: card.damage, health: card.health}
+                              })
+                              yield put({
+                                  type: 'ADD_ENEMY_THREAT',
+                                  payload: card.damage
+                              })
                                 break;
                             default:
                                 break;
