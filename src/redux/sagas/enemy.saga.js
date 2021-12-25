@@ -103,16 +103,22 @@ function* fetchDeck(action) {
         
         // ----- AI turn handler -----
         // Scores for different actions will be added up conditionally
-        // AI executes the actions with the highest score at the end
-        for (let card of action.payload.enemyHand) {
-            if (card.cost <= action.payload.enemy.energy) {
+        // Actions with the highest scores are given more priority
+        console.log('***** AI Handler *****'); 
+        let enemyHand = action.payload.hand;
+        let energy = action.payload.enemy.energy;
+        
+        for (let card of enemyHand) {
+            if (card.cost <= energy) {
               let blockScore = 0;
               let attackScore = 0;
               let minionScore = 0;
               let selectedCard = 0;
               let highestScore = 0;
               
-              for (let card of action.payload.enemyHand) { 
+              console.log(enemyHand);
+              for (let card of enemyHand) { 
+                console.log(card);
                   switch (card.type) {
                       case 'block':
                           blockScore = 1;
@@ -127,6 +133,7 @@ function* fetchDeck(action) {
                           break;
                   }
               }
+              console.log(blockScore, attackScore, minionScore);
 
               /* Card type deciders */
 
@@ -178,17 +185,14 @@ function* fetchDeck(action) {
               if (attackScore > highestScore) {
                   cardType = 'attack';
                   highestScore = attackScore;
-                  // attackScore = 0;
               }
               if (blockScore > highestScore) {
                   cardType = 'block';
                   highestScore = blockScore;
-                  // blockScore = 0;
               }
               if (minionScore > highestScore) {
                   cardType = 'minion';
                   highestScore = minionScore;
-                  // minionScore = 0
               }
               console.log('-----'); 
               console.log('Card type: ', cardType);
@@ -290,12 +294,10 @@ function* fetchDeck(action) {
                     }
                     index++;
                 }
-                yield put({
-                  type: 'REMOVE_ENEMY_ENERGY',
-                  payload: card.cost
-                })
+                console.log('starting energy: ', energy);
+                energy -= card.cost;
                 console.log('energy used:', card.cost);
-                console.log('energy left:', action.payload.enemy.energy);
+                console.log('energy left:', energy);
             }
         } // End of loop
 

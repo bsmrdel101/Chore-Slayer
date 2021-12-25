@@ -10,7 +10,7 @@ function Game() {
     const deckReducer = useSelector((store) => store.deckReducer);
     const enemyDeck = useSelector((store) => store.enemyDeck);
     const enemyHand = useSelector((store) => store.enemyHand);
-    let [round, setRound] = useState(0);
+    let [round, setRound] = useState(1);
     const dispatch = useDispatch();
     const playerBoard = useSelector((store) => store.playerBoard);
     const enemyBoard = useSelector((store) => store.enemyBoard);
@@ -85,7 +85,6 @@ function Game() {
                 payload: {id: 0, deck: enemyDeck, hand: enemyHand, player: player, enemy: enemy, playerBoard: playerBoard, enemyBoard: enemyBoard, hand: hand, enemyHand: enemyHand}
             })
         }
-        
     }
 
     return (
