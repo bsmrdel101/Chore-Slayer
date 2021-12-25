@@ -5,47 +5,92 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2'
+import { useState } from 'react';
 
 function GameCard({card, round}) {
     const hand = useSelector((store) => store.hand);
+    const player = useSelector((store) => store.playerStatBlock);
+    const playerBoard = useSelector((store) => store.playerBoard);
+    const enemyBoard = useSelector((store) => store.enemyBoard);
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        let selectedCard = card.card_id;
-        let index = 0;
-        for (let element of hand) {
-            if (element.card_id === selectedCard) {
-                console.log(element);
-                switch (element.type) {
-                    case 'block':
-                        handleBlockCard(element);
-                        break;
-                    case 'attack':
-                        handleAttackCard(element);
-                        break;
-                    case 'minion':
-                        handleMinionCard(element);
-                        break;
-                    default:
-                        break;
+        if (card.type === 'minion' && playerBoard.length === 5) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })      
+            Toast.fire({
+                icon: 'warning',
+                title: 'Max number of minions on board'
+            })
+        } else {
+            if (card.cost <= player.energy) {
+                let selectedCard = card.card_id;
+                let index = 0;
+                for (let element of hand) {
+                    if (element.card_id === selectedCard) {
+                        console.log(element);
+                        switch (element.type) {
+                            case 'block':
+                                handleBlockCard(element);
+                                break;
+                            case 'attack':
+                                handleAttackCard(element);
+                                break;
+                            case 'minion':
+                                handleMinionCard(element);
+                                break;
+                            default:
+                                break;
+                        }
+                        dispatch({
+                            type: 'SELECT_CARD',
+                            payload: index
+                        })
+                    }
+                    index++;
                 }
                 dispatch({
-                    type: 'SELECT_CARD',
-                    payload: index
+                    type: 'REMOVE_PLAYER_ENERGY',
+                    payload: card.cost
+                })
+            } else {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })      
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Not enough energy'
                 })
             }
-            index++;
         }
     }
 
     const handleBlockCard = (element) => {
         element.block_amount && dispatch({
-            type: 'ADD_BLOCK',
+            type: 'ADD_PLAYER_BLOCK',
             payload: element.block_amount
         });
         switch (element.card_id) {
             case 5: // Swap block
-                dispatch({type: 'SWAP_BLOCK'})
+                dispatch({type: 'SWAP_PLAYER_BLOCK'})
                 break;
             case 6: // Break formation
                 console.log('TODO: Break Formation');
@@ -56,11 +101,41 @@ function GameCard({card, round}) {
     }    
 
     const handleAttackCard = (element) => {
-        console.log('Attack: ', element.attack_amount);
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })      
+        Toast.fire({
+            icon: 'info',
+            title: 'Select an enemy minion to attack'
+        })
+        dispatch({
+            type: 'PLAYER_CAN_ATTACK',
+            payload: true
+        })
+        // Passes the data of the card played to the reducer so Game.js can access it
+        dispatch({
+            type: 'ELEMENT',
+            payload: element
+        })
     }    
 
     const handleMinionCard = (element) => {
-        console.log('Health: ', element.health, 'Dmg', element.damage);
+        dispatch({
+            type: 'SUMMON_PLAYER_MINION',
+            payload: {damage: element.damage, health: element.health}
+        })
+        dispatch({
+            type: 'ADD_PLAYER_THREAT',
+            payload: element.damage
+        })
     }    
 
     return (
