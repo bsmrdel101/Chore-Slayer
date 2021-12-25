@@ -10,6 +10,7 @@ import playerStatBlock from './playerStatBlock.reducer';
 import enemyStatBlock from './EnemyStatBlock.reducer';
 import enemyHand from './enemyHand.reducer';
 import enemyDeck from './enemyDeck.reducer';
+import taskHistoryReducer from './taskHistory.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
   playerStatBlock,
   enemyStatBlock,
   enemyHand,
-  enemyDeck
+  enemyDeck,
+  taskHistoryReducer
 });
 
 export default rootReducer;
