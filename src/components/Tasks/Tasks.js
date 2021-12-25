@@ -13,6 +13,7 @@ function Tasks() {
     const history = useHistory();
     const dispatch = useDispatch();
     const taskReducer = useSelector((store) => store.taskReducer);
+    const taskHistory = useSelector((store) => store.taskHistoryReducer);
 
     useEffect(() => {
         // Render all of the task cards on the DOM when the page loads
@@ -56,7 +57,7 @@ function Tasks() {
                     <Item>
                         <div>
                             <h2>Tasks Left: {taskReducer.length}</h2>
-                            <h2>Tasks Completed: 0</h2>
+                            <h2>Tasks Completed: {taskHistory.length}</h2>
                             <hr />
                             <h2>New Card: 0/3</h2>
                             <h2>Stat Increase: 0/5</h2>

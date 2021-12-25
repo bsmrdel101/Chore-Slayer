@@ -3,13 +3,12 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Swal from 'sweetalert2';
 
 function TaskCard({task}) {
     const dispatch = useDispatch();
-    const taskReducer = useSelector((store) => store.taskReducer);
 
     const deleteTask = () => {
         // Sweet alert conformation message for deletion
