@@ -72,12 +72,27 @@ function TaskCard({task}) {
         })
     }
 
+    // Removes task for chores list and adds it to task history
+    // Updates task statistics
+    const completeTask = () => {
+        // Add task to history
+        dispatch({
+            type: 'STORE_TASK',
+            payload: task
+        })
+        // Removes task card from the list
+        dispatch({
+            type: 'DELETE_TASK',
+            payload: task.id
+        })
+    }
+
     return (
         <>
             <div>
                 <Card sx={{ maxWidth: 345 }} className="task-card">
                     <CardActionArea>
-                        <CardContent>
+                        <CardContent onClick={handleEdit}>
                         <Typography gutterBottom variant="h5" component="div">
                         <Grid container spacing={2} columns={16}>
                             <Grid item xs={8}>
@@ -94,8 +109,7 @@ function TaskCard({task}) {
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-                        <Button size="small" variant="contained" color="success">Complete</Button>
-                        <Button size="small" color="primary" onClick={handleEdit}><EditIcon/></Button>
+                        <Button size="small" variant="contained" color="success" onClick={completeTask}>Complete</Button>
                         <Button size="small" color="error" onClick={deleteTask}><DeleteIcon/></Button>
                     </CardActions>
                 </Card>
