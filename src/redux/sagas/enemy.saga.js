@@ -100,10 +100,10 @@ function* fetchDeck(action) {
             console.log('modified hand', modifiedHand);
             console.log('base hand', baseHand);
         }
-
-        // AI turn handler
+        
+        // ----- AI turn handler -----
         // Scores for different actions will be added up conditionally
-        // AI executes the action with the highest score at the end
+        // AI executes the actions with the highest score at the end
         for (let card of action.payload.enemyHand) {
             if (card.cost <= action.payload.enemy.energy) {
               let blockScore = 0;
@@ -127,6 +127,9 @@ function* fetchDeck(action) {
                           break;
                   }
               }
+
+              /* Card type deciders */
+
               if (attackScore > 0) {
                   switch (true) {
                     case action.payload.playerBoard.length === 0:
@@ -166,27 +169,29 @@ function* fetchDeck(action) {
                       minionScore += 1;
                   }
               }
+              // End of card type deciders
       
-              console.log(blockScore, attackScore, minionScore);
+              console.log('Type scores: ', blockScore, attackScore, minionScore);
       
               // Adds up the scores to see what type of card it will be
               let cardType = '';
               if (attackScore > highestScore) {
                   cardType = 'attack';
                   highestScore = attackScore;
-                  attackScore = 0;
+                  // attackScore = 0;
               }
               if (blockScore > highestScore) {
                   cardType = 'block';
                   highestScore = blockScore;
-                  blockScore = 0;
+                  // blockScore = 0;
               }
               if (minionScore > highestScore) {
                   cardType = 'minion';
                   highestScore = minionScore;
-                  minionScore = 0
+                  // minionScore = 0
               }
-              console.log(cardType);
+              console.log('-----'); 
+              console.log('Card type: ', cardType);
 
               // Determines what type of block card will get played
               if (cardType === 'block') {
@@ -289,6 +294,8 @@ function* fetchDeck(action) {
                   type: 'REMOVE_ENEMY_ENERGY',
                   payload: card.cost
                 })
+                console.log('energy used:', card.cost);
+                console.log('energy left:', action.payload.enemy.energy);
             }
         } // End of loop
 
