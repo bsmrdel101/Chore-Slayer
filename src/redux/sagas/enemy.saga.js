@@ -232,7 +232,7 @@ function* handleEnemyTurn(action) {
                           break;
                       default:          
                           for (let card of enemyHand) {
-                            if (card.type === 'block') {
+                            if (card.type === 'block' && energy >= card.cost) {
                               selectedCard = card.card_id;
                               console.log(card.name);
                               break;
@@ -245,7 +245,7 @@ function* handleEnemyTurn(action) {
               if (cardType === 'attack') {
                 console.log('Inside attack!');
                 for (let card of enemyHand) {
-                  if (card.type === 'attack') {
+                  if (card.type === 'attack' && energy >= card.cost) {
                     selectedCard = card.card_id;
                     console.log(card.name);
                     break;
@@ -255,12 +255,23 @@ function* handleEnemyTurn(action) {
               // Determines what type of minion card will get played
               if (cardType === 'minion') {
                 console.log('Inside minion!');
-                for (let card of enemyHand) {
-                  if (card.type === 'minion') {
-                    selectedCard = card.card_id;
-                    console.log(card.name);
+                switch (card.card_id) {
+                  case 14:
+                    if (energy >= card.cost) {
+                      selectedCard = card.card_id;
+                      console.log(card.name);
+                    }
                     break;
-                  }
+                
+                  default:
+                    for (let card of enemyHand) {
+                      if (card.type === 'minion' && energy >= card.cost) {
+                        selectedCard = card.card_id;
+                        console.log(card.name);
+                        break;
+                      }
+                    }
+                    break;
                 }
               }
               console.log(blockScore, attackScore, minionScore, 'Card: ', selectedCard);
@@ -338,17 +349,18 @@ function* handleEnemyTurn(action) {
                 energy -= card.cost;
                 console.log('energy used:', card.cost);
                 console.log('energy left:', energy);
-
-                // Makes sure the enemy doesn't have more than 5 minions on the board
-                while (action.payload.enemyBoard.length > 5) {
-                  yield put({
-                    type: 'FILTER_BOARD'
-                  })
-                  // replaces the energy spent using the wrongly placed card
-                  energy += card.cost;
-                }
             }
         } // End of loop
+
+        let playerDefence = action.payload.player.threat + action.payload.player.block;
+        // Deals damage to the player if allowed
+        if (enemy.threat > playerDefence) {
+          console.log('dealt', enemy.threat - playerDefence); 
+          yield put({
+            type: 'DEAL_PLAYER_DAMAGE',
+            payload: enemy.threat - playerDefence
+          })
+        }
 
       yield put({
         type: 'FETCH_ENEMY_HAND',

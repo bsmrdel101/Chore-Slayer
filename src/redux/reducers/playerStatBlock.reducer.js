@@ -21,6 +21,10 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
             copyOfState = {...state};
             copyOfState.energy -= action.payload;
             return copyOfState;
+        case 'DEAL_PLAYER_DAMAGE':
+            copyOfState = {...state};
+            copyOfState.health -= action.payload;
+            return copyOfState;
         case 'ELEMENT':
             copyOfState = {...state};
             copyOfState.element = action.payload;
