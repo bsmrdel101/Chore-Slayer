@@ -60,7 +60,7 @@ function Game() {
     }
 
     // Deals damage to a minion that the player has selected
-    const handlePlayerAttack = (i, name) => {
+    const handlePlayerAttack = (i) => {
         if (player.canAttack === true) {
             dispatch({
                 type: 'ATTACK_ENEMY_MINION',
@@ -96,7 +96,7 @@ function Game() {
                 </Grid>
                 <Grid item xs={6} className="board" marginRight={"3rem"}>
                     {enemyBoard.map((minion, i) => {
-                        return <p key={i} onClick={() => handlePlayerAttack(i, minion.name)}>{minion.damage} / {minion.health}</p>;
+                        return <p key={i} onClick={() => handlePlayerAttack(i)}>{minion.damage} / {minion.health}</p>;
                     })}
                 </Grid>
                 <Grid item xs={2} className="stat-block-container" paddingBottom={"10px"}>
