@@ -105,7 +105,6 @@ function Game() {
                         <p>Block: {enemy.block}</p>
                         <p>Health: {enemy.health}</p>
                         <p>Threat: {enemy.threat}</p>
-                        <p>Energy: {enemy.energy}</p>
                     </div>
                 </Grid>
             </Grid>

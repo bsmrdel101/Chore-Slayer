@@ -104,7 +104,7 @@ function* fetchDeck(action) {
         // ----- AI turn handler -----
         // Scores for different actions will be added up conditionally
         // Actions with the highest scores are given more priority
-        console.log('***** AI Handler *****'); 
+        console.log('***** AI Handler *****');
         let enemyHand = action.payload.hand;
         let energy = action.payload.enemy.energy;
         
@@ -199,6 +199,7 @@ function* fetchDeck(action) {
 
               // Determines what type of block card will get played
               if (cardType === 'block') {
+                console.log('Inside block!');
                   switch (card.card_id) {
                       case 5:
                           let blockDiff = action.payload.player.block - action.payload.enemy.block;
@@ -213,7 +214,7 @@ function* fetchDeck(action) {
                               console.log(card.name);
                           }
                           break;
-                      default:
+                      default:          
                           selectedCard = card.card_id;
                           console.log(card.name);
                           break;
@@ -221,20 +222,22 @@ function* fetchDeck(action) {
               }
               // Determines what type of attack card will get played
               if (cardType === 'attack') {
-                  selectedCard = card.card_id;
-                  console.log(card.name);
+                console.log('Inside attack!');
+                selectedCard = card.card_id;
+                console.log(card.name);
               }
               // Determines what type of minion card will get played
               if (cardType === 'minion') {
-                  selectedCard = card.card_id;
-                  console.log(card.name);
+                console.log('Inside minion!');
+                selectedCard = card.card_id;
+                console.log(card.name);
               }
               console.log(blockScore, attackScore, minionScore, 'Card: ', selectedCard);
               console.log('-----');
 
               // Play the selected card
               let index = 0;
-                for (let card of action.payload.enemyHand) {
+                for (let card of enemyHand) {
                     if (card.card_id === selectedCard) {
                         console.log('AI plays: ', card);
                         switch (card.type) {
@@ -287,10 +290,19 @@ function* fetchDeck(action) {
                             default:
                                 break;
                         }
+                        console.log('before hand:', enemyHand);
+                        // Remove card from enemy hand
+                        enemyHand.splice(index, 1);
                         yield put({
                           type: 'SELECT_ENEMY_CARD',
                           payload: index
                         })
+                        console.log('after hand:', enemyHand);
+                        yield put({
+                          type: 'REMOVE_ENEMY_ENERGY',
+                          payload: card.cost
+                        })
+                        break;
                     }
                     index++;
                 }
