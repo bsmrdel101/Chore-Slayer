@@ -313,6 +313,14 @@ function* handleEnemyTurn(action) {
                                     type: 'ATTACK_PLAYER_MINION',
                                     payload: {id: minionId, attack: card.attack_amount}
                                   })
+                                  let newThreat = 0;
+                                  for (let minion of action.payload.playerBoard) {
+                                    newThreat += minion.damage;
+                                  }
+                                  yield put ({
+                                    type: 'UPDATE_PLAYER_THREAT',
+                                    payload: newThreat 
+                                  })
                                 } else {
                                   console.log('* Player had no minions to attack *');
                                 }

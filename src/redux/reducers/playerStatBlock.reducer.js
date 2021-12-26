@@ -13,6 +13,10 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
             copyOfState = {...state};
             copyOfState.threat += action.payload;
             return copyOfState;
+        case 'UPDATE_PLAYER_THREAT':
+            copyOfState = {...state};
+            copyOfState.threat = action.payload;
+            return copyOfState;
         case 'PLAYER_CAN_ATTACK':
             copyOfState = {...state};
             copyOfState.canAttack = true
