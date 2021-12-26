@@ -362,6 +362,15 @@ function* handleEnemyTurn(action) {
           })
         }
 
+        // Check if player is still alive
+        if (action.payload.player.health <= 0) {
+          yield put({
+            type: 'RESET_GAME'
+          })
+          // TODO: show player lose screen
+          
+        }
+
       yield put({
         type: 'FETCH_ENEMY_HAND',
         payload: {card1: modifiedHand[0], card2: modifiedHand[1], card3: modifiedHand[2], card4: modifiedHand[3], card5: modifiedHand[4]}

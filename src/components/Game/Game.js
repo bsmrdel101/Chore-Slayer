@@ -61,6 +61,8 @@ function Game() {
             dispatch({
                 type: 'RESET_GAME'
             })
+            // TODO: Go to win screen
+
         }
         // Only runs enemies turn if it's alive
         if (enemy.health > 0) {
