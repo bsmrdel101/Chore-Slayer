@@ -106,8 +106,10 @@ function* fetchDeck(action) {
         // Actions with the highest scores are given more priority
         console.log('***** AI Handler *****');
         let enemyHand = action.payload.hand;
-        let energy = action.payload.enemy.energy;
-        
+        let energy = action.payload.enemy.energy
+        let enemy = action.payload.enemy
+        console.log(enemyHand);
+
         for (let card of enemyHand) {
             if (card.cost <= energy) {
               let blockScore = 0;
@@ -115,6 +117,9 @@ function* fetchDeck(action) {
               let minionScore = 0;
               let selectedCard = 0;
               let highestScore = 0;
+
+              let lowestHp = 50;
+              let minionId;
               
               console.log(enemyHand);
               for (let card of enemyHand) { 
@@ -134,7 +139,6 @@ function* fetchDeck(action) {
                   }
               }
               console.log(blockScore, attackScore, minionScore);
-
               /* Card type deciders */
 
               if (attackScore > 0) {
@@ -155,7 +159,7 @@ function* fetchDeck(action) {
               
               if (blockScore > 0) {
                   switch (true) {
-                      case action.payload.enemy.threat >= action.payload.player.threat:
+                      case enemy.threat >= action.payload.player.threat:
                           blockScore -= 3;
                           break;
                       case enemy.block === 0:
@@ -202,14 +206,14 @@ function* fetchDeck(action) {
                 console.log('Inside block!');
                   switch (card.card_id) {
                       case 5:
-                          let blockDiff = action.payload.player.block - action.payload.enemy.block;
+                          let blockDiff = action.payload.player.block - enemy.block;
                           if (blockDiff > 1) {
                               selectedCard = card.card_id;
                               console.log(card.name);
                           }
                           break;
                       case 6:
-                          if (action.payload.player.block > 5 || action.payload.player.block >= 3 && action.payload.enemy.block < 3) {
+                          if (action.payload.player.block > 5 || action.payload.player.block >= 3 && enemy.block < 3) {
                               selectedCard = card.card_id;
                               console.log(card.name);
                           }
@@ -261,8 +265,6 @@ function* fetchDeck(action) {
                                 break;
                             case 'attack':
                                 if (action.payload.playerBoard.length > 0) {
-                                  let lowestHp = 50;
-                                  let minionId;
                                   for (let minion of action.payload.playerBoard) {
                                     if (minion.health < lowestHp) {
                                       minionId = minion.card_id;

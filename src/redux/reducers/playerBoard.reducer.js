@@ -6,11 +6,10 @@ const playerBoard = (state = [], action) => {
             copyOfState.push(action.payload);
             return copyOfState;
         case 'ATTACK_PLAYER_MINION':
-            let id = action.payload.id;
             copyOfState = [...state];
-            copyOfState[id].health -= action.payload.attack;
-            if (copyOfState[id].health <= 0) {
-                copyOfState.splice(id, 1);
+            copyOfState[0].health -= action.payload.attack;
+            if (copyOfState[0].health <= 0) {
+                copyOfState.splice(0, 1);
             }
             return copyOfState;
         case 'RESET_GAME':
