@@ -56,7 +56,16 @@ function Game() {
                 payload: {deck: deckReducer, hand: hand}
             })
         }
-        handleEnemyTurn();
+        // Checks for player win condition
+        if (enemy.health <= 0) {
+            dispatch({
+                type: 'RESET_GAME'
+            })
+        }
+        // Only runs enemies turn if it's alive
+        if (enemy.health > 0) {
+            handleEnemyTurn();
+        }
     }
 
     // Deals damage to a minion that the player has selected

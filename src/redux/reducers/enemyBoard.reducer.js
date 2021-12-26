@@ -17,6 +17,10 @@ const enemyBoard = (state = [], action) => {
             copyOfState = [...state];
             copyOfState.splice(state.length - 1, 1);
             return copyOfState;
+        case 'RESET_GAME':
+            copyOfState = [...state];
+            copyOfState = [];
+            return copyOfState;
         default:
             return state;
     }
