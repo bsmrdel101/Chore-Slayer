@@ -115,8 +115,6 @@ function* handleEnemyTurn(action) {
           for (let modifiedId of modifiedHand) {
             if (card.card_id === modifiedId) {
               enemyHand.push(card);
-              console.log(card);
-              console.log(enemyHand);
             }
           }
         }
@@ -212,114 +210,129 @@ function* handleEnemyTurn(action) {
               console.log('-----'); 
               console.log('Card type: ', cardType);
 
-        //       // Determines what type of block card will get played
-        //       if (cardType === 'block') {
-        //         console.log('Inside block!');
-        //           switch (card.card_id) {
-        //               case 5:
-        //                   let blockDiff = action.payload.player.block - enemy.block;
-        //                   if (blockDiff > 1) {
-        //                       selectedCard = card.card_id;
-        //                       console.log(card.name);
-        //                   }
-        //                   break;
-        //               case 6:
-        //                   if (action.payload.player.block > 5 || action.payload.player.block >= 3 && enemy.block < 3) {
-        //                       selectedCard = card.card_id;
-        //                       console.log(card.name);
-        //                   }
-        //                   break;
-        //               default:          
-        //                   selectedCard = card.card_id;
-        //                   console.log(card.name);
-        //                   break;
-        //           }
-        //       }
-        //       // Determines what type of attack card will get played
-        //       if (cardType === 'attack') {
-        //         console.log('Inside attack!');
-        //         selectedCard = card.card_id;
-        //         console.log(card.name);
-        //       }
-        //       // Determines what type of minion card will get played
-        //       if (cardType === 'minion') {
-        //         console.log('Inside minion!');
-        //         selectedCard = card.card_id;
-        //         console.log(card.name);
-        //       }
-        //       console.log(blockScore, attackScore, minionScore, 'Card: ', selectedCard);
-        //       console.log('-----');
+              // Determines what type of block card will get played
+              if (cardType === 'block') {
+                console.log('Inside block!');
+                  switch (card.card_id) {
+                      case 5:
+                          let blockDiff = action.payload.player.block - enemy.block;
+                          if (blockDiff > 1) {
+                              selectedCard = card.card_id;
+                              console.log(card.name);
+                          }
+                          break;
+                      case 6:
+                          if (action.payload.player.block > 5 || action.payload.player.block >= 3 && enemy.block < 3) {
+                              selectedCard = card.card_id;
+                              console.log(card.name);
+                          }
+                          break;
+                      default:          
+                          for (let card of enemyHand) {
+                            if (card.type === 'block') {
+                              selectedCard = card.card_id;
+                              console.log(card.name);
+                              break;
+                            }
+                          }
+                          break;
+                  }
+              }
+              // Determines what type of attack card will get played
+              if (cardType === 'attack') {
+                console.log('Inside attack!');
+                for (let card of enemyHand) {
+                  if (card.type === 'attack') {
+                    selectedCard = card.card_id;
+                    console.log(card.name);
+                    break;
+                  }
+                }
+              }
+              // Determines what type of minion card will get played
+              if (cardType === 'minion') {
+                console.log('Inside minion!');
+                for (let card of enemyHand) {
+                  if (card.type === 'minion') {
+                    selectedCard = card.card_id;
+                    console.log(card.name);
+                    break;
+                  }
+                }
+              }
+              console.log(blockScore, attackScore, minionScore, 'Card: ', selectedCard);
+              console.log('-----');
 
-        //       // Play the selected card
-        //       let index = 0;
-        //         for (let card of enemyHand) {
-        //             if (card.card_id === selectedCard) {
-        //                 console.log('AI plays: ', card);
-        //                 switch (card.type) {
-        //                     case 'block':
-        //                         if (card.block_amount) {
-        //                           yield put({
-        //                             type: 'ADD_ENEMY_BLOCK',
-        //                             payload: card.block_amount
-        //                           });
-        //                         }
-        //                         switch (card.card_id) {
-        //                             case 5: // Swap block
-        //                                 yield put({type: 'SWAP_PLAYER_BLOCK'})
-        //                                 break;
-        //                             case 6: // Break formation
-        //                                 console.log('TODO: Break Formation');
-        //                                 break;
-        //                             default:
-        //                                 break;
-        //                         }
-        //                         break;
-        //                     case 'attack':
-        //                         if (action.payload.playerBoard.length > 0) {
-        //                           for (let minion of action.payload.playerBoard) {
-        //                             if (minion.health < lowestHp) {
-        //                               minionId = minion.card_id;
-        //                               lowestHp = minion.health;
-        //                             }
-        //                           }
-        //                           yield put({
-        //                             type: 'ATTACK_PLAYER_MINION',
-        //                             payload: {id: minionId, attack: card.attack_amount}
-        //                           })
-        //                         } else {
-        //                           console.log('* Player had no minions to attack *');
-        //                         }
-        //                         break;
-        //                     case 'minion':
-        //                       yield put({
-        //                         type: 'SUMMON_ENEMY_MINION',
-        //                         payload: {damage: card.damage, health: card.health}
-        //                       })
-        //                       yield put({
-        //                           type: 'ADD_ENEMY_THREAT',
-        //                           payload: card.damage
-        //                       })
-        //                         break;
-        //                     default:
-        //                         break;
-        //                 }
-        //                 console.log('before hand:', enemyHand);
-        //                 // Remove card from enemy hand
-        //                 enemyHand.splice(index, 1);
-        //                 yield put({
-        //                   type: 'SELECT_ENEMY_CARD',
-        //                   payload: index
-        //                 })
-        //                 console.log('after hand:', enemyHand);
-        //                 break;
-        //             }
-        //             index++;
-        //         }
-        //         // Removes energy from local variable, which enemy uses for calculations
-        //         console.log('starting energy: ', energy);
-        //         energy -= card.cost;
-        //         console.log('energy used:', card.cost);
-        //         console.log('energy left:', energy);
+              // Play the selected card
+              let index = 0;
+                for (let card of enemyHand) {
+                    if (card.card_id === selectedCard) {
+                        console.log('AI plays: ', card);
+                        switch (card.type) {
+                            case 'block':
+                                if (card.block_amount) {
+                                  yield put({
+                                    type: 'ADD_ENEMY_BLOCK',
+                                    payload: card.block_amount
+                                  });
+                                }
+                                switch (card.card_id) {
+                                    case 5: // Swap block
+                                        yield put({type: 'SWAP_PLAYER_BLOCK'})
+                                        break;
+                                    case 6: // Break formation
+                                        console.log('TODO: Break Formation');
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case 'attack':
+                                if (action.payload.playerBoard.length > 0) {
+                                  for (let minion of action.payload.playerBoard) {
+                                    if (minion.health < lowestHp) {
+                                      minionId = minion.card_id;
+                                      lowestHp = minion.health;
+                                    }
+                                  }
+                                  yield put({
+                                    type: 'ATTACK_PLAYER_MINION',
+                                    payload: {id: minionId, attack: card.attack_amount}
+                                  })
+                                } else {
+                                  console.log('* Player had no minions to attack *');
+                                }
+                                break;
+                            case 'minion':
+                              yield put({
+                                type: 'SUMMON_ENEMY_MINION',
+                                payload: {damage: card.damage, health: card.health}
+                              })
+                              yield put({
+                                  type: 'ADD_ENEMY_THREAT',
+                                  payload: card.damage
+                              })
+                                break;
+                            default:
+                                break;
+                        }
+                        console.log('before hand:', enemyHand);
+                        // Remove card from enemy hand
+                        enemyHand.splice(index, 1);
+                        yield put({
+                          type: 'SELECT_ENEMY_CARD',
+                          payload: index
+                        })
+                        console.log('after hand:', enemyHand);
+                        break;
+                    }
+                    index++;
+                }
+                // Removes energy from local variable, which enemy uses for calculations
+                console.log('starting energy: ', energy);
+                energy -= card.cost;
+                console.log('energy used:', card.cost);
+                console.log('energy left:', energy);
             }
         } // End of loop
 
