@@ -74,17 +74,21 @@ function Game() {
     const handleEnemyTurn = () => {
         const playerDefence = player.threat + player.block;
 
-        if (enemyDeck.length === 0) {
-            dispatch({
-                type: 'FETCH_ENEMY_DECK',
-                payload: {id: 1, deck: enemyDeck, hand: enemyHand, player: player, enemy: enemy, playerBoard: playerBoard, enemyBoard: enemyBoard, hand: hand, enemyHand: enemyHand}
-            })
-        } else {
-            dispatch({
-                type: 'FETCH_ENEMY_DECK',
-                payload: {id: 0, deck: enemyDeck, hand: enemyHand, player: player, enemy: enemy, playerBoard: playerBoard, enemyBoard: enemyBoard, hand: hand, enemyHand: enemyHand}
-            })
-        }
+        // if (enemyDeck.length === 0) {
+        //     dispatch({
+        //         type: 'FETCH_ENEMY_DECK',
+        //         payload: {id: 1, deck: enemyDeck, hand: enemyHand, player: player, enemy: enemy, playerBoard: playerBoard, enemyBoard: enemyBoard, hand: hand, enemyHand: enemyHand}
+        //     })
+        // } else {
+        //     dispatch({
+        //         type: 'FETCH_ENEMY_DECK',
+        //         payload: {id: 0, deck: enemyDeck, hand: enemyHand, player: player, enemy: enemy, playerBoard: playerBoard, enemyBoard: enemyBoard, hand: hand, enemyHand: enemyHand}
+        //     })
+        // }
+        dispatch({
+            type: 'FETCH_ENEMY_DECK',
+            payload: {id: 1, deck: enemyDeck, hand: enemyHand, player: player, enemy: enemy, playerBoard: playerBoard, enemyBoard: enemyBoard, hand: hand, enemyHand: enemyHand}
+        })
         // Handle enemy end turn
         setRound(round + 1);
     }
