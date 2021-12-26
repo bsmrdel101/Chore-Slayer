@@ -188,6 +188,9 @@ function* handleEnemyTurn(action) {
                   if (action.payload.playerBoard.length === 0) {
                       minionScore += 1;
                   }
+                  if (action.payload.enemyBoard.length >= 5) {
+                      minionScore -= 100;
+                  }
               }
               // End of card type deciders
       
@@ -304,14 +307,16 @@ function* handleEnemyTurn(action) {
                                 }
                                 break;
                             case 'minion':
-                              yield put({
-                                type: 'SUMMON_ENEMY_MINION',
-                                payload: {damage: card.damage, health: card.health}
-                              })
-                              yield put({
-                                  type: 'ADD_ENEMY_THREAT',
-                                  payload: card.damage
-                              })
+                                if (action.payload.enemyBoard.length <= 5) {
+                                  yield put({
+                                    type: 'SUMMON_ENEMY_MINION',
+                                    payload: {damage: card.damage, health: card.health}
+                                  })
+                                  yield put({
+                                      type: 'ADD_ENEMY_THREAT',
+                                      payload: card.damage
+                                  })
+                                }
                                 break;
                             default:
                                 break;
@@ -333,6 +338,15 @@ function* handleEnemyTurn(action) {
                 energy -= card.cost;
                 console.log('energy used:', card.cost);
                 console.log('energy left:', energy);
+
+                // Makes sure the enemy doesn't have more than 5 minions on the board
+                while (action.payload.enemyBoard.length > 5) {
+                  yield put({
+                    type: 'FILTER_BOARD'
+                  })
+                  // replaces the energy spent using the wrongly placed card
+                  energy += card.cost;
+                }
             }
         } // End of loop
 
