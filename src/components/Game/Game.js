@@ -85,6 +85,8 @@ function Game() {
                 payload: {id: 0, deck: enemyDeck, hand: enemyHand, player: player, enemy: enemy, playerBoard: playerBoard, enemyBoard: enemyBoard, hand: hand, enemyHand: enemyHand}
             })
         }
+        // Handle enemy end turn
+        setRound(round + 1);
     }
 
     return (

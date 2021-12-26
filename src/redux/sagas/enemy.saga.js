@@ -298,14 +298,11 @@ function* fetchDeck(action) {
                           payload: index
                         })
                         console.log('after hand:', enemyHand);
-                        yield put({
-                          type: 'REMOVE_ENEMY_ENERGY',
-                          payload: card.cost
-                        })
                         break;
                     }
                     index++;
                 }
+                // Removes energy from local variable, which enemy uses for calculations
                 console.log('starting energy: ', energy);
                 energy -= card.cost;
                 console.log('energy used:', card.cost);
