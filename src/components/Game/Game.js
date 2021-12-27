@@ -11,7 +11,6 @@ function Game() {
     const enemyDeck = useSelector((store) => store.enemyDeck);
     const enemyHand = useSelector((store) => store.enemyHand);
     let [round, setRound] = useState(0);
-    let [enemyHealth, setEnemyHealth] = useState(enemy.health);
     const dispatch = useDispatch();
     const playerBoard = useSelector((store) => store.playerBoard);
     const enemyBoard = useSelector((store) => store.enemyBoard);
@@ -46,7 +45,6 @@ function Game() {
                 type: 'DEAL_ENEMY_DAMAGE',
                 payload: player.threat - enemyDefence
             })
-            setEnemyHealth(enemyHealth - player.threat + enemyDefence);
         }
         if (deckReducer.length === 0) {
             dispatch({
@@ -78,12 +76,12 @@ function Game() {
     const handleEnemyTurn = () => {
         dispatch({
             type: 'FETCH_ENEMY_DECK',
-            payload: {id: 1, deck: enemyDeck, hand: enemyHand, player: player, enemy: enemy, playerBoard: playerBoard, enemyBoard: enemyBoard, hand: hand, enemyHand: enemyHand, enemyCondition: enemyHealth}
+            payload: {id: 1, deck: enemyDeck, hand: enemyHand, player: player, enemy: enemy, playerBoard: playerBoard, enemyBoard: enemyBoard, hand: hand, enemyHand: enemyHand}
         })
         // Handle enemy end turn
         setRound(round + 1);
         // Makes sure the enemy doesn't have more than 5 minions on the board
-        while (enemyBoard.length > 5) {
+        if (enemyBoard.length > 5) {
             dispatch({
               type: 'FILTER_BOARD'
             })
