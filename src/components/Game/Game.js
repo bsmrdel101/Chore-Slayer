@@ -10,7 +10,8 @@ function Game() {
     const deckReducer = useSelector((store) => store.deckReducer);
     const enemyDeck = useSelector((store) => store.enemyDeck);
     const enemyHand = useSelector((store) => store.enemyHand);
-    let [round, setRound] = useState(1);
+    let [round, setRound] = useState(0);
+    let [enemyHealth, setEnemyHealth] = useState(enemy.health);
     const dispatch = useDispatch();
     const playerBoard = useSelector((store) => store.playerBoard);
     const enemyBoard = useSelector((store) => store.enemyBoard);
@@ -35,6 +36,7 @@ function Game() {
 
     const handleEndTurn = () => {
         const enemyDefence = enemy.threat + enemy.block;
+
         dispatch({
             type: 'RESET_PLAYER_ENERGY'
         })
@@ -44,6 +46,7 @@ function Game() {
                 type: 'DEAL_ENEMY_DAMAGE',
                 payload: player.threat - enemyDefence
             })
+            setEnemyHealth(enemyHealth - player.threat + enemyDefence);
         }
         if (deckReducer.length === 0) {
             dispatch({
@@ -56,18 +59,8 @@ function Game() {
                 payload: {deck: deckReducer, hand: hand}
             })
         }
-        // Checks for player win condition
-        if (enemy.health <= 0) {
-            dispatch({
-                type: 'RESET_GAME'
-            })
-            // TODO: Go to win screen
 
-        }
-        // Only runs enemies turn if it's alive
-        if (enemy.health > 0) {
-            handleEnemyTurn();
-        }
+        handleEnemyTurn();
     }
 
     // Deals damage to a minion that the player has selected
@@ -85,7 +78,7 @@ function Game() {
     const handleEnemyTurn = () => {
         dispatch({
             type: 'FETCH_ENEMY_DECK',
-            payload: {id: 1, deck: enemyDeck, hand: enemyHand, player: player, enemy: enemy, playerBoard: playerBoard, enemyBoard: enemyBoard, hand: hand, enemyHand: enemyHand}
+            payload: {id: 1, deck: enemyDeck, hand: enemyHand, player: player, enemy: enemy, playerBoard: playerBoard, enemyBoard: enemyBoard, hand: hand, enemyHand: enemyHand, enemyCondition: enemyHealth}
         })
         // Handle enemy end turn
         setRound(round + 1);

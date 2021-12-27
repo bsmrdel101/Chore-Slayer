@@ -108,6 +108,7 @@ function* handleEnemyTurn(action) {
         let enemyHand = [];
         let energy = action.payload.enemy.energy
         let enemy = action.payload.enemy
+        let player = action.payload.player
 
         // Initializes enemy hand
         console.log(response.data);
@@ -168,7 +169,7 @@ function* handleEnemyTurn(action) {
               
               if (blockScore > 0) {
                   switch (true) {
-                      case enemy.threat >= action.payload.player.threat:
+                      case enemy.threat >= player.threat:
                           blockScore -= 3;
                       case enemy.block === 0:
                           blockScore += 2;
@@ -218,14 +219,14 @@ function* handleEnemyTurn(action) {
                 console.log('Inside block!');
                   switch (card.card_id) {
                       case 5:
-                          let blockDiff = action.payload.player.block - enemy.block;
+                          let blockDiff = player.block - enemy.block;
                           if (blockDiff > 1) {
                               selectedCard = card.card_id;
                               console.log(card.name);
                           }
                           break;
                       case 6:
-                          if (action.payload.player.block > 5 || action.payload.player.block >= 3 && enemy.block < 3) {
+                          if (player.block > 5 || player.block >= 3 && enemy.block < 3) {
                               selectedCard = card.card_id;
                               console.log(card.name);
                           }
@@ -352,7 +353,7 @@ function* handleEnemyTurn(action) {
             }
         } // End of loop
 
-        let playerDefence = action.payload.player.threat + action.payload.player.block;
+        let playerDefence = player.threat + player.block;
         // Deals damage to the player if allowed
         if (enemy.threat > playerDefence) {
           console.log('dealt', enemy.threat - playerDefence); 
@@ -363,7 +364,7 @@ function* handleEnemyTurn(action) {
         }
 
         // Check if player is still alive
-        if (action.payload.player.health <= 0) {
+        if (player.health <= 0) {
           yield put({
             type: 'RESET_GAME'
           })

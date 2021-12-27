@@ -34,6 +34,9 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
         case 'DEAL_PLAYER_DAMAGE':
             copyOfState = {...state};
             copyOfState.health -= action.payload;
+            if (copyOfState.health <= 0) {
+                document.location.reload();
+            }
             return copyOfState;
         case 'ELEMENT':
             copyOfState = {...state};

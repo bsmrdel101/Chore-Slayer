@@ -28,6 +28,9 @@ const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5}, ac
         case 'DEAL_ENEMY_DAMAGE':
             copyOfState = {...state};
             copyOfState.health -= action.payload;
+            if (copyOfState.health <= 0) {
+                document.location.reload();
+            }
             return copyOfState;
         case 'REMOVE_ENEMY_ENERGY':
             copyOfState = {...state};

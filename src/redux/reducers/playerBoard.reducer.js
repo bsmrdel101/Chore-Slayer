@@ -7,7 +7,9 @@ const playerBoard = (state = [], action) => {
             return copyOfState;
         case 'ATTACK_PLAYER_MINION':
             copyOfState = [...state];
-            copyOfState[0].health -= action.payload.attack;
+            if (state.length > 0) {
+                copyOfState[0].health -= action.payload.attack;
+            }
             if (copyOfState[0].health <= 0) {
                 copyOfState.splice(0, 1);
             }
