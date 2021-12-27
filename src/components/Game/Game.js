@@ -35,6 +35,7 @@ function Game() {
 
     const handleEndTurn = () => {
         const enemyDefence = enemy.threat + enemy.block;
+
         dispatch({
             type: 'RESET_PLAYER_ENERGY'
         })
@@ -56,6 +57,7 @@ function Game() {
                 payload: {deck: deckReducer, hand: hand}
             })
         }
+
         handleEnemyTurn();
     }
 
@@ -64,7 +66,7 @@ function Game() {
         if (player.canAttack === true) {
             dispatch({
                 type: 'ATTACK_ENEMY_MINION',
-                payload: {id: i, attack: player.element.attack_amount}
+                payload: {id: i, attack: player.element.attack_amount, board: enemyBoard}
             })
         }
         player.canAttack = false;
@@ -72,20 +74,18 @@ function Game() {
 
     // Enemy turn handler
     const handleEnemyTurn = () => {
-        const playerDefence = player.threat + player.block;
-
-        if (enemyDeck.length === 0) {
+        dispatch({
+            type: 'FETCH_ENEMY_DECK',
+            payload: {id: 1, deck: enemyDeck, hand: enemyHand, player: player, enemy: enemy, playerBoard: playerBoard, enemyBoard: enemyBoard, hand: hand, enemyHand: enemyHand}
+        })
+        // Handle enemy end turn
+        setRound(round + 1);
+        // Makes sure the enemy doesn't have more than 5 minions on the board
+        if (enemyBoard.length > 5) {
             dispatch({
-                type: 'FETCH_ENEMY_DECK',
-                payload: {id: 1, player: player, enemy: enemy, playerBoard: playerBoard, enemyBoard: enemyBoard, hand: hand, enemyHand: enemyHand}
-            })
-        } else {
-            dispatch({
-                type: 'FETCH_ENEMY_DECK',
-                payload: {id: 0, deck: enemyDeck, hand: enemyHand, player: player, enemy: enemy, playerBoard: playerBoard, enemyBoard: enemyBoard, hand: hand, enemyHand: enemyHand}
+              type: 'FILTER_BOARD'
             })
         }
-        
     }
 
     return (
@@ -106,7 +106,6 @@ function Game() {
                         <p>Block: {enemy.block}</p>
                         <p>Health: {enemy.health}</p>
                         <p>Threat: {enemy.threat}</p>
-                        <p>Energy: {enemy.energy}</p>
                     </div>
                 </Grid>
             </Grid>

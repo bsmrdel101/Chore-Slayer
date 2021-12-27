@@ -13,6 +13,16 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
             copyOfState = {...state};
             copyOfState.threat += action.payload;
             return copyOfState;
+        case 'UPDATE_PLAYER_THREAT':
+            copyOfState = {...state};
+            copyOfState.threat = action.payload;
+            return copyOfState;
+        case 'ATTACK_PLAYER_MINION':
+            copyOfState = {...state};
+            if (action.payload.board[0].health <= 0) {
+                copyOfState.threat -= action.payload.board[0].damage;
+            }
+            return copyOfState;
         case 'PLAYER_CAN_ATTACK':
             copyOfState = {...state};
             copyOfState.canAttack = true
@@ -20,6 +30,13 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
         case 'REMOVE_PLAYER_ENERGY':
             copyOfState = {...state};
             copyOfState.energy -= action.payload;
+            return copyOfState;
+        case 'DEAL_PLAYER_DAMAGE':
+            copyOfState = {...state};
+            copyOfState.health -= action.payload;
+            if (copyOfState.health <= 0) {
+                document.location.reload();
+            }
             return copyOfState;
         case 'ELEMENT':
             copyOfState = {...state};

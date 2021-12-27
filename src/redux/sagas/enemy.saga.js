@@ -37,7 +37,7 @@ const getRandomInt = (min, max) => {
 }
 
 // Saga GET route
-function* fetchDeck(action) {
+function* handleEnemyTurn(action) {
     try {
         const response = yield axios({
           method: 'GET',
@@ -100,19 +100,40 @@ function* fetchDeck(action) {
             console.log('modified hand', modifiedHand);
             console.log('base hand', baseHand);
         }
-
-        // AI turn handler
+        
+        // ----- AI turn handler -----
         // Scores for different actions will be added up conditionally
-        // AI executes the action with the highest score at the end
-        for (let card of action.payload.enemyHand) {
-            if (card.cost <= action.payload.enemy.energy) {
+        // Actions with the highest scores are given more priority
+        console.log('***** AI Handler *****');
+        let enemyHand = [];
+        let energy = action.payload.enemy.energy
+        let enemy = action.payload.enemy
+        let player = action.payload.player
+
+        // Initializes enemy hand
+        console.log(response.data);
+        for (let card of response.data) {
+          for (let modifiedId of modifiedHand) {
+            if (card.card_id === modifiedId) {
+              enemyHand.push(card);
+            }
+          }
+        }
+
+        for (let card of enemyHand) {
+            if (card.cost <= energy) {
               let blockScore = 0;
               let attackScore = 0;
               let minionScore = 0;
               let selectedCard = 0;
               let highestScore = 0;
+
+              let lowestHp = 50;
+              let minionId;
               
-              for (let card of action.payload.enemyHand) { 
+              console.log(enemyHand);
+              for (let card of enemyHand) { 
+                console.log(card);
                   switch (card.type) {
                       case 'block':
                           blockScore = 1;
@@ -127,6 +148,9 @@ function* fetchDeck(action) {
                           break;
                   }
               }
+              console.log(blockScore, attackScore, minionScore);
+
+              /* Card type deciders */
               if (attackScore > 0) {
                   switch (true) {
                     case action.payload.playerBoard.length === 0:
@@ -145,12 +169,12 @@ function* fetchDeck(action) {
               
               if (blockScore > 0) {
                   switch (true) {
-                      case action.payload.enemy.threat >= action.payload.player.threat:
+                      case enemy.threat >= player.threat:
                           blockScore -= 3;
-                          break;
                       case enemy.block === 0:
                           blockScore += 2;
                       default:
+                          blockScore += 1;
                           break;
                   }
               }
@@ -165,67 +189,98 @@ function* fetchDeck(action) {
                   if (action.payload.playerBoard.length === 0) {
                       minionScore += 1;
                   }
+                  if (action.payload.enemyBoard.length >= 5) {
+                      minionScore -= 100;
+                  }
               }
+              // End of card type deciders
       
-              console.log(blockScore, attackScore, minionScore);
+              console.log('Type scores: ', blockScore, attackScore, minionScore);
       
               // Adds up the scores to see what type of card it will be
               let cardType = '';
               if (attackScore > highestScore) {
                   cardType = 'attack';
                   highestScore = attackScore;
-                  attackScore = 0;
               }
               if (blockScore > highestScore) {
                   cardType = 'block';
                   highestScore = blockScore;
-                  blockScore = 0;
               }
               if (minionScore > highestScore) {
                   cardType = 'minion';
                   highestScore = minionScore;
-                  minionScore = 0
               }
-              console.log(cardType);
+              console.log('-----'); 
+              console.log('Card type: ', cardType);
 
               // Determines what type of block card will get played
               if (cardType === 'block') {
+                console.log('Inside block!');
                   switch (card.card_id) {
                       case 5:
-                          let blockDiff = action.payload.player.block - action.payload.enemy.block;
+                          let blockDiff = player.block - enemy.block;
                           if (blockDiff > 1) {
                               selectedCard = card.card_id;
                               console.log(card.name);
                           }
                           break;
                       case 6:
-                          if (action.payload.player.block > 5 || action.payload.player.block >= 3 && action.payload.enemy.block < 3) {
+                          if (player.block > 5 || player.block >= 3 && enemy.block < 3) {
                               selectedCard = card.card_id;
                               console.log(card.name);
                           }
                           break;
-                      default:
-                          selectedCard = card.card_id;
-                          console.log(card.name);
+                      default:          
+                          for (let card of enemyHand) {
+                            if (card.type === 'block' && energy >= card.cost) {
+                              selectedCard = card.card_id;
+                              console.log(card.name);
+                              break;
+                            }
+                          }
                           break;
                   }
               }
               // Determines what type of attack card will get played
               if (cardType === 'attack') {
-                  selectedCard = card.card_id;
-                  console.log(card.name);
+                console.log('Inside attack!');
+                for (let card of enemyHand) {
+                  if (card.type === 'attack' && energy >= card.cost) {
+                    selectedCard = card.card_id;
+                    console.log(card.name);
+                    break;
+                  }
+                }
               }
               // Determines what type of minion card will get played
               if (cardType === 'minion') {
-                  selectedCard = card.card_id;
-                  console.log(card.name);
+                console.log('Inside minion!');
+                switch (card.card_id) {
+                  case 14:
+                    if (energy >= card.cost) {
+                      selectedCard = card.card_id;
+                      console.log(card.name);
+                    }
+                    break;
+                
+                  default:
+                    for (let card of enemyHand) {
+                      if (card.type === 'minion' && energy >= card.cost) {
+                        selectedCard = card.card_id;
+                        console.log(card.name);
+                        break;
+                      }
+                    }
+                    break;
+                }
               }
               console.log(blockScore, attackScore, minionScore, 'Card: ', selectedCard);
               console.log('-----');
 
               // Play the selected card
               let index = 0;
-                for (let card of action.payload.enemyHand) {
+                for (let card of enemyHand) {
                     if (card.card_id === selectedCard) {
                         console.log('AI plays: ', card);
                         switch (card.type) {
@@ -249,8 +304,6 @@ function* fetchDeck(action) {
                                 break;
                             case 'attack':
                                 if (action.payload.playerBoard.length > 0) {
-                                  let lowestHp = 50;
-                                  let minionId;
                                   for (let minion of action.payload.playerBoard) {
                                     if (minion.health < lowestHp) {
                                       minionId = minion.card_id;
@@ -259,38 +312,65 @@ function* fetchDeck(action) {
                                   }
                                   yield put({
                                     type: 'ATTACK_PLAYER_MINION',
-                                    payload: {id: minionId, attack: card.attack_amount}
+                                    payload: {id: minionId, attack: card.attack_amount, board: action.payload.playerBoard}
                                   })
                                 } else {
                                   console.log('* Player had no minions to attack *');
                                 }
                                 break;
                             case 'minion':
-                              yield put({
-                                type: 'SUMMON_ENEMY_MINION',
-                                payload: {damage: card.damage, health: card.health}
-                              })
-                              yield put({
-                                  type: 'ADD_ENEMY_THREAT',
-                                  payload: card.damage
-                              })
+                                if (action.payload.enemyBoard.length <= 5) {
+                                  yield put({
+                                    type: 'SUMMON_ENEMY_MINION',
+                                    payload: {damage: card.damage, health: card.health}
+                                  })
+                                  yield put({
+                                      type: 'ADD_ENEMY_THREAT',
+                                      payload: card.damage
+                                  })
+                                }
                                 break;
                             default:
                                 break;
                         }
+                        console.log('before hand:', enemyHand);
+                        // Remove card from enemy hand
+                        enemyHand.splice(index, 1);
                         yield put({
                           type: 'SELECT_ENEMY_CARD',
                           payload: index
                         })
+                        console.log('after hand:', enemyHand);
+                        break;
                     }
                     index++;
                 }
-                yield put({
-                  type: 'REMOVE_ENEMY_ENERGY',
-                  payload: card.cost
-                })
+                // Removes energy from local variable, which enemy uses for calculations
+                console.log('starting energy: ', energy);
+                energy -= card.cost;
+                console.log('energy used:', card.cost);
+                console.log('energy left:', energy);
             }
         } // End of loop
+
+        let playerDefence = player.threat + player.block;
+        // Deals damage to the player if allowed
+        if (enemy.threat > playerDefence) {
+          console.log('dealt', enemy.threat - playerDefence); 
+          yield put({
+            type: 'DEAL_PLAYER_DAMAGE',
+            payload: enemy.threat - playerDefence
+          })
+        }
+
+        // Check if player is still alive
+        if (player.health <= 0) {
+          yield put({
+            type: 'RESET_GAME'
+          })
+          // TODO: show player lose screen
+          
+        }
 
       yield put({
         type: 'FETCH_ENEMY_HAND',
@@ -308,7 +388,7 @@ function* fetchDeck(action) {
 }
 
 function* enemySaga() {
-    yield takeLatest('FETCH_ENEMY_DECK', fetchDeck);
+    yield takeLatest('FETCH_ENEMY_DECK', handleEnemyTurn);
     yield takeLatest('FETCH_ENEMY_HAND', fetchHand);
   }
   

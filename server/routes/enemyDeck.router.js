@@ -10,8 +10,10 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     const sqlText = (`
-        SELECT * FROM "deck"
-        WHERE "user_id"=$1;
+        SELECT * FROM "cards"
+	    JOIN "deck"
+	    	ON "deck"."card_id"="cards"."id"	
+	    WHERE "user_id"=$1;
     `);
     const sqlValues = [
         req.user.id
