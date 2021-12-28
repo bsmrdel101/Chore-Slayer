@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+
 const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, canAttack: false, element: {}}, action) => {
     let copyOfState;
     switch (action.type) {
@@ -35,7 +37,14 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
             copyOfState = {...state};
             copyOfState.health -= action.payload;
             if (copyOfState.health <= 0) {
-                document.location.reload();
+                Swal.fire({
+                    title: 'You Lost!',
+                    text: 'ha ha',
+                    icon: 'error',
+                    confirmButtonText: 'New Game'
+                  }).then((result) => {
+                    document.location.reload();
+                  })
             }
             return copyOfState;
         case 'ELEMENT':

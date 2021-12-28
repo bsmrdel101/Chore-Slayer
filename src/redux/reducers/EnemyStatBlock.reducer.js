@@ -31,13 +31,13 @@ const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5, sto
             copyOfState = {...state};
             copyOfState.health -= action.payload;
             if (copyOfState.health <= 0) {
-                document.location.reload();
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong!',
-                    footer: '<a href="">Why do I have this issue?</a>'
-                })
+                    title: 'Victory!',
+                    icon: 'success',
+                    confirmButtonText: 'New Game'
+                  }).then((result) => {
+                    document.location.reload();
+                  })
             }
             return copyOfState;
         case 'REMOVE_ENEMY_ENERGY':
