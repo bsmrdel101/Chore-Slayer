@@ -3,9 +3,17 @@ import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
-import { CircularProgress } from "@mui/material";
+import { Card, CardContent, CardActionArea, Typography, CardActions } from "@mui/material";
+import { Grid } from "@mui/material";
+import { useEffect } from "react";
 
 function AddTask() {
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_HISTORY'
+        })
+    }, [])    
+
     const history = useHistory();
     const dispatch = useDispatch();
     const taskHistory = useSelector((store) => store.taskHistoryReducer);
@@ -35,7 +43,7 @@ function AddTask() {
         <>
             <form onSubmit={addTask}>
                 <TextField label="Name" variant="outlined" value={newName}
-                    onChange={(event) => setNewName(event.target.value)} />
+                    onChange={(event) => setNewName(event.target.value)} required/>
                 <TextField
                     label="Description"
                     multiline
@@ -43,6 +51,7 @@ function AddTask() {
                     variant="outlined"
                     value={newDescription}
                     onChange={(event) => setNewDescription(event.target.value)}
+                    required
                 />
                 <Button variant="text" type="submit">Save</Button>
                 <Button variant="text" onClick={() => history.push('/tasks')}>Cancel</Button>
@@ -52,10 +61,10 @@ function AddTask() {
                     taskHistory.length > 0 &&
                     taskHistory.map((task) => {
                         return (
-                            <>
+                            <div key={task.id}>
                                 <Card sx={{ maxWidth: 345 }} className="task-card">
                                     <CardActionArea>
-                                        <CardContent onClick={handleEdit}>
+                                        <CardContent>
                                         <Typography gutterBottom variant="h5" component="div">
                                         <Grid container spacing={2} columns={16}>
                                             <Grid item xs={8}>
@@ -72,11 +81,10 @@ function AddTask() {
                                         </CardContent>
                                     </CardActionArea>
                                     <CardActions>
-                                        <Button size="small" variant="contained" color="gray" onClick={incompleteTask}>Incomplete</Button>
-                                        <Button size="small" color="error" onClick={deleteTask}><DeleteIcon/></Button>
+                                        <Button size="small" variant="contained" onClick={incompleteTask}>Incomplete</Button>
                                     </CardActions>
                                 </Card> 
-                            </>
+                            </div>
                         );
                     })
                 }

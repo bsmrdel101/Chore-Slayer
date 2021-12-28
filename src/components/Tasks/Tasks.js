@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import TaskCard from "../TaskCard/TaskCard";
 import { styled } from '@mui/material/styles';
@@ -18,6 +18,9 @@ function Tasks() {
     useEffect(() => {
         // Render all of the task cards on the DOM when the page loads
         fetchTasks();
+        dispatch({
+            type: 'FETCH_HISTORY'
+        })
     }, [])
 
     // GET tasks

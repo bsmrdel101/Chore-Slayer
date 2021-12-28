@@ -10,7 +10,6 @@ function* fetchTasks(action) {
         url: '/api/tasks'
       })
       // Update the tasks
-      console.log(response.data);
       yield put({
         type: 'GET_TASKS',
         payload: response.data
@@ -23,7 +22,6 @@ function* fetchTasks(action) {
 // Saga POST route
 function* addTask(action) {
     try {
-        console.log(action.payload);
         // Axios POST /api/tasks as an object
         const response = yield axios({
             method: 'POST',
@@ -42,7 +40,6 @@ function* addTask(action) {
 // Saga DELETE route
 function* deleteTask(action) {
     try {
-      console.log(action);
       // Make an axios request to the server
       const response = yield axios({
         method: 'DELETE',
@@ -60,7 +57,6 @@ function* deleteTask(action) {
 // Saga PUT route
 function* editTask(action) {
     try {
-      console.log(action);
       // Make an axios request to the server
       const response = yield axios({
         method: 'PUT',
@@ -76,12 +72,45 @@ function* editTask(action) {
     }
 }
 
+// sends dispatch to taskHistory reducer
+function* storeTask(action) {
+  try {
+    const response = yield axios({
+      method: 'POST',
+      url: '/api/history',
+      data: action.payload
+    })
+    yield put({
+      type: 'FETCH_HISTORY'
+    })
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
+
+// Retrieves the history
+function* fetchHistory(action) {
+  try {
+    const response = yield axios({
+      method: 'GET',
+      url: '/api/history'
+    })
+    yield put({
+      type: 'GET_HISTORY',
+      payload: response.data
+    })
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
 
 function* taskSaga() {
     yield takeLatest('FETCH_TASKS', fetchTasks);
     yield takeLatest('ADD_TASK', addTask);
     yield takeLatest('DELETE_TASK', deleteTask);
     yield takeLatest('EDIT_TASK', editTask);
+    yield takeLatest('FETCH_HISTORY', fetchHistory);
+    yield takeLatest('STORE_TASK', storeTask);
   }
   
   export default taskSaga;

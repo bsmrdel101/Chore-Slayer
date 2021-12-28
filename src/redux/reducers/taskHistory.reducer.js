@@ -1,6 +1,6 @@
 const taskHistoryReducer = (state = [], action) => {
     switch (action.type) {
-        case 'STORE_TASK':
+        case 'GET_HISTORY':
             return action.payload;
         default:
             return state;
