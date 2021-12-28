@@ -23,7 +23,6 @@ import HelpIcon from '@mui/icons-material/Help';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Swal from 'sweetalert2'
 
-
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -107,25 +106,7 @@ export default function Sidebar() {
       setOpen(false);
     };
 
-  // const handleEnterGame = () => {
-  //   Swal.fire({
-  //     title: 'Do you want to start the tutorial?',
-  //     icon: 'question',
-  //     showCancelButton: true,
-  //     showDenyButton: true,
-  //     confirmButtonText: 'Yes',
-  //     denyButtonText: `No`,
-  //   }).then((result) => {
-  //     /* Read more about isConfirmed, isDenied below */
-  //     if (result.isConfirmed) {
-  //       history.push('/game')
-  //     } else {
-  //       history.push('/game')
-  //     }
-  //   })
-  // }
-
-  function handleLeaveGame() {
+  function handleLeaveGame(page) {
     Swal.fire({
       title: 'Your game will not be saved if you leave!',
       icon: 'warning',
@@ -133,7 +114,7 @@ export default function Sidebar() {
       confirmButtonText: 'Okay',
     }).then((result) => {
       if (result.isConfirmed) {
-        history.push('/tasks');
+        history.push(`/${page}`);
         dispatch({
           type: 'RESET_GAME'
         });
@@ -153,7 +134,7 @@ export default function Sidebar() {
         <Divider />
         <List>
         {user.id &&
-            <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame() : history.push('/tasks'))}>
+            <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame('tasks') : history.push('/tasks'))}>
                 <ListItemIcon>
                     <TaskIcon />
                 </ListItemIcon>
@@ -169,7 +150,7 @@ export default function Sidebar() {
             </ListItem>
         }
         {user.id &&
-            <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame() : history.push('/deck'))}>
+            <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame('deck') : history.push('/deck'))}>
                 <ListItemIcon>
                     <Inventory2Icon />
                 </ListItemIcon>
@@ -177,7 +158,7 @@ export default function Sidebar() {
             </ListItem>
         }
         {user.id &&
-            <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame() : history.push('/stats'))}>
+            <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame('stats') : history.push('/stats'))}>
                 <ListItemIcon>
                     <BarChartIcon />
                 </ListItemIcon>
@@ -189,7 +170,7 @@ export default function Sidebar() {
             <Divider />
         }
         {user.id &&
-        <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame() : history.push('/help'))}>
+        <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame('help') : history.push('/help'))}>
             <ListItemIcon>
                 <HelpIcon />
             </ListItemIcon>
