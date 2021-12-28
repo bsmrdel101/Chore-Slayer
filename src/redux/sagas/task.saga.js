@@ -133,6 +133,44 @@ function* reviveTask(action) {
   }
 }
 
+// saga PUT route
+function* rewardProgress(action) {
+  try {
+    const response = yield axios({
+      method: 'PUT',
+      url: `/api/rewards`,
+      data: {newCard: action.payload}
+    })
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
+
+function* fetchProgress(action) {
+  try {
+    const response = yield axios({
+      method: 'GET',
+      url: `/api/rewards`
+    })
+    // Update rewards reducer
+    console.log(response.data);
+    let newCard = response.data.newCard;
+    console.log(newCard);
+    yield put({
+      type: 'GET_REWARDS',
+      payload: newCard
+    })
+
+    // Add 1 to the card reward progress
+    yield put({
+      type: 'REWARD_PROGRESS',
+      payload: newCard
+    })
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
+
 function* taskSaga() {
     yield takeLatest('FETCH_TASKS', fetchTasks);
     yield takeLatest('ADD_TASK', addTask);
@@ -142,6 +180,8 @@ function* taskSaga() {
     yield takeLatest('STORE_TASK', storeTask);
     yield takeLatest('DELETE_HISTORY', deleteHistory);
     yield takeLatest('REVIVE_TASK', reviveTask);
+    yield takeLatest('REWARD_PROGRESS', rewardProgress);
+    yield takeLatest('FETCH_REWARD_PROGRESS', fetchProgress);
   }
   
   export default taskSaga;
