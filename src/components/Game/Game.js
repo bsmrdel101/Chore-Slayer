@@ -39,7 +39,7 @@ function Game() {
         dispatch({
             type: 'RESET_PLAYER_ENERGY'
         })
-        if (player.threat > enemyDefence) {
+        if (player.threat > enemyDefence && round > 0) {
             // Deals dmg to enemy equal to players threat
             dispatch({
                 type: 'DEAL_ENEMY_DAMAGE',
