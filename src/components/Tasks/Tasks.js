@@ -63,7 +63,7 @@ function Tasks() {
                             <h2>Tasks Left: {taskReducer.length}</h2>
                             <h2>Tasks Completed: {taskHistory.length}</h2>
                             <hr />
-                            <h2>New Card: {rewardsReducer.newCard}/3</h2>
+                            <h2>New Card: 0/3</h2>
                         </div>
                     </Item>
                 </Grid>
