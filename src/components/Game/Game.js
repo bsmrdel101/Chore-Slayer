@@ -76,7 +76,7 @@ function Game() {
     const handleEnemyTurn = () => {
         dispatch({
             type: 'FETCH_ENEMY_DECK',
-            payload: {id: 1, deck: enemyDeck, hand: enemyHand, player: player, enemy: enemy, playerBoard: playerBoard, enemyBoard: enemyBoard, hand: hand, enemyHand: enemyHand}
+            payload: {id: 1, deck: enemyDeck, hand: enemyHand, player: player, enemy: enemy, playerBoard: playerBoard, enemyBoard: enemyBoard, hand: hand, enemyHand: enemyHand, round: round}
         })
         // Handle enemy end turn
         setRound(round + 1);

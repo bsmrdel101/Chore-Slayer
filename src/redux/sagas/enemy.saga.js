@@ -107,8 +107,9 @@ function* handleEnemyTurn(action) {
         console.log('***** AI Handler *****');
         let enemyHand = [];
         let energy = action.payload.enemy.energy
-        let enemy = action.payload.enemy
-        let player = action.payload.player
+        const enemy = action.payload.enemy
+        const player = action.payload.player
+        const round = action.payload.round
 
         // Initializes enemy hand
         console.log(response.data);
@@ -130,10 +131,8 @@ function* handleEnemyTurn(action) {
 
               let lowestHp = 50;
               let minionId;
-              
-              console.log(enemyHand);
+
               for (let card of enemyHand) { 
-                console.log(card);
                   switch (card.type) {
                       case 'block':
                           blockScore = 1;
