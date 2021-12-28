@@ -3,13 +3,13 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import Swal from 'sweetalert2';
 
 function TaskCard({task}) {
     const dispatch = useDispatch();
+    const taskHistory = useSelector((store) => store.taskHistoryReducer);
 
     const deleteTask = () => {
         // Sweet alert conformation message for deletion
@@ -72,12 +72,32 @@ function TaskCard({task}) {
         })
     }
 
+    // Removes task for chores list and adds it to task history
+    // Updates task statistics
+    const completeTask = () => {
+        // TODO clear history when the reward is reached
+        // Retrieve the current value of users reward progress
+        dispatch({
+            type: 'FETCH_REWARD_PROGRESS'
+        })
+        // Add task to history
+        dispatch({
+            type: 'STORE_TASK',
+            payload: task
+        })
+        // Removes task card from the list
+        dispatch({
+            type: 'DELETE_TASK',
+            payload: task.id
+        })
+    }
+
     return (
         <>
             <div>
                 <Card sx={{ maxWidth: 345 }} className="task-card">
                     <CardActionArea>
-                        <CardContent>
+                        <CardContent onClick={handleEdit}>
                         <Typography gutterBottom variant="h5" component="div">
                         <Grid container spacing={2} columns={16}>
                             <Grid item xs={8}>
@@ -94,8 +114,7 @@ function TaskCard({task}) {
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-                        <Button size="small" variant="contained" color="success">Complete</Button>
-                        <Button size="small" color="primary" onClick={handleEdit}><EditIcon/></Button>
+                        <Button size="small" variant="contained" color="success" onClick={completeTask}>Complete</Button>
                         <Button size="small" color="error" onClick={deleteTask}><DeleteIcon/></Button>
                     </CardActions>
                 </Card>

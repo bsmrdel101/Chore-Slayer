@@ -10,7 +10,7 @@ CREATE TABLE "user" (
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
     "max_hp" INTEGER DEFAULT 15,
-    "new_user" BOOLEAN DEFAULT true
+    "new_user" BOOLEAN DEFAULT true,
 );
 
 CREATE TABLE "tasks" (
@@ -19,6 +19,20 @@ CREATE TABLE "tasks" (
     "description" VARCHAR (1000),
     "difficulty" INTEGER,
     "complete" BOOLEAN DEFAULT false,
+    "user_id" INTEGER REFERENCES "user"
+);
+
+CREATE TABLE "rewards" (
+    "id" SERIAL PRIMARY KEY,
+    "newCard" INTEGER DEFAULT 0,
+    "user_id" INTEGER REFERENCES "user"
+);
+
+CREATE TABLE "history" (
+    "id" SERIAL PRIMARY KEY,
+    "name" VARCHAR (255) NOT NULL,
+    "description" VARCHAR (1000),
+    "difficulty" INTEGER,
     "user_id" INTEGER REFERENCES "user"
 );
 

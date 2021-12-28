@@ -12,6 +12,8 @@ const userRouter = require('./routes/user.router');
 const taskRouter = require('./routes/task.router');
 const handRouter = require('./routes/hand.router');
 const deckRouter = require('./routes/deck.router');
+const historyRouter = require('./routes/history.router');
+const rewardsRouter = require('./routes/rewards.router');
 const enemyDeckRouter = require('./routes/enemyDeck.router');
 const enemyHandRouter = require('./routes/enemyHand.router');
 
@@ -31,6 +33,8 @@ app.use('/api/user', userRouter);
 app.use('/api/tasks', taskRouter);
 app.use('/api/hand', handRouter);
 app.use('/api/deck', deckRouter);
+app.use('/api/history', historyRouter);
+app.use('/api/rewards', rewardsRouter);
 app.use('/api/enemyHand', enemyHandRouter);
 app.use('/api/enemyDeck', enemyDeckRouter);
 

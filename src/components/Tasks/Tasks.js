@@ -1,12 +1,11 @@
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import TaskCard from "../TaskCard/TaskCard";
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import ModalUnstyled from '@mui/base/ModalUnstyled';
 import * as React from 'react';
 import { useHistory } from "react-router-dom";
 
@@ -14,10 +13,15 @@ function Tasks() {
     const history = useHistory();
     const dispatch = useDispatch();
     const taskReducer = useSelector((store) => store.taskReducer);
+    const taskHistory = useSelector((store) => store.taskHistoryReducer);
+    const rewardsReducer = useSelector((store) => store.rewardsReducer);
 
     useEffect(() => {
         // Render all of the task cards on the DOM when the page loads
         fetchTasks();
+        dispatch({
+            type: 'FETCH_HISTORY'
+        })
     }, [])
 
     // GET tasks
@@ -57,10 +61,9 @@ function Tasks() {
                     <Item>
                         <div>
                             <h2>Tasks Left: {taskReducer.length}</h2>
-                            <h2>Tasks Completed: 0</h2>
+                            <h2>Tasks Completed: {taskHistory.length}</h2>
                             <hr />
                             <h2>New Card: 0/3</h2>
-                            <h2>Stat Increase: 0/5</h2>
                         </div>
                     </Item>
                 </Grid>
