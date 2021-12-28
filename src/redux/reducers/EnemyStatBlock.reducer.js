@@ -1,4 +1,6 @@
-const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5}, action) => {
+import Swal from 'sweetalert2';
+
+const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5, storedThreat: 0}, action) => {
     let copyOfState;
     switch (action.type) {
         case 'ADD_ENEMY_BLOCK':
@@ -11,7 +13,13 @@ const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5}, ac
             return copyOfState;
         case 'ADD_ENEMY_THREAT':
             copyOfState = {...state};
-            copyOfState.threat += action.payload;
+            if (action.payload.round > 0) {
+                let damage = action.payload.damage + copyOfState.storedThreat;
+                copyOfState.threat += damage;
+                copyOfState.storedThreat = 0;
+            } else {
+                copyOfState.storedThreat = action.payload.damage;
+            }
             return copyOfState;
         case 'UPDATE_ENEMY_THREAT':
             copyOfState = {...state};
@@ -30,6 +38,12 @@ const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5}, ac
             copyOfState.health -= action.payload;
             if (copyOfState.health <= 0) {
                 document.location.reload();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    footer: '<a href="">Why do I have this issue?</a>'
+                })
             }
             return copyOfState;
         case 'REMOVE_ENEMY_ENERGY':
@@ -42,7 +56,7 @@ const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5}, ac
             return copyOfState;
         case 'RESET_GAME':
             copyOfState = {...state};
-            copyOfState = {block: 0, health: 20, threat: 0, energy: 5};
+            copyOfState = {block: 0, health: 20, threat: 0, energy: 5, storedThreat: 0};
             return copyOfState;
         default:
             return state;

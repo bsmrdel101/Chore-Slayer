@@ -80,12 +80,12 @@ function Game() {
         })
         // Handle enemy end turn
         setRound(round + 1);
-        // Makes sure the enemy doesn't have more than 5 minions on the board
-        if (enemyBoard.length > 5) {
-            dispatch({
-              type: 'FILTER_BOARD'
-            })
-        }
+        // // Makes sure the enemy doesn't have more than 5 minions on the board
+        // if (enemyBoard.length > 5) {
+        //     dispatch({
+        //       type: 'FILTER_BOARD'
+        //     })
+        // }
     }
 
     return (

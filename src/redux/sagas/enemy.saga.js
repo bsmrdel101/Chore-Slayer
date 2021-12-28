@@ -179,6 +179,7 @@ function* handleEnemyTurn(action) {
               }
       
               if (minionScore > 0) {
+                // AHHHHHHHH
                   if (action.payload.enemyBoard.length === 0) {
                       minionScore += 3;
                   }
@@ -323,9 +324,10 @@ function* handleEnemyTurn(action) {
                                     type: 'SUMMON_ENEMY_MINION',
                                     payload: {damage: card.damage, health: card.health}
                                   })
+                                  // Add the enemy threat
                                   yield put({
                                       type: 'ADD_ENEMY_THREAT',
-                                      payload: card.damage
+                                      payload: {damage: card.damage, round: round}
                                   })
                                 }
                                 break;
@@ -360,15 +362,6 @@ function* handleEnemyTurn(action) {
             type: 'DEAL_PLAYER_DAMAGE',
             payload: enemy.threat - playerDefence
           })
-        }
-
-        // Check if player is still alive
-        if (player.health <= 0) {
-          yield put({
-            type: 'RESET_GAME'
-          })
-          // TODO: show player lose screen
-          
         }
 
       yield put({

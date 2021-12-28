@@ -5,8 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import Swal from 'sweetalert2'
-import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 function GameCard({card, round}) {
     const hand = useSelector((store) => store.hand);
@@ -16,7 +15,7 @@ function GameCard({card, round}) {
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        if (card.type === 'minion' && playerBoard.length === 5) {
+        if (card.type === 'minion' && playerBoard.length === 6) {
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
