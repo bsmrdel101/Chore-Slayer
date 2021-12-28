@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 import GameCard from "../GameCard/GameCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import Swal from 'sweetalert2';
 
 function Game() {
     const hand = useSelector((store) => store.hand);
@@ -80,12 +81,30 @@ function Game() {
         })
         // Handle enemy end turn
         setRound(round + 1);
-        // // Makes sure the enemy doesn't have more than 5 minions on the board
-        // if (enemyBoard.length > 5) {
-        //     dispatch({
-        //       type: 'FILTER_BOARD'
-        //     })
-        // }
+    }
+
+    // Ends the game when the player clicks the surrender button
+    const handleSurrender = () => {
+        Swal.fire({
+            title: 'Are you sure you want to quit?',
+            text: "Nothing will be saved",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#808080',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'You Lost!',
+                    text: 'ha ha',
+                    icon: 'error',
+                    confirmButtonText: 'New Game'
+                }).then((result) => {
+                  document.location.reload();
+                })
+            }
+        })
     }
 
     return (
@@ -131,6 +150,9 @@ function Game() {
             </Grid>
             <div id="end-turn-btn">
                 <button onClick={handleEndTurn}>End Turn</button>
+            </div>
+            <div id="surrender-btn">
+                <button onClick={handleSurrender}>Surrender</button>
             </div>
 
             {/* Holds the player's hand */}

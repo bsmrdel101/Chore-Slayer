@@ -88,6 +88,18 @@ hr {
     font-size: 25px;
 }
 
+#surrender-btn {
+    display: flex;
+    justify-content: center;
+}
+
+#surrender-btn button {
+    margin-top: 5px;
+    color: white;
+    padding: 4px;
+    background-color: rgb(196, 82, 82);
+}
+
 .card:hover {
     transform:translateY(-25px);
 }
