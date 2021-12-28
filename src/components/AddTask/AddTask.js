@@ -35,8 +35,17 @@ function AddTask() {
         });
     }
 
-    const incompleteTask = () => {
-
+    const incompleteTask = (task) => {
+        // Adds the task back to chore list
+        dispatch({
+            type: 'REVIVE_TASK',
+            payload: task
+        })
+        // Removes the task from the history
+        dispatch({
+            type: 'DELETE_HISTORY',
+            payload: task.id
+        })
     }
 
     return (
@@ -81,7 +90,7 @@ function AddTask() {
                                         </CardContent>
                                     </CardActionArea>
                                     <CardActions>
-                                        <Button size="small" variant="contained" onClick={incompleteTask}>Incomplete</Button>
+                                        <Button size="small" variant="contained" onClick={() => incompleteTask(task)}>Incomplete</Button>
                                     </CardActions>
                                 </Card> 
                             </div>

@@ -104,6 +104,35 @@ function* fetchHistory(action) {
   }
 }
 
+// Deletes an item in the history
+function* deleteHistory(action) {
+  try {
+    const response = yield axios({
+      method: 'DELETE',
+      url: `/api/history/${action.payload}`
+    })
+    yield put({
+      type: 'FETCH_HISTORY',
+      payload: response.data
+    })
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
+
+// Puts the item back into the chore list before deletion
+function* reviveTask(action) {
+  try {
+    const response = yield axios({
+      method: 'POST',
+      url: `/api/history/${action.payload.id}`,
+      data: action.payload
+    })
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
+
 function* taskSaga() {
     yield takeLatest('FETCH_TASKS', fetchTasks);
     yield takeLatest('ADD_TASK', addTask);
@@ -111,6 +140,8 @@ function* taskSaga() {
     yield takeLatest('EDIT_TASK', editTask);
     yield takeLatest('FETCH_HISTORY', fetchHistory);
     yield takeLatest('STORE_TASK', storeTask);
+    yield takeLatest('DELETE_HISTORY', deleteHistory);
+    yield takeLatest('REVIVE_TASK', reviveTask);
   }
   
   export default taskSaga;
