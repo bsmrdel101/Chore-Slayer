@@ -22,17 +22,12 @@ CREATE TABLE "tasks" (
     "user_id" INTEGER REFERENCES "user"
 );
 
-CREATE TABLE "rewards" (
-    "id" SERIAL PRIMARY KEY,
-    "newCard" INTEGER DEFAULT 0,
-    "user_id" INTEGER REFERENCES "user"
-);
-
 CREATE TABLE "history" (
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR (255) NOT NULL,
     "description" VARCHAR (1000),
     "difficulty" INTEGER,
+    "newCard" INTEGER DEFAULT 0,
     "user_id" INTEGER REFERENCES "user"
 );
 
