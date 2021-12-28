@@ -10,7 +10,9 @@ CREATE TABLE "user" (
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
     "max_hp" INTEGER DEFAULT 15,
-    "new_user" BOOLEAN DEFAULT true
+    "new_user" BOOLEAN DEFAULT true,
+    "newCard" INTEGER,
+    "statIncrease" INTEGER
 );
 
 CREATE TABLE "tasks" (
