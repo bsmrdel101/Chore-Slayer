@@ -77,9 +77,9 @@ function TaskCard({task}) {
     const completeTask = () => {
         // TODO clear history when the reward is reached
         // Retrieve the current value of users reward progress
-        // dispatch({
-        //     type: 'FETCH_REWARD_PROGRESS'
-        // })
+        dispatch({
+            type: 'FETCH_REWARD_PROGRESS'
+        })
         // Add task to history
         dispatch({
             type: 'STORE_TASK',
