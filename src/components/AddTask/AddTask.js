@@ -50,22 +50,33 @@ function AddTask() {
 
     return (
         <>
-            <form onSubmit={addTask}>
-                <TextField label="Name" variant="outlined" value={newName}
-                    onChange={(event) => setNewName(event.target.value)} required/>
-                <TextField
-                    label="Description"
-                    multiline
-                    rows={4}
-                    variant="outlined"
-                    value={newDescription}
-                    onChange={(event) => setNewDescription(event.target.value)}
-                    required
-                />
-                <Button variant="text" type="submit">Save</Button>
-                <Button variant="text" onClick={() => history.push('/tasks')}>Cancel</Button>
-            </form>
+            <center>
+                <h1 className="task-subtitle">Add a Task</h1>
+                <form onSubmit={addTask} className="add-task-form">
+                    <div>
+                        <TextField label="Name" variant="outlined" value={newName}
+                            onChange={(event) => setNewName(event.target.value)} required/>
+                    </div>
+                    <div>
+                        <TextField
+                            label="Description"
+                            multiline
+                            rows={4}
+                            variant="outlined"
+                            value={newDescription}
+                            onChange={(event) => setNewDescription(event.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <Button variant="text" type="submit">Save</Button>
+                        <Button variant="text" onClick={() => history.push('/tasks')}>Cancel</Button>
+                    </div>
+                </form>
+            </center>
+            <hr/>
             <section className="task-history-list">
+                <h1 className="task-subtitle">History</h1>
                 {
                     taskHistory.length > 0 &&
                     taskHistory.map((task) => {
