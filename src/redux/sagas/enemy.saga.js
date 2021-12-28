@@ -327,7 +327,7 @@ function* handleEnemyTurn(action) {
                                   // Add the enemy threat
                                   yield put({
                                       type: 'ADD_ENEMY_THREAT',
-                                      payload: {damage: card.damage, round: round}
+                                      payload: card.damage
                                   })
                                 }
                                 break;
@@ -356,7 +356,7 @@ function* handleEnemyTurn(action) {
 
         let playerDefence = player.threat + player.block;
         // Deals damage to the player if allowed
-        if (enemy.threat > playerDefence) {
+        if (enemy.threat > playerDefence && round > 0) {
           console.log('dealt', enemy.threat - playerDefence); 
           yield put({
             type: 'DEAL_PLAYER_DAMAGE',
