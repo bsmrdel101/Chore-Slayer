@@ -7,9 +7,9 @@ const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5, sto
             copyOfState = {...state};
             copyOfState.block += action.payload;
             return copyOfState;
-        case 'SWAP_ENEMY_BLOCK':
+        case 'SWAP_BLOCK':
             copyOfState = {...state};
-            console.log('TODO: add swap block mechanic');
+            copyOfState.block = action.payload.playerBlock;
             return copyOfState;
         case 'ADD_ENEMY_THREAT':
             copyOfState = {...state};

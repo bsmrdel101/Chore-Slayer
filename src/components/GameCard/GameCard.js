@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 function GameCard({card, round}) {
     const hand = useSelector((store) => store.hand);
     const player = useSelector((store) => store.playerStatBlock);
+    const enemy = useSelector((store) => store.enemyStatBlock);
     const playerBoard = useSelector((store) => store.playerBoard);
     const enemyBoard = useSelector((store) => store.enemyBoard);
     const dispatch = useDispatch();
@@ -89,7 +90,7 @@ function GameCard({card, round}) {
         });
         switch (element.card_id) {
             case 5: // Swap block
-                dispatch({type: 'SWAP_PLAYER_BLOCK'})
+                dispatch({type: 'SWAP_BLOCK', payload: {enemyBlock: enemy.block, playerBlock: player.block}})
                 break;
             case 6: // Break formation
                 console.log('TODO: Break Formation');
