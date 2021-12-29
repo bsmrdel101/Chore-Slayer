@@ -24,7 +24,7 @@ function* fetchReward(action) {
       method: 'GET',
       url: '/api/rewards'
     })
-    console.log(response.data);
+    console.log('RESPONSE!!!!!!', response.data);
     yield put({
       type: 'GET_REWARDS',
       payload: response.data

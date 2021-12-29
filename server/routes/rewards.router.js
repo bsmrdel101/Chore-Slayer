@@ -21,12 +21,12 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     pool.query(sqlText, sqlValues)
         .then((dbres) => res.sendStatus(201))
         .catch((dberror) => {
-          console.log('Opps you messed up DB error', dberror);
+          console.log('Oops you messed up DB error', dberror);
           res.sendStatus(500)
     })
 });
 
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/', (req, res) => {
     const sqlText =`
         SELECT "newCard" FROM "history"
         WHERE "user_id"=$1;
@@ -34,11 +34,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlValues = [
         req.user.id
     ]
-    console.log('this is sqlValues for rewards', sqlValues);
     pool.query(sqlText, sqlValues)
         .then((dbres) => res.send(dbres.rows))
         .catch((dberror) => {
-        console.log('Opps you messed up DB error', dberror);
+        console.log('Oops you messed up DB error', dberror);
         res.sendStatus(500)
     })  
 });

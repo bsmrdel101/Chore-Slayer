@@ -94,12 +94,29 @@ function GameCard({card, round}) {
             case 6: // Break formation
                 console.log('TODO: Break Formation');
                 break;
+            case 17: // Block block
+                console.log('TODO: Block block');
+                break;
             default:
                 break;
         }
     }    
 
     const handleAttackCard = (element) => {
+        switch (element.card_id) {
+            case 18: // Sweep
+                console.log('TODO: Sweep');
+                break;
+            case 19: // Restart
+                console.log('TODO: Restart');
+                break;
+            default:
+                allowAttack(element);
+                break;
+        }
+    }
+    
+    const allowAttack = (element) => {
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -124,9 +141,23 @@ function GameCard({card, round}) {
             type: 'ELEMENT',
             payload: element
         })
-    }    
+    }
 
     const handleMinionCard = (element) => {
+        switch (element.card_id) {
+            case 20: // Dragon
+                console.log('TODO: Dragon');
+                break;
+            case 21: // Cleric
+                console.log('TODO: Cleric');
+                break;
+            default:
+                summonMinion(element);
+                break;
+        }
+    }    
+
+    const summonMinion = (element) => {
         dispatch({
             type: 'SUMMON_PLAYER_MINION',
             payload: {damage: element.damage, health: element.health}
@@ -135,7 +166,7 @@ function GameCard({card, round}) {
             type: 'ADD_PLAYER_THREAT',
             payload: element.damage
         })
-    }    
+    }
 
     return (
         <>
