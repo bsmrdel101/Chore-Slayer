@@ -90,10 +90,10 @@ function GameCard({card, round}) {
         });
         switch (element.card_id) {
             case 5: // Swap block
-                dispatch({type: 'SWAP_BLOCK', payload: {enemyBlock: enemy.block, playerBlock: player.block}})
+                dispatch({type: 'SWAP_BLOCK', payload: {enemyBlock: enemy.block, playerBlock: player.block}});
                 break;
             case 6: // Break formation
-                console.log('TODO: Break Formation');
+                dispatch({type: 'BREAK_FORMATION'});
                 break;
             case 17: // Block block
                 console.log('TODO: Block block');

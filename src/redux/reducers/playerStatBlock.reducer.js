@@ -11,6 +11,10 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
             copyOfState = {...state};
             copyOfState.block = action.payload.enemyBlock;
             return copyOfState;
+        case 'BREAK_FORMATION':
+            copyOfState = {...state};
+            copyOfState.block -= 3;
+            return copyOfState;
         case 'ADD_PLAYER_THREAT':
             copyOfState = {...state};
             copyOfState.threat += action.payload;
