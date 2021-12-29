@@ -95,8 +95,8 @@ function GameCard({card, round}) {
             case 6: // Break formation
                 dispatch({type: 'BREAK_FORMATION'});
                 break;
-            case 17: // Block block
-                console.log('TODO: Block block');
+            case 17: // Coward
+                dispatch({type: 'PLAYER_COWARD'});
                 break;
             default:
                 break;
