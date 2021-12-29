@@ -18,6 +18,9 @@ const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5, sto
         case 'BREAK_FORMATION':
             copyOfState = {...state};
             copyOfState.block -= 3;
+            if (copyOfState.block <= 0) {
+                copyOfState.block = 0;
+            }
             return copyOfState;
         case 'ADD_ENEMY_THREAT':
             copyOfState = {...state};
