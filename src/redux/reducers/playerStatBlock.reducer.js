@@ -7,9 +7,20 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
             copyOfState = {...state};
             copyOfState.block += action.payload;
             return copyOfState;
-        case 'SWAP_PLAYER_BLOCK':
+        case 'PLAYER_COWARD':
             copyOfState = {...state};
-            console.log('TODO: add swap block mechanic');
+            copyOfState.block += 5;
+            return copyOfState;
+        case 'SWAP_BLOCK':
+            copyOfState = {...state};
+            copyOfState.block = action.payload.enemyBlock;
+            return copyOfState;
+        case 'BREAK_FORMATION':
+            copyOfState = {...state};
+            copyOfState.block -= 3;
+            if (copyOfState.block <= 0) {
+                copyOfState.block = 0;
+            }
             return copyOfState;
         case 'ADD_PLAYER_THREAT':
             copyOfState = {...state};
@@ -23,6 +34,13 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
             copyOfState = {...state};
             if (action.payload.board[0].health <= 0) {
                 copyOfState.threat -= action.payload.board[0].damage;
+            }
+            return copyOfState;
+        case 'SWEEP_PLAYER_MINION':
+            copyOfState = {...state};
+            let index = action.payload.index;
+            if (action.payload.board[index].health <= 0) {
+                copyOfState.threat -= action.payload.board[index].damage;
             }
             return copyOfState;
         case 'PLAYER_CAN_ATTACK':
@@ -47,7 +65,18 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
                   })
             }
             return copyOfState;
+        case 'HEAL_PLAYER':
+            copyOfState = {...state};
+            if (copyOfState.health < 20) {
+                copyOfState.health += 3;
+            }
+            return copyOfState;
+        case 'RESTART_ATTACK':
+            copyOfState = {...state};
+            copyOfState.threat = 0;
+            return copyOfState;
         case 'ELEMENT':
+            // Element is the card data sent to the game.js for when a player clicks an enemy minion
             copyOfState = {...state};
             copyOfState.element = action.payload;
             return copyOfState;
@@ -59,7 +88,7 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
             return copyOfState;
         case 'RESET_GAME':
             copyOfState = {...state};
-            copyOfState = {block: 0, health: 20, threat: 0, energy: 5, canAttack: false};
+            copyOfState = {block: 0, health: 20, threat: 0, energy: 5, canAttack: false, element: {}};
             return copyOfState;
         default:
             return state;

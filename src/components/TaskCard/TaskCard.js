@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 function TaskCard({task}) {
     const dispatch = useDispatch();
     const taskHistory = useSelector((store) => store.taskHistoryReducer);
+    const rewardsReducer = useSelector((store) => store.rewardsReducer);
 
     const deleteTask = () => {
         // Sweet alert conformation message for deletion
@@ -77,9 +78,9 @@ function TaskCard({task}) {
     const completeTask = () => {
         // TODO clear history when the reward is reached
         // Retrieve the current value of users reward progress
-        dispatch({
-            type: 'FETCH_REWARD_PROGRESS'
-        })
+        // dispatch({
+        //     type: 'FETCH_REWARD_PROGRESS'
+        // })
         // Add task to history
         dispatch({
             type: 'STORE_TASK',

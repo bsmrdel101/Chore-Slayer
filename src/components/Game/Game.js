@@ -107,6 +107,15 @@ function Game() {
         })
     }
 
+    const handleSweep = () => {
+        for (let i = 0; i < enemyBoard.length; i++) {
+            dispatch({
+                type: 'ATTACK_ENEMY_MINION', 
+                payload: {id: i, attack: player.element.attack_amount, board: enemyBoard}
+            });
+        }
+    }
+
     return (
         <>
             <Grid container spacing={3}>
@@ -130,7 +139,9 @@ function Game() {
             </Grid>
             <Grid container spacing={3}>
                 <Grid item xs className="deck-picture" marginRight={"3rem"} marginLeft={"3rem"}>
-                    <p>Deck {deckReducer.length}</p>
+                    <div id="dummy-card">
+                        <p>some text</p>
+                    </div>
                     <br/>
                     <br/>
                 </Grid>
@@ -154,7 +165,7 @@ function Game() {
             <div id="surrender-btn">
                 <button onClick={handleSurrender}>Surrender</button>
             </div>
-
+            
             {/* Holds the player's hand */}
             <div className="hand-container">
                 {hand.map((card) => {

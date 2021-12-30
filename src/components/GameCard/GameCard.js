@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 function GameCard({card, round}) {
     const hand = useSelector((store) => store.hand);
     const player = useSelector((store) => store.playerStatBlock);
+    const enemy = useSelector((store) => store.enemyStatBlock);
     const playerBoard = useSelector((store) => store.playerBoard);
     const enemyBoard = useSelector((store) => store.enemyBoard);
     const dispatch = useDispatch();
@@ -89,10 +90,15 @@ function GameCard({card, round}) {
         });
         switch (element.card_id) {
             case 5: // Swap block
-                dispatch({type: 'SWAP_PLAYER_BLOCK'})
+                dispatch({type: 'SWAP_BLOCK', payload: {enemyBlock: enemy.block, playerBlock: player.block}});
                 break;
             case 6: // Break formation
-                console.log('TODO: Break Formation');
+                dispatch({type: 'BREAK_FORMATION'});
+                break;
+            case 17: // Coward
+                if (enemyBoard.length >= 5) {
+                    dispatch({type: 'PLAYER_COWARD'});
+                }
                 break;
             default:
                 break;
@@ -100,6 +106,41 @@ function GameCard({card, round}) {
     }    
 
     const handleAttackCard = (element) => {
+        switch (element.card_id) {
+            case 18: // Sweep
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })      
+                Toast.fire({
+                    icon: 'info',
+                    title: 'Click on the enemy board to attack'
+                })
+                // Passes the data of the card played to the reducer so Game.js can access it
+                dispatch({
+                    type: 'ELEMENT',
+                    payload: element
+                })
+                break;
+            case 19: // Restart
+                dispatch({
+                    type: 'RESTART_ATTACK'
+                });
+                break;
+            default:
+                allowAttack(element);
+                break;
+        }
+    }
+    
+    const allowAttack = (element) => {
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -124,9 +165,33 @@ function GameCard({card, round}) {
             type: 'ELEMENT',
             payload: element
         })
-    }    
+    }
 
     const handleMinionCard = (element) => {
+        switch (element.card_id) {
+            case 20: // Dragon
+                if (playerBoard.length >= 5) {
+                    for (let i = 0; i < 5; i++) {
+                        dispatch({
+                            type: 'DRAGON_SACRIFICE_PLAYER'
+                        });
+                    }
+                    summonMinion(element);
+                }
+                break;
+            case 21: // Cleric
+                dispatch({
+                    type: 'HEAL_PLAYER'
+                });
+                summonMinion(element);
+                break;
+            default:
+                summonMinion(element);
+                break;
+        }
+    }    
+
+    const summonMinion = (element) => {
         dispatch({
             type: 'SUMMON_PLAYER_MINION',
             payload: {damage: element.damage, health: element.health}
@@ -135,7 +200,7 @@ function GameCard({card, round}) {
             type: 'ADD_PLAYER_THREAT',
             payload: element.damage
         })
-    }    
+    }
 
     return (
         <>

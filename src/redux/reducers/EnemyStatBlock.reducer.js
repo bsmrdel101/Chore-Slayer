@@ -7,9 +7,32 @@ const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5, sto
             copyOfState = {...state};
             copyOfState.block += action.payload;
             return copyOfState;
-        case 'SWAP_ENEMY_BLOCK':
+        case 'ENEMY_COWARD':
             copyOfState = {...state};
-            console.log('TODO: add swap block mechanic');
+            if (action.payload >= 5) {
+                copyOfState.block += 5;
+            }
+            return copyOfState;
+        case 'SWAP_BLOCK':
+            copyOfState = {...state};
+            copyOfState.block = action.payload.playerBlock;
+            return copyOfState;
+        case 'HEAL_ENEMY':
+            copyOfState = {...state};
+            if (copyOfState.health < 20) {
+                copyOfState.health += 3;
+            }
+            return copyOfState;
+        case 'RESTART_ATTACK':
+            copyOfState = {...state};
+            copyOfState.threat = 0;
+            return copyOfState;
+        case 'BREAK_FORMATION':
+            copyOfState = {...state};
+            copyOfState.block -= 3;
+            if (copyOfState.block <= 0) {
+                copyOfState.block = 0;
+            }
             return copyOfState;
         case 'ADD_ENEMY_THREAT':
             copyOfState = {...state};
