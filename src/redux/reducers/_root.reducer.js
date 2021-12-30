@@ -12,6 +12,7 @@ import enemyHand from './enemyHand.reducer';
 import enemyDeck from './enemyDeck.reducer';
 import taskHistoryReducer from './taskHistory.reducer';
 import rewardsReducer from './rewards.reducer';
+import actions from './actions.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
   enemyHand,
   enemyDeck,
   taskHistoryReducer,
-  rewardsReducer
+  rewardsReducer,
+  actions
 });
 
 export default rootReducer;

@@ -11,6 +11,7 @@ function Game() {
     const deckReducer = useSelector((store) => store.deckReducer);
     const enemyDeck = useSelector((store) => store.enemyDeck);
     const enemyHand = useSelector((store) => store.enemyHand);
+    const actions = useSelector((store) => store.actions);
     let [round, setRound] = useState(0);
     const dispatch = useDispatch();
     const playerBoard = useSelector((store) => store.playerBoard);
@@ -139,8 +140,10 @@ function Game() {
             </Grid>
             <Grid container spacing={3}>
                 <Grid item xs className="deck-picture" marginRight={"3rem"} marginLeft={"3rem"}>
-                    <div id="dummy-card">
-                        <p>some text</p>
+                    <div id="actions">
+                        {actions.map((action) => {
+                            return <p>{action}</p>;
+                        })}
                     </div>
                     <br/>
                     <br/>
