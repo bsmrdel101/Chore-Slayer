@@ -369,16 +369,38 @@ function* handleEnemyTurn(action) {
 
                             // Minion card handler
                             case 'minion':
-                                if (enemyBoard.length <= 5) {
-                                  yield put({
-                                    type: 'SUMMON_ENEMY_MINION',
-                                    payload: {damage: card.damage, health: card.health}
-                                  })
-                                  // Add the enemy threat
-                                  yield put({
-                                      type: 'ADD_ENEMY_THREAT',
-                                      payload: card.damage
-                                  })
+                                switch (card.card_id) {
+                                  case 20: // Dragon
+                                  if (enemyBoard.length >= 5) {
+                                      for (let i = 0; i < 5; i++) {
+                                          yield put({
+                                              type: 'DRAGON_SACRIFICE_ENEMY'
+                                          });
+                                      }
+                                      yield put({
+                                        type: 'SUMMON_ENEMY_MINION',
+                                        payload: {damage: card.damage, health: card.health}
+                                      })
+                                      // Add the enemy threat
+                                      yield put({
+                                          type: 'ADD_ENEMY_THREAT',
+                                          payload: card.damage
+                                      })
+                                  }
+                                  break;
+                                  default:
+                                    if (enemyBoard.length <= 5) {
+                                      yield put({
+                                        type: 'SUMMON_ENEMY_MINION',
+                                        payload: {damage: card.damage, health: card.health}
+                                      })
+                                      // Add the enemy threat
+                                      yield put({
+                                          type: 'ADD_ENEMY_THREAT',
+                                          payload: card.damage
+                                      })
+                                    }
+                                    break;
                                 }
                                 break;
                             default:

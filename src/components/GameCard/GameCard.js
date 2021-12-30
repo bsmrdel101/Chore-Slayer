@@ -170,7 +170,14 @@ function GameCard({card, round}) {
     const handleMinionCard = (element) => {
         switch (element.card_id) {
             case 20: // Dragon
-                console.log('TODO: Dragon');
+                if (playerBoard.length >= 5) {
+                    for (let i = 0; i < 5; i++) {
+                        dispatch({
+                            type: 'DRAGON_SACRIFICE_PLAYER'
+                        });
+                    }
+                    summonMinion(element);
+                }
                 break;
             case 21: // Cleric
                 console.log('TODO: Cleric');

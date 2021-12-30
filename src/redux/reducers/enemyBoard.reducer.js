@@ -13,6 +13,10 @@ const enemyBoard = (state = [], action) => {
                 copyOfState.splice(id, 1);
             }
             return copyOfState;
+        case 'DRAGON_SACRIFICE_ENEMY':
+            copyOfState = [...state];
+            copyOfState.pop();
+            return copyOfState;
         case 'RESTART_ATTACK':
             copyOfState = [...state];
             copyOfState = [];
