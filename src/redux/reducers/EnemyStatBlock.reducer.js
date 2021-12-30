@@ -40,6 +40,13 @@ const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5, sto
                 copyOfState.threat -= action.payload.board[id].damage;
             }
             return copyOfState;
+        // case 'SWEEP_ENEMY_MINION':
+        //     let id = action.payload.id;
+        //     copyOfState = {...state};
+        //     if (action.payload.board[id].health <= 0) {
+        //         copyOfState.threat -= action.payload.board[id].damage;
+        //     }
+        //     return copyOfState;
         case 'DEAL_ENEMY_DAMAGE':
             copyOfState = {...state};
             copyOfState.health -= action.payload;

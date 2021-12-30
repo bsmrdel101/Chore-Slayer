@@ -36,6 +36,13 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
                 copyOfState.threat -= action.payload.board[0].damage;
             }
             return copyOfState;
+        case 'SWEEP_PLAYER_MINION':
+            copyOfState = {...state};
+            let index = action.payload.index;
+            if (action.payload.board[index].health <= 0) {
+                copyOfState.threat -= action.payload.board[index].damage;
+            }
+            return copyOfState;
         case 'PLAYER_CAN_ATTACK':
             copyOfState = {...state};
             copyOfState.canAttack = true

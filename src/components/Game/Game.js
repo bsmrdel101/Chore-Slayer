@@ -107,6 +107,15 @@ function Game() {
         })
     }
 
+    const handleSweep = () => {
+        for (let i = 0; i < enemyBoard.length; i++) {
+            dispatch({
+                type: 'ATTACK_ENEMY_MINION', 
+                payload: {id: i, attack: player.element.attack_amount, board: enemyBoard}
+            });
+        }
+    }
+
     return (
         <>
             <Grid container spacing={3}>
@@ -115,7 +124,7 @@ function Game() {
                     <br/>
                     <br/>
                 </Grid>
-                <Grid item xs={6} className="board" marginRight={"3rem"}>
+                <Grid item xs={6} className="board" marginRight={"3rem"} onClick={handleSweep}>
                     {enemyBoard.map((minion, i) => {
                         return <p key={i} onClick={() => handlePlayerAttack(i)}>{minion.damage} / {minion.health}</p>;
                     })}

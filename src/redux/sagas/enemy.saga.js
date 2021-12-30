@@ -295,6 +295,7 @@ function* handleEnemyTurn(action) {
                     if (card.card_id === selectedCard) {
                         console.log('AI plays: ', card);
                         switch (card.type) {
+                            // Block card handler
                             case 'block':
                                 if (card.block_amount) {
                                   yield put({
@@ -316,22 +317,46 @@ function* handleEnemyTurn(action) {
                                         break;
                                 }
                                 break;
+
+                            // Attack card handler
                             case 'attack':
-                                if (playerBoard.length > 0) {
-                                  for (let minion of playerBoard) {
-                                    if (minion.health < lowestHp) {
-                                      minionId = minion.card_id;
-                                      lowestHp = minion.health;
+                                switch (card.card_id) {
+                                  case 18:
+                                    let i = 0
+                                    if (playerBoard.length > 0) {
+                                      for (let minion of playerBoard) {
+                                        minionId = minion.card_id;
+                                        // Deals the 2 damage to all player minions
+                                        yield put({
+                                          type: 'SWEEP_PLAYER_MINION',
+                                          payload: {id: minionId, attack: card.attack_amount, board: playerBoard, index: i}
+                                        })
+                                        i++;
+                                      }
+                                    } else {
+                                      console.log('* Player had no minions to attack *');
                                     }
-                                  }
-                                  yield put({
-                                    type: 'ATTACK_PLAYER_MINION',
-                                    payload: {id: minionId, attack: card.attack_amount, board: playerBoard}
-                                  })
-                                } else {
-                                  console.log('* Player had no minions to attack *');
+                                    break;
+                                  default:
+                                    if (playerBoard.length > 0) {
+                                      for (let minion of playerBoard) {
+                                        if (minion.health < lowestHp) {
+                                          minionId = minion.card_id;
+                                          lowestHp = minion.health;
+                                        }
+                                      }
+                                      yield put({
+                                        type: 'ATTACK_PLAYER_MINION',
+                                        payload: {id: minionId, attack: card.attack_amount, board: playerBoard}
+                                      })
+                                    } else {
+                                      console.log('* Player had no minions to attack *');
+                                    }
+                                    break;
                                 }
                                 break;
+
+                            // Minion card handler
                             case 'minion':
                                 if (enemyBoard.length <= 5) {
                                   yield put({
