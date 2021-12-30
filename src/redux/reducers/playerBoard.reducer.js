@@ -5,6 +5,10 @@ const playerBoard = (state = [], action) => {
             copyOfState = [...state];
             copyOfState.push(action.payload);
             return copyOfState;
+        case 'RESTART_ATTACK':
+            copyOfState = [...state];
+            copyOfState = [];
+            return copyOfState;
         case 'ATTACK_PLAYER_MINION':
             copyOfState = [...state];
             if (state.length > 0) {

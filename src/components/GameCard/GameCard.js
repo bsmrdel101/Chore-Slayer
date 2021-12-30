@@ -130,7 +130,9 @@ function GameCard({card, round}) {
                 })
                 break;
             case 19: // Restart
-                console.log('TODO: Restart');
+                dispatch({
+                    type: 'RESTART_ATTACK'
+                });
                 break;
             default:
                 allowAttack(element);

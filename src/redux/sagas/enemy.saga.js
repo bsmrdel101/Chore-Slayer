@@ -321,20 +321,29 @@ function* handleEnemyTurn(action) {
                             // Attack card handler
                             case 'attack':
                                 switch (card.card_id) {
-                                  case 18:
+                                  case 18: // Sweep
                                     let i = 0
                                     if (playerBoard.length > 0) {
                                       for (let minion of playerBoard) {
                                         minionId = minion.card_id;
                                         // Deals the 2 damage to all player minions
-                                        console.log('SWEEEP BEFORE', minion);
+                                        console.log('SWEEP BEFORE', minion);
                                         yield put({
                                           type: 'SWEEP_PLAYER_MINION',
                                           payload: {id: minionId, attack: card.attack_amount, board: playerBoard, index: i}
                                         })
                                         i++;
-                                        console.log('SWEEEP AFTER', minion);
+                                        console.log('SWEEP AFTER', minion);
                                       }
+                                    } else {
+                                      console.log('* Player had no minions to attack *');
+                                    }
+                                    break;
+                                  case 19: // Restart
+                                    if (playerBoard.length > 0) {
+                                      yield put({
+                                        type: 'RESTART_ATTACK'
+                                      });
                                     } else {
                                       console.log('* Player had no minions to attack *');
                                     }

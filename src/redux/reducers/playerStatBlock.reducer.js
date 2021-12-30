@@ -65,7 +65,12 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
                   })
             }
             return copyOfState;
+        case 'RESTART_ATTACK':
+            copyOfState = {...state};
+            copyOfState.threat = 0;
+            return copyOfState;
         case 'ELEMENT':
+            // Element is the card data sent to the game.js for when a player clicks an enemy minion
             copyOfState = {...state};
             copyOfState.element = action.payload;
             return copyOfState;

@@ -13,6 +13,10 @@ const enemyBoard = (state = [], action) => {
                 copyOfState.splice(id, 1);
             }
             return copyOfState;
+        case 'RESTART_ATTACK':
+            copyOfState = [...state];
+            copyOfState = [];
+            return copyOfState;
         case 'FILTER_BOARD':
             copyOfState = [...state];
             copyOfState.splice(state.length - 1, 1);
