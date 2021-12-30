@@ -113,9 +113,6 @@ function* handleEnemyTurn(action) {
         const player = action.payload.player
         const round = action.payload.round
 
-        // Clears the actions reducer
-        yield put({type: 'CLEAR_ACTIONS'});
-
         // Initializes enemy hand
         console.log(response.data);
         for (let card of response.data) {
@@ -307,11 +304,10 @@ function* handleEnemyTurn(action) {
               let index = 0;
                 for (let card of enemyHand) {
                     if (card.card_id === selectedCard) {
-                        console.log('AI plays: ', card);
                         switch (card.type) {
                             // Block card handler
                             case 'block':
-                                yield put({type: 'ADD_ACTION', payload: card.name});
+                                yield put({type: 'ADD_ACTION', payload: card});
                                 if (card.block_amount) {
                                   yield put({
                                     type: 'ADD_ENEMY_BLOCK',
@@ -335,7 +331,7 @@ function* handleEnemyTurn(action) {
 
                             // Attack card handler
                             case 'attack':
-                                yield put({type: 'ADD_ACTION', payload: card.name});
+                                yield put({type: 'ADD_ACTION', payload: card});
                                 switch (card.card_id) {
                                   case 18: // Sweep
                                     let i = 0
@@ -385,7 +381,7 @@ function* handleEnemyTurn(action) {
 
                             // Minion card handler
                             case 'minion':
-                                yield put({type: 'ADD_ACTION', payload: card.name});
+                                yield put({type: 'ADD_ACTION', payload: card});
                                 switch (card.card_id) {
                                   case 20: // Dragon
                                   if (enemyBoard.length >= 5) {

@@ -84,6 +84,7 @@ function GameCard({card, round}) {
     }
 
     const handleBlockCard = (element) => {
+        dispatch({type: 'ADD_ACTION', payload: element});
         element.block_amount && dispatch({
             type: 'ADD_PLAYER_BLOCK',
             payload: element.block_amount
@@ -106,6 +107,7 @@ function GameCard({card, round}) {
     }    
 
     const handleAttackCard = (element) => {
+        dispatch({type: 'ADD_ACTION', payload: element});
         switch (element.card_id) {
             case 18: // Sweep
                 const Toast = Swal.mixin({
@@ -168,6 +170,7 @@ function GameCard({card, round}) {
     }
 
     const handleMinionCard = (element) => {
+        dispatch({type: 'ADD_ACTION', payload: element});
         switch (element.card_id) {
             case 20: // Dragon
                 if (playerBoard.length >= 5) {
