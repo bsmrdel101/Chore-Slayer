@@ -327,11 +327,13 @@ function* handleEnemyTurn(action) {
                                       for (let minion of playerBoard) {
                                         minionId = minion.card_id;
                                         // Deals the 2 damage to all player minions
+                                        console.log('SWEEEP BEFORE', minion);
                                         yield put({
                                           type: 'SWEEP_PLAYER_MINION',
                                           payload: {id: minionId, attack: card.attack_amount, board: playerBoard, index: i}
                                         })
                                         i++;
+                                        console.log('SWEEEP AFTER', minion);
                                       }
                                     } else {
                                       console.log('* Player had no minions to attack *');

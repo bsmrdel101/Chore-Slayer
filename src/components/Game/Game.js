@@ -124,7 +124,7 @@ function Game() {
                     <br/>
                     <br/>
                 </Grid>
-                <Grid item xs={6} className="board" marginRight={"3rem"} onClick={handleSweep}>
+                <Grid item xs={6} className="board" marginRight={"3rem"}>
                     {enemyBoard.map((minion, i) => {
                         return <p key={i} onClick={() => handlePlayerAttack(i)}>{minion.damage} / {minion.health}</p>;
                     })}
