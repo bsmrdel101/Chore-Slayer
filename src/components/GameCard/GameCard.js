@@ -180,7 +180,10 @@ function GameCard({card, round}) {
                 }
                 break;
             case 21: // Cleric
-                console.log('TODO: Cleric');
+                dispatch({
+                    type: 'HEAL_PLAYER'
+                });
+                summonMinion(element);
                 break;
             default:
                 summonMinion(element);

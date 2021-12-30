@@ -65,6 +65,12 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
                   })
             }
             return copyOfState;
+        case 'HEAL_PLAYER':
+            copyOfState = {...state};
+            if (copyOfState.health < 20) {
+                copyOfState.health += 3;
+            }
+            return copyOfState;
         case 'RESTART_ATTACK':
             copyOfState = {...state};
             copyOfState.threat = 0;

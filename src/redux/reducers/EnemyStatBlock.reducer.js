@@ -17,6 +17,12 @@ const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5, sto
             copyOfState = {...state};
             copyOfState.block = action.payload.playerBlock;
             return copyOfState;
+        case 'HEAL_ENEMY':
+            copyOfState = {...state};
+            if (copyOfState.health < 20) {
+                copyOfState.health += 3;
+            }
+            return copyOfState;
         case 'RESTART_ATTACK':
             copyOfState = {...state};
             copyOfState.threat = 0;

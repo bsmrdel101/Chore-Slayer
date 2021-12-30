@@ -388,13 +388,27 @@ function* handleEnemyTurn(action) {
                                       })
                                   }
                                   break;
+                                  case 21: // Cleric
+                                      if (enemyBoard.length <= 5) {
+                                        yield put({
+                                            type: 'HEAL_ENEMY'
+                                        });
+                                        yield put({
+                                          type: 'SUMMON_ENEMY_MINION',
+                                          payload: {damage: card.damage, health: card.health}
+                                        })
+                                        yield put({
+                                            type: 'ADD_ENEMY_THREAT',
+                                            payload: card.damage
+                                        })
+                                      }
+                                      break;
                                   default:
                                     if (enemyBoard.length <= 5) {
                                       yield put({
                                         type: 'SUMMON_ENEMY_MINION',
                                         payload: {damage: card.damage, health: card.health}
                                       })
-                                      // Add the enemy threat
                                       yield put({
                                           type: 'ADD_ENEMY_THREAT',
                                           payload: card.damage
