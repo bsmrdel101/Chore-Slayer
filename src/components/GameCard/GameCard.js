@@ -96,7 +96,9 @@ function GameCard({card, round}) {
                 dispatch({type: 'BREAK_FORMATION'});
                 break;
             case 17: // Coward
-                dispatch({type: 'PLAYER_COWARD'});
+                if (enemyBoard.length >= 5) {
+                    dispatch({type: 'PLAYER_COWARD'});
+                }
                 break;
             default:
                 break;

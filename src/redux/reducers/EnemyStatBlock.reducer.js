@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
 
-const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5, storedThreat: 0, coward: false}, action) => {
+const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5, storedThreat: 0}, action) => {
     let copyOfState;
     switch (action.type) {
         case 'ADD_ENEMY_BLOCK':
@@ -9,7 +9,9 @@ const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5, sto
             return copyOfState;
         case 'ENEMY_COWARD':
             copyOfState = {...state};
-            copyOfState.coward = true;
+            if (action.payload >= 5) {
+                copyOfState.block += 5;
+            }
             return copyOfState;
         case 'SWAP_BLOCK':
             copyOfState = {...state};
@@ -61,7 +63,7 @@ const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5, sto
             return copyOfState;
         case 'RESET_GAME':
             copyOfState = {...state};
-            copyOfState = {block: 0, health: 20, threat: 0, energy: 5, storedThreat: 0, coward: false};
+            copyOfState = {block: 0, health: 20, threat: 0, energy: 5, storedThreat: 0};
             return copyOfState;
         default:
             return state;

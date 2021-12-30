@@ -108,6 +108,8 @@ function* handleEnemyTurn(action) {
         let enemyHand = [];
         let energy = action.payload.enemy.energy
         const enemy = action.payload.enemy
+        const enemyBoard = action.payload.enemyBoard
+        const playerBoard = action.payload.playerBoard
         const player = action.payload.player
         const round = action.payload.round
 
@@ -152,13 +154,13 @@ function* handleEnemyTurn(action) {
               /* Card type deciders */
               if (attackScore > 0) {
                   switch (true) {
-                    case action.payload.playerBoard.length === 0:
+                    case playerBoard.length === 0:
                       attackScore -= 50;
                       break;
-                      case action.payload.playerBoard.length === 1:
+                      case playerBoard.length === 1:
                           attackScore += 1;
                           break;
-                      case action.payload.playerBoard.length > 2:
+                      case playerBoard.length > 2:
                           attackScore += 4; 
                           break;
                       default:
@@ -172,6 +174,9 @@ function* handleEnemyTurn(action) {
                           blockScore -= 3;
                       case enemy.block === 0:
                           blockScore += 2;
+                      case enemy.block < 4 && round > 5:
+                          blockScore += 2;
+                          break;
                       default:
                           blockScore += 1;
                           break;
@@ -180,16 +185,16 @@ function* handleEnemyTurn(action) {
       
               if (minionScore > 0) {
                 // AHHHHHHHH
-                  if (action.payload.enemyBoard.length === 0) {
+                  if (enemyBoard.length === 0) {
                       minionScore += 3;
                   }
-                  if (action.payload.playerBoard.length > 2) {
+                  if (playerBoard.length > 2) {
                       minionScore += 3;
                   }
-                  if (action.payload.playerBoard.length === 0) {
+                  if (playerBoard.length === 0) {
                       minionScore += 1;
                   }
-                  if (action.payload.enemyBoard.length >= 5) {
+                  if (enemyBoard.length >= 5) {
                       minionScore -= 100;
                   }
               }
@@ -219,8 +224,8 @@ function* handleEnemyTurn(action) {
                 console.log('Inside block!');
                   switch (card.card_id) {
                       case 5:
-                          let blockDiff = player.block - enemy.block;
-                          if (blockDiff > 1) {
+                          let blockDiff = player.block + 2;
+                          if (blockDiff > enemy.block) {
                               selectedCard = card.card_id;
                               console.log(card.name);
                           }
@@ -229,6 +234,12 @@ function* handleEnemyTurn(action) {
                           if (player.block > 5 || player.block >= 3 && enemy.block < 3) {
                               selectedCard = card.card_id;
                               console.log(card.name);
+                          }
+                          break;
+                      case 17:
+                          if (playerBoard >= 5) {
+                            selectedCard = card.card_id;
+                            console.log(card.name);
                           }
                           break;
                       default:          
@@ -299,15 +310,15 @@ function* handleEnemyTurn(action) {
                                         yield put({type: 'BREAK_FORMATION'});
                                         break;
                                     case 17: // Coward
-                                        yield put({type: 'ENEMY_COWARD'});
+                                        yield put({type: 'ENEMY_COWARD', payload: playerBoard.length});
                                     break;
                                     default:
                                         break;
                                 }
                                 break;
                             case 'attack':
-                                if (action.payload.playerBoard.length > 0) {
-                                  for (let minion of action.payload.playerBoard) {
+                                if (playerBoard.length > 0) {
+                                  for (let minion of playerBoard) {
                                     if (minion.health < lowestHp) {
                                       minionId = minion.card_id;
                                       lowestHp = minion.health;
@@ -315,14 +326,14 @@ function* handleEnemyTurn(action) {
                                   }
                                   yield put({
                                     type: 'ATTACK_PLAYER_MINION',
-                                    payload: {id: minionId, attack: card.attack_amount, board: action.payload.playerBoard}
+                                    payload: {id: minionId, attack: card.attack_amount, board: playerBoard}
                                   })
                                 } else {
                                   console.log('* Player had no minions to attack *');
                                 }
                                 break;
                             case 'minion':
-                                if (action.payload.enemyBoard.length <= 5) {
+                                if (enemyBoard.length <= 5) {
                                   yield put({
                                     type: 'SUMMON_ENEMY_MINION',
                                     payload: {damage: card.damage, health: card.health}

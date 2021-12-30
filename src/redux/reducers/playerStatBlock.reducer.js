@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
 
-const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, canAttack: false, element: {}, coward: false}, action) => {
+const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, canAttack: false, element: {}}, action) => {
     let copyOfState;
     switch (action.type) {
         case 'ADD_PLAYER_BLOCK':
@@ -9,7 +9,7 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
             return copyOfState;
         case 'PLAYER_COWARD':
             copyOfState = {...state};
-            copyOfState.coward = true;
+            copyOfState.block += 5;
             return copyOfState;
         case 'SWAP_BLOCK':
             copyOfState = {...state};
@@ -70,7 +70,7 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
             return copyOfState;
         case 'RESET_GAME':
             copyOfState = {...state};
-            copyOfState = {block: 0, health: 20, threat: 0, energy: 5, canAttack: false, element: {}, coward: false};
+            copyOfState = {block: 0, health: 20, threat: 0, energy: 5, canAttack: false, element: {}};
             return copyOfState;
         default:
             return state;
