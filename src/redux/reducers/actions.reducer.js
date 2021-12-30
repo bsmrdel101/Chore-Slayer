@@ -2,7 +2,9 @@ const actions = (state = [], action) => {
     let copyOfState;
     switch (action.type) {
         case 'ADD_ACTION':
-            return action.payload;
+            copyOfState = [...state];
+            copyOfState.push(action.payload);
+            return copyOfState;
         case 'CLEAR_ACTIONS':
             copyOfState = [...state];
             copyOfState = [];
