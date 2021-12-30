@@ -272,9 +272,20 @@ function* handleEnemyTurn(action) {
                     if (energy >= card.cost) {
                       selectedCard = card.card_id;
                       console.log(card.name);
+                      break;
                     }
-                    break;
-                
+                  case 20:
+                    if (enemyBoard.length >= 5) {
+                      selectedCard = card.card_id;
+                      console.log(card.name);
+                      break;
+                    }
+                  case 21:
+                    if (enemy.health <= 17) {
+                      selectedCard = card.card_id;
+                      console.log(card.name);
+                      break;
+                    }
                   default:
                     for (let card of enemyHand) {
                       if (card.type === 'minion' && energy >= card.cost) {
