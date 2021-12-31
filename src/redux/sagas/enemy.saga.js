@@ -104,7 +104,8 @@ function* handleEnemyTurn(action) {
         // ----- AI turn handler -----
         // Scores for different actions will be added up conditionally
         // Actions with the highest scores are given more priority
-        console.log('***** AI Handler *****');
+        console.log('***** AI Handler *****'); 
+
         let enemyHand = [];
         let energy = action.payload.enemy.energy
         const enemy = action.payload.enemy
@@ -307,7 +308,7 @@ function* handleEnemyTurn(action) {
                         switch (card.type) {
                             // Block card handler
                             case 'block':
-                                yield put({type: 'ADD_ACTION', payload: card});
+                                yield put({type: 'ADD_ACTION', payload: card.name});
                                 if (card.block_amount) {
                                   yield put({
                                     type: 'ADD_ENEMY_BLOCK',
@@ -331,7 +332,7 @@ function* handleEnemyTurn(action) {
 
                             // Attack card handler
                             case 'attack':
-                                yield put({type: 'ADD_ACTION', payload: card});
+                                yield put({type: 'ADD_ACTION', payload: card.name});
                                 switch (card.card_id) {
                                   case 18: // Sweep
                                     let i = 0
@@ -381,7 +382,7 @@ function* handleEnemyTurn(action) {
 
                             // Minion card handler
                             case 'minion':
-                                yield put({type: 'ADD_ACTION', payload: card});
+                                yield put({type: 'ADD_ACTION', payload: card.name});
                                 switch (card.card_id) {
                                   case 20: // Dragon
                                   if (enemyBoard.length >= 5) {

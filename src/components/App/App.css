@@ -103,3 +103,20 @@ hr {
 .card:hover {
     transform:translateY(-25px);
 }
+
+.action {
+    animation: usedCard 1s both;
+}
+
+@keyframes usedCard {
+    from {
+        opacity: 0;
+        transform:translateX(-6px);
+        color: greenyellow;
+    }
+    to {
+        opacity: 1;
+        transform:translateX(6px);
+        color: black;
+    }
+}

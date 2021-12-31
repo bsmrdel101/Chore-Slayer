@@ -3,7 +3,6 @@ import GameCard from "../GameCard/GameCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import Swal from 'sweetalert2';
-import { Card, CardActionArea, Typography, CardContent, CardMedia} from "@mui/material";
 
 function Game() {
     const hand = useSelector((store) => store.hand);
@@ -140,41 +139,11 @@ function Game() {
                 </Grid>
             </Grid>
             <Grid container spacing={3}>
-                <Grid item xs marginRight={"3rem"} marginLeft={"3rem"}>
+                <Grid item xs className="deck-picture" marginRight={"3rem"} marginLeft={"3rem"}>
                     <div id="actions">
-                        {actions.card_id > 0 && <Card sx={{ flexGrow: 1, maxWidth: 200 }} className="card">
-                            <CardActionArea>
-                                <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
-                                    {actions.name}
-                                </Typography>
-                                <CardMedia
-                                component="img"
-                                image={actions.token}
-                                alt="token"
-                                draggable="false"
-                                />
-                                <CardContent>
-                                <Typography varient="h6" textAlign={"center"}>
-                                    Energy: {actions.cost}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    {actions.block_amount &&
-                                        <>
-                                            Block: {actions.block_amount}
-                                            <br/>
-                                        </>
-                                    }
-                                    {actions.attack_amount &&
-                                        <>
-                                            Damage: {actions.attack_amount}
-                                            <br/>
-                                        </>
-                                    }
-                                    {actions.description}
-                                </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>}
+                        {actions.map((action, i) => {
+                            return <p key={i} className="action">{action}</p>;
+                        })}
                     </div>
                     <br/>
                     <br/>
