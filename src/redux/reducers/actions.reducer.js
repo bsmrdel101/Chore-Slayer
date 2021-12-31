@@ -6,7 +6,7 @@ const actions = (state = [], action) => {
             if (copyOfState.length >= 5) {
                 copyOfState = [];
             }
-            copyOfState.push(action.payload);
+            copyOfState.push({name: action.payload.name, type: action.payload.type});
             return copyOfState;
         case 'CLEAR_ACTIONS':
             copyOfState = [...state];

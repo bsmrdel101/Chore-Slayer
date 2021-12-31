@@ -308,7 +308,7 @@ function* handleEnemyTurn(action) {
                         switch (card.type) {
                             // Block card handler
                             case 'block':
-                                yield put({type: 'ADD_ACTION', payload: card.name});
+                                yield put({type: 'ADD_ACTION', payload: {name: card.name, type: 'enemy'}});
                                 if (card.block_amount) {
                                   yield put({
                                     type: 'ADD_ENEMY_BLOCK',
@@ -332,7 +332,7 @@ function* handleEnemyTurn(action) {
 
                             // Attack card handler
                             case 'attack':
-                                yield put({type: 'ADD_ACTION', payload: card.name});
+                                yield put({type: 'ADD_ACTION', payload: {name: card.name, type: 'enemy'}});
                                 switch (card.card_id) {
                                   case 18: // Sweep
                                     let i = 0
@@ -382,7 +382,7 @@ function* handleEnemyTurn(action) {
 
                             // Minion card handler
                             case 'minion':
-                                yield put({type: 'ADD_ACTION', payload: card.name});
+                                yield put({type: 'ADD_ACTION', payload: {name: card.name, type: 'enemy'}});
                                 switch (card.card_id) {
                                   case 20: // Dragon
                                   if (enemyBoard.length >= 5) {
