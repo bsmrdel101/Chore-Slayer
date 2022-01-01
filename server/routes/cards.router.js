@@ -36,4 +36,19 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     })  
 });
 
+router.post('/', rejectUnauthenticated, (req, res) => {
+    const sqlText =`INSERT INTO "deck" ("user_id", "card_id")
+      VALUES ($1, $2);`
+    const sqlValues = [
+        req.user.id,
+        req.body.id
+    ]
+    pool.query(sqlText, sqlValues)
+        .then((dbres) => res.send(dbres.rows))
+        .catch((dberror) => {
+        console.log('Opps you messed up DB error', dberror);
+        res.sendStatus(500)
+    })  
+});
+
 module.exports = router;

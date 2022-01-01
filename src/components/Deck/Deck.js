@@ -27,7 +27,10 @@ function Deck() {
     }
 
     const handleAddCard = (card) => {
-        console.log(card);
+        dispatch({
+            type: 'ADD_CARD_TO_DECK',
+            payload: card.id
+        })
     }
 
     return (

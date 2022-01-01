@@ -161,11 +161,29 @@ function* deleteCard(action) {
   }
 }
 
+// Adds a card to the user's deck
+function* addCard(action) {
+  try {
+      const response = yield axios({
+        method: 'POST',
+        url: '/api/cards',
+        data: {id: action.payload}
+      })
+      // Updates the deck
+      yield put({
+        type: 'FETCH_CARDS',
+      });
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
+
 function* deckSaga() {
     yield takeLatest('FETCH_DECK', fetchDeck);
     yield takeLatest('FETCH_RAW_DECK', fetchRawDeck);
     yield takeLatest('FETCH_CARDS', fetchCards);
     yield takeLatest('REMOVE_CARD', deleteCard);
+    yield takeLatest('ADD_CARD_TO_DECK', addCard);
   }
   
 export default deckSaga;
