@@ -105,9 +105,15 @@ function* fetchRawDeck(action) {
         url: '/api/deck'
       })
       let deckCards = [];
-      for (let id of response.data) {
-        deckCards.push(id.card_id);
+
+      for (let card of action.payload) {
+        for (let id of response.data) {
+          if (card.id === id.card_id) {
+            deckCards.push(id.card_id);
+          }
+        }
       }
+
       yield put({
           type: 'GET_DECK',
           payload: deckCards
@@ -128,7 +134,12 @@ function* fetchCards(action) {
       yield put({
           type: 'GET_CARDS',
           payload: response.data
-      })
+      });
+      // Gets all the card_id's in the deck
+      yield put({
+        type: 'FETCH_RAW_DECK',
+        payload: response.data
+      });
   } catch(err) {
     console.error('GET error: ', err);
   }

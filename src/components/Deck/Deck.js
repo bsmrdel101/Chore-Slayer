@@ -5,18 +5,13 @@ import DisplayCard from "../DisplayCard/DisplayCard";
 
 function Deck() {
     const deck = useSelector((store) => store.deckReducer);
-    const cards = useSelector((store) => store.cardReducer);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch({
             type: 'FETCH_CARDS'
-        })
-        dispatch({
-            type: 'FETCH_RAW_DECK'
         });
-        console.log(deck);
     }, [])
 
     return (
@@ -25,10 +20,8 @@ function Deck() {
                 <Button className="cards-btn" variant="contained" color="error">See all cards</Button>
             </div>
             <section className="deck-gallery">
-                {cards.map((card) => {
-                    if (deck.includes(card.card_id)) {
-                        return <DisplayCard key={card.id} card={card}/>;
-                    }
+                {deck.map((card_id) => {
+                    return <DisplayCard key={card_id} id={card_id}/>;
                 })}
             </section>
         </>
