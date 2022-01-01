@@ -97,8 +97,44 @@ function* fetchDeck(action) {
     }
 }
 
+// Gets all of the cards in the deck with all the data
+function* fetchRawDeck(action) {
+  try {
+      const response = yield axios({
+        method: 'GET',
+        url: '/api/deck'
+      })
+      console.log(response.data);
+      yield put({
+          type: 'GET_RAW_DECK',
+          payload: response.data
+      })
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
+
+// Gets all of the cards from the database
+function* fetchCards(action) {
+  try {
+      const response = yield axios({
+        method: 'GET',
+        url: '/api/cards'
+      })
+      console.log(response.data);
+      yield put({
+          type: 'GET_CARDS',
+          payload: response.data
+      })
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
+
 function* deckSaga() {
     yield takeLatest('FETCH_DECK', fetchDeck);
+    yield takeLatest('FETCH_RAW_DECK', fetchRawDeck);
+    yield takeLatest('FETCH_CARDS', fetchCards);
   }
   
 export default deckSaga;

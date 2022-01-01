@@ -112,6 +112,21 @@ hr {
     animation: usedCardEnemy 1s both;
 }
 
+/* Deck Page */
+.deck-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    background-color: grey;
+    padding: 15px;
+}
+
+.cards-btn-container {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
 /* Animations */
 @keyframes usedCardPlayer {
     from {
