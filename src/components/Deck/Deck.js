@@ -16,8 +16,8 @@ function Deck() {
 
     return (
         <>
-            <div className="cards-btn-container">
-                <Button className="cards-btn" variant="contained" color="error">See all cards</Button>
+            <div className="deck-header">
+                <h2>{deck.length} / 15 cards</h2>
             </div>
             <section className="deck-gallery">
                 {deck.map((card_id) => {
