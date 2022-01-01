@@ -10,12 +10,12 @@ const router = express.Router();
 
 router.put('/', rejectUnauthenticated, (req, res) => {
     const sqlText =`
-    UPDATE "history"
-    SET "newCard" = $1
-    WHERE "user_id" = $2;
+    UPDATE "user"
+    SET "coins" = $1
+    WHERE "id" = $2;
     `
     const sqlValues = [
-        req.body,
+        req.body.coins,
         req.user.id,  
     ]
     pool.query(sqlText, sqlValues)
@@ -29,7 +29,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 router.get('/', (req, res) => {
     const sqlText =`
         SELECT "coins" FROM "user"
-        WHERE "id"=$1;
+        WHERE "id" = $1;
     `
     const sqlValues = [
         req.user.id

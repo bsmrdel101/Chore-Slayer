@@ -23,7 +23,17 @@ function Tasks() {
         dispatch({
             type: 'FETCH_HISTORY'
         })
+        // Retrieve the current value of users reward progress
+        dispatch({
+            type: 'FETCH_REWARD_PROGRESS'
+        })
     }, [])
+
+    const getRandomInt = (min, max) => {
+        min = Math.ceil(min);
+        max = Math.floor(max + 1);
+        return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+    }
 
     // GET tasks
     const fetchTasks = () => {
@@ -41,7 +51,11 @@ function Tasks() {
     }));
 
     const handleReward = () => {
-        
+        const num = getRandomInt(50, 150);
+        dispatch({
+            type: 'REWARD_COINS',
+            payload: num
+        })
     }
 
     return (
