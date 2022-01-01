@@ -1,5 +1,6 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -35,11 +36,26 @@ function* fetchCoins(action) {
       method: 'GET',
       url: '/api/rewards'
     })
-    console.log('RESPONSE!!!!!!', response.data[0].coins);
     const num = getRandomInt(50, 150);
     let coins = num + response.data[0].coins;
-    console.log('num', num);
-    console.log('coins', coins);
+
+    // Show the user how much coins they earned
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })      
+    Toast.fire({
+        icon: 'info',
+        title: `You have earned ${num} coins`
+    })
+
     yield put({
       type: 'REWARD_COINS',
       payload: coins

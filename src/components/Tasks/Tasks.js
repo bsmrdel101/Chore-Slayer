@@ -3,30 +3,30 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import TaskCard from "../TaskCard/TaskCard";
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import * as React from 'react';
 import { useHistory } from "react-router-dom";
 import { Button } from "@mui/material";
+import Swal from 'sweetalert2';
 
 function Tasks() {
     const history = useHistory();
     const dispatch = useDispatch();
     const taskReducer = useSelector((store) => store.taskReducer);
     const taskHistory = useSelector((store) => store.taskHistoryReducer);
-    const rewardsReducer = useSelector((store) => store.rewardsReducer);
+    const reward = useSelector((store) => store.rewardsReducer);
 
     useEffect(() => {
         // Render all of the task cards on the DOM when the page loads
         fetchTasks();
         dispatch({
             type: 'FETCH_HISTORY'
-        })
+        });
         // Retrieve the current value of users reward progress
         dispatch({
             type: 'FETCH_REWARD_PROGRESS'
-        })
+        });
     }, [])
 
     // GET tasks
@@ -81,7 +81,7 @@ function Tasks() {
                             <hr />
                             <h2>Reward: {taskHistory.length} / 3 cards</h2>
                             {
-                                taskHistory.length === 3 && <Button variant="contained" color="success" onClick={handleReward}>Claim Reward</Button>
+                                taskHistory.length >= 3 && <Button variant="contained" color="success" onClick={handleReward}>Claim Reward</Button>
                             }
                         </div>
                     </Item>
