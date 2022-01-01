@@ -28,8 +28,8 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 
 router.get('/', (req, res) => {
     const sqlText =`
-        SELECT "newCard" FROM "history"
-        WHERE "user_id"=$1;
+        SELECT "coins" FROM "user"
+        WHERE "id"=$1;
     `
     const sqlValues = [
         req.user.id

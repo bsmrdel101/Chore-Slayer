@@ -10,7 +10,8 @@ CREATE TABLE "user" (
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
     "max_hp" INTEGER DEFAULT 15,
-    "new_user" BOOLEAN DEFAULT true,
+    "coins" INTEGER,
+    "new_user" BOOLEAN DEFAULT true
 );
 
 CREATE TABLE "tasks" (
@@ -41,7 +42,8 @@ CREATE TABLE "cards" (
     "block_amount" INTEGER,
     "attack_amount" INTEGER,
     "damage" INTEGER,
-    "health" INTEGER
+    "health" INTEGER,
+    "rarity" TEXT    
 );
 
 CREATE TABLE "deck" (

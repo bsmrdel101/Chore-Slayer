@@ -8,6 +8,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import * as React from 'react';
 import { useHistory } from "react-router-dom";
+import { Button } from "@mui/material";
 
 function Tasks() {
     const history = useHistory();
@@ -39,6 +40,10 @@ function Tasks() {
         color: theme.palette.text.secondary,
     }));
 
+    const handleReward = () => {
+        
+    }
+
     return (
         <>
             <h1>Chores</h1>
@@ -63,7 +68,10 @@ function Tasks() {
                             <h2>Tasks Left: {taskReducer.length}</h2>
                             <h2>Tasks Completed: {taskHistory.length}</h2>
                             <hr />
-                            <h2>New Card: 0/3</h2>
+                            <h2>Reward: {taskHistory.length} / 3 cards</h2>
+                            {
+                                taskHistory.length === 1 && <Button variant="contained" color="success" onClick={handleReward}>Claim Reward</Button>
+                            }
                         </div>
                     </Item>
                 </Grid>
