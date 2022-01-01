@@ -20,4 +20,20 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })  
 });
 
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    const sqlText = (`
+        DELETE FROM "deck" WHERE "user_id"=$1 AND "card_id"=$2;
+    `);
+    const sqlValues = [
+        req.user.id,
+        req.params.id
+    ];
+    pool.query(sqlText, sqlValues)
+        .then((dbres) => res.send(dbres.rows))
+        .catch((dberror) => {
+        console.log('Opps you messed up DB error', dberror);
+        res.sendStatus(500)
+    })  
+});
+
 module.exports = router;

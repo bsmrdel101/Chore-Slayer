@@ -18,11 +18,16 @@ function Deck() {
         <>
             <div className="deck-header">
                 <h2>{deck.length} / 15 cards</h2>
+                <Button variant="contained" color="success">Add Cards</Button>
             </div>
             <section className="deck-gallery">
                 {deck.map((card_id) => {
                     return <DisplayCard key={card_id} id={card_id}/>;
                 })}
+            </section>
+            {/* Card store */}
+            <section>
+
             </section>
         </>
     );
