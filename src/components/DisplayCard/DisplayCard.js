@@ -34,7 +34,7 @@ function DisplayCard({id}) {
             {cards.map((card) => {
                 if (card.id === id && card.rarity === 'Common') {
                     return (
-                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#9d8c6d', color: 'white' }} key={id} onClick={() => handleDelete(card)}>
+                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#2b5c55', color: 'white' }} key={id} onClick={() => handleDelete(card)}>
                             <CardActionArea>
                                 <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                                     {card.name}
@@ -73,7 +73,7 @@ function DisplayCard({id}) {
                     );
                 } else if (card.id === id && card.rarity === 'Uncommon') {
                     return (
-                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#399139', color: 'white' }} key={id} onClick={() => handleDelete(card)}>
+                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#3f813f', color: 'white' }} key={id} onClick={() => handleDelete(card)}>
                             <CardActionArea>
                                 <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                                     {card.name}
@@ -112,7 +112,7 @@ function DisplayCard({id}) {
                     );
                 } else if (card.id === id && card.rarity === 'Rare') {
                     return (
-                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#4040ad', color: 'white' }} key={id} onClick={() => handleDelete(card)}>
+                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#343483', color: 'white' }} key={id} onClick={() => handleDelete(card)}>
                             <CardActionArea>
                                 <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                                     {card.name}
@@ -151,7 +151,7 @@ function DisplayCard({id}) {
                     );
                 } else if (card.id === id && card.rarity === 'Very Rare') {
                     return (
-                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#9651c1', color: 'white' }} key={id} onClick={() => handleDelete(card)}>
+                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#562772', color: 'white' }} key={id} onClick={() => handleDelete(card)}>
                             <CardActionArea>
                                 <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                                     {card.name}
@@ -190,7 +190,7 @@ function DisplayCard({id}) {
                     );
                 } else if (card.id === id && card.rarity === 'Legendary') {
                     return (
-                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#c72e2e', color: 'white' }} key={id} onClick={() => handleDelete(card)}>
+                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#a73434', color: 'white' }} key={id} onClick={() => handleDelete(card)}>
                             <CardActionArea>
                                 <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                                     {card.name}

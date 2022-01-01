@@ -29,7 +29,7 @@ function* rewardCoins(action) {
     }
 }
 
-// Retrieves the history
+// Retrieves the history and edits
 function* fetchCoins(action) {
   try {
     const response = yield axios({
@@ -65,9 +65,27 @@ function* fetchCoins(action) {
   }
 }
 
+// Just retrieves the history
+function* getReward(action) {
+  try {
+    const response = yield axios({
+      method: 'GET',
+      url: '/api/rewards'
+    })
+    // Add the coin amount to the reward reducer
+    yield put({
+      type: 'ADD_COINS',
+      payload: response.data[0].coins
+    });
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
+
 function* rewardsSaga() {
     yield takeLatest('FETCH_COINS', fetchCoins);
     yield takeLatest('REWARD_COINS', rewardCoins);
+    yield takeLatest('GET_REWARD', getReward);
 }
 
 export default rewardsSaga;
