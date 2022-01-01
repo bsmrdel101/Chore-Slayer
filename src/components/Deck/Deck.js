@@ -16,6 +16,7 @@ function Deck() {
         dispatch({
             type: 'FETCH_RAW_DECK'
         });
+        console.log(deck);
     }, [])
 
     return (
@@ -25,7 +26,9 @@ function Deck() {
             </div>
             <section className="deck-gallery">
                 {cards.map((card) => {
-                    return <DisplayCard key={card.id} card={card}/>;
+                    if (deck.includes(card.card_id)) {
+                        return <DisplayCard key={card.id} card={card}/>;
+                    }
                 })}
             </section>
         </>
