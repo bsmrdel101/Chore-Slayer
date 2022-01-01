@@ -14,6 +14,7 @@ hr {
     font-size: 30px;
 }
 
+
 /* Login/registration forms */
 .formPanel {
     display: inline-block;
@@ -110,11 +111,6 @@ hr {
 
 .enemy-action {
     animation: usedCardEnemy 1s both;
-}
-
-/* Card Rarity */
-.common {
-    background-color: rgb(10, 112, 10);
 }
 
 
