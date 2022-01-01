@@ -103,7 +103,7 @@ function Deck() {
                                     {/* Common Card */}
                                     {
                                         card.rarity === 'Common' &&
-                                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#9d8c6d', color: 'white' }}>
+                                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#9d8c6d', color: 'white' }} onClick={() => handleAddCard(card)}>
                                             <CardActionArea>
                                                 <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                                                     {card.name}
@@ -143,7 +143,7 @@ function Deck() {
                                     {/* Uncommon Card */}
                                     {
                                         card.rarity === 'Uncommon' &&
-                                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#399139', color: 'white' }}>
+                                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#399139', color: 'white' }} onClick={() => handleAddCard(card)}>
                                             <CardActionArea>
                                                 <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                                                     {card.name}
@@ -183,7 +183,7 @@ function Deck() {
                                     {/* Rare Card */}
                                     {
                                         card.rarity === 'Rare' &&
-                                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#4040ad', color: 'white' }}>
+                                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#4040ad', color: 'white' }} onClick={() => handleAddCard(card)}>
                                             <CardActionArea>
                                                 <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                                                     {card.name}
@@ -223,7 +223,7 @@ function Deck() {
                                     {/* Very Rare Card */}
                                     {
                                         card.rarity === 'Very Rare' &&
-                                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#9651c1', color: 'white' }}>
+                                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#9651c1', color: 'white' }} onClick={() => handleAddCard(card)}>
                                             <CardActionArea>
                                                 <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                                                     {card.name}
@@ -263,7 +263,7 @@ function Deck() {
                                     {/* Legendary Card */}
                                     {
                                         card.rarity === 'Legendary' &&
-                                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#c72e2e', color: 'white' }}>
+                                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#c72e2e', color: 'white' }} onClick={() => handleAddCard(card)}>
                                             <CardActionArea>
                                                 <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                                                     {card.name}
