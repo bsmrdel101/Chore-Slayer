@@ -29,34 +29,53 @@ function Deck() {
 
     // Loops through deck reducer and allows the user to add a card if it's not a duplicate
     const handleAddCard = (card) => {
-        let cardStatus = true;
-        for (let item of deck) {
-            if (card.id === item) {
-                cardStatus = false;
-                // Shows user warning message
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 1500,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })      
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Cannot have duplicate cards'
-                })
-                break;   
-            }
-        }
-        if (cardStatus === true) {      
-            dispatch({
-                type: 'ADD_CARD_TO_DECK',
-                payload: card.id
+        if (deck.length >= 15) {
+            // Warns user if deck is at max cards
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })      
+            Toast.fire({
+                icon: 'error',
+                title: 'To many cards in deck!'
             })
+        } else {
+            let cardStatus = true;
+            for (let item of deck) {
+                if (card.id === item) {
+                    cardStatus = false;
+                    // Shows user warning message
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })      
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Cannot have duplicate cards'
+                    })
+                    break;   
+                }
+            }
+            if (cardStatus === true) {      
+                dispatch({
+                    type: 'ADD_CARD_TO_DECK',
+                    payload: card.id
+                })
+            }
         }
     }
 
