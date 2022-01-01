@@ -13,9 +13,9 @@ function DisplayCard({id}) {
 
     const handleDelete = (card) => {
         Swal.fire({
-            title: 'Are you sure?',
+            title: 'Would you like to remove this card from your deck?',
             text: "You cannot undo this action!",
-            icon: 'warning',
+            icon: 'question',
             showCancelButton: true,
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
@@ -38,6 +38,9 @@ function DisplayCard({id}) {
                             <CardActionArea>
                                 <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                                     {card.name}
+                                </Typography>
+                                <Typography variant="body1" color="text.secondary" textAlign={"center"}>
+                                    {card.rarity}
                                 </Typography>
                                 <CardMedia
                                 component="img"

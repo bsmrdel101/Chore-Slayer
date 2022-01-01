@@ -212,6 +212,9 @@ function GameCard({card, round}) {
                     <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                         {card.name}
                     </Typography>
+                    <Typography variant="body1" color="text.secondary" textAlign={"center"}>
+                        {card.rarity}
+                    </Typography>
                     <CardMedia
                     component="img"
                     image={card.token}

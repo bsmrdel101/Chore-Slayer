@@ -112,6 +112,12 @@ hr {
     animation: usedCardEnemy 1s both;
 }
 
+/* Card Rarity */
+.common {
+    background-color: rgb(10, 112, 10);
+}
+
+
 /* Deck Page */
 .deck-gallery {
     display: flex;
@@ -131,7 +137,7 @@ hr {
 @keyframes usedCardPlayer {
     from {
         opacity: 0;
-        transform:translateX(-6px);
+        transform:translateX(-24px);
         color: greenyellow;
     }
     to {
@@ -144,7 +150,7 @@ hr {
 @keyframes usedCardEnemy {
     from {
         opacity: 0;
-        transform:translateX(-6px);
+        transform:translateX(-24px);
         color: greenyellow;
     }
     to {
