@@ -51,10 +51,8 @@ function Tasks() {
     }));
 
     const handleReward = () => {
-        const num = getRandomInt(50, 150);
         dispatch({
-            type: 'REWARD_COINS',
-            payload: num
+            type: 'FETCH_COINS',
         })
     }
 
@@ -84,7 +82,7 @@ function Tasks() {
                             <hr />
                             <h2>Reward: {taskHistory.length} / 3 cards</h2>
                             {
-                                taskHistory.length === 1 && <Button variant="contained" color="success" onClick={handleReward}>Claim Reward</Button>
+                                taskHistory.length === 3 && <Button variant="contained" color="success" onClick={handleReward}>Claim Reward</Button>
                             }
                         </div>
                     </Item>

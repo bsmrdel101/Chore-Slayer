@@ -1,12 +1,9 @@
-const rewardsReducer = (state = {coins: 0}, action) => {
+const rewardsReducer = (state = [], action) => {
     let copyOfState;
     switch (action.type) {
         case 'ADD_COINS':
-            let copyOfState = {...state};
             console.log('action payload', action.payload);
-            copyOfState.coins += action.payload;
-            console.log(copyOfState);
-            return copyOfState;
+            return action.payload;
         default:
             return state;
     }
