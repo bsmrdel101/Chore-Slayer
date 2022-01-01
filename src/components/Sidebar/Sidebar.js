@@ -111,6 +111,7 @@ export default function Sidebar() {
       title: 'Your game will not be saved if you leave!',
       icon: 'warning',
       showCancelButton: true,
+      cancelButtonColor: '#d33',
       confirmButtonText: 'Okay',
     }).then((result) => {
       if (result.isConfirmed) {

@@ -14,6 +14,7 @@ hr {
     font-size: 30px;
 }
 
+
 /* Login/registration forms */
 .formPanel {
     display: inline-block;
@@ -104,19 +105,53 @@ hr {
     transform:translateY(-25px);
 }
 
-.action {
-    animation: usedCard 1s both;
+.player-action {
+    animation: usedCardPlayer 1s both;
 }
 
-@keyframes usedCard {
+.enemy-action {
+    animation: usedCardEnemy 1s both;
+}
+
+
+/* Deck Page */
+.deck-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    background-color: grey;
+    padding: 15px;
+}
+
+.deck-header {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Animations */
+@keyframes usedCardPlayer {
     from {
         opacity: 0;
-        transform:translateX(-6px);
+        transform:translateX(-24px);
         color: greenyellow;
     }
     to {
         opacity: 1;
         transform:translateX(6px);
-        color: black;
+        color: rgb(55, 55, 204);
+    }
+}
+
+@keyframes usedCardEnemy {
+    from {
+        opacity: 0;
+        transform:translateX(-24px);
+        color: greenyellow;
+    }
+    to {
+        opacity: 1;
+        transform:translateX(6px);
+        color: rgb(178 17 17);
     }
 }

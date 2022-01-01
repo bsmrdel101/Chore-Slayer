@@ -142,7 +142,11 @@ function Game() {
                 <Grid item xs className="deck-picture" marginRight={"3rem"} marginLeft={"3rem"}>
                     <div id="actions">
                         {actions.map((action, i) => {
-                            return <p key={i} className="action">{action}</p>;
+                            if (action.type === 'enemy') {
+                                return <p key={i} className="action enemy-action">{action.name}</p>;
+                            } else {
+                                return <p key={i} className="action player-action">{action.name}</p>;
+                            }
                         })}
                     </div>
                     <br/>

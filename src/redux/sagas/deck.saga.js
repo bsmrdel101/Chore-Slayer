@@ -97,8 +97,93 @@ function* fetchDeck(action) {
     }
 }
 
+// Gets all of the cards in the deck with all the data
+function* fetchRawDeck(action) {
+  try {
+      const response = yield axios({
+        method: 'GET',
+        url: '/api/deck'
+      })
+      let deckCards = [];
+
+      for (let card of action.payload) {
+        for (let id of response.data) {
+          if (card.id === id.card_id) {
+            deckCards.push(id.card_id);
+          }
+        }
+      }
+
+      yield put({
+          type: 'GET_DECK',
+          payload: deckCards
+      })
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
+
+// Gets all of the cards from the database
+function* fetchCards(action) {
+  try {
+      const response = yield axios({
+        method: 'GET',
+        url: '/api/cards'
+      })
+      console.log(response.data);
+      yield put({
+          type: 'GET_CARDS',
+          payload: response.data
+      });
+      // Gets all the card_id's in the deck
+      yield put({
+        type: 'FETCH_RAW_DECK',
+        payload: response.data
+      });
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
+
+// Removes a card from the user's deck
+function* deleteCard(action) {
+  try {
+      const response = yield axios({
+        method: 'DELETE',
+        url: `/api/cards/${action.payload}`
+      })
+      // Updates the deck
+      yield put({
+        type: 'FETCH_CARDS',
+      });
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
+
+// Adds a card to the user's deck
+function* addCard(action) {
+  try {
+      const response = yield axios({
+        method: 'POST',
+        url: '/api/cards',
+        data: {id: action.payload}
+      })
+      // Updates the deck
+      yield put({
+        type: 'FETCH_CARDS',
+      });
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
+
 function* deckSaga() {
     yield takeLatest('FETCH_DECK', fetchDeck);
+    yield takeLatest('FETCH_RAW_DECK', fetchRawDeck);
+    yield takeLatest('FETCH_CARDS', fetchCards);
+    yield takeLatest('REMOVE_CARD', deleteCard);
+    yield takeLatest('ADD_CARD_TO_DECK', addCard);
   }
   
 export default deckSaga;
