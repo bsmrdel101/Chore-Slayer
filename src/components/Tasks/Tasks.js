@@ -29,12 +29,6 @@ function Tasks() {
         })
     }, [])
 
-    const getRandomInt = (min, max) => {
-        min = Math.ceil(min);
-        max = Math.floor(max + 1);
-        return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-    }
-
     // GET tasks
     const fetchTasks = () => {
         dispatch({
@@ -51,9 +45,14 @@ function Tasks() {
     }));
 
     const handleReward = () => {
+        // Updates new coin value and stores it in the database
         dispatch({
             type: 'FETCH_COINS',
-        })
+        });
+        // Clear history
+        dispatch({
+            type: 'CLEAR_HISTORY'
+        });
     }
 
     return (
