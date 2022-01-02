@@ -93,7 +93,7 @@ function* payCoins(action) {
     })
     // Update the reward reducer
     yield put({
-      type: 'ADD_COINS',
+      type: 'GET_REWARD',
       payload: response.data[0].coins
     });
   } catch(err) {
