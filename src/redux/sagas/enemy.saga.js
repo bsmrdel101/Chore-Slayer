@@ -150,55 +150,104 @@ function* handleEnemyTurn(action) {
                           break;
                   }
               }
-              console.log(blockScore, attackScore, minionScore);
+              console.log('block',blockScore,'atk', attackScore,'minion', minionScore);
 
+              console.log('block before', blockScore);
+              // Switch statements don't work because it breaks after one condition is met
+              if (blockScore > 0) {
+                if (enemy.threat >= player.threat) {
+                  blockScore -= 1;
+                  console.log('enemy threat > player  -1');
+                }
+                if (enemy.block === 0) {
+                  blockScore += 2;
+                  console.log('Have no block  +2');
+                } 
+                if (enemy.block < 4 && round > 5) {
+                  blockScore += 3;
+                  console.log('< 4 block after round 5  +3');
+                }
+                  // switch (true) {
+                  //     case enemy.threat >= player.threat:
+                  //         blockScore -= 1;
+                  //         console.log('enemy threat > player');
+                  //     case enemy.block === 0:
+                  //         blockScore += 2;
+                  //         console.log('Have no block');
+                  //     case enemy.block < 4 && round > 5:
+                  //         blockScore += 3;
+                  //         console.log('< 4 block after round 5');
+                  //         break;
+                  //     default:
+                  //         blockScore += 1;
+                  //         console.log('default');
+                  //         break;
+                  // }
+              }
+              console.log('block after', blockScore);
+
+              console.log('attack before', attackScore);
               /* Card type deciders */
               if (attackScore > 0) {
-                  switch (true) {
-                    case playerBoard.length === 0:
-                      attackScore -= 50;
-                      break;
-                      case playerBoard.length === 1:
-                          attackScore += 1;
-                          break;
-                      case playerBoard.length > 2:
-                          attackScore += 4; 
-                          break;
-                      default:
-                          break;
-                  }
+                if (playerBoard.length === 0) {
+                  attackScore -= 50;
+                  console.log('No player minions  -50');
+                }
+                if (playerBoard.length === 1) {
+                  attackScore += 1;
+                  console.log('1 player minion  +1');
+                }
+                if (playerBoard.length > 2) {
+                  attackScore += 4; 
+                  console.log('More than 2 player minions  +4');
+                }
+                  // switch (true) {
+                  //   case playerBoard.length === 0:
+                  //     attackScore -= 50;
+                  //     console.log('No player minions');
+                  //     break;
+                  //     case playerBoard.length === 1:
+                  //         attackScore += 1;
+                  //         console.log('1 player minion');
+                  //         break;
+                  //     case playerBoard.length > 2:
+                  //         attackScore += 4; 
+                  //         console.log('More than 2 player minions');
+                  //         break;
+                  //     default:
+                  //         break;
+                  // }
               }
-              
-              if (blockScore > 0) {
-                  switch (true) {
-                      case enemy.threat >= player.threat:
-                          blockScore -= 3;
-                      case enemy.block === 0:
-                          blockScore += 2;
-                      case enemy.block < 4 && round > 5:
-                          blockScore += 2;
-                          break;
-                      default:
-                          blockScore += 1;
-                          break;
-                  }
-              }
+              console.log('attack after', attackScore);
       
+              console.log('minion before', minionScore);
               if (minionScore > 0) {
-                // AHHHHHHHH
                   if (enemyBoard.length === 0) {
-                      minionScore += 3;
+                      minionScore += 4;
+                      console.log('no enemy minions  +4');
                   }
                   if (playerBoard.length > 2) {
-                      minionScore += 3;
+                      minionScore += 1;
+                      console.log('more than 2 player minions  +1');
                   }
                   if (playerBoard.length === 0) {
-                      minionScore += 1;
+                      minionScore += 5;
+                      console.log('no player minions  +5');
                   }
                   if (enemyBoard.length >= 5) {
                       minionScore -= 100;
+                      console.log('5 or more enemy minions  -100');
+                  }
+                  if (player.block < 3 && playerBoard.length < 4) {
+                    minionScore += 3;
+                    console.log('player block < 3 && < 4 player minions  +3');
+                  }
+                  if (player.block === 0) {
+                    minionScore += 2;
+                    console.log('no player block  +2');
                   }
               }
+              console.log('minion after', minionScore);
               // End of card type deciders
       
               console.log('Type scores: ', blockScore, attackScore, minionScore);
@@ -303,8 +352,10 @@ function* handleEnemyTurn(action) {
 
               // Play the selected card
               let index = 0;
+              let energyCard = 0;
                 for (let card of enemyHand) {
                     if (card.card_id === selectedCard) {
+                        energyCard = card;
                         switch (card.type) {
                             // Block card handler
                             case 'block':
@@ -448,8 +499,8 @@ function* handleEnemyTurn(action) {
                 }
                 // Removes energy from local variable, which enemy uses for calculations
                 console.log('starting energy: ', energy);
-                energy -= card.cost;
-                console.log('energy used:', card.cost);
+                energy -= energyCard.cost;
+                console.log('energy used:', energyCard.cost);
                 console.log('energy left:', energy);
             }
         } // End of loop
