@@ -8,7 +8,27 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
+// Adds coins
 router.put('/', rejectUnauthenticated, (req, res) => {
+    const sqlText =`
+    UPDATE "user"
+    SET "coins" = $1
+    WHERE "id" = $2;
+    `
+    const sqlValues = [
+        req.body.coins,
+        req.user.id,  
+    ]
+    pool.query(sqlText, sqlValues)
+        .then((dbres) => res.sendStatus(201))
+        .catch((dberror) => {
+          console.log('Oops you messed up DB error', dberror);
+          res.sendStatus(500)
+    })
+});
+
+// Subtracts coins
+router.put('/:id', rejectUnauthenticated, (req, res) => {
     const sqlText =`
     UPDATE "user"
     SET "coins" = $1

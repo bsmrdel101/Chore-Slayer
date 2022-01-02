@@ -82,10 +82,30 @@ function* getReward(action) {
   }
 }
 
+// Subtracts users coin amount from the card price
+function* payCoins(action) {
+  try {
+    let total = action.payload.coins - action.payload.price;
+    const response = yield axios({
+      method: 'PUT',
+      url: `/api/rewards/${action.payload.id}`,
+      data: {coins: total}
+    })
+    // Update the reward reducer
+    yield put({
+      type: 'ADD_COINS',
+      payload: response.data[0].coins
+    });
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
+
 function* rewardsSaga() {
     yield takeLatest('FETCH_COINS', fetchCoins);
     yield takeLatest('REWARD_COINS', rewardCoins);
     yield takeLatest('GET_REWARD', getReward);
+    yield takeLatest('PAY_COINS', payCoins);
 }
 
 export default rewardsSaga;

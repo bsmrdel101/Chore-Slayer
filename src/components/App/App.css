@@ -106,11 +106,11 @@ hr {
 }
 
 .player-action {
-    animation: usedCardPlayer 1s both;
+    animation: usedCardPlayer 0.5s both;
 }
 
 .enemy-action {
-    animation: usedCardEnemy 1s both;
+    animation: usedCardEnemy 0.5s both;
 }
 
 

@@ -8,7 +8,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Swal from 'sweetalert2';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 
 function Deck() {
     const deck = useSelector((store) => store.deckReducer);
@@ -76,11 +75,53 @@ function Deck() {
                     break;   
                 }
             }
-            if (cardStatus === true) {      
-                dispatch({
-                    type: 'ADD_CARD_TO_DECK',
-                    payload: card.id
-                })
+            if (cardStatus === true) {
+                if (rewards < card.price) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })      
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Not enough coins'
+                    })
+                } else {     
+                    // Shows user success message
+                    // Adds card to deck
+                    // Removes price from coin amount
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })      
+                    Toast.fire({
+                        icon: 'success',
+                        title: `You bought ${card.name}`
+                    })
+
+                    dispatch({
+                        type: 'ADD_CARD_TO_DECK',
+                        payload: card.id
+                    })
+                    
+                    dispatch({
+                        type: 'PAY_COINS',
+                        payload: {coins: rewards, price: card.price, id: card.id}
+                    })
+                }
             }
         }
     }
@@ -112,11 +153,9 @@ function Deck() {
                                         card.rarity === 'Common' &&
                                         <>
                                             <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#2b5c55', color: 'white' }} onClick={() => handleAddCard(card)}>
-                                                    {card.price &&
                                                         <Typography gutterBottom variant="h4" component="div" textAlign={"center"}>
                                                             Price: {card.price}
                                                         </Typography>
-                                                    }
                                                 <CardActionArea>
                                                     <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                                                         {card.name}
@@ -159,11 +198,9 @@ function Deck() {
                                         card.rarity === 'Uncommon' &&
                                         <>
                                             <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#3f813f', color: 'white' }} onClick={() => handleAddCard(card)}>
-                                                    {card.price &&
                                                         <Typography gutterBottom variant="h4" component="div" textAlign={"center"}>
                                                             Price: {card.price}
                                                         </Typography>
-                                                    }
                                                 <CardActionArea>
                                                     <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                                                         {card.name}
@@ -206,11 +243,9 @@ function Deck() {
                                         card.rarity === 'Rare' &&
                                         <>
                                             <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#343483', color: 'white' }} onClick={() => handleAddCard(card)}>
-                                                    {card.price &&
                                                         <Typography gutterBottom variant="h4" component="div" textAlign={"center"}>
                                                             Price: {card.price}
                                                         </Typography>
-                                                    }
                                                 <CardActionArea>
                                                     <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                                                         {card.name}
@@ -253,11 +288,9 @@ function Deck() {
                                         card.rarity === 'Very Rare' &&
                                         <>
                                             <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#562772', color: 'white' }} onClick={() => handleAddCard(card)}>
-                                                    {card.price &&
                                                         <Typography gutterBottom variant="h4" component="div" textAlign={"center"}>
                                                             Price: {card.price}
                                                         </Typography>
-                                                    }
                                                 <CardActionArea>
                                                     <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                                                         {card.name}
@@ -300,11 +333,9 @@ function Deck() {
                                         card.rarity === 'Legendary' &&
                                         <>
                                             <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#a73434', color: 'white' }} onClick={() => handleAddCard(card)}>
-                                                    {card.price &&
                                                         <Typography gutterBottom variant="h4" component="div" textAlign={"center"}>
                                                             Price: {card.price}
                                                         </Typography>
-                                                    }
                                                 <CardActionArea>
                                                     <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
                                                         {card.name}
