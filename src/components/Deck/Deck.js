@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 function Deck() {
     const deck = useSelector((store) => store.deckReducer);
     const cards = useSelector((store) => store.cardReducer);
+    const rewards = useSelector((store) => store.rewardsReducer);
     let [addCard, setAddCard] = useState(false);
 
     const dispatch = useDispatch();
@@ -19,6 +20,10 @@ function Deck() {
     useEffect(() => {
         dispatch({
             type: 'FETCH_CARDS'
+        });
+        // Gets the user's coins
+        dispatch({
+            type: 'GET_REWARD'
         });
     }, [])
 
@@ -70,11 +75,53 @@ function Deck() {
                     break;   
                 }
             }
-            if (cardStatus === true) {      
-                dispatch({
-                    type: 'ADD_CARD_TO_DECK',
-                    payload: card.id
-                })
+            if (cardStatus === true) {
+                if (rewards < card.price) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })      
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Not enough coins'
+                    })
+                } else {     
+                    // Shows user success message
+                    // Adds card to deck
+                    // Removes price from coin amount
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })      
+                    Toast.fire({
+                        icon: 'success',
+                        title: `You bought ${card.name}`
+                    })
+
+                    dispatch({
+                        type: 'ADD_CARD_TO_DECK',
+                        payload: card.id
+                    })
+                    
+                    dispatch({
+                        type: 'PAY_COINS',
+                        payload: {coins: rewards, price: card.price, id: card.id}
+                    })
+                }
             }
         }
     }
@@ -83,6 +130,7 @@ function Deck() {
         <>
             <div className="deck-header">
                 <h2>{deck.length} / 15 cards</h2>
+                <h3>{rewards} Coins</h3>
                 {
                     addCard === false ? <Button variant="contained" color="success" onClick={handleAllowModify}>Add Cards</Button> 
                 :
@@ -97,208 +145,233 @@ function Deck() {
                         <h1>Add Cards</h1>
                     </center>
                     <div className="deck-gallery">
-                        {cards.map((card, i) => {
+                        {cards.map((card) => {
                             return (
                                 <>
                                     {/* Common Card */}
                                     {
                                         card.rarity === 'Common' &&
-                                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#9d8c6d', color: 'white' }}>
-                                            <CardActionArea>
-                                                <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
-                                                    {card.name}
-                                                </Typography>
-                                                <Typography variant="body1" color="white" textAlign={"center"}>
-                                                    {card.rarity}
-                                                </Typography>
-                                                <CardMedia
-                                                component="img"
-                                                image={card.token}
-                                                alt="token"
-                                                draggable="false"
-                                                />
-                                                <CardContent>
-                                                <Typography varient="h6" textAlign={"center"}>
-                                                    Energy: {card.cost}
-                                                </Typography>
-                                                <Typography variant="body2" color="white">
-                                                    {card.block_amount &&
-                                                        <>
-                                                            Block: {card.block_amount}
-                                                            <br/>
-                                                        </>
-                                                    }
-                                                    {card.attack_amount &&
-                                                        <>
-                                                            Damage: {card.attack_amount}
-                                                            <br/>
-                                                        </>
-                                                    }
-                                                    {card.description}
-                                                </Typography>
-                                                </CardContent>
-                                            </CardActionArea>
-                                        </Card>
+                                        <>
+                                            <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#2b5c55', color: 'white' }} onClick={() => handleAddCard(card)}>
+                                                        <Typography gutterBottom variant="h4" component="div" textAlign={"center"}>
+                                                            Price: {card.price}
+                                                        </Typography>
+                                                <CardActionArea>
+                                                    <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                                                        {card.name}
+                                                    </Typography>
+                                                    <Typography variant="body1" color="white" textAlign={"center"}>
+                                                        {card.rarity}
+                                                    </Typography>
+                                                    <CardMedia
+                                                    component="img"
+                                                    image={card.token}
+                                                    alt="token"
+                                                    draggable="false"
+                                                    />
+                                                    <CardContent>
+                                                    <Typography varient="h6" textAlign={"center"}>
+                                                        Energy: {card.cost}
+                                                    </Typography>
+                                                    <Typography variant="body2" color="white">
+                                                        {card.block_amount &&
+                                                            <>
+                                                                Block: {card.block_amount}
+                                                                <br/>
+                                                            </>
+                                                        }
+                                                        {card.attack_amount &&
+                                                            <>
+                                                                Damage: {card.attack_amount}
+                                                                <br/>
+                                                            </>
+                                                        }
+                                                        {card.description}
+                                                    </Typography>
+                                                    </CardContent>
+                                                </CardActionArea>
+                                            </Card>
+                                        </>
                                     }
                                     {/* Uncommon Card */}
                                     {
                                         card.rarity === 'Uncommon' &&
-                                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#399139', color: 'white' }}>
-                                            <CardActionArea>
-                                                <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
-                                                    {card.name}
-                                                </Typography>
-                                                <Typography variant="body1" color="white" textAlign={"center"}>
-                                                    {card.rarity}
-                                                </Typography>
-                                                <CardMedia
-                                                component="img"
-                                                image={card.token}
-                                                alt="token"
-                                                draggable="false"
-                                                />
-                                                <CardContent>
-                                                <Typography varient="h6" textAlign={"center"}>
-                                                    Energy: {card.cost}
-                                                </Typography>
-                                                <Typography variant="body2" color="white">
-                                                    {card.block_amount &&
-                                                        <>
-                                                            Block: {card.block_amount}
-                                                            <br/>
-                                                        </>
-                                                    }
-                                                    {card.attack_amount &&
-                                                        <>
-                                                            Damage: {card.attack_amount}
-                                                            <br/>
-                                                        </>
-                                                    }
-                                                    {card.description}
-                                                </Typography>
-                                                </CardContent>
-                                            </CardActionArea>
-                                        </Card>
+                                        <>
+                                            <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#3f813f', color: 'white' }} onClick={() => handleAddCard(card)}>
+                                                        <Typography gutterBottom variant="h4" component="div" textAlign={"center"}>
+                                                            Price: {card.price}
+                                                        </Typography>
+                                                <CardActionArea>
+                                                    <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                                                        {card.name}
+                                                    </Typography>
+                                                    <Typography variant="body1" color="white" textAlign={"center"}>
+                                                        {card.rarity}
+                                                    </Typography>
+                                                    <CardMedia
+                                                    component="img"
+                                                    image={card.token}
+                                                    alt="token"
+                                                    draggable="false"
+                                                    />
+                                                    <CardContent>
+                                                    <Typography varient="h6" textAlign={"center"}>
+                                                        Energy: {card.cost}
+                                                    </Typography>
+                                                    <Typography variant="body2" color="white">
+                                                        {card.block_amount &&
+                                                            <>
+                                                                Block: {card.block_amount}
+                                                                <br/>
+                                                            </>
+                                                        }
+                                                        {card.attack_amount &&
+                                                            <>
+                                                                Damage: {card.attack_amount}
+                                                                <br/>
+                                                            </>
+                                                        }
+                                                        {card.description}
+                                                    </Typography>
+                                                    </CardContent>
+                                                </CardActionArea>
+                                            </Card>
+                                        </>
                                     }
                                     {/* Rare Card */}
                                     {
                                         card.rarity === 'Rare' &&
-                                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#4040ad', color: 'white' }}>
-                                            <CardActionArea>
-                                                <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
-                                                    {card.name}
-                                                </Typography>
-                                                <Typography variant="body1" color="white" textAlign={"center"}>
-                                                    {card.rarity}
-                                                </Typography>
-                                                <CardMedia
-                                                component="img"
-                                                image={card.token}
-                                                alt="token"
-                                                draggable="false"
-                                                />
-                                                <CardContent>
-                                                <Typography varient="h6" textAlign={"center"}>
-                                                    Energy: {card.cost}
-                                                </Typography>
-                                                <Typography variant="body2" color="white">
-                                                    {card.block_amount &&
-                                                        <>
-                                                            Block: {card.block_amount}
-                                                            <br/>
-                                                        </>
-                                                    }
-                                                    {card.attack_amount &&
-                                                        <>
-                                                            Damage: {card.attack_amount}
-                                                            <br/>
-                                                        </>
-                                                    }
-                                                    {card.description}
-                                                </Typography>
-                                                </CardContent>
-                                            </CardActionArea>
-                                        </Card>
+                                        <>
+                                            <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#343483', color: 'white' }} onClick={() => handleAddCard(card)}>
+                                                        <Typography gutterBottom variant="h4" component="div" textAlign={"center"}>
+                                                            Price: {card.price}
+                                                        </Typography>
+                                                <CardActionArea>
+                                                    <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                                                        {card.name}
+                                                    </Typography>
+                                                    <Typography variant="body1" color="white" textAlign={"center"}>
+                                                        {card.rarity}
+                                                    </Typography>
+                                                    <CardMedia
+                                                    component="img"
+                                                    image={card.token}
+                                                    alt="token"
+                                                    draggable="false"
+                                                    />
+                                                    <CardContent>
+                                                    <Typography varient="h6" textAlign={"center"}>
+                                                        Energy: {card.cost}
+                                                    </Typography>
+                                                    <Typography variant="body2" color="white">
+                                                        {card.block_amount &&
+                                                            <>
+                                                                Block: {card.block_amount}
+                                                                <br/>
+                                                            </>
+                                                        }
+                                                        {card.attack_amount &&
+                                                            <>
+                                                                Damage: {card.attack_amount}
+                                                                <br/>
+                                                            </>
+                                                        }
+                                                        {card.description}
+                                                    </Typography>
+                                                    </CardContent>
+                                                </CardActionArea>
+                                            </Card>
+                                        </>
                                     }
                                     {/* Very Rare Card */}
                                     {
                                         card.rarity === 'Very Rare' &&
-                                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#9651c1', color: 'white' }}>
-                                            <CardActionArea>
-                                                <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
-                                                    {card.name}
-                                                </Typography>
-                                                <Typography variant="body1" color="white" textAlign={"center"}>
-                                                    {card.rarity}
-                                                </Typography>
-                                                <CardMedia
-                                                component="img"
-                                                image={card.token}
-                                                alt="token"
-                                                draggable="false"
-                                                />
-                                                <CardContent>
-                                                <Typography varient="h6" textAlign={"center"}>
-                                                    Energy: {card.cost}
-                                                </Typography>
-                                                <Typography variant="body2" color="white">
-                                                    {card.block_amount &&
-                                                        <>
-                                                            Block: {card.block_amount}
-                                                            <br/>
-                                                        </>
-                                                    }
-                                                    {card.attack_amount &&
-                                                        <>
-                                                            Damage: {card.attack_amount}
-                                                            <br/>
-                                                        </>
-                                                    }
-                                                    {card.description}
-                                                </Typography>
-                                                </CardContent>
-                                            </CardActionArea>
-                                        </Card>
+                                        <>
+                                            <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#562772', color: 'white' }} onClick={() => handleAddCard(card)}>
+                                                        <Typography gutterBottom variant="h4" component="div" textAlign={"center"}>
+                                                            Price: {card.price}
+                                                        </Typography>
+                                                <CardActionArea>
+                                                    <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                                                        {card.name}
+                                                    </Typography>
+                                                    <Typography variant="body1" color="white" textAlign={"center"}>
+                                                        {card.rarity}
+                                                    </Typography>
+                                                    <CardMedia
+                                                    component="img"
+                                                    image={card.token}
+                                                    alt="token"
+                                                    draggable="false"
+                                                    />
+                                                    <CardContent>
+                                                    <Typography varient="h6" textAlign={"center"}>
+                                                        Energy: {card.cost}
+                                                    </Typography>
+                                                    <Typography variant="body2" color="white">
+                                                        {card.block_amount &&
+                                                            <>
+                                                                Block: {card.block_amount}
+                                                                <br/>
+                                                            </>
+                                                        }
+                                                        {card.attack_amount &&
+                                                            <>
+                                                                Damage: {card.attack_amount}
+                                                                <br/>
+                                                            </>
+                                                        }
+                                                        {card.description}
+                                                    </Typography>
+                                                    </CardContent>
+                                                </CardActionArea>
+                                            </Card>
+                                        </>
                                     }
                                     {/* Legendary Card */}
                                     {
                                         card.rarity === 'Legendary' &&
-                                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#c72e2e', color: 'white' }}>
-                                            <CardActionArea>
-                                                <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
-                                                    {card.name}
-                                                </Typography>
-                                                <Typography variant="body1" color="white" textAlign={"center"}>
-                                                    {card.rarity}
-                                                </Typography>
-                                                <CardMedia
-                                                component="img"
-                                                image={card.token}
-                                                alt="token"
-                                                draggable="false"
-                                                />
-                                                <CardContent>
-                                                <Typography varient="h6" textAlign={"center"}>
-                                                    Energy: {card.cost}
-                                                </Typography>
-                                                <Typography variant="body2" color="white">
-                                                    {card.block_amount &&
-                                                        <>
-                                                            Block: {card.block_amount}
-                                                            <br/>
-                                                        </>
-                                                    }
-                                                    {card.attack_amount &&
-                                                        <>
-                                                            Damage: {card.attack_amount}
-                                                            <br/>
-                                                        </>
-                                                    }
-                                                    {card.description}
-                                                </Typography>
-                                                </CardContent>
-                                            </CardActionArea>
-                                        </Card>
+                                        <>
+                                            <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#a73434', color: 'white' }} onClick={() => handleAddCard(card)}>
+                                                        <Typography gutterBottom variant="h4" component="div" textAlign={"center"}>
+                                                            Price: {card.price}
+                                                        </Typography>
+                                                <CardActionArea>
+                                                    <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                                                        {card.name}
+                                                    </Typography>
+                                                    <Typography variant="body1" color="white" textAlign={"center"}>
+                                                        {card.rarity}
+                                                    </Typography>
+                                                    <CardMedia
+                                                    component="img"
+                                                    image={card.token}
+                                                    alt="token"
+                                                    draggable="false"
+                                                    />
+                                                    <CardContent>
+                                                    <Typography varient="h6" textAlign={"center"}>
+                                                        Energy: {card.cost}
+                                                    </Typography>
+                                                    <Typography variant="body2" color="white">
+                                                        {card.block_amount &&
+                                                            <>
+                                                                Block: {card.block_amount}
+                                                                <br/>
+                                                            </>
+                                                        }
+                                                        {card.attack_amount &&
+                                                            <>
+                                                                Damage: {card.attack_amount}
+                                                                <br/>
+                                                            </>
+                                                        }
+                                                        {card.description}
+                                                    </Typography>
+                                                    </CardContent>
+                                                </CardActionArea>
+                                            </Card>
+                                        </>
                                     }
                                 </>
                             );

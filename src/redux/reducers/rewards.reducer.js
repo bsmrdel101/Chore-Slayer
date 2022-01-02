@@ -1,8 +1,6 @@
 const rewardsReducer = (state = [], action) => {
-    let copyOfState;
     switch (action.type) {
-        case 'GET_REWARDS':
-            console.log(action.payload);
+        case 'ADD_COINS':
             return action.payload;
         default:
             return state;

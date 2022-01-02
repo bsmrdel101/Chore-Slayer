@@ -130,7 +130,6 @@ function* fetchCards(action) {
         method: 'GET',
         url: '/api/cards'
       })
-      console.log(response.data);
       yield put({
           type: 'GET_CARDS',
           payload: response.data

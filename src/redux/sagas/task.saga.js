@@ -133,6 +133,18 @@ function* reviveTask(action) {
   }
 }
 
+// Deletes everything in the history table
+function* clearHistory(action) {
+  try {
+    const response = yield axios({
+      method: 'DELETE',
+      url: `/api/history`
+    })
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
+
 function* taskSaga() {
     yield takeLatest('FETCH_TASKS', fetchTasks);
     yield takeLatest('ADD_TASK', addTask);
@@ -142,6 +154,7 @@ function* taskSaga() {
     yield takeLatest('STORE_TASK', storeTask);
     yield takeLatest('DELETE_HISTORY', deleteHistory);
     yield takeLatest('REVIVE_TASK', reviveTask);
+    yield takeLatest('CLEAR_HISTORY', clearHistory);
   }
   
   export default taskSaga;

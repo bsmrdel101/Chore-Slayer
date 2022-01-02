@@ -76,11 +76,6 @@ function TaskCard({task}) {
     // Removes task for chores list and adds it to task history
     // Updates task statistics
     const completeTask = () => {
-        // TODO clear history when the reward is reached
-        // Retrieve the current value of users reward progress
-        // dispatch({
-        //     type: 'FETCH_REWARD_PROGRESS'
-        // })
         // Add task to history
         dispatch({
             type: 'STORE_TASK',

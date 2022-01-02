@@ -3,25 +3,30 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import TaskCard from "../TaskCard/TaskCard";
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import * as React from 'react';
 import { useHistory } from "react-router-dom";
+import { Button } from "@mui/material";
+import Swal from 'sweetalert2';
 
 function Tasks() {
     const history = useHistory();
     const dispatch = useDispatch();
     const taskReducer = useSelector((store) => store.taskReducer);
     const taskHistory = useSelector((store) => store.taskHistoryReducer);
-    const rewardsReducer = useSelector((store) => store.rewardsReducer);
+    const reward = useSelector((store) => store.rewardsReducer);
 
     useEffect(() => {
         // Render all of the task cards on the DOM when the page loads
         fetchTasks();
         dispatch({
             type: 'FETCH_HISTORY'
-        })
+        });
+        // Retrieve the current value of users reward progress
+        dispatch({
+            type: 'FETCH_REWARD_PROGRESS'
+        });
     }, [])
 
     // GET tasks
@@ -38,6 +43,17 @@ function Tasks() {
         textAlign: 'center',
         color: theme.palette.text.secondary,
     }));
+
+    const handleReward = () => {
+        // Updates new coin value and stores it in the database
+        dispatch({
+            type: 'FETCH_COINS',
+        });
+        // Clear history
+        dispatch({
+            type: 'CLEAR_HISTORY'
+        });
+    }
 
     return (
         <>
@@ -63,7 +79,10 @@ function Tasks() {
                             <h2>Tasks Left: {taskReducer.length}</h2>
                             <h2>Tasks Completed: {taskHistory.length}</h2>
                             <hr />
-                            <h2>New Card: 0/3</h2>
+                            <h2>Reward: {taskHistory.length} / 3 cards</h2>
+                            {
+                                taskHistory.length >= 3 && <Button variant="contained" color="success" onClick={handleReward}>Claim Reward</Button>
+                            }
                         </div>
                     </Item>
                 </Grid>

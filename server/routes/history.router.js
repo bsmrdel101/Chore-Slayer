@@ -75,4 +75,19 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })  
 });
 
+router.delete('/', (req, res) => {
+  const sqlText =`
+    DELETE FROM "history" WHERE "user_id" = $1;
+  `
+  const sqlValues = [
+      req.user.id
+  ]
+  pool.query(sqlText, sqlValues)
+      .then((dbres) => res.send(dbres.rows))
+      .catch((dberror) => {
+      console.log('Oops you messed up DB error', dberror);
+      res.sendStatus(500)
+  })  
+});
+
 module.exports = router;
