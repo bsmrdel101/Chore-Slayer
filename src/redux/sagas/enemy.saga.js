@@ -429,7 +429,7 @@ function* handleEnemyTurn(action) {
                                       }
                                       yield put({
                                         type: 'ATTACK_PLAYER_MINION',
-                                        payload: {id: minionId, attack: card.attack_amount, board: playerBoard}
+                                        payload: {id: minionId, attack: card.damage, board: playerBoard}
                                       })
                                     } else {
                                       console.log('* Player had no minions to attack *');
