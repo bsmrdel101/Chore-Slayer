@@ -2,6 +2,7 @@
 body {
     padding-left: 100px;
     padding-right: 30px;
+    font-family: sans-serif;
 }
 
 hr {
@@ -15,6 +16,9 @@ hr {
     font-size: 30px;
 }
 
+#react-root {
+    background-color: rgba(110, 85, 52, 0.596);
+}
 
 /* Login/registration forms */
 .formPanel {
@@ -56,27 +60,31 @@ hr {
 
 /* Game styles */
 .board {
-    background-color: rgb(177, 177, 177);
-    border: 3px solid rgb(85, 85, 85);
+    background-color: #d7c4aa;
+    border: 3px solid rgb(78 61 51);
+    border-radius: 3px;
 }
 
 .stat-block-container {
-    background-color: rgb(177, 177, 177);
-    border: 3px solid rgb(85, 85, 85);
+    background-color: #d7c4aa;
+    border: 3px solid rgb(78 61 51);
+    border-radius: 3px;
 }
 
 .deck-picture {
-    background-color: grey;
+    background-color: #d7c4aa;
+    border: 3px solid rgb(78 61 51);
+    border-radius: 3px;
 }
 
 .hand-container {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    background-color: rgb(190, 190, 190);
     padding: 10px;
     margin-top: 3vh;
-    /* margin-right: 27px; */
+    background-color: rgb(143 130 112);
+    border: 3px solid rgb(78 61 51);
 }
 
 #end-turn-btn {
@@ -112,6 +120,11 @@ hr {
 
 .enemy-action {
     animation: usedCardEnemy 0.5s both;
+}
+
+.round-counter {
+    padding-left: 25px;
+    color: white;
 }
 
 

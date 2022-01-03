@@ -3,6 +3,7 @@ import GameCard from "../GameCard/GameCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import Swal from 'sweetalert2';
+import { Button } from "@mui/material";
 
 function Game() {
     const hand = useSelector((store) => store.hand);
@@ -121,7 +122,7 @@ function Game() {
         <>
             <Grid container spacing={3}>
                 <Grid item xs>
-                    <h1>Turn {round}</h1>
+                    <h1 className="round-counter">Turn {round}</h1>
                     <br/>
                     <br/>
                 </Grid>
@@ -167,10 +168,10 @@ function Game() {
                 </Grid>
             </Grid>
             <div id="end-turn-btn">
-                <button onClick={handleEndTurn}>End Turn</button>
+                <Button variant="contained" color="success" onClick={handleEndTurn}>End Turn</Button> 
             </div>
             <div id="surrender-btn">
-                <button onClick={handleSurrender}>Surrender</button>
+                <Button variant="contained" color="error" onClick={handleSurrender}>Surrender</Button> 
             </div>
             
             {/* Holds the player's hand */}

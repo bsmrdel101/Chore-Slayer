@@ -308,17 +308,16 @@ function* handleEnemyTurn(action) {
               if (cardType === 'attack') {
                 console.log('Inside attack!');
                 for (let card of enemyHand) {
-                  console.log(card);
-                  if (card.type === 'attack' && energy >= card.cost) {
-                    selectedCard = card.card_id;
-                    console.log(card.name);
-                    break;
-                  } else {
-                    selectedCard = undefined;
+                  if (card.type === 'attack') {
+                    if (energy >= card.cost) {
+                      selectedCard = card.card_id;
+                      console.log(card.name);
+                      break;
+                    } else {
+                      cardType = 'minion';
+                      break;
+                    }
                   }
-                }
-                if (selectedCard === undefined) {
-                  cardType === 'minion';
                 }
               }
               // Determines what type of minion card will get played
