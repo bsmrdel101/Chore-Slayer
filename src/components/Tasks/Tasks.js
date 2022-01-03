@@ -57,11 +57,14 @@ function Tasks() {
 
     return (
         <>
-            <h1>Chores</h1>
-            <button className="add-task-btn" onClick={() => history.push('/add')}>+</button>
+            <h1 className="chore-list-title">Chores</h1>
             <Grid container spacing={2} columns={16}>
-                <Grid item xs={8}>
-                    <Item>
+                <Grid item xs={3} id='invisible'>
+                    <Item></Item>
+                </Grid>
+                <Grid item xs={5}>
+                    <Item id="grid-background-left">
+                        <Button variant="contained" color="success" id="add-task-btn" onClick={() => history.push('/add')}>+</Button>                 
                         <div className='task-list'>
                             {taskReducer.map((task) => {
                                 return (
@@ -73,7 +76,7 @@ function Tasks() {
                         </div>
                     </Item>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={5}>
                     <Item>
                         <div>
                             <h2>Tasks Left: {taskReducer.length}</h2>

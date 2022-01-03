@@ -15,6 +15,10 @@ hr {
     font-size: 30px;
 }
 
+#invisible {
+    opacity: 0;
+}
+
 #react-root {
     /* background: rgb(110,85,52);
     background: linear-gradient(90deg, rgba(110,85,52,0.5) 25%, rgba(122,95,59,0.5) 50%, rgba(138,108,68,0.5) 75%); */
@@ -40,16 +44,22 @@ hr {
 }
 
 .task-list {
-    background-color: grey;
+    background-color: #c1af96;
     padding: 30px;
 }
 
-.add-task-btn {
+#add-task-btn {
     padding: 0 25px;
-    font-size: 40px;
+    font-size: 30px;
     color: white;
-    background-color: rgb(56, 56, 163);
+    background-color: rgb(78 61 51);
     margin-bottom: 3vh;
+    padding-bottom: 5px;
+}
+
+#grid-background-left {
+    background-color: #d7c4aa;
+    border: 3px solid rgb(78 61 51);
 }
 
 .add-task-form {
@@ -58,6 +68,15 @@ hr {
     gap: 5px;
     padding-top: 3vh;
 }
+
+.chore-list-title {
+    color: rgb(78 61 51);
+    background-color: #d7c4aa;
+    border: 3px solid rgb(78 61 51);
+    font-size: 45px;
+    text-align: center;
+}
+
 
 /* Game styles */
 .board {
@@ -125,9 +144,14 @@ hr {
 }
 
 .round-counter {
-    padding-left: 25px;
-    color: #e7e7e7;
+    display: inline-block;
+    padding-left: 24px;
+    color: rgb(78 61 51);
+    background-color: #d7c4aa;
+    border: 3px solid rgb(78 61 51);
     font-size: 35px;
+    margin-left: 25px;
+    padding-right: 26px;
 }
 
 
