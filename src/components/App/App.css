@@ -16,9 +16,9 @@ hr {
 }
 
 #react-root {
-    /* background-color: rgba(110, 85, 52, 0.596); */
-    background: rgb(110,85,52);
-    background: linear-gradient(90deg, rgba(110,85,52,0.5) 25%, rgba(122,95,59,0.5) 50%, rgba(138,108,68,0.5) 75%);
+    /* background: rgb(110,85,52);
+    background: linear-gradient(90deg, rgba(110,85,52,0.5) 25%, rgba(122,95,59,0.5) 50%, rgba(138,108,68,0.5) 75%); */
+    background-image: url("/src/components/App/wood-background.jpg");
 }
 
 /* Login/registration forms */
@@ -84,7 +84,8 @@ hr {
     gap: 1rem;
     padding: 10px;
     margin-top: 3vh;
-    background-color: rgb(143 130 112);
+    background: rgb(143,130,120);
+    background: linear-gradient(90deg, rgba(143,130,120,1) 25%, rgba(161,147,136,1) 50%, rgba(180,164,152,1) 75%);
     border: 3px solid rgb(78 61 51);
 }
 
@@ -125,7 +126,7 @@ hr {
 
 .round-counter {
     padding-left: 25px;
-    color: rgb(64 64 64);
+    color: #e7e7e7;
     font-size: 35px;
 }
 
@@ -136,9 +137,9 @@ hr {
     flex-wrap: wrap;
     justify-content: space-around;
     gap: 20px;
-    background-color: grey;
     padding: 15px;
-    background-color: rgb(143 130 112);
+    background: rgb(143,130,120);
+    background: linear-gradient(90deg, rgba(143,130,120,1) 25%, rgba(161,147,136,1) 50%, rgba(180,164,152,1) 75%);
     border: 3px solid rgb(78 61 51);
 }
 
@@ -148,14 +149,14 @@ hr {
     margin-bottom: 2rem;
     margin-left: 25px;
     padding: 10px;
-    color: rgb(64 64 64);
-    background-color: rgb(143 130 112);
+    color: #e7e7e7;
+    background-color: rgb(143,130,120);
     border: 3px solid rgb(78 61 51);
 }
 
 .deck-title {
     font-size: 60px;
-    color: white;
+    color: #e7e7e7;
 }
 
 
