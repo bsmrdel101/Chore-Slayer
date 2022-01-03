@@ -1,7 +1,6 @@
 /* Other styles */
 body {
-    padding-left: 100px;
-    padding-right: 30px;
+    padding-left: 73px;
     font-family: sans-serif;
 }
 
@@ -137,11 +136,24 @@ hr {
     gap: 20px;
     background-color: grey;
     padding: 15px;
+    background-color: rgb(143 130 112);
+    border: 3px solid rgb(78 61 51);
 }
 
 .deck-header {
+    display: inline-block;
     margin-top: 1rem;
     margin-bottom: 2rem;
+    margin-left: 25px;
+    padding: 10px;
+    color: rgb(64 64 64);
+    background-color: rgb(143 130 112);
+    border: 3px solid rgb(78 61 51);
+}
+
+.deck-title {
+    font-size: 60px;
+    color: white;
 }
 
 
