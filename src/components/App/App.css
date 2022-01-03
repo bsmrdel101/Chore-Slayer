@@ -16,7 +16,9 @@ hr {
 }
 
 #react-root {
-    background-color: rgba(110, 85, 52, 0.596);
+    /* background-color: rgba(110, 85, 52, 0.596); */
+    background: rgb(110,85,52);
+    background: linear-gradient(90deg, rgba(110,85,52,0.5) 25%, rgba(122,95,59,0.5) 50%, rgba(138,108,68,0.5) 75%);
 }
 
 /* Login/registration forms */
