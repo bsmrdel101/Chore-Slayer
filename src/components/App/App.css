@@ -124,7 +124,8 @@ hr {
 
 .round-counter {
     padding-left: 25px;
-    color: white;
+    color: rgb(64 64 64);
+    font-size: 35px;
 }
 
 
@@ -154,7 +155,7 @@ hr {
     to {
         opacity: 1;
         transform:translateX(6px);
-        color: rgb(55, 55, 204);
+        color: rgb(52 52 130);
     }
 }
 
@@ -167,6 +168,6 @@ hr {
     to {
         opacity: 1;
         transform:translateX(6px);
-        color: rgb(178 17 17);
+        color: #a73434;
     }
 }
