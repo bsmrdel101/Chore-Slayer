@@ -17,7 +17,8 @@ function DisplayCard({id}) {
             text: "You cannot undo this action!",
             icon: 'question',
             showCancelButton: true,
-            cancelButtonColor: '#d33',
+            cancelButtonColor: 'rgb(196, 82, 82)',
+            confirmButtonColor: 'rgb(51 135 150)',
             confirmButtonText: 'Yes, delete it!'
           }).then((result) => {
             if (result.isConfirmed) {
@@ -25,6 +26,22 @@ function DisplayCard({id}) {
                     type: 'REMOVE_CARD',
                     payload: card.id
                 });
+                // Send an alert to the user
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })      
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Card successfully sold'
+                })
             }
           })
     }

@@ -19,8 +19,8 @@ function TaskCard({task}) {
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: 'rgb(51 135 150)',
+            cancelButtonColor: 'rgb(196, 82, 82)',
             confirmButtonText: 'Yes, delete it!'
           }).then((result) => {
             if (result.isConfirmed) {
@@ -61,6 +61,7 @@ function TaskCard({task}) {
             html: `<input type="text" id="name" class="swal2-input" placeholder="Name">
             <input type="text" id="description" class="swal2-input" placeholder="Description">`,
             confirmButtonText: 'Save Changes',
+            confirmButtonColor: 'rgb(51 135 150)',
             focusConfirm: false,
             preConfirm: () => {
               const name = Swal.getPopup().querySelector('#name').value
