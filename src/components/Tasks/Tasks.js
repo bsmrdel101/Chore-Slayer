@@ -80,11 +80,11 @@ function Tasks() {
                     <Item id="grid-background-right">
                         <div className="reward-display">
                             <h2>Tasks Left: {taskReducer.length}</h2>
-                            <h2>Tasks Completed: {taskHistory.length}</h2>
+                            {/* <h2>Tasks Completed: {taskHistory.length}</h2> */}
                             <hr />
-                            <h2>Reward: {taskHistory.length} / 3 cards</h2>
+                            <h2>Reward: {taskHistory.length} / 3 completed tasks</h2>
                             {
-                                taskHistory.length >= 3 && <Button variant="contained" color="success" onClick={handleReward}>Claim Reward</Button>
+                                taskHistory.length >= 3 && <button className="success-btn" onClick={handleReward}>Claim Reward</button>
                             }
                         </div>
                     </Item>

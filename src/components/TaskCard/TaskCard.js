@@ -96,12 +96,12 @@ function TaskCard({task}) {
                         <CardContent onClick={handleEdit}>
                         <Typography gutterBottom variant="h5" component="div">
                         <Grid container spacing={2} columns={16}>
-                            <Grid item xs={8}>
+                            <Grid item xs={16}>
                                 {task.name}
                             </Grid>
-                            <Grid item xs={8}>
+                            {/* <Grid item xs={8}>
                                 {task.difficulty}
-                            </Grid>
+                            </Grid> */}
                         </Grid>
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
@@ -110,7 +110,7 @@ function TaskCard({task}) {
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-                        <Button size="small" variant="contained" color="success" onClick={completeTask}>Complete</Button>
+                        <button className="complete-btn" onClick={completeTask}>Complete</button>
                         <Button size="small" color="error" onClick={deleteTask}><DeleteIcon/></Button>
                     </CardActions>
                 </Card>

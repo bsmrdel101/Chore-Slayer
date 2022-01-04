@@ -33,6 +33,53 @@ hr {
     /* background-image: url("/src/components/App/hex-background.jpg"); */
 }
 
+
+/* Button variants */
+
+.success-btn {
+    width: 140px;
+    height: 45px;
+    font-size: 15px;
+    color: white;
+    background-color: rgb(51 135 150);
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+  
+  .success-btn:hover {
+    background-color: rgb(73, 178, 197);
+    font-size: 16px;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+.complete-btn {
+    width: 115px;
+    height: 43px;
+    font-size: 15px;
+    color: white;
+    background-color: rgb(51 135 150);
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+  
+.complete-btn:hover {
+    background-color: rgb(73, 178, 197);
+    font-size: 16px;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+
 /* Login/registration forms */
 .formPanel {
     display: inline-block;
@@ -65,6 +112,10 @@ hr {
     background-color: #7b7491;
     margin-bottom: 3vh;
     padding-bottom: 5px;
+}
+
+#add-task-btn:hover {
+    background-color: #8a82a3;
 }
 
 #grid-background-left {
