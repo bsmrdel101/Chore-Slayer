@@ -201,6 +201,7 @@ hr {
     border: 3px solid #b0bec5;
     font-size: 45px;
     text-align: center;
+    border-radius: 5px;
 }
 
 .MuiPaper-root .task-card {
@@ -357,6 +358,7 @@ hr {
     border: 3px solid #b0bec5;
     font-size: 45px;
     text-align: center;
+    border-radius: 5px;
 }
 /* -------- */
 

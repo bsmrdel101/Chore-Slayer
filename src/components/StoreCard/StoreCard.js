@@ -50,77 +50,90 @@ function StoreCard({card}) {
                 title: 'To many cards in deck!'
             })
         } else {
-            let cardStatus = true;
-            for (let item of deck) {
-                if (card.id === item) {
-                    cardStatus = false;
-                    // Shows user warning message
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 1500,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+            Swal.fire({
+                title: `Would you buy ${card.name}?`,
+                text: `Price: ${card.price} coins`,
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonColor: 'rgb(196, 82, 82)',
+                confirmButtonColor: 'rgb(51 135 150)',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let cardStatus = true;
+                    for (let item of deck) {
+                        if (card.id === item) {
+                            cardStatus = false;
+                            // Shows user warning message
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            })      
+                            Toast.fire({
+                                icon: 'error',
+                                title: 'Cannot have duplicate cards'
+                            })
+                            break;   
                         }
-                    })      
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'Cannot have duplicate cards'
-                    })
-                    break;   
-                }
-            }
-            if (cardStatus === true) {
-                if (rewards < card.price) {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 1500,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    })      
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'Not enough coins'
-                    })
-                } else {     
-                    // Shows user success message
-                    // Adds card to deck
-                    // Removes price from coin amount
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 1500,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    })      
-                    Toast.fire({
-                        icon: 'success',
-                        title: `You bought ${card.name}`
-                    })
+                    }
+                    if (cardStatus === true) {
+                        if (rewards < card.price) {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            })      
+                            Toast.fire({
+                                icon: 'error',
+                                title: 'Not enough coins'
+                            })
+                        } else {     
+                            // Shows user success message
+                            // Adds card to deck
+                            // Removes price from coin amount
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            })      
+                            Toast.fire({
+                                icon: 'success',
+                                title: `You bought ${card.name}`
+                            })
 
-                    dispatch({
-                        type: 'ADD_CARD_TO_DECK',
-                        payload: card.id
-                    })
-                    
-                    dispatch({
-                        type: 'PAY_COINS',
-                        payload: {coins: rewards, price: card.price, id: card.id}
-                    })
+                            dispatch({
+                                type: 'ADD_CARD_TO_DECK',
+                                payload: card.id
+                            })
+                            
+                            dispatch({
+                                type: 'PAY_COINS',
+                                payload: {coins: rewards, price: card.price, id: card.id}
+                            })
+                        }
+                    }
                 }
-            }
+            })
         }
     }
 
