@@ -29,11 +29,12 @@ hr {
 
 #react-root {
     background-color: #0cbaba;
-    background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);    
+    background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
     /* background-image: url("/src/components/App/hex-background.jpg"); */
 }
 
 
+/* -------- */
 /* Button variants */
 
 .success-btn {
@@ -80,6 +81,53 @@ hr {
     transform: translateY(-7px);
 }
 
+#add-cards-btn {
+    width: 113px;
+    height: 35px;
+    font-size: 15px;
+    color: white;
+    background-color: rgb(51 135 150);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+#add-cards-btn:hover {
+    background-color: rgb(73, 178, 197);
+    font-size: 16px;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+#show-deck-btn {
+    width: 113px;
+    height: 35px;
+    font-size: 15px;
+    color: white;
+    background-color: rgb(196, 82, 82);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+#show-deck-btn:hover {
+    font-size: 16px;
+    background-color: rgb(228, 94, 94);
+    box-shadow: 0px 15px 20px rgba(216, 50, 28, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+/* -------- */
+
+
+/* -------- */
 /* Login/registration forms */
 .formPanel {
     display: inline-block;
@@ -91,7 +139,10 @@ hr {
 .top-margin-btn {
     margin-top: 1em;
 }
+/* -------- */
 
+
+/* -------- */
 /* Tasks */
 .task-card {
     margin-top: 2vh;
@@ -103,6 +154,14 @@ hr {
     color: #e5eef3;
     padding: 30px;
     border-radius: 3px;
+}
+
+#delete-task-btn {
+    color: rgb(172, 62, 62);
+}
+
+#delete-task-btn:hover {
+    color: rgb(185, 67, 67);
 }
 
 #add-task-btn {
@@ -121,11 +180,13 @@ hr {
 #grid-background-left {
     background-color: #3e3852;
     border: 3px solid #b0bec5;
+    border-radius: 17px;
 }
 
 #grid-background-right {
     background-color: #3e3852;
     border: 3px solid #b0bec5;
+    border-radius: 17px;
 }
 
 .add-task-form {
@@ -146,15 +207,19 @@ hr {
 .MuiPaper-root .task-card {
     background-color: #7b7491;
     color: #e5eef3;
+    border-radius: 10px;
 }
 
 .MuiPaper-root .reward-display {
     background-color: #4f4866;
     color: #e5eef3;
+    border-radius: 10px;
     padding: 10px;
 }
+/* -------- */
 
 
+/* -------- */
 /* Game styles */
 .board {
     color: #e5eef3;
@@ -194,8 +259,23 @@ hr {
 
 #end-turn-btn button {
     margin-top: 3vh;
-    padding: 10px 5rem;
+    padding: 10px 4rem;
     font-size: 25px;
+    color: white;
+    background-color: rgb(51 135 150);
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+  
+#end-turn-btn button:hover {
+    background-color: rgb(73, 178, 197);
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-3px);
 }
 
 #surrender-btn {
@@ -206,8 +286,21 @@ hr {
 #surrender-btn button {
     margin-top: 5px;
     color: white;
-    padding: 4px;
+    padding: 8px;
     background-color: rgb(196, 82, 82);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+#surrender-btn button:hover {
+    background-color: rgb(228, 94, 94);
+    box-shadow: 0px 15px 20px rgba(216, 50, 28, 0.4);
+    color: #fff;
+    transform: translateY(-2px);
 }
 
 .card:hover {
@@ -232,8 +325,10 @@ hr {
     margin-left: 25px;
     padding-right: 26px;
 }
+/* -------- */
 
 
+/* -------- */
 /* Deck Page */
 .deck-gallery {
     display: flex;
@@ -254,6 +349,7 @@ hr {
     color: #e5eef3;
     background-color: #3e3852;    
     border: 3px solid #b0bec5;
+    border-radius: 10px;
 }
 
 .deck-title {
@@ -263,8 +359,10 @@ hr {
     font-size: 45px;
     text-align: center;
 }
+/* -------- */
 
 
+/* -------- */
 /* Animations */
 @keyframes usedCardPlayer {
     from {
@@ -288,6 +386,7 @@ hr {
     to {
         opacity: 1;
         transform:translateX(6px);
-        color: #a73434;
+        color: rgb(196, 82, 82);
     }
 }
+/* -------- */

@@ -11,6 +11,7 @@ const router = express.Router();
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlText = (`
         SELECT * FROM "cards"
+        ORDER BY "price", "rarity" ASC;
     `);
     pool.query(sqlText)
         .then((dbres) => res.send(dbres.rows))

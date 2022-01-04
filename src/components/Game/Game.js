@@ -168,10 +168,10 @@ function Game() {
                 </Grid>
             </Grid>
             <div id="end-turn-btn">
-                <Button variant="contained" color="success" onClick={handleEndTurn}>End Turn</Button> 
+                <button onClick={handleEndTurn}>End Turn</button> 
             </div>
             <div id="surrender-btn">
-                <Button variant="contained" color="error" onClick={handleSurrender}>Surrender</Button> 
+                <button onClick={handleSurrender}>Surrender</button> 
             </div>
             
             {/* Holds the player's hand */}

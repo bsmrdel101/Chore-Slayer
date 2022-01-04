@@ -128,9 +128,9 @@ function Deck() {
                 <h2>{deck.length} / 15 cards</h2>
                 <h3>{rewards} Coins</h3>
                 {
-                    addCard === false ? <Button variant="contained" color="success" onClick={handleAllowModify}>Add Cards</Button> 
+                    addCard === false ? <button id="add-cards-btn" onClick={handleAllowModify}>Add Cards</button> 
                 :
-                    <Button variant="contained" color="error" onClick={handleAllowModify}>Show Deck</Button>
+                    <button id="show-deck-btn" onClick={handleAllowModify}>Show Deck</button>
                 }
             </div>
             {/* Card store */}

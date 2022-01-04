@@ -99,9 +99,6 @@ function TaskCard({task}) {
                             <Grid item xs={16}>
                                 {task.name}
                             </Grid>
-                            {/* <Grid item xs={8}>
-                                {task.difficulty}
-                            </Grid> */}
                         </Grid>
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
@@ -111,7 +108,7 @@ function TaskCard({task}) {
                     </CardActionArea>
                     <CardActions>
                         <button className="complete-btn" onClick={completeTask}>Complete</button>
-                        <Button size="small" color="error" onClick={deleteTask}><DeleteIcon/></Button>
+                        <Button size="small" color="error" id='delete-task-btn' onClick={deleteTask}><DeleteIcon/></Button>
                     </CardActions>
                 </Card>
             </div>
