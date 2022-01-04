@@ -56,7 +56,7 @@ function Tasks() {
     }
 
     return (
-        <>
+        <div className="fill-screen">
             <h1 className="chore-list-title">Chores</h1>
             <Grid container spacing={2} columns={16}>
                 <Grid item xs={3} id='invisible'>
@@ -77,8 +77,8 @@ function Tasks() {
                     </Item>
                 </Grid>
                 <Grid item xs={5}>
-                    <Item>
-                        <div>
+                    <Item id="grid-background-right">
+                        <div className="reward-display">
                             <h2>Tasks Left: {taskReducer.length}</h2>
                             <h2>Tasks Completed: {taskHistory.length}</h2>
                             <hr />
@@ -90,7 +90,7 @@ function Tasks() {
                     </Item>
                 </Grid>
             </Grid>
-        </>    
+        </div>    
     );
 }
 

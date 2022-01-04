@@ -124,9 +124,9 @@ export default function Sidebar() {
   }
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex'}}>
       <CssBaseline />
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={open} id="sidebar">
         <DrawerHeader>
           <IconButton onClick={open === true ? handleDrawerClose : handleDrawerOpen}>
             {open === false ? <ChevronRightIcon /> : <ChevronLeftIcon />}

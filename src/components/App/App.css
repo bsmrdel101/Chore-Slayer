@@ -10,6 +10,14 @@ hr {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
+#sidebar {
+    background-color: #d7c4aa;
+}
+
+.fill-screen {
+    padding-bottom: 13em;
+}
+
 .task-subtitle {
     text-align: center;
     font-size: 30px;
@@ -46,6 +54,7 @@ hr {
 .task-list {
     background-color: #c1af96;
     padding: 30px;
+    border-radius: 3px;
 }
 
 #add-task-btn {
@@ -58,6 +67,11 @@ hr {
 }
 
 #grid-background-left {
+    background-color: #d7c4aa;
+    border: 3px solid rgb(78 61 51);
+}
+
+#grid-background-right {
     background-color: #d7c4aa;
     border: 3px solid rgb(78 61 51);
 }
@@ -75,6 +89,15 @@ hr {
     border: 3px solid rgb(78 61 51);
     font-size: 45px;
     text-align: center;
+}
+
+.MuiPaper-root .task-card {
+    background-color: #fff6ea;
+}
+
+.MuiPaper-root .reward-display {
+    background-color: #fff6ea;
+    padding: 10px;
 }
 
 
@@ -174,13 +197,19 @@ hr {
     margin-left: 25px;
     padding: 10px;
     color: #e7e7e7;
-    background-color: rgb(143,130,120);
+    color: rgb(78 61 51);
+    background-color: #d7c4aa;
     border: 3px solid rgb(78 61 51);
 }
 
 .deck-title {
-    font-size: 60px;
-    color: #e7e7e7;
+    /* font-size: 60px;
+    color: #e7e7e7; */
+    color: rgb(78 61 51);
+    background-color: #d7c4aa;
+    border: 3px solid rgb(78 61 51);
+    font-size: 45px;
+    text-align: center;
 }
 
 

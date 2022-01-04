@@ -65,7 +65,6 @@ function AddTask() {
                             variant="outlined"
                             value={newDescription}
                             onChange={(event) => setNewDescription(event.target.value)}
-                            required
                         />
                     </div>
                     <div>
