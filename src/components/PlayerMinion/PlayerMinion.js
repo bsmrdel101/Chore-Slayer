@@ -9,7 +9,7 @@ function PlayerMinion({minion}) {
                 <Card className="minion" sx={{backgroundColor: '#2b5c55', color: 'white'}}>
                     <CardMedia
                     component="img"
-                    image="attack-icon.png"
+                    image="minion-icon.png"
                     alt="token"
                     draggable="false"
                     />
@@ -21,7 +21,7 @@ function PlayerMinion({minion}) {
                 <Card className="minion" sx={{backgroundColor: '#3f813f', color: 'white'}}>
                     <CardMedia
                     component="img"
-                    image="attack-icon.png"
+                    image="minion-icon.png"
                     alt="token"
                     draggable="false"
                     />
@@ -33,7 +33,7 @@ function PlayerMinion({minion}) {
                 <Card className="minion" sx={{backgroundColor: '#343483', color: 'white'}}>
                     <CardMedia
                     component="img"
-                    image="attack-icon.png"
+                    image="minion-icon.png"
                     alt="token"
                     draggable="false"
                     />
@@ -45,7 +45,7 @@ function PlayerMinion({minion}) {
                 <Card className="minion" sx={{backgroundColor: '#562772', color: 'white'}}>
                     <CardMedia
                     component="img"
-                    image="attack-icon.png"
+                    image="minion-icon.png"
                     alt="token"
                     draggable="false"
                     />
@@ -57,7 +57,7 @@ function PlayerMinion({minion}) {
                 <Card className="minion" sx={{backgroundColor: '#a73434', color: 'white'}}>
                     <CardMedia
                     component="img"
-                    image="attack-icon.png"
+                    image="minion-icon.png"
                     alt="token"
                     draggable="false"
                     />

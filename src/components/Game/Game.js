@@ -131,7 +131,7 @@ function Game() {
                 </Grid>
                 <Grid item xs={6} className="board" marginRight={"3rem"}>
                     {enemyBoard.map((minion, i) => {
-                        return <EnemyMinion key={i} minion={minion} onClick={() => handlePlayerAttack(i)} />;
+                        return <EnemyMinion key={i} minion={minion} index={i}/>;
                     })}
                 </Grid>
                 <Grid item xs={2} className="stat-block-container" paddingBottom={"10px"}>
