@@ -197,7 +197,7 @@ function GameCard({card, round}) {
     const summonMinion = (element) => {
         dispatch({
             type: 'SUMMON_PLAYER_MINION',
-            payload: {damage: element.damage, health: element.health}
+            payload: {damage: element.damage, health: element.health, rarity: element.rarity}
         })
         dispatch({
             type: 'ADD_PLAYER_THREAT',

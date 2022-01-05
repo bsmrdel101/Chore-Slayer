@@ -450,7 +450,7 @@ function* handleEnemyTurn(action) {
                                       }
                                       yield put({
                                         type: 'SUMMON_ENEMY_MINION',
-                                        payload: {damage: card.damage, health: card.health}
+                                        payload: {damage: card.damage, health: card.health, rarity: card.rarity}
                                       })
                                       // Add the enemy threat
                                       yield put({
@@ -466,7 +466,7 @@ function* handleEnemyTurn(action) {
                                         });
                                         yield put({
                                           type: 'SUMMON_ENEMY_MINION',
-                                          payload: {damage: card.damage, health: card.health}
+                                          payload: {damage: card.damage, health: card.health, rarity: card.rarity}
                                         })
                                         yield put({
                                             type: 'ADD_ENEMY_THREAT',
@@ -478,7 +478,7 @@ function* handleEnemyTurn(action) {
                                     if (enemyBoard.length <= 5) {
                                       yield put({
                                         type: 'SUMMON_ENEMY_MINION',
-                                        payload: {damage: card.damage, health: card.health}
+                                        payload: {damage: card.damage, health: card.health, rarity: card.rarity}
                                       })
                                       yield put({
                                           type: 'ADD_ENEMY_THREAT',

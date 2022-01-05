@@ -3,12 +3,10 @@ import GameCard from "../GameCard/GameCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import Swal from 'sweetalert2';
-import { Button } from "@mui/material";
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import PlayerMinion from "../PlayerMinion/PlayerMinion";
+import EnemyMinion from "../EnemyMinion/EnemyMinion";
 
 function Game() {
     const hand = useSelector((store) => store.hand);
@@ -133,20 +131,7 @@ function Game() {
                 </Grid>
                 <Grid item xs={6} className="board" marginRight={"3rem"}>
                     {enemyBoard.map((minion, i) => {
-                        return (
-                            <>
-                                <Card className="minion" key={i} onClick={() => handlePlayerAttack(i)}>
-                                    <CardMedia
-                                    component="img"
-                                    image="attack-icon.png"
-                                    alt="token"
-                                    draggable="false"
-                                    />
-                                    <p>{minion.damage} / {minion.health}</p>
-                                </Card>
-                                {/* <p key={i} onClick={() => handlePlayerAttack(i)}>{minion.damage} / {minion.health}</p> */}
-                            </>
-                        );
+                        return <EnemyMinion key={i} minion={minion} onClick={() => handlePlayerAttack(i)} />;
                     })}
                 </Grid>
                 <Grid item xs={2} className="stat-block-container" paddingBottom={"10px"}>
@@ -173,7 +158,7 @@ function Game() {
                 </Grid>
                 <Grid item xs={6} className="board" marginRight={"3rem"}>
                     {playerBoard.map((minion, i) => {
-                        return <p key={i}>{minion.damage} / {minion.health}</p>;
+                        return <PlayerMinion key={i} minion={minion} />;
                     })}
                 </Grid>
                 <Grid item xs={2} className="stat-block-container">
