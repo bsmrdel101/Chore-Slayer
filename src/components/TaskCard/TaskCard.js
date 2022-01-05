@@ -108,8 +108,14 @@ function TaskCard({task}) {
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-                        <button className="complete-btn" onClick={completeTask}>Complete</button>
-                        <Button size="small" color="error" id='delete-task-btn' onClick={deleteTask}><DeleteIcon/></Button>
+                        <Grid container spacing={2} columns={16}>
+                            <Grid item xs={8}>
+                                <button className="complete-btn" onClick={completeTask}>Complete</button>
+                            </Grid>
+                            <Grid item xs={8}>
+                                <Button size="small" color="error" id='delete-task-btn' onClick={deleteTask}><DeleteIcon/></Button> 
+                            </Grid>
+                        </Grid>
                     </CardActions>
                 </Card>
             </div>

@@ -149,7 +149,7 @@ function Deck() {
                 :
                 <section>
                     <center>
-                        <h1 className="deck-title">Your Cards</h1>
+                        <h1 className="deck-title">Your Deck</h1>
                     </center>
                     <div className="deck-gallery">
                         {deck.map((card_id) => {
