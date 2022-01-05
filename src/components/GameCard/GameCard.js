@@ -212,18 +212,20 @@ function GameCard({card, round}) {
                 card.rarity === 'Common' &&
                 <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#2b5c55', color: 'white' }} onClick={handleClick} className="card">
                     <CardActionArea>
-                        <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                        <Typography gutterBottom variant="h5" component="div" textAlign={"center"} fontSize="25px">
                             {card.name}
                         </Typography>
                         <Typography variant="body1" color="white" textAlign={"center"}>
-                            {card.rarity}
+                            <em>{card.rarity}</em>
                         </Typography>
-                        <CardMedia
-                        component="img"
-                        image={card.token}
-                        alt="token"
-                        draggable="false"
-                        />
+                        <center>
+                            <CardMedia className='token'
+                            component="img"
+                            image={card.token}
+                            alt="token"
+                            draggable="false"
+                            />
+                        </center>
                         <CardContent>
                         <Typography varient="h6" textAlign={"center"}>
                             Energy: {card.cost}
@@ -252,18 +254,20 @@ function GameCard({card, round}) {
                 card.rarity === 'Uncommon' &&
                 <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#3f813f', color: 'white' }} onClick={handleClick} className="card">
                     <CardActionArea>
-                        <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                        <Typography gutterBottom variant="h6" component="div" textAlign={"center"} fontSize="25px">
                             {card.name}
                         </Typography>
                         <Typography variant="body1" color="white" textAlign={"center"}>
-                            {card.rarity}
+                            <em>{card.rarity}</em>
                         </Typography>
-                        <CardMedia
-                        component="img"
-                        image={card.token}
-                        alt="token"
-                        draggable="false"
-                        />
+                        <center>
+                            <CardMedia className='token'
+                            component="img"
+                            image={card.token}
+                            alt="token"
+                            draggable="false"
+                            />
+                        </center>
                         <CardContent>
                         <Typography varient="h6" textAlign={"center"}>
                             Energy: {card.cost}
@@ -292,18 +296,20 @@ function GameCard({card, round}) {
                 card.rarity === 'Rare' &&
                 <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#343483', color: 'white' }} onClick={handleClick} className="card">
                     <CardActionArea>
-                        <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                        <Typography gutterBottom variant="h6" component="div" textAlign={"center"} fontSize="25px">
                             {card.name}
                         </Typography>
                         <Typography variant="body1" color="white" textAlign={"center"}>
-                            {card.rarity}
+                            <em>{card.rarity}</em>
                         </Typography>
-                        <CardMedia
-                        component="img"
-                        image={card.token}
-                        alt="token"
-                        draggable="false"
-                        />
+                        <center>
+                            <CardMedia className='token'
+                            component="img"
+                            image={card.token}
+                            alt="token"
+                            draggable="false"
+                            />
+                        </center>
                         <CardContent>
                         <Typography varient="h6" textAlign={"center"}>
                             Energy: {card.cost}
@@ -332,18 +338,20 @@ function GameCard({card, round}) {
                 card.rarity === 'Very Rare' &&
                 <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#562772', color: 'white' }} onClick={handleClick} className="card">
                     <CardActionArea>
-                        <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                        <Typography gutterBottom variant="h6" component="div" textAlign={"center"} fontSize="25px">
                             {card.name}
                         </Typography>
                         <Typography variant="body1" color="white" textAlign={"center"}>
-                            {card.rarity}
+                            <em>{card.rarity}</em>
                         </Typography>
-                        <CardMedia
-                        component="img"
-                        image={card.token}
-                        alt="token"
-                        draggable="false"
-                        />
+                        <center>
+                            <CardMedia className='token'
+                            component="img"
+                            image={card.token}
+                            alt="token"
+                            draggable="false"
+                            />
+                        </center>
                         <CardContent>
                         <Typography varient="h6" textAlign={"center"}>
                             Energy: {card.cost}
@@ -372,18 +380,20 @@ function GameCard({card, round}) {
                 card.rarity === 'Legendary' &&
                 <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#a73434', color: 'white' }} onClick={handleClick} className="card">
                     <CardActionArea>
-                        <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                        <Typography gutterBottom variant="h6" component="div" textAlign={"center"} fontSize="25px">
                             {card.name}
                         </Typography>
                         <Typography variant="body1" color="white" textAlign={"center"}>
-                            {card.rarity}
+                            <em>{card.rarity}</em>
                         </Typography>
-                        <CardMedia
-                        component="img"
-                        image={card.token}
-                        alt="token"
-                        draggable="false"
-                        />
+                        <center>
+                            <CardMedia className='token'
+                            component="img"
+                            image={card.token}
+                            alt="token"
+                            draggable="false"
+                            />
+                        </center>
                         <CardContent>
                         <Typography varient="h6" textAlign={"center"}>
                             Energy: {card.cost}

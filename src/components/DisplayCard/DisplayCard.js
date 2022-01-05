@@ -51,20 +51,22 @@ function DisplayCard({id}) {
             {cards.map((card) => {
                 if (card.id === id && card.rarity === 'Common') {
                     return (
-                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#2b5c55', color: 'white' }} key={id} onClick={() => handleDelete(card)}>
+                        <Card sx={{ flexGrow: 1, maxWidth: "200px", backgroundColor: '#2b5c55', color: 'white'}} key={id} onClick={() => handleDelete(card)}>
                             <CardActionArea>
-                                <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                                <Typography gutterBottom variant="h6" component="div" textAlign={"center"} fontSize="25px">
                                     {card.name}
                                 </Typography>
                                 <Typography variant="body1" color="white" textAlign={"center"}>
-                                    {card.rarity}
+                                    <em>{card.rarity}</em>
                                 </Typography>
-                                <CardMedia
-                                component="img"
-                                image={card.token}
-                                alt="token"
-                                draggable="false"
-                                />
+                                <center>
+                                    <CardMedia className='token'
+                                    component="img"
+                                    image={card.token}
+                                    alt="token"
+                                    draggable="false"
+                                    />
+                                </center>
                                 <CardContent>
                                 <Typography varient="h6" textAlign={"center"}>
                                     Energy: {card.cost}
@@ -92,18 +94,20 @@ function DisplayCard({id}) {
                     return (
                         <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#3f813f', color: 'white' }} key={id} onClick={() => handleDelete(card)}>
                             <CardActionArea>
-                                <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                                <Typography gutterBottom variant="h6" component="div" textAlign={"center"} fontSize="25px">
                                     {card.name}
                                 </Typography>
                                 <Typography variant="body1" color="white" textAlign={"center"}>
-                                    {card.rarity}
+                                    <em>{card.rarity}</em>
                                 </Typography>
-                                <CardMedia
-                                component="img"
-                                image={card.token}
-                                alt="token"
-                                draggable="false"
-                                />
+                                <center>
+                                    <CardMedia className='token'
+                                    component="img"
+                                    image={card.token}
+                                    alt="token"
+                                    draggable="false"
+                                    />
+                                </center>
                                 <CardContent>
                                 <Typography varient="h6" textAlign={"center"}>
                                     Energy: {card.cost}
@@ -131,18 +135,20 @@ function DisplayCard({id}) {
                     return (
                         <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#343483', color: 'white' }} key={id} onClick={() => handleDelete(card)}>
                             <CardActionArea>
-                                <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                                <Typography gutterBottom variant="h6" component="div" textAlign={"center"} fontSize="25px">
                                     {card.name}
                                 </Typography>
                                 <Typography variant="body1" color="white" textAlign={"center"}>
-                                    {card.rarity}
+                                    <em>{card.rarity}</em>
                                 </Typography>
-                                <CardMedia
-                                component="img"
-                                image={card.token}
-                                alt="token"
-                                draggable="false"
-                                />
+                                <center>
+                                    <CardMedia className='token'
+                                    component="img"
+                                    image={card.token}
+                                    alt="token"
+                                    draggable="false"
+                                    />
+                                </center>
                                 <CardContent>
                                 <Typography varient="h6" textAlign={"center"}>
                                     Energy: {card.cost}
@@ -170,18 +176,20 @@ function DisplayCard({id}) {
                     return (
                         <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#562772', color: 'white' }} key={id} onClick={() => handleDelete(card)}>
                             <CardActionArea>
-                                <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                                <Typography gutterBottom variant="h6" component="div" textAlign={"center"} fontSize="25px">
                                     {card.name}
                                 </Typography>
                                 <Typography variant="body1" color="white" textAlign={"center"}>
-                                    {card.rarity}
+                                    <em>{card.rarity}</em>
                                 </Typography>
-                                <CardMedia
-                                component="img"
-                                image={card.token}
-                                alt="token"
-                                draggable="false"
-                                />
+                                <center>
+                                    <CardMedia className='token'
+                                    component="img"
+                                    image={card.token}
+                                    alt="token"
+                                    draggable="false"
+                                    />
+                                </center>
                                 <CardContent>
                                 <Typography varient="h6" textAlign={"center"}>
                                     Energy: {card.cost}
@@ -209,18 +217,20 @@ function DisplayCard({id}) {
                     return (
                         <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#a73434', color: 'white' }} key={id} onClick={() => handleDelete(card)}>
                             <CardActionArea>
-                                <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                                <Typography gutterBottom variant="h6" component="div" textAlign={"center"} fontSize="25px">
                                     {card.name}
                                 </Typography>
                                 <Typography variant="body1" color="white" textAlign={"center"}>
-                                    {card.rarity}
+                                    <em>{card.rarity}</em>
                                 </Typography>
-                                <CardMedia
-                                component="img"
-                                image={card.token}
-                                alt="token"
-                                draggable="false"
-                                />
+                                <center>
+                                    <CardMedia className='token'
+                                    component="img"
+                                    image={card.token}
+                                    alt="token"
+                                    draggable="false"
+                                    />
+                                </center>
                                 <CardContent>
                                 <Typography varient="h6" textAlign={"center"}>
                                     Energy: {card.cost}

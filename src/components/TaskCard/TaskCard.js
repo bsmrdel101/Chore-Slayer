@@ -102,7 +102,7 @@ function TaskCard({task}) {
                             </Grid>
                         </Grid>
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body2" className='task-description'>
                             {task.description}
                         </Typography>
                         </CardContent>

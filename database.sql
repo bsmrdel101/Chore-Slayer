@@ -43,7 +43,8 @@ CREATE TABLE "cards" (
     "attack_amount" INTEGER,
     "damage" INTEGER,
     "health" INTEGER,
-    "rarity" TEXT    
+    "rarity" TEXT,
+    "price" INTEGER    
 );
 
 CREATE TABLE "deck" (
@@ -60,8 +61,7 @@ CREATE TABLE "hand" (
 );
 
 
--- ** Test SQL **
-
+-- Add card data to table
 
 INSERT INTO "cards" ("name", "type", "token", "description", "cost", "block_amount", "attack_amount", "damage", "health")
 VALUES 

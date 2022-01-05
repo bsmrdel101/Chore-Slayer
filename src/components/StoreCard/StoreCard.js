@@ -148,18 +148,20 @@ function StoreCard({card}) {
                                     Price: {card.price}
                                 </Typography>
                         <CardActionArea>
-                            <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                            <Typography gutterBottom variant="h6" component="div" textAlign={"center"} fontSize="25px">
                                 {card.name}
                             </Typography>
                             <Typography variant="body1" color="white" textAlign={"center"}>
-                                {card.rarity}
+                                <em>{card.rarity}</em>
                             </Typography>
-                            <CardMedia
-                            component="img"
-                            image={card.token}
-                            alt="token"
-                            draggable="false"
-                            />
+                            <center>
+                                <CardMedia className='token'
+                                component="img"
+                                image={card.token}
+                                alt="token"
+                                draggable="false"
+                                />
+                            </center>
                             <CardContent>
                             <Typography varient="h6" textAlign={"center"}>
                                 Energy: {card.cost}
@@ -193,18 +195,20 @@ function StoreCard({card}) {
                                     Price: {card.price}
                                 </Typography>
                         <CardActionArea>
-                            <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                            <Typography gutterBottom variant="h6" component="div" textAlign={"center"} fontSize="25px">
                                 {card.name}
                             </Typography>
                             <Typography variant="body1" color="white" textAlign={"center"}>
-                                {card.rarity}
+                                <em>{card.rarity}</em>
                             </Typography>
-                            <CardMedia
-                            component="img"
-                            image={card.token}
-                            alt="token"
-                            draggable="false"
-                            />
+                            <center>
+                                <CardMedia className='token'
+                                component="img"
+                                image={card.token}
+                                alt="token"
+                                draggable="false"
+                                />
+                            </center>
                             <CardContent>
                             <Typography varient="h6" textAlign={"center"}>
                                 Energy: {card.cost}
@@ -238,18 +242,20 @@ function StoreCard({card}) {
                                     Price: {card.price}
                                 </Typography>
                         <CardActionArea>
-                            <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                            <Typography gutterBottom variant="h6" component="div" textAlign={"center"} fontSize="25px">
                                 {card.name}
                             </Typography>
                             <Typography variant="body1" color="white" textAlign={"center"}>
-                                {card.rarity}
+                                <em>{card.rarity}</em>
                             </Typography>
-                            <CardMedia
-                            component="img"
-                            image={card.token}
-                            alt="token"
-                            draggable="false"
-                            />
+                            <center>
+                                <CardMedia className='token'
+                                component="img"
+                                image={card.token}
+                                alt="token"
+                                draggable="false"
+                                />
+                            </center>
                             <CardContent>
                             <Typography varient="h6" textAlign={"center"}>
                                 Energy: {card.cost}
@@ -283,18 +289,20 @@ function StoreCard({card}) {
                                     Price: {card.price}
                                 </Typography>
                         <CardActionArea>
-                            <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                            <Typography gutterBottom variant="h6" component="div" textAlign={"center"} fontSize="25px">
                                 {card.name}
                             </Typography>
                             <Typography variant="body1" color="white" textAlign={"center"}>
-                                {card.rarity}
+                                <em>{card.rarity}</em>
                             </Typography>
-                            <CardMedia
-                            component="img"
-                            image={card.token}
-                            alt="token"
-                            draggable="false"
-                            />
+                            <center>
+                                <CardMedia className='token'
+                                component="img"
+                                image={card.token}
+                                alt="token"
+                                draggable="false"
+                                />
+                            </center>
                             <CardContent>
                             <Typography varient="h6" textAlign={"center"}>
                                 Energy: {card.cost}
@@ -328,18 +336,20 @@ function StoreCard({card}) {
                                     Price: {card.price}
                                 </Typography>
                         <CardActionArea>
-                            <Typography gutterBottom variant="h6" component="div" textAlign={"center"}>
+                            <Typography gutterBottom variant="h6" component="div" textAlign={"center"} fontSize="25px">
                                 {card.name}
                             </Typography>
                             <Typography variant="body1" color="white" textAlign={"center"}>
-                                {card.rarity}
+                                <em>{card.rarity}</em>
                             </Typography>
-                            <CardMedia
-                            component="img"
-                            image={card.token}
-                            alt="token"
-                            draggable="false"
-                            />
+                            <center>
+                                <CardMedia className='token'
+                                component="img"
+                                image={card.token}
+                                alt="token"
+                                draggable="false"
+                                />
+                            </center>
                             <CardContent>
                             <Typography varient="h6" textAlign={"center"}>
                                 Energy: {card.cost}

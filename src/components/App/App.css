@@ -11,8 +11,8 @@ hr {
 }
 
 #sidebar .css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
-    /* background-color: #9d97b3; */
-    background-color: #7b7491;
+    background-color: #9b8dc7;
+    color: #47415c
 }
 
 .fill-screen {
@@ -33,6 +33,10 @@ hr {
     background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
 }
 
+.token {
+    padding-top: 8px;
+    max-width: 150px;
+}
 
 /* -------- */
 /* Button variants */
@@ -149,6 +153,10 @@ hr {
     cursor: pointer;
 }
 
+.task-description {
+    color: rgb(209 207 217);
+}
+
 .task-list {
     background-color: #4f4866;
     color: #e5eef3;
@@ -229,21 +237,21 @@ hr {
     color: #e5eef3;
     background-color: #3e3852;    
     border: 3px solid #b0bec5;
-    border-radius: 3px;
+    border-radius: 5px;
 }
 
 .stat-block-container {
     color: #e5eef3;
     background-color: #3e3852;    
     border: 3px solid #b0bec5;
-    border-radius: 3px;
+    border-radius: 5px;
 }
 
 .deck-picture {
     color: #e5eef3;
     background-color: #3e3852;    
     border: 3px solid #b0bec5;
-    border-radius: 3px;
+    border-radius: 5px;
 }
 
 .hand-container {
@@ -256,6 +264,7 @@ hr {
     border: 3px solid #b0bec5;
     margin-right: 10%;
     margin-left: 10%;
+    border-radius: 5px;
 }
 
 #end-turn-btn {
@@ -330,6 +339,7 @@ hr {
     font-size: 35px;
     margin-left: 25px;
     padding-right: 26px;
+    border-radius: 5px;
 }
 /* -------- */
 
