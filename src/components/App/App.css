@@ -238,6 +238,20 @@ hr {
     background-color: #3e3852;    
     border: 3px solid #b0bec5;
     border-radius: 5px;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.minion {
+    max-width: 50px;
+    max-height: 85px;
+    padding: 6px;
+}
+
+.minion p {
+    text-align: center;
 }
 
 .stat-block-container {
@@ -340,6 +354,10 @@ hr {
     margin-left: 25px;
     padding-right: 26px;
     border-radius: 5px;
+}
+
+.minion {
+    cursor: pointer;
 }
 /* -------- */
 
