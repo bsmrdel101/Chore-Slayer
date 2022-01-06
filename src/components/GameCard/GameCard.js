@@ -110,26 +110,9 @@ function GameCard({card, round}) {
         dispatch({type: 'ADD_ACTION', payload: {name: element.name, type: 'player'}});
         switch (element.card_id) {
             case 18: // Sweep
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 1500,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })      
-                Toast.fire({
-                    icon: 'info',
-                    title: 'Click on the enemy board to attack'
-                })
-                // Passes the data of the card played to the reducer so Game.js can access it
-                dispatch({
-                    type: 'ELEMENT',
-                    payload: element
-                })
+                if (enemyBoard.length > 0) {
+                    handleSweep(element);
+                }
                 break;
             case 19: // Restart
                 dispatch({
@@ -142,6 +125,15 @@ function GameCard({card, round}) {
         }
     }
     
+    const handleSweep = (element) => {
+        for (let i = 0; i < enemyBoard.length; i++) {
+            dispatch({
+                type: 'ATTACK_ENEMY_MINION', 
+                payload: {id: i, attack: element.attack_amount, board: enemyBoard}
+            });
+        }
+    }
+
     const allowAttack = (element) => {
         const Toast = Swal.mixin({
             toast: true,

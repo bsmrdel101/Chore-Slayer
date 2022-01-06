@@ -16,7 +16,6 @@ const playerBoard = (state = [], action) => {
         case 'ATTACK_PLAYER_MINION':
             copyOfState = [...state];
             if (state.length > 0) {
-                console.log('test state.length true');
                 console.log(copyOfState[0]);
                 console.log(action.payload.attack);
                 copyOfState[0].health -= action.payload.attack;

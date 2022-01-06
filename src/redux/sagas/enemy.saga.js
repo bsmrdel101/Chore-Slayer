@@ -172,22 +172,6 @@ function* handleEnemyTurn(action) {
                   blockScore += 3;
                   console.log('< 4 block after round 5  +3');
                 }
-                  // switch (true) {
-                  //     case enemy.threat >= player.threat:
-                  //         blockScore -= 1;
-                  //         console.log('enemy threat > player');
-                  //     case enemy.block === 0:
-                  //         blockScore += 2;
-                  //         console.log('Have no block');
-                  //     case enemy.block < 4 && round > 5:
-                  //         blockScore += 3;
-                  //         console.log('< 4 block after round 5');
-                  //         break;
-                  //     default:
-                  //         blockScore += 1;
-                  //         console.log('default');
-                  //         break;
-                  // }
               }
               console.log('block after', blockScore);
 
@@ -206,22 +190,6 @@ function* handleEnemyTurn(action) {
                   attackScore += 4; 
                   console.log('More than 2 player minions  +4');
                 }
-                  // switch (true) {
-                  //   case playerBoard.length === 0:
-                  //     attackScore -= 50;
-                  //     console.log('No player minions');
-                  //     break;
-                  //     case playerBoard.length === 1:
-                  //         attackScore += 1;
-                  //         console.log('1 player minion');
-                  //         break;
-                  //     case playerBoard.length > 2:
-                  //         attackScore += 4; 
-                  //         console.log('More than 2 player minions');
-                  //         break;
-                  //     default:
-                  //         break;
-                  // }
               }
               console.log('attack after', attackScore);
       
@@ -323,6 +291,13 @@ function* handleEnemyTurn(action) {
                   }
                 }
                 console.log(selectedCard);
+
+                // Checks if there wasn't a compatible attack card to play
+                // if there isn't then select the cardType with the next highest score
+                if (selectedCard === 0) {
+                  blockScore > minionScore ? cardType = 'block' : cardType = 'minion';
+                  console.log(cardType);
+                }
               }
               // Determines what type of minion card will get played
               if (cardType === 'minion') {
