@@ -110,8 +110,11 @@ function GameCard({card, round}) {
         dispatch({type: 'ADD_ACTION', payload: {name: element.name, type: 'player'}});
         switch (element.card_id) {
             case 18: // Sweep
-                if (enemyBoard.length > 0) {
-                    handleSweep(element);
+                for (let i = 0; i < enemyBoard.length; i++) {
+                    dispatch({
+                        type: 'ATTACK_ENEMY_MINION', 
+                        payload: {id: i, attack: element.attack_amount, board: enemyBoard}
+                    });
                 }
                 break;
             case 19: // Restart
@@ -125,14 +128,6 @@ function GameCard({card, round}) {
         }
     }
     
-    const handleSweep = (element) => {
-        for (let i = 0; i < enemyBoard.length; i++) {
-            dispatch({
-                type: 'ATTACK_ENEMY_MINION', 
-                payload: {id: i, attack: element.attack_amount, board: enemyBoard}
-            });
-        }
-    }
 
     const allowAttack = (element) => {
         const Toast = Swal.mixin({

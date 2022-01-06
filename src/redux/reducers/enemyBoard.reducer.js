@@ -9,6 +9,9 @@ const enemyBoard = (state = [], action) => {
         case 'ATTACK_ENEMY_MINION':
             let id = action.payload.id;
             copyOfState = [...state];
+            if (copyOfState[id] === undefined) {
+                id = 0;
+            }
             copyOfState[id].health -= action.payload.attack;
             if (copyOfState[id].health <= 0) {
                 copyOfState.splice(id, 1);
