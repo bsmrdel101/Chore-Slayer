@@ -4,7 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import Swal from 'sweetalert2';
 import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
 import PlayerMinion from "../PlayerMinion/PlayerMinion";
 import EnemyMinion from "../EnemyMinion/EnemyMinion";
 
@@ -112,15 +114,6 @@ function Game() {
         })
     }
 
-    const handleSweep = () => {
-        for (let i = 0; i < enemyBoard.length; i++) {
-            dispatch({
-                type: 'ATTACK_ENEMY_MINION', 
-                payload: {id: i, attack: player.element.attack_amount, board: enemyBoard}
-            });
-        }
-    }
-
     return (
         <>
             <Grid container spacing={3}>
@@ -182,6 +175,12 @@ function Game() {
                 {hand.map((card) => {
                     return <GameCard key={card.id} card={card}/>;
                 })}
+
+                {/* If the hand is empty, add an invisible card to prevent the hand from collapsing */}
+                {
+                    hand.length === 0 &&
+                    <div className="filler-card"></div>
+                }
             </div>
         </>
     );
