@@ -36,6 +36,11 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 }
 
+// Decides what card will be played after the specific card type has been decided
+function cardDecider() {
+  
+}
+
 // Saga GET route
 function* handleEnemyTurn(action) {
     try {
@@ -308,17 +313,16 @@ function* handleEnemyTurn(action) {
               if (cardType === 'attack') {
                 console.log('Inside attack!');
                 for (let card of enemyHand) {
+                  console.log(card);
                   if (card.type === 'attack') {
                     if (energy >= card.cost) {
                       selectedCard = card.card_id;
                       console.log(card.name);
                       break;
-                    } else {
-                      cardType = 'minion';
-                      break;
                     }
                   }
                 }
+                console.log(selectedCard);
               }
               // Determines what type of minion card will get played
               if (cardType === 'minion') {
@@ -426,9 +430,10 @@ function* handleEnemyTurn(action) {
                                           lowestHp = minion.health;
                                         }
                                       }
+                                      console.log(card.attack_amount);
                                       yield put({
                                         type: 'ATTACK_PLAYER_MINION',
-                                        payload: {id: minionId, attack: card.damage, board: playerBoard}
+                                        payload: {id: minionId, attack: card.attack_amount, board: playerBoard}
                                       })
                                     } else {
                                       console.log('* Player had no minions to attack *');

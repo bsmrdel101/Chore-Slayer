@@ -51,7 +51,7 @@ function DisplayCard({id}) {
             {cards.map((card) => {
                 if (card.id === id && card.rarity === 'Common') {
                     return (
-                        <Card sx={{ flexGrow: 1, maxWidth: "200px", backgroundColor: '#2b5c55', color: 'white'}} key={id} onClick={() => handleDelete(card)}>
+                        <Card sx={{ flexGrow: 1, maxWidth: 200, backgroundColor: '#2b5c55', color: 'white'}} key={id} onClick={() => handleDelete(card)}>
                             <CardActionArea>
                                 <Typography gutterBottom variant="h6" component="div" textAlign={"center"} fontSize="25px">
                                     {card.name}
