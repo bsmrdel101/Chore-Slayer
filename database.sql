@@ -60,9 +60,28 @@ CREATE TABLE "hand" (
     "deck_id" INTEGER REFERENCES "deck"
 );
 
+CREATE TABLE "stats" (
+	"id" SERIAL PRIMARY KEY,
+    "games_won" INTEGER DEFAULT 0,
+    "games_lost" INTEGER DEFAULT 0,
+    "total_games" INTEGER DEFAULT 0,
+    "cards_played" INTEGER DEFAULT 0,
+    "total_damage" INTEGER DEFAULT 0,
+    "total_block" INTEGER DEFAULT 0,
+    "minions_slain" INTEGER DEFAULT 0,
+    "times_surrendered" INTEGER DEFAULT 0,
+    "highest_threat" INTEGER DEFAULT 0,
+    "highest_block" INTEGER  DEFAULT 0,
+    "user_id" INTEGER REFERENCES "user"
+);
 
--- Add card data to table
+
+
+-- Add data in table
 
 INSERT INTO "cards" ("name", "type", "token", "description", "cost", "block_amount", "attack_amount", "damage", "health")
 VALUES 
 ('Break Formation', 'block', 'shield_token.png', 'Both players lose 3 block', '2', '0', '0', '0', '0');
+
+INSERT INTO "stats" ("games_won", "games_lost", "total_games", "cards_played", "total_damage", "total_block", "minions_slain", "times_surrendered", "highest_threat", "highest_block")
+VALUES ();
