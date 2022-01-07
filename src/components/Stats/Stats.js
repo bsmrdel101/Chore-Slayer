@@ -4,6 +4,13 @@ import { useEffect } from "react";
 function Stats() {
     const dispatch = useDispatch();
 
+    useEffect(()=> {
+        dispatch({
+            type: 'CHECK_USER',
+            payload: 1
+        });
+    }, [])
+
     return (
         <>
             <br/>

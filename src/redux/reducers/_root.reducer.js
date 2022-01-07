@@ -14,6 +14,7 @@ import taskHistoryReducer from './taskHistory.reducer';
 import rewardsReducer from './rewards.reducer';
 import actions from './actions.reducer';
 import cardReducer from './card.reducer';
+import statsReducer from './stats.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -36,7 +37,8 @@ const rootReducer = combineReducers({
   taskHistoryReducer,
   rewardsReducer,
   actions,
-  cardReducer
+  cardReducer,
+  statsReducer
 });
 
 export default rootReducer;

@@ -7,6 +7,7 @@ import handSaga from './hand.saga';
 import deckSaga from './deck.saga';
 import enemySaga from './enemy.saga';
 import rewardsSaga from './rewards.saga';
+import statsSaga from './stats.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -24,6 +25,7 @@ export default function* rootSaga() {
     handSaga(),
     deckSaga(),
     enemySaga(),
-    rewardsSaga()
+    rewardsSaga(),
+    statsSaga()
   ]);
 }
