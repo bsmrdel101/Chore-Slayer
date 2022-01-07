@@ -16,10 +16,6 @@ hr {
     color: #47415c
 }
 
-.fill-screen {
-    padding-bottom: 14em;
-}
-
 .task-subtitle {
     text-align: center;
     font-size: 30px;
@@ -37,6 +33,7 @@ hr {
 #react-root {
     background-color: #0cbaba;
     background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
+    height: 100vh;
 }
 
 .token {
@@ -417,12 +414,14 @@ hr {
     margin-left: 2rem;
     padding: 8px;
     font-size: 50px;
+    border-radius: 10px;
 }
 
 .stats-container {
     display: flex;
     justify-content: center;
-    gap: 12rem;
+    gap: 6rem;
+    margin-top: 35px;
 }
 
 .stats-container div {
@@ -430,6 +429,7 @@ hr {
     background-color: #3e3852;    
     border: 3px solid #b0bec5;
     padding: 0 8px;
+    border-radius: 10px;
 }
 
 .stats-container h3 {
@@ -440,6 +440,7 @@ hr {
 .stats-container p {
     background-color: #4f4866;
     padding: 8px;
+    border-radius: 5px;
 }
 
 
