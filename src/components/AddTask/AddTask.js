@@ -86,15 +86,12 @@ function AddTask() {
                                         <CardContent>
                                         <Typography gutterBottom variant="h5" component="div">
                                         <Grid container spacing={2} columns={16}>
-                                            <Grid item xs={8}>
+                                            <Grid item xs={16}>
                                                 {task.name}
-                                            </Grid>
-                                            <Grid item xs={8}>
-                                                {task.difficulty}
                                             </Grid>
                                         </Grid>
                                         </Typography>
-                                        <Typography variant="body2" color="text.secondary">
+                                        <Typography variant="body2" className='task-description'>
                                             {task.description}
                                         </Typography>
                                         </CardContent>
