@@ -17,15 +17,14 @@ function* checkUser(action) {
     try {
         const response = yield axios({
             method: 'GET',
-            url: `/api/stats/${action.payload}`
+            url: `/api/stats/1`
         })
         console.log(response.data);
         // Checks if the user is new
         // If true, then insert a row for them in the stats table 
         if (response.data.new_user === true) {
             yield put({
-                type: 'INITIALIZE_STATS',
-                payload: 1
+                type: 'INITIALIZE_STATS'
             });
         }
     } catch(err) {
@@ -37,8 +36,7 @@ function* initializeStats(action) {
     try {
         yield axios({
             method: 'POST',
-            url: '/api/stats',
-            data: action.payload
+            url: '/api/stats'
         })
         // Sets new_user to false
         yield put({

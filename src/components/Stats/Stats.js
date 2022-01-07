@@ -6,8 +6,7 @@ function Stats() {
 
     useEffect(()=> {
         dispatch({
-            type: 'CHECK_USER',
-            payload: 1
+            type: 'CHECK_USER'
         });
     }, [])
 
