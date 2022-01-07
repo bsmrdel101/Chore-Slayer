@@ -408,6 +408,41 @@ hr {
 /* -------- */
 
 
+/* Stats page */
+#stats-title {
+    display: inline;
+    color: #e5eef3;
+    background-color: #3e3852;    
+    border: 3px solid #b0bec5;
+    margin-left: 2rem;
+    padding: 8px;
+    font-size: 50px;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 12rem;
+}
+
+.stats-container div {
+    color: #e5eef3;
+    background-color: #3e3852;    
+    border: 3px solid #b0bec5;
+    padding: 0 8px;
+}
+
+.stats-container h3 {
+    border-bottom: 2px solid #b0bec5;
+    font-size: 25px;
+}
+
+.stats-container p {
+    background-color: #4f4866;
+    padding: 8px;
+}
+
+
 /* -------- */
 /* Animations */
 @keyframes usedCardPlayer {
