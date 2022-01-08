@@ -165,7 +165,7 @@ hr {
     background-color: #4f4866;
     color: #e5eef3;
     padding: 30px;
-    border-radius: 3px;
+    border-radius: 5px;
 }
 
 #delete-task-btn {
@@ -461,6 +461,7 @@ hr {
 .stats-container h3 {
     border-bottom: 2px solid #b0bec5;
     font-size: 25px;
+    text-align: center;
 }
 
 .stats-container p {

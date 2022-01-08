@@ -101,11 +101,32 @@ function* payCoins(action) {
   }
 }
 
+function* refund(action) {
+  try {
+    console.log(action.payload.coins);
+    console.log(action.payload.amount);
+    let total = action.payload.coins + action.payload.amount;
+    const response = yield axios({
+      method: 'PUT',
+      url: `/api/rewards/`,
+      data: {coins: total}
+    })
+    // Update the reward reducer
+    yield put({
+      type: 'GET_REWARD',
+      payload: response.data[0].coins
+    });
+  } catch(err) {
+    console.error('GET error: ', err);
+  }
+}
+
 function* rewardsSaga() {
     yield takeLatest('FETCH_COINS', fetchCoins);
     yield takeLatest('REWARD_COINS', rewardCoins);
     yield takeLatest('GET_REWARD', getReward);
     yield takeLatest('PAY_COINS', payCoins);
+    yield takeLatest('REFUND', refund);
 }
 
 export default rewardsSaga;

@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 
 function DisplayCard({id}) {
     const cards = useSelector((store) => store.cardReducer);
+    const rewards = useSelector((store) => store.rewardsReducer);
 
     const dispatch = useDispatch();
 
@@ -26,6 +27,11 @@ function DisplayCard({id}) {
                     type: 'REMOVE_CARD',
                     payload: card.id
                 });
+                // Refunds 1/2 of the price to the user
+                dispatch({
+                    type: 'REFUND',
+                    payload: {amount: Math.round(card.price / 2), coins: rewards}
+                })
                 // Send an alert to the user
                 const Toast = Swal.mixin({
                     toast: true,
