@@ -31,6 +31,10 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
+    // Initializes stats reducer
+    dispatch({
+      type: 'FETCH_STATS'
+    });
   }, [dispatch]);
 
   return (

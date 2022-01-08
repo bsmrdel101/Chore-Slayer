@@ -54,10 +54,10 @@ function AddTask() {
                 <h1 className="task-subtitle">Add a Task</h1>
                 <form onSubmit={addTask} className="add-task-form">
                     <div>
-                        <TextField label="Name" variant="outlined" value={newName}
+                        <TextField label="Name" variant="outlined" value={newName} id="name-input"
                             onChange={(event) => setNewName(event.target.value)} required/>
                     </div>
-                    <div>
+                    <div id="description-input">
                         <TextField
                             label="Description"
                             multiline
@@ -74,37 +74,43 @@ function AddTask() {
                 </form>
             </center>
             <hr/>
-            <section className="task-history-list">
-                <h1 className="task-subtitle">History</h1>
-                {
-                    taskHistory.length > 0 &&
-                    taskHistory.map((task) => {
-                        return (
-                            <div key={task.id}>
-                                <Card sx={{ maxWidth: 345 }} className="task-card">
-                                    <CardActionArea>
-                                        <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                        <Grid container spacing={2} columns={16}>
-                                            <Grid item xs={16}>
-                                                {task.name}
+            <center>
+                <section id="task-history-list">
+                    <h1 className="task-subtitle">History</h1>
+                    {
+                        taskHistory.length > 0 &&
+                        taskHistory.map((task) => {
+                            return (
+                                <div key={task.id}>
+                                    <Card sx={{ maxWidth: 345 }} className="task-card">
+                                        <CardActionArea>
+                                            <CardContent>
+                                            <Typography gutterBottom variant="h5" component="div">
+                                            <Grid container spacing={2} columns={16}>
+                                                <Grid item xs={16}>
+                                                    <center>
+                                                        {task.name}
+                                                    </center>
+                                                </Grid>
                                             </Grid>
-                                        </Grid>
-                                        </Typography>
-                                        <Typography variant="body2" className='task-description'>
-                                            {task.description}
-                                        </Typography>
-                                        </CardContent>
-                                    </CardActionArea>
-                                    <CardActions>
-                                        <Button size="small" variant="contained" onClick={() => incompleteTask(task)}>Incomplete</Button>
-                                    </CardActions>
-                                </Card> 
-                            </div>
-                        );
-                    })
-                }
-            </section>
+                                            </Typography>
+                                            <Typography variant="body2" className='task-description'>
+                                                <center>
+                                                    {task.description}
+                                                </center>
+                                            </Typography>
+                                            </CardContent>
+                                        </CardActionArea>
+                                        <CardActions>
+                                            <Button size="small" variant="contained" onClick={() => incompleteTask(task)}>Incomplete</Button>
+                                        </CardActions>
+                                    </Card> 
+                                </div>
+                            );
+                        })
+                    }
+                </section>
+            </center>
         </>
     );
 }

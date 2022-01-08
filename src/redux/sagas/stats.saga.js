@@ -1,15 +1,16 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
+/**** AXIOS ROUTES ****/
+
 function* fetchStats(action) {
     try {
-      const response = yield axios({
-        method: 'GET',
-        url: '/api/stats'
-      })
-      console.log(response.data);
+        const response = yield axios({
+            method: 'GET',
+            url: '/api/stats'
+        })
     } catch(err) {
-      console.error('GET error: ', err);
+        console.error('GET error: ', err);
     }
 }
 
@@ -19,7 +20,6 @@ function* checkUser(action) {
             method: 'GET',
             url: `/api/stats/1`
         })
-        console.log(response.data);
         // Checks if the user is new
         // If true, then insert a row for them in the stats table 
         if (response.data.new_user === true) {
@@ -51,7 +51,7 @@ function* newUser(action) {
     try {
         yield axios({
             method: 'PUT',
-            url: '/api/stats',
+            url: '/api/stats/1',
         })
     } catch(err) {
         console.error('GET error: ', err);
@@ -59,12 +59,46 @@ function* newUser(action) {
 }
 
 
+/**** STAT HANDLERS ****/
+
+function* totalGames(action) {
+    try {
+        const total = action.payload + 1;
+        yield axios({
+            method: 'PUT',
+            url: '/api/stats',
+            data: {
+                games_won: action.payload.games_won,
+                games_lost: action.payload.games_lost,
+                total_games: total,
+                cards_played: action.payload.cards_played,
+                total_damage: action.payload.total_damage,
+                total_block: action.payload.total_block,
+                minions_slain: action.payload.minions_slain,
+                times_surrendered: action.payload.times_surrendered,
+                highest_threat: action.payload.highest_threat,
+                highest_block: action.payload.highest_block
+            }
+        })
+        yield put({
+            type: 'FETCH_STATS'
+        });
+    } catch(err) {
+        console.error('GET error: ', err);
+    }
+}
+
 
 function* statsSaga() {
+    // axios routes
     yield takeLatest('FETCH_STATS', fetchStats);
     yield takeLatest('INITIALIZE_STATS', initializeStats);
     yield takeLatest('CHECK_USER', checkUser);
     yield takeLatest('NEW_USER', newUser);
+    // stat handlers
+    // yield takeLatest('GAMES_WON', gamesWon);
+    // yield takeLatest('GAMES_LOST', gamesLost);
+    yield takeLatest('TOTAL_GAMES', totalGames);
 }
 
 export default statsSaga;

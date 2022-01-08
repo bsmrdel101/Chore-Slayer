@@ -19,6 +19,7 @@ hr {
 .task-subtitle {
     text-align: center;
     font-size: 30px;
+    color: #e5eef3;
 }
 
 .filler-card {
@@ -202,10 +203,28 @@ hr {
 }
 
 .add-task-form {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     gap: 5px;
     padding-top: 3vh;
+    color: #b0bec5;
+    background-color: #3e3852;    
+    border: 3px solid #b0bec5;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+#name-input {
+    color: #b0bec5;
+    background-color: #7b7491;   
+    border-radius: 5px;
+}
+
+#description-input {
+    color: #b0bec5;
+    background-color: #7b7491;   
+    border-radius: 5px;
 }
 
 .chore-list-title {
@@ -231,6 +250,13 @@ hr {
     border-radius: 10px;
     padding: 10px;
 }
+
+#task-history-list .task-card {
+    background-color: #7b7491;
+    color: #e5eef3;
+    border-radius: 10px;
+}
+
 /* -------- */
 
 

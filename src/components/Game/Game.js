@@ -3,10 +3,6 @@ import GameCard from "../GameCard/GameCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import Swal from 'sweetalert2';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
 import PlayerMinion from "../PlayerMinion/PlayerMinion";
 import EnemyMinion from "../EnemyMinion/EnemyMinion";
 
@@ -22,6 +18,7 @@ function Game() {
     const dispatch = useDispatch();
     const playerBoard = useSelector((store) => store.playerBoard);
     const enemyBoard = useSelector((store) => store.enemyBoard);
+    const stats = useSelector((store) => store.statsReducer);
 
     useEffect(() => {
         // Loop through all the cards in our deck and copy them all into a local state called baseHand
@@ -31,6 +28,11 @@ function Game() {
             // Add the card to the discard pile so it can't be drawn again
             // Splice the card at index 0
         fetchDeck();
+        // Adds one to total games stat
+        dispatch({
+            type: 'TOTAL_GAMES',
+            payload: stats.total_games
+        });
     }, []);
 
     // Gets all of the cards in the user's deck
