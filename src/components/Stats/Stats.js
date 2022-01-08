@@ -10,9 +10,6 @@ function Stats() {
         dispatch({
             type: 'CHECK_USER'
         });
-        dispatch({
-            type: 'FETCH_STATS'
-        });
     }, [])
 
     return (
