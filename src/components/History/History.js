@@ -2,9 +2,11 @@ import { Card, CardContent, CardActionArea, Typography, CardActions } from "@mui
 import { Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 function History() {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const taskHistory = useSelector((store) => store.taskHistoryReducer);
 
@@ -31,6 +33,7 @@ function History() {
         <>
             <center>
                     <h1 className="chore-list-title">History</h1>
+                    <button onClick={() => history.push('/tasks')}>Back</button>
                     <section id="task-history-list">
                     {
                         taskHistory.length > 0 &&
