@@ -186,7 +186,7 @@ function Game() {
             {/* Holds the player's hand */}
             <div className="hand-container">
                 {hand.map((card) => {
-                    return <GameCard key={card.id} card={card}/>;
+                    return <GameCard key={card.id} card={card} round={round}/>;
                 })}
 
                 {/* If the hand is empty, add an invisible card to prevent the hand from collapsing */}

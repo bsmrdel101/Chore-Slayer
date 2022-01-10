@@ -122,6 +122,16 @@ function GameCard({card, round}) {
                     type: 'RESTART_ATTACK'
                 });
                 break;
+            case 22: // Rebound  
+                dispatch({
+                    type: 'DEAL_ENEMY_DAMAGE',
+                    payload: round
+                });
+                dispatch({
+                    type: 'DEAL_PLAYER_DAMAGE',
+                    payload: round
+                });
+                break;
             default:
                 allowAttack(element);
                 break;
