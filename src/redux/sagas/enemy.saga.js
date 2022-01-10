@@ -397,6 +397,16 @@ function* handleEnemyTurn(action) {
                                       console.log('* Player had no minions to attack *');
                                     }
                                     break;
+                                  case 22: // Rebound  
+                                    yield put({
+                                        type: 'DEAL_ENEMY_DAMAGE',
+                                        payload: round
+                                    });
+                                    yield put({
+                                        type: 'DEAL_PLAYER_DAMAGE',
+                                        payload: round
+                                    });
+                                    break;
                                   default:
                                     if (playerBoard.length > 0) {
                                       for (let minion of playerBoard) {
@@ -405,7 +415,6 @@ function* handleEnemyTurn(action) {
                                           lowestHp = minion.health;
                                         }
                                       }
-                                      console.log(card.attack_amount);
                                       yield put({
                                         type: 'ATTACK_PLAYER_MINION',
                                         payload: {id: minionId, attack: card.attack_amount, board: playerBoard}
