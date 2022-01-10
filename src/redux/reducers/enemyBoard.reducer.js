@@ -3,8 +3,10 @@ const enemyBoard = (state = [], action) => {
     switch (action.type) {
         case 'SUMMON_ENEMY_MINION':
             copyOfState = [...state];
-            copyOfState.push(action.payload);
-            console.log(copyOfState);
+            if (copyOfState.length < 6) {
+                copyOfState.push(action.payload);
+                console.log(copyOfState);
+            }
             return copyOfState;
         case 'ATTACK_ENEMY_MINION':
             let id = action.payload.id;

@@ -57,6 +57,20 @@ function Game() {
     const handleEndTurn = () => {
         const enemyDefence = enemy.threat + enemy.block;
 
+        // Activates enemy's slime machine if it exists on the board
+        for (let minion of enemyBoard) {
+            if (minion.damage === 0 && minion.health === 6) {
+              dispatch({
+                type: 'SUMMON_ENEMY_MINION',
+                payload: {damage: 1, health: 1, rarity: 'Common'}
+              });
+              dispatch({
+                  type: 'ADD_ENEMY_THREAT',
+                  payload: 1
+              });
+            }
+        }
+
         dispatch({
             type: 'RESET_PLAYER_ENERGY'
         })

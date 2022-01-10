@@ -530,6 +530,20 @@ function* handleEnemyTurn(action) {
           })
         }
 
+        // Activates player's slime machine if it exists on the board
+        for (let minion of playerBoard) {
+          if (minion.damage === 0 && minion.health === 6) {
+            yield put({
+              type: 'SUMMON_PLAYER_MINION',
+              payload: {damage: 1, health: 1, rarity: 'Common'}
+            });
+            yield put({
+                type: 'ADD_PLAYER_THREAT',
+                payload: 1
+            });
+          }
+        }
+
       yield put({
         type: 'FETCH_ENEMY_HAND',
         payload: {card1: modifiedHand[0], card2: modifiedHand[1], card3: modifiedHand[2], card4: modifiedHand[3], card5: modifiedHand[4]}
