@@ -75,6 +75,13 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
             copyOfState = {...state};
             copyOfState.threat = 0;
             return copyOfState;
+        case 'DOUBLE_PLAYER_BLOCK':
+            copyOfState = {...state};
+            copyOfState.block *= 2;
+            if (copyOfState.block > 12) {
+                copyOfState.block = 12;
+            }
+            return copyOfState;
         case 'ELEMENT':
             // Element is the card data sent to the game.js for when a player clicks an enemy minion
             copyOfState = {...state};

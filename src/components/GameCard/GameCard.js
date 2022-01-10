@@ -101,6 +101,11 @@ function GameCard({card, round}) {
                     dispatch({type: 'PLAYER_COWARD'});
                 }
                 break;
+            case 23: // Tower shield
+                dispatch({
+                    type: 'DOUBLE_PLAYER_BLOCK'
+                });
+                break;
             default:
                 break;
         }

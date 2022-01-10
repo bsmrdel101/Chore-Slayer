@@ -246,6 +246,10 @@ function* handleEnemyTurn(action) {
               if (cardType === 'block') {
                 console.log('Inside block!');
                   switch (card.card_id) {
+                      case 23:
+                          selectedCard = card.card_id;
+                          console.log(card.name);
+                          break;
                       case 5:
                           let blockDiff = player.block + 2;
                           console.log(blockDiff, enemy.block);
@@ -361,6 +365,11 @@ function* handleEnemyTurn(action) {
                                     case 17: // Coward
                                         yield put({type: 'ENEMY_COWARD', payload: playerBoard.length});
                                     break;
+                                    case 23: // Tower shield
+                                        yield put({
+                                            type: 'DOUBLE_ENEMY_BLOCK'
+                                        });
+                                        break;
                                     default:
                                         break;
                                 }

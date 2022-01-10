@@ -34,6 +34,13 @@ const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5, sto
                 copyOfState.block = 0;
             }
             return copyOfState;
+        case 'DOUBLE_ENEMY_BLOCK':
+            copyOfState = {...state};
+            copyOfState.block *= 2;
+            if (copyOfState.block > 12) {
+                copyOfState.block = 12;
+            }
+            return copyOfState;
         case 'ADD_ENEMY_THREAT':
             copyOfState = {...state};
             copyOfState.threat += action.payload;
