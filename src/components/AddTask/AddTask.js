@@ -3,8 +3,6 @@ import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
-import { Card, CardContent, CardActionArea, Typography, CardActions } from "@mui/material";
-import { Grid } from "@mui/material";
 import { useEffect } from "react";
 
 function AddTask() {
@@ -16,7 +14,6 @@ function AddTask() {
 
     const history = useHistory();
     const dispatch = useDispatch();
-    const taskHistory = useSelector((store) => store.taskHistoryReducer);
 
     // local state for add task form
     let [newName, setNewName] = useState('');
@@ -33,19 +30,6 @@ function AddTask() {
             type: 'ADD_TASK',
             payload: {name: newName, description: newDescription, difficulty: newDifficulty}
         });
-    }
-
-    const incompleteTask = (task) => {
-        // Adds the task back to chore list
-        dispatch({
-            type: 'REVIVE_TASK',
-            payload: task
-        })
-        // Removes the task from the history
-        dispatch({
-            type: 'DELETE_HISTORY',
-            payload: task.id
-        })
     }
 
     return (
@@ -72,44 +56,6 @@ function AddTask() {
                         <Button variant="text" onClick={() => history.push('/tasks')}>Cancel</Button>
                     </div>
                 </form>
-            </center>
-            <hr/>
-            <center>
-                <section id="task-history-list">
-                    <h1 className="task-subtitle">History</h1>
-                    {
-                        taskHistory.length > 0 &&
-                        taskHistory.map((task) => {
-                            return (
-                                <div key={task.id}>
-                                    <Card sx={{ maxWidth: 345 }} className="task-card">
-                                        <CardActionArea>
-                                            <CardContent>
-                                            <Typography gutterBottom variant="h5" component="div">
-                                            <Grid container spacing={2} columns={16}>
-                                                <Grid item xs={16}>
-                                                    <center>
-                                                        {task.name}
-                                                    </center>
-                                                </Grid>
-                                            </Grid>
-                                            </Typography>
-                                            <Typography variant="body2" className='task-description'>
-                                                <center>
-                                                    {task.description}
-                                                </center>
-                                            </Typography>
-                                            </CardContent>
-                                        </CardActionArea>
-                                        <CardActions>
-                                            <Button size="small" variant="contained" onClick={() => incompleteTask(task)}>Incomplete</Button>
-                                        </CardActions>
-                                    </Card> 
-                                </div>
-                            );
-                        })
-                    }
-                </section>
             </center>
         </>
     );

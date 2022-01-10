@@ -18,7 +18,7 @@ hr {
 
 .task-subtitle {
     text-align: center;
-    font-size: 30px;
+    font-size: 50px;
     color: #e5eef3;
 }
 
@@ -85,6 +85,28 @@ hr {
     background-color: rgb(73, 178, 197);
     font-size: 16px;
     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-5px);
+}
+
+.incomplete-btn {
+    width: 115px;
+    height: 43px;
+    font-size: 15px;
+    color: white;
+    background-color: rgb(196, 82, 82);
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+  
+.incomplete-btn:hover {
+    font-size: 16px;
+    background-color: rgb(228, 94, 94);
+    box-shadow: 0px 15px 20px rgba(216, 50, 28, 0.4);
     color: #fff;
     transform: translateY(-5px);
 }
@@ -256,6 +278,23 @@ hr {
     color: #e5eef3;
     border-radius: 10px;
 }
+
+#task-history-list {
+    color: #b0bec5;
+    background-color: #3e3852;    
+    border: 3px solid #b0bec5;
+    padding: 40px;
+    margin-left: 30%;
+    margin-right: 30%;
+    border-radius: 10px;
+}
+
+.task-list-background {
+    background-color: #4f4866;
+    color: #e5eef3;
+    padding: 10px 3px 20px 3px;
+    border-radius: 3px;
+} 
 
 /* -------- */
 

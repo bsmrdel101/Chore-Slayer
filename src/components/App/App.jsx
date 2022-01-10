@@ -21,6 +21,7 @@ import Deck from '../Deck/Deck';
 import Stats from '../Stats/Stats';
 import Help from '../Help/Help';
 import AddTask from '../AddTask/AddTask';
+import History from '../History/History';
 
 import './App.css';
 
@@ -105,6 +106,14 @@ function App() {
             path="/help"
           >
             <Help />
+          </ProtectedRoute>
+
+          {/* History page */}
+          <ProtectedRoute
+            exact
+            path="/history"
+          >
+            <History />
           </ProtectedRoute>
 
           <Route
