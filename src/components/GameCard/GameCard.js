@@ -106,6 +106,11 @@ function GameCard({card, round}) {
                     type: 'DOUBLE_PLAYER_BLOCK'
                 });
                 break;
+            case 24: // Rejuvenate
+                dispatch({
+                    type: 'REJUVENATE_PLAYER'
+                });
+                break;
             default:
                 break;
         }

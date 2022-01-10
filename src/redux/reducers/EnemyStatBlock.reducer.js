@@ -41,6 +41,17 @@ const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5, sto
                 copyOfState.block = 12;
             }
             return copyOfState;
+        case 'REJUVENATE_ENEMY':
+            copyOfState = {...state};
+            if (copyOfState.block > 6) {
+                copyOfState.block = 6;
+            }
+            copyOfState.health += copyOfState.block;
+            copyOfState.block = 0;
+            if (copyOfState.health > 20) {
+                copyOfState.health = 20;
+            }
+            return copyOfState;
         case 'ADD_ENEMY_THREAT':
             copyOfState = {...state};
             copyOfState.threat += action.payload;

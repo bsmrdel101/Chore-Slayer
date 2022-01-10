@@ -270,6 +270,12 @@ function* handleEnemyTurn(action) {
                             console.log(card.name);
                           }
                           break;
+                      case 24:
+                          if (enemy.block >= 5) {
+                            selectedCard = card.card_id;
+                            console.log(card.name);
+                          }
+                          break;
                       default:          
                           for (let card of enemyHand) {
                             if (card.type === 'block' && energy >= card.cost) {
@@ -368,6 +374,11 @@ function* handleEnemyTurn(action) {
                                     case 23: // Tower shield
                                         yield put({
                                             type: 'DOUBLE_ENEMY_BLOCK'
+                                        });
+                                        break;
+                                    case 24: // Rejuvenate
+                                        yield put({
+                                            type: 'REJUVENATE_ENEMY'
                                         });
                                         break;
                                     default:

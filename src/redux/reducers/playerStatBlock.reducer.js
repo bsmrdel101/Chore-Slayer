@@ -82,6 +82,17 @@ const playerStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 500, 
                 copyOfState.block = 12;
             }
             return copyOfState;
+        case 'REJUVENATE_PLAYER':
+            copyOfState = {...state};
+            if (copyOfState.block > 6) {
+                copyOfState.block = 6;
+            }
+            copyOfState.health += copyOfState.block;
+            copyOfState.block = 0;
+            if (copyOfState.health > 20) {
+                copyOfState.health = 20;
+            }
+            return copyOfState;
         case 'ELEMENT':
             // Element is the card data sent to the game.js for when a player clicks an enemy minion
             copyOfState = {...state};
