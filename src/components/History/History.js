@@ -33,7 +33,7 @@ function History() {
         <>
             <center>
                     <h1 className="chore-list-title">History</h1>
-                    <button onClick={() => history.push('/tasks')}>Back</button>
+                    <button onClick={() => history.push('/tasks')} className="back-btn">Back</button>
                     <section id="task-history-list">
                     {
                         taskHistory.length > 0 &&

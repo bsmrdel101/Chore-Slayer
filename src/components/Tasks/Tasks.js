@@ -80,7 +80,7 @@ function Tasks() {
                     <Item id="grid-background-right">
                         <div className="reward-display">
                             <h2>Tasks Left: {taskReducer.length}</h2>
-                            <button onClick={() => history.push('/history')}>See History</button>
+                            <button onClick={() => history.push('/history')} className="complete-btn">See History</button>
                             <hr />
                             <h2>Reward: {taskHistory.length} / 3 completed tasks</h2>
                             {

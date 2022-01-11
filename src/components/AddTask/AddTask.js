@@ -38,7 +38,7 @@ function AddTask() {
                 <h1 className="task-subtitle">Add a Task</h1>
                 <form onSubmit={addTask} className="add-task-form">
                     <div>
-                        <TextField label="Name" variant="outlined" value={newName} id="name-input"
+                        <TextField label="Name" variant="filled" value={newName} id="name-input"
                             onChange={(event) => setNewName(event.target.value)} required/>
                     </div>
                     <div id="description-input">
@@ -46,14 +46,14 @@ function AddTask() {
                             label="Description"
                             multiline
                             rows={4}
-                            variant="outlined"
+                            variant="filled"
                             value={newDescription}
                             onChange={(event) => setNewDescription(event.target.value)}
                         />
                     </div>
-                    <div>
-                        <Button variant="text" type="submit">Save</Button>
-                        <Button variant="text" onClick={() => history.push('/tasks')}>Cancel</Button>
+                    <div className="add-task-btn-container">
+                        <button className="complete-btn" type="submit">Save</button>
+                        <button  className="incomplete-btn" onClick={() => history.push('/tasks')}>Cancel</button>
                     </div>
                 </form>
             </center>
