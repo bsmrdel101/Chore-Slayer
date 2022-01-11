@@ -496,6 +496,12 @@ hr {
     margin-right: 10%;
     margin-left: 10%;
 }
+
+.deck-gallery .MuiPaper-root {
+    width: 12rem;
+    min-height: 20em;
+}
+
 /* -------- */
 
 
