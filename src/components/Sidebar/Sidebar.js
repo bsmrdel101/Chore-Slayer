@@ -171,27 +171,18 @@ export default function Sidebar() {
         {user.id &&
             <Divider />
         }
-        {user.id &&
         <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame('help') : history.push('/help'))}>
             <ListItemIcon>
                 <HelpIcon />
             </ListItemIcon>
             <ListItemText primary="Help"/>
         </ListItem>
-        }
-        {user.id ?
+        {user.id &&
             <ListItem button onClick={() => dispatch({ type: 'LOGOUT' })}>
                 <ListItemIcon>
                     <LogoutIcon />
                 </ListItemIcon>
                 <ListItemText primary="Logout"/>
-            </ListItem>
-        :
-            <ListItem button onClick={() => (history.push('/login'))}>
-                <ListItemIcon>
-                    <InboxIcon />
-                </ListItemIcon>
-                <ListItemText primary="Login / Register"/>
             </ListItem>
         }
       </Drawer>

@@ -48,6 +48,7 @@ function AddTask() {
                             rows={4}
                             variant="filled"
                             value={newDescription}
+                            sx={{backgroundColor: '#7b7491'}}
                             onChange={(event) => setNewDescription(event.target.value)}
                         />
                     </div>
