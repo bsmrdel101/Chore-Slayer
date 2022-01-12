@@ -20,7 +20,9 @@ function Help() {
             <br />
             <div className="box-right">
                 <h1 className="help-subtitle">Deck</h1>
-                <p>stuff and things</p>
+                <ul className="box-list">
+                    <li></li>
+                </ul>
             </div>
             <br />
             <div className="box-left">
