@@ -193,8 +193,20 @@ hr {
     border-radius: 10px;
 }
 
+.login-title {
+    font-size: 32px;
+}
+
+#username-input, #password-input, #register-username, #register-password {
+    color: #b0bec5;
+}
+
 .top-margin-btn {
     margin-top: 1em;
+}
+
+.top-margin-btn h4 {
+    color: #b0bec5;
 }
 
 /* -------- */
@@ -512,14 +524,14 @@ hr {
 
 /* Stats page */
 #stats-title {
-    display: inline;
-    color: #e5eef3;
+    color: #b0bec5;
     background-color: #3e3852;    
     border: 3px solid #b0bec5;
-    margin-left: 2rem;
-    padding: 8px;
-    font-size: 50px;
-    border-radius: 10px;
+    font-size: 45px;
+    text-align: center;
+    border-radius: 5px;
+    margin-right: 15%;
+    margin-left: 15%;
 }
 
 .stats-container {
@@ -549,8 +561,35 @@ hr {
     border-radius: 5px;
 }
 
+/* -------- */
+
+
+/* Help page */
+.box-left {
+    display: inline-block;
+    color: #e5eef3;
+    background-color: #3e3852;    
+    border: 3px solid #b0bec5;
+    border-radius: 10px;
+    padding: 0px 15px;
+    margin-left: 20%;
+    margin-top: 2em;
+}
+
+.box-right {
+    display: inline-block;
+    color: #e5eef3;
+    background-color: #3e3852;    
+    border: 3px solid #b0bec5;
+    border-radius: 10px;
+    padding: 0px 15px;
+    margin-top: 1em;
+    margin-left: 70%;
+}
 
 /* -------- */
+
+
 /* Animations */
 @keyframes usedCardPlayer {
     from {

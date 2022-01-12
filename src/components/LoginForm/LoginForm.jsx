@@ -34,21 +34,21 @@ function LoginForm() {
   return (
     <center>
       <form className="form-panel" onSubmit={login}>
-        <h2>Login</h2>
+        <h2 className="login-title">Login</h2>
         {errors.loginMessage && (
           <h3 className="alert" role="alert">
             {errors.loginMessage}
           </h3>
         )}
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+          <AccountCircle sx={{ color: '#b0bec5', mr: 1, my: 0.5 }} />
           <TextField id="username-input" label="Username" variant="standard" 
             required
             value={username}
             onChange={(event) => setUsername(event.target.value)} />
         </Box>
           <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-            <VpnKeyIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+            <VpnKeyIcon sx={{ color: '#b0bec5', mr: 1, my: 0.5 }} />
             <TextField id="password-input" label="Password" variant="standard" type="password"
               required
               value={password}

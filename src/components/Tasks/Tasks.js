@@ -8,7 +8,6 @@ import Grid from '@mui/material/Grid';
 import * as React from 'react';
 import { useHistory } from "react-router-dom";
 import { Button } from "@mui/material";
-import Swal from 'sweetalert2';
 
 function Tasks() {
     const history = useHistory();
