@@ -1,11 +1,14 @@
 import { Button } from "@mui/material";
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 
 function Help() {
     return (
         <>
             <h1 className="chore-list-title">Help</h1>
             <div className="box-left">
-                <h1>Chore List</h1>
+                <h1 className="help-subtitle">Chore List</h1>
                 <ul className="box-list">
                     <li>Click the <Button variant="contained" id="help-add-task-btn">+</Button> button to add a task</li>
                     <li>Press the <button className="complete-btn">Complete</button> button to finish a task and add it to your history</li>
@@ -16,22 +19,41 @@ function Help() {
             </div>
             <br />
             <div className="box-right">
-                <h1>Deck</h1>
+                <h1 className="help-subtitle">Deck</h1>
                 <p>stuff and things</p>
             </div>
             <br />
             <div className="box-left">
-                <h1>Game Overview</h1>
+                <h1 className="help-subtitle">Game Overview</h1>
                 <p>stuff and things</p>
             </div>
             <br />
             <div className="box-right">
-                <h1>Card Types</h1>
-                <p>stuff and things</p>
+                <h1 className="help-subtitle">Card Types</h1>
+                <div className="type-label-container">
+                    <Grid container spacing={2} columns={2}>
+                        <Grid className="type-images">
+                            <img className="help-card-type-img" src="attack-icon.png" />
+                            <img className="help-card-type-img" src="minion-icon.png" />
+                            <img className="help-card-type-img" src="block-icon.png" />
+                        </Grid>
+                    </Grid>
+                    <Grid>
+                        <Grid>
+                            <p>Attack</p>
+                        </Grid>
+                        <Grid>
+                            <p>Minion</p>
+                        </Grid>
+                        <Grid>
+                            <p>Block</p>
+                        </Grid>
+                    </Grid>
+                </div>
             </div>
             <br />
             <div className="box-left">
-                <h1>Card Overview</h1>
+                <h1 className="help-subtitle">Card Overview</h1>
                 <p>stuff and things</p>
             </div>
         </>

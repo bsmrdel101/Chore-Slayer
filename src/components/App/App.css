@@ -565,6 +565,18 @@ hr {
 
 
 /* Help page */
+.help-subtitle {
+    display: inline-block;
+    border-bottom: 2px solid #b0bec5;
+    padding: 0px 3px;
+}
+
+.help-card-type-img {
+    display: flex;
+    width: 80px;
+    padding-bottom: 15px;
+}
+
 .box-list {
     font-size: 17px;    
 }
@@ -592,17 +604,26 @@ hr {
 }
 
 #help-add-task-btn {
-    /* font-size: 20px;
-    color: white;
-    background-color: #7b7491;
-    margin-bottom: 3vh;
-    padding-bottom: 5px; */
     padding: 0 25px;
     font-size: 30px;
     color: white;
     background-color: #7b7491;
     margin-bottom: 3vh;
     padding-bottom: 5px;
+}
+
+.type-label-container {
+    display: flex;
+}
+
+.type-label-container p {
+    padding-right: 2rem;
+    padding-bottom: 55px;
+}
+
+.type-images {
+    padding-top: 8px;
+    padding-left: 15px;
 }
 
 /* -------- */
