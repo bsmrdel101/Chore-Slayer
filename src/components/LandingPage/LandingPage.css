@@ -1,0 +1,10 @@
+.welcome-title {
+    font-size: 150px;
+    color: white;
+    transform: rotate(-8deg);
+    text-align: center;
+}
+
+.welcome-btn {
+    text-align: center;
+}

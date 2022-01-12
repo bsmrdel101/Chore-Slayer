@@ -21,6 +21,7 @@ import Inventory2Icon from '@mui/icons-material/Inventory2';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import HelpIcon from '@mui/icons-material/Help';
 import LogoutIcon from '@mui/icons-material/Logout';
+import HomeIcon from '@mui/icons-material/Home';
 import Swal from 'sweetalert2'
 
 const drawerWidth = 240;
@@ -170,6 +171,14 @@ export default function Sidebar() {
         </List>
         {user.id &&
             <Divider />
+        }
+        {!user.id &&
+            <ListItem button onClick={() => history.push('/home')}>
+                <ListItemIcon>
+                    <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary="Game Stats"/>
+            </ListItem>
         }
         <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame('help') : history.push('/help'))}>
             <ListItemIcon>

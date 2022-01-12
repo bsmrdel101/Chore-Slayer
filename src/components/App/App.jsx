@@ -99,12 +99,12 @@ function App() {
           </ProtectedRoute>
 
           {/* Help page */}
-          <ProtectedRoute
+          <Route
             exact
             path="/help"
           >
             <Help />
-          </ProtectedRoute>
+          </Route>
 
           {/* History page */}
           <ProtectedRoute
