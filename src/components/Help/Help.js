@@ -107,6 +107,9 @@ function Help() {
                     <li>In the middle of the screen are two game boards and stat blocks. The bottom sections belong to you, and the top is for the AI.</li>
                     <li>The empty box on the left of the screen will display the moves that both you and the AI play.</li>
                     <li>On the bottom of the screen is your hand, which holds five cards. The hand is filled with a random order of cards from your deck. <br/>Your deck will be re-shuffled after you go through all your cards.</li>
+                    <li>Inside the stat blocks are block, energy, health, and threat values.</li>
+                    <li>If your health reaches zero then you lose, but if the enemy's health drops to zero you win.</li>
+                    
                     <li>When you're done playing cards press the end turn button to make it the AI's turn.</li>
                 </ul>
             </div>
