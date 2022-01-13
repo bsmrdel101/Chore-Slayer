@@ -157,9 +157,9 @@ function Game() {
                 </Grid>
                 <Grid item xs={2} className="stat-block-container" paddingBottom={"10px"}>
                     <div className="stat-block">
-                        <p>Block: {enemy.block}</p>
-                        <p>Health: {enemy.health}</p>
-                        <p>Threat: {enemy.threat}</p>
+                        <p><img src="shield.png" className="stat-icon"/> {enemy.block}</p>
+                        <p><img src="heart.png" className="stat-icon"/> {enemy.health}</p>
+                        <p><img src="threat.png" className="stat-icon"/> {enemy.threat}</p>
                     </div>
                 </Grid>
             </Grid>
@@ -184,10 +184,10 @@ function Game() {
                 </Grid>
                 <Grid item xs={2} className="stat-block-container">
                     <div className="stat-block">
-                        <p>Block: {player.block}</p>
-                        <p>Health: {player.health}</p>
-                        <p>Threat: {player.threat}</p>
-                        <p>Energy: {player.energy}</p>
+                        <p><img src="shield.png" className="stat-icon"/> {player.block}</p>
+                        <p><img src="heart.png" className="stat-icon"/> {player.health}</p>
+                        <p><img src="threat.png" className="stat-icon"/> {player.threat}</p>
+                        <p><img src="energy.png" className="stat-icon"/> {player.energy}</p>
                     </div>
                 </Grid>
             </Grid>

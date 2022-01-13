@@ -1,13 +1,11 @@
 import { Button } from "@mui/material";
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 
 function Help() {
     return (
-        <>
+        <div className="help-center">
             <h1 className="chore-list-title">Help</h1>
-            <div className="box-left">
+            <div className="help-box">
                 <h1 className="help-subtitle">Chore List</h1>
                 <ul className="box-list">
                     <li>Click the <Button variant="contained" id="help-add-task-btn">+</Button> button to add a task</li>
@@ -18,19 +16,17 @@ function Help() {
                 </ul>
             </div>
             <br />
-            <div className="box-right">
+            <div className="help-box">
                 <h1 className="help-subtitle">Deck</h1>
                 <ul className="box-list">
-                    <li></li>
+                    <li>The deck page shows all the cards in your deck</li>
+                    <li>Click on a card to sell it for a fraction of it's cost</li>
+                    <li>Press <button className="help-add-cards-btn">Add Cards</button> to show the card store, where you can spend your coins to buy more cards</li>
+                    <li>You can only have a max of 15 cards in your deck, and can't leave the page with less than that</li>
                 </ul>
             </div>
             <br />
-            <div className="box-left">
-                <h1 className="help-subtitle">Game Overview</h1>
-                <p>stuff and things</p>
-            </div>
-            <br />
-            <div className="box-right">
+            <div className="help-box">
                 <h1 className="help-subtitle">Card Types</h1>
                 <div className="type-label-container">
                     <Grid container spacing={2} columns={2}>
@@ -54,11 +50,27 @@ function Help() {
                 </div>
             </div>
             <br />
-            <div className="box-left">
-                <h1 className="help-subtitle">Card Overview</h1>
-                <p>stuff and things</p>
+            <div className="help-box">
+                <h1 className="help-subtitle">Player Stats Overview</h1>
+                <ul className="box-list">
+                    <li></li>
+                </ul>
             </div>
-        </>
+            <br />
+            <div className="help-box">
+                <h1 className="help-subtitle">Card Overview</h1>
+                <ul className="box-list">
+                    <li></li>
+                </ul>
+            </div>
+            <br />
+            <div className="help-box">
+                <h1 className="help-subtitle">Game Overview</h1>
+                <ul className="box-list">
+                    <li></li>
+                </ul>
+            </div>
+        </div>
     );
 }
 

@@ -24,4 +24,37 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })  
 });
 
+router.post('/', (req, res) => {
+    console.log(req.body.id);
+    console.log(req.body.card);
+    const sqlText = (`
+        INSERT INTO "deck" ("user_id", "card_id")
+        VALUES ($1, $2);
+    `);
+    const sqlValues = [
+        req.body.id,
+        req.body.card      
+    ];
+    pool.query(sqlText, sqlValues)
+        .then((dbres) => res.send(dbres.rows[0]))
+        .catch((dberror) => {
+        console.log('Opps you messed up DB error', dberror);
+        res.sendStatus(500)
+    })  
+});
+
+router.get('/:id', (req, res) => {
+    const sqlText = (`
+        SELECT "id" FROM "user"
+        ORDER BY "id" DESC
+        LIMIT 1;
+    `);
+    pool.query(sqlText)
+        .then((dbres) => res.send(dbres.rows[0]))
+        .catch((dberror) => {
+        console.log('Opps you messed up DB error', dberror);
+        res.sendStatus(500)
+    })  
+});
+
 module.exports = router;

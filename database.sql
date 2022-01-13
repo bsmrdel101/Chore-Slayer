@@ -85,3 +85,4 @@ VALUES
 
 INSERT INTO "stats" ("games_won", "games_lost", "total_games", "cards_played", "total_damage", "total_block", "minions_slain", "times_surrendered", "highest_threat", "highest_block")
 VALUES ();
+

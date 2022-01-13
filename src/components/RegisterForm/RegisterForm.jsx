@@ -17,15 +17,17 @@ function RegisterForm() {
   const registerUser = (event) => {
     event.preventDefault();
 
-    dispatch({
-      type: 'REGISTER',
-      payload: {
-        username: username,
-        password: password,
-        max_hp: 15,
-        new_user: true
-      },
-    });
+    if (username && password) {
+      dispatch({
+        type: 'REGISTER',
+        payload: {
+          username: username,
+          password: password,
+          max_hp: 15,
+          new_user: true
+        },
+      });
+    }
   }; // end registerUser
 
   return (
