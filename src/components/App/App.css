@@ -11,7 +11,7 @@ hr {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
-#sidebar .css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
+#sidebar > div {
     background-color: #9b8dc7;
     color: #47415c
 }
@@ -468,6 +468,7 @@ hr {
     margin-left: 25px;
     padding-right: 26px;
     border-radius: 5px;
+    box-shadow: 0px 15px 20px rgba(26, 29, 29, 0.726);
 }
 
 .minion {
@@ -476,6 +477,19 @@ hr {
 
 .stat-icon {
     width: 20px;
+}
+
+.round-counter-variant {
+    display: inline-block;
+    padding-left: 24px;
+    color: rgb(22, 206, 206);
+    box-shadow: 0px 15px 20px rgba(22, 206, 206, 0.4);
+    background-color: #3e3852;    
+    border: 3px solid #b0bec5;
+    font-size: 35px;
+    margin-left: 25px;
+    padding-right: 26px;
+    border-radius: 5px;
 }
 
 /* -------- */
@@ -644,6 +658,10 @@ hr {
     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
     color: #fff;
     transform: translateY(-5px);
+}
+
+#help-card {
+    margin-bottom: 20px;
 }
 
 /* -------- */

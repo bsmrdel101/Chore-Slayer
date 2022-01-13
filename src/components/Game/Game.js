@@ -146,7 +146,12 @@ function Game() {
         <>
             <Grid container spacing={3}>
                 <Grid item xs>
-                    <h1 className="round-counter">Turn {round}</h1>
+                    {
+                        round === 0 ?
+                        <h1 className="round-counter-variant">Turn {round}</h1>
+                        :
+                        <h1 className="round-counter">Turn {round}</h1>
+                    }
                     <br/>
                     <br/>
                 </Grid>
