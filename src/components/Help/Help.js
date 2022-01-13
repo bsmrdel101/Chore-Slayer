@@ -109,8 +109,15 @@ function Help() {
                     <li>On the bottom of the screen is your hand, which holds five cards. The hand is filled with a random order of cards from your deck. <br/>Your deck will be re-shuffled after you go through all your cards.</li>
                     <li>Inside the stat blocks are block, energy, health, and threat values.</li>
                     <li>If your health reaches zero then you lose, but if the enemy's health drops to zero you win.</li>
-                    
+                    <li>Playing a card costs energy equal to what is displayed on the card. You cannot play a card if it cost more energy than you have.</li>
                     <li>When you're done playing cards press the end turn button to make it the AI's turn.</li>
+                    <li>At the end of each player's turn, the game will check if you can deal damage to the other player</li>
+                    <ul>
+                        <li>If you have a greater threat than your opponent, you will deal damage equal to the excess amount of threat you have over them.</li>
+                        <li>At the end of your turn, if you had 6 threat and the AI had 2, you would deal 4 damage to them.</li>
+                        <li>However block is also taken into account for defending, when calculating damage. In the same situation, if the AI had 4 block you would've dealt 0 damage.<br />
+                        This is because you had 6 threat and the AI had 2 threat + 4 block.</li>
+                    </ul>
                 </ul>
             </div>
         </div>
