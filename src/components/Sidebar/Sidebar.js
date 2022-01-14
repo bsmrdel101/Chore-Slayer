@@ -95,6 +95,8 @@ export default function Sidebar() {
     const user = useSelector((store) => store.user);
     const dispatch = useDispatch();
 
+    const deck = useSelector((store) => store.deckReducer);
+
     const theme = useTheme();
     const history = useHistory();
     const [open, setOpen] = React.useState(false);
@@ -106,6 +108,29 @@ export default function Sidebar() {
     const handleDrawerClose = () => {
       setOpen(false);
     };
+
+  const handleLeaveDeck = (page) => {
+    console.log(deck.length);
+    if (deck.length < 15) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })      
+      Toast.fire({
+          icon: 'error',
+          title: 'Cannot have less than 15 cards in deck'
+      })
+    } else {
+      history.push(page)
+    }
+  }
 
   function handleLeaveGame(page) {
     Swal.fire({
@@ -137,7 +162,7 @@ export default function Sidebar() {
         <Divider />
         <List>
         {user.id &&
-            <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame('tasks') : history.push('/tasks'))}>
+            <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame('tasks') : history.location.pathname === '/deck' ? handleLeaveDeck('tasks') : history.push('/tasks'))}>
                 <ListItemIcon>
                     <TaskIcon />
                 </ListItemIcon>
@@ -145,7 +170,7 @@ export default function Sidebar() {
             </ListItem>
         }
         {user.id &&
-            <ListItem button onClick={() => (history.push('/game'))}>
+            <ListItem button onClick={() => (history.location.pathname === '/deck' ? handleLeaveDeck('game') : history.push('/game'))}>
                 <ListItemIcon>
                     <SportsEsportsIcon />
                 </ListItemIcon>
@@ -161,7 +186,7 @@ export default function Sidebar() {
             </ListItem>
         }
         {user.id &&
-            <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame('stats') : history.push('/stats'))}>
+            <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame('stats') : history.location.pathname === '/deck' ? handleLeaveDeck('stats') : history.push('/stats'))}>
                 <ListItemIcon>
                     <BarChartIcon />
                 </ListItemIcon>
@@ -180,7 +205,7 @@ export default function Sidebar() {
                 <ListItemText primary="Home"/>
             </ListItem>
         }
-        <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame('help') : history.push('/help'))}>
+        <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame('help') : history.location.pathname === '/deck' ? handleLeaveDeck('help') : history.push('/help'))}>
             <ListItemIcon>
                 <HelpIcon />
             </ListItemIcon>
