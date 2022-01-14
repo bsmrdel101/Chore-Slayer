@@ -30,35 +30,6 @@ function RegisterForm() {
     }
   }; // end registerUser
 
-  // return (
-  //   <center className='top-margin-btn'>
-  //     <form className="formPanel" onSubmit={registerUser}>
-  //       <h2>Register User</h2>
-  //       {errors.registrationMessage && (
-  //         <h3 className="alert" role="alert">
-  //           {errors.registrationMessage}
-  //         </h3>
-  //       )}
-  //       <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-  //         <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-  //         <TextField id="register-username" label="Username" variant="standard" 
-  //           required
-  //           value={username}
-  //           onChange={(event) => setUsername(event.target.value)} />
-  //       </Box>
-  //       <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-  //         <VpnKeyIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-  //         <TextField id="register-password" label="Password" variant="standard" type="password"
-  //           required
-  //           value={password}
-  //           onChange={(event) => setPassword(event.target.value)}/>
-  //       </Box>
-  //       <div className='top-margin-btn'>
-  //         <Button type='submit' variant='contained'>Submit</Button>
-  //       </div>
-  //     </form>
-  //   </center>
-  // );
   return (
     <center>
       <form className="form-panel" onSubmit={registerUser}>
@@ -83,7 +54,7 @@ function RegisterForm() {
               onChange={(event) => setPassword(event.target.value)}/>
           </Box>
         <div className='top-margin-btn'>
-          <Button variant="contained" type="submit" value="Register">Submit</Button>
+          <button className="submit-btn" type="submit" value="Register">Submit</button>
         </div>
       </form>
     </center>

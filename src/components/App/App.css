@@ -67,6 +67,29 @@ hr {
     transform: translateY(-5px);
 }
 
+.submit-btn {
+    width: 100px;
+    height: 45px;
+    font-size: 15px;
+    color: white;
+    background-color: rgb(51 135 150);
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    margin-top: 10px;
+}
+  
+  .submit-btn:hover {
+    background-color: rgb(73, 178, 197);
+    font-size: 16px;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-5px);
+}
+
 .complete-btn {
     width: 115px;
     height: 43px;

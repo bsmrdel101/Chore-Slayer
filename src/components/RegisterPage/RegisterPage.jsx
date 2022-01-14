@@ -12,16 +12,14 @@ function RegisterPage() {
 
       <center className='top-margin-btn'>
         <h4>Already have an account?</h4>
-        <Button
-          variant='outlined'
-          type="button"
-          className="btn btn_asLink"
+        <button
+          className="incomplete-btn"
           onClick={() => {
             history.push('/login');
           }}
         >
           Login
-        </Button>
+        </button>
       </center>
     </div>
   );

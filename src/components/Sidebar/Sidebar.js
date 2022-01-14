@@ -177,7 +177,7 @@ export default function Sidebar() {
                 <ListItemIcon>
                     <HomeIcon />
                 </ListItemIcon>
-                <ListItemText primary="Game Stats"/>
+                <ListItemText primary="Home"/>
             </ListItem>
         }
         <ListItem button onClick={() => (history.location.pathname === '/game' ?  handleLeaveGame('help') : history.push('/help'))}>
