@@ -234,7 +234,7 @@ function GameCard({card, round}) {
                             />
                         </center>
                         <CardContent>
-                        <Typography varient="h6" textAlign={"center"}>
+                        <Typography varient="h6" textAlign={"center"} fontSize={"18px"}>
                             Energy: {card.cost}
                         </Typography>
                         <Typography variant="body2" color="white">
@@ -276,7 +276,7 @@ function GameCard({card, round}) {
                             />
                         </center>
                         <CardContent>
-                        <Typography varient="h6" textAlign={"center"}>
+                        <Typography varient="h6" textAlign={"center"} fontSize={"18px"}>
                             Energy: {card.cost}
                         </Typography>
                         <Typography variant="body2" color="white">
@@ -318,7 +318,7 @@ function GameCard({card, round}) {
                             />
                         </center>
                         <CardContent>
-                        <Typography varient="h6" textAlign={"center"}>
+                        <Typography varient="h6" textAlign={"center"} fontSize={"18px"}>
                             Energy: {card.cost}
                         </Typography>
                         <Typography variant="body2" color="white">
@@ -360,7 +360,7 @@ function GameCard({card, round}) {
                             />
                         </center>
                         <CardContent>
-                        <Typography varient="h6" textAlign={"center"}>
+                        <Typography varient="h6" textAlign={"center"} fontSize={"18px"}>
                             Energy: {card.cost}
                         </Typography>
                         <Typography variant="body2" color="white">
@@ -402,7 +402,7 @@ function GameCard({card, round}) {
                             />
                         </center>
                         <CardContent>
-                        <Typography varient="h6" textAlign={"center"}>
+                        <Typography varient="h6" textAlign={"center"} fontSize={"18px"}>
                             Energy: {card.cost}
                         </Typography>
                         <Typography variant="body2" color="white">

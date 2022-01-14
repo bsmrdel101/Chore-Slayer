@@ -85,8 +85,8 @@ function Help() {
                                 />
                             </center>
                             <CardContent>
-                            <Typography varient="h6" textAlign={"center"}>
-                                <img src="energy.png" className="stat-icon"/> 3
+                            <Typography varient="h6" textAlign={"center"} fontSize={"18px"}>
+                                Energy: 3
                             </Typography>
                             <Typography variant="body2" color="white">
                                 Summons a (2/3) wolf

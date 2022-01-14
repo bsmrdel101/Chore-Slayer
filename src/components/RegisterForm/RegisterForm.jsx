@@ -30,31 +30,60 @@ function RegisterForm() {
     }
   }; // end registerUser
 
+  // return (
+  //   <center className='top-margin-btn'>
+  //     <form className="formPanel" onSubmit={registerUser}>
+  //       <h2>Register User</h2>
+  //       {errors.registrationMessage && (
+  //         <h3 className="alert" role="alert">
+  //           {errors.registrationMessage}
+  //         </h3>
+  //       )}
+  //       <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+  //         <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+  //         <TextField id="register-username" label="Username" variant="standard" 
+  //           required
+  //           value={username}
+  //           onChange={(event) => setUsername(event.target.value)} />
+  //       </Box>
+  //       <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+  //         <VpnKeyIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+  //         <TextField id="register-password" label="Password" variant="standard" type="password"
+  //           required
+  //           value={password}
+  //           onChange={(event) => setPassword(event.target.value)}/>
+  //       </Box>
+  //       <div className='top-margin-btn'>
+  //         <Button type='submit' variant='contained'>Submit</Button>
+  //       </div>
+  //     </form>
+  //   </center>
+  // );
   return (
-    <center className='top-margin-btn'>
-      <form className="formPanel" onSubmit={registerUser}>
-        <h2>Register User</h2>
-        {errors.registrationMessage && (
+    <center>
+      <form className="form-panel" onSubmit={registerUser}>
+        <h2 className="login-title">Register User</h2>
+        {errors.loginMessage && (
           <h3 className="alert" role="alert">
-            {errors.registrationMessage}
+            {errors.loginMessage}
           </h3>
         )}
         <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-          <TextField id="username-input" label="Username" variant="standard" 
+          <AccountCircle sx={{ color: '#b0bec5', mr: 1, my: 0.5 }} />
+          <TextField id="register-username" label="Username" variant="standard" 
             required
             value={username}
             onChange={(event) => setUsername(event.target.value)} />
         </Box>
-        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          <VpnKeyIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-          <TextField id="password-input" label="Password" variant="standard" type="password"
-            required
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}/>
-        </Box>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+            <VpnKeyIcon sx={{ color: '#b0bec5', mr: 1, my: 0.5 }} />
+            <TextField id="register-password" label="Password" variant="standard" type="password"
+              required
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}/>
+          </Box>
         <div className='top-margin-btn'>
-          <Button type='submit' variant='contained'>Submit</Button>
+          <Button variant="contained" type="submit" value="Register">Submit</Button>
         </div>
       </form>
     </center>

@@ -162,9 +162,9 @@ function Game() {
                 </Grid>
                 <Grid item xs={2} className="stat-block-container" paddingBottom={"10px"}>
                     <div className="stat-block">
-                        <p><img src="shield.png" className="stat-icon"/> {enemy.block}</p>
-                        <p><img src="heart.png" className="stat-icon"/> {enemy.health}</p>
-                        <p><img src="threat.png" className="stat-icon"/> {enemy.threat}</p>
+                        <p><img src="shield.png" className="stat-icon"/> Block: {enemy.block}</p>
+                        <p><img src="heart.png" className="stat-icon"/> Health: {enemy.health}</p>
+                        <p><img src="threat.png" className="stat-icon"/> Threat: {enemy.threat}</p>
                     </div>
                 </Grid>
             </Grid>
@@ -189,10 +189,10 @@ function Game() {
                 </Grid>
                 <Grid item xs={2} className="stat-block-container">
                     <div className="stat-block">
-                        <p><img src="shield.png" className="stat-icon"/> {player.block}</p>
-                        <p><img src="heart.png" className="stat-icon"/> {player.health}</p>
-                        <p><img src="threat.png" className="stat-icon"/> {player.threat}</p>
-                        <p><img src="energy.png" className="stat-icon"/> {player.energy}</p>
+                        <p><img src="shield.png" className="stat-icon"/> Block: {player.block}</p>
+                        <p><img src="heart.png" className="stat-icon"/> Health: {player.health}</p>
+                        <p><img src="threat.png" className="stat-icon"/> Threat: {player.threat}</p>
+                        <p><img src="energy.png" className="stat-icon"/> Energy: {player.energy}</p>
                     </div>
                 </Grid>
             </Grid>
