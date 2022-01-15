@@ -76,69 +76,34 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 });
 
 // Updates stat
-// router.put('/', rejectUnauthenticated, (req, res) => {
-//     const sqlText =`
-//         UPDATE "stats"
-//         SET "games_won" = $1
-//         WHERE "user_id" = $2;
-
-//         UPDATE "stats"
-//         SET "games_lost" = $3
-//         WHERE "user_id" = $2;
-
-//         UPDATE "stats"
-//         SET "total_games" = $4
-//         WHERE "user_id" = $2;
-
-//         UPDATE "stats"
-//         SET "card_played" = $5
-//         WHERE "user_id" = $2;
-
-//         UPDATE "stats"
-//         SET "total_damage" = $6
-//         WHERE "user_id" = $2;
-
-//         UPDATE "stats"
-//         SET "total_block" = $7
-//         WHERE "user_id" = $2;
-
-//         UPDATE "stats"
-//         SET "minions_slain" = $8
-//         WHERE "user_id" = $2;
-
-//         UPDATE "stats"
-//         SET "times_surrendered" = $9
-//         WHERE "user_id" = $2;
-
-//         UPDATE "stats"
-//         SET "highest_threat" = $10
-//         WHERE "user_id" = $2;
-
-//         UPDATE "stats"
-//         SET "highest_block" = $11
-//         WHERE "user_id" = $2;
-//     `
-//     const sqlValues = [
-//         req.body.games_won,
-//         req.user.id,
-//         req.body.games_lost,
-//         req.body.total_games,
-//         req.body.cards_played,
-//         req.body.total_damage,
-//         req.body.total_block,
-//         req.body.minions_slain,
-//         req.body.times_surrendered,
-//         req.body.highest_threat,
-//         req.body.highest_block
-//     ]
-//     console.log(pool.query(sqlText, sqlValues));
-//     pool.query(sqlText, sqlValues)
-//         .then((dbres) => res.sendStatus(201))
-//         .catch((dberror) => {
-//           console.log('Oops you messed up DB error', dberror);
-//           res.sendStatus(500)
-//     })
-// });
+router.put('/', rejectUnauthenticated, (req, res) => {
+    const sqlText =
+    `
+        UPDATE "stats"
+        SET "games_won"=$1, "games_lost"=$3, "total_games"=$4, "cards_played"=$5, "total_damage"=$6, "total_block"=$7, "minions_slain"=$8, "times_surrendered"=$9, "highest_threat"=$10, "highest_block"=$11 
+        WHERE "user_id" = $2;
+    `
+    const sqlValues = [
+        req.body.games_won,
+        req.user.id,
+        req.body.games_lost,
+        req.body.total_games,
+        req.body.cards_played,
+        req.body.total_damage,
+        req.body.total_block,
+        req.body.minions_slain,
+        req.body.times_surrendered,
+        req.body.highest_threat,
+        req.body.highest_block
+    ]
+    console.log(pool.query(sqlText, sqlValues));
+    pool.query(sqlText, sqlValues)
+        .then((dbres) => res.sendStatus(201))
+        .catch((dberror) => {
+          console.log('Oops you messed up DB error', dberror);
+          res.sendStatus(500)
+    })
+});
 
 
 
