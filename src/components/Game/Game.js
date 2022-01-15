@@ -28,6 +28,7 @@ function Game() {
             // Add the card to the discard pile so it can't be drawn again
             // Splice the card at index 0
         fetchDeck();
+        
         // Adds one to total games stat
         dispatch({
             type: 'TOTAL_GAMES',

@@ -76,6 +76,60 @@ function* newUser(action) {
 
 /**** STAT HANDLERS ****/
 
+function* gamesWon(action) {
+    try {
+        const total = action.payload.games_won + 1;
+        yield axios({
+            method: 'PUT',
+            url: '/api/stats',
+            data: {
+                games_won: total,
+                games_lost: action.payload.games_lost,
+                total_games: action.payload.total_games,
+                cards_played: action.payload.cards_played,
+                total_damage: action.payload.total_damage,
+                total_block: action.payload.total_block,
+                minions_slain: action.payload.minions_slain,
+                times_surrendered: action.payload.times_surrendered,
+                highest_threat: action.payload.highest_threat,
+                highest_block: action.payload.highest_block
+            }
+        })
+        yield put({
+            type: 'FETCH_STATS'
+        });
+    } catch(err) {
+        console.error('GET error: ', err);
+    }
+}
+
+function* gamesLost(action) {
+    try {
+        const total = action.payload.games_lost + 1;
+        yield axios({
+            method: 'PUT',
+            url: '/api/stats',
+            data: {
+                games_won: action.payload.games_won,
+                games_lost: total,
+                total_games: action.payload.total_games,
+                cards_played: action.payload.cards_played,
+                total_damage: action.payload.total_damage,
+                total_block: action.payload.total_block,
+                minions_slain: action.payload.minions_slain,
+                times_surrendered: action.payload.times_surrendered,
+                highest_threat: action.payload.highest_threat,
+                highest_block: action.payload.highest_block
+            }
+        })
+        yield put({
+            type: 'FETCH_STATS'
+        });
+    } catch(err) {
+        console.error('GET error: ', err);
+    }
+}
+
 function* totalGames(action) {
     try {
         const total = action.payload.total_games + 1;
@@ -103,6 +157,32 @@ function* totalGames(action) {
     }
 }
 
+function* cardsPlayed(action) {
+    try {
+        const total = action.payload.cards_played + 1;
+        yield axios({
+            method: 'PUT',
+            url: '/api/stats',
+            data: {
+                games_won: action.payload.games_won,
+                games_lost: action.payload.games_lost,
+                total_games: action.payload.total_games,
+                cards_played: total,
+                total_damage: action.payload.total_damage,
+                total_block: action.payload.total_block,
+                minions_slain: action.payload.minions_slain,
+                times_surrendered: action.payload.times_surrendered,
+                highest_threat: action.payload.highest_threat,
+                highest_block: action.payload.highest_block
+            }
+        })
+        yield put({
+            type: 'FETCH_STATS'
+        });
+    } catch(err) {
+        console.error('GET error: ', err);
+    }
+}
 
 function* statsSaga() {
     // axios routes
@@ -111,9 +191,10 @@ function* statsSaga() {
     yield takeLatest('CHECK_USER', checkUser);
     yield takeLatest('NEW_USER', newUser);
     // stat handlers
-    // yield takeLatest('GAMES_WON', gamesWon);
-    // yield takeLatest('GAMES_LOST', gamesLost);
+    yield takeLatest('GAMES_WON', gamesWon);
+    yield takeLatest('GAMES_LOST', gamesLost);
     yield takeLatest('TOTAL_GAMES', totalGames);
+    yield takeLatest('CARDS_PLAYED', cardsPlayed);
 }
 
 export default statsSaga;
