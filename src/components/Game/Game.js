@@ -29,21 +29,21 @@ function Game() {
             // Splice the card at index 0
         fetchDeck();
         // Adds one to total games stat
-        // dispatch({
-        //     type: 'TOTAL_GAMES',
-        //     payload: {
-        //         games_won: stats.games_won,
-        //         games_lost: stats.games_lost,
-        //         total_games: stats.total_games,
-        //         cards_played: stats.cards_played,
-        //         total_damage: stats.total_damage,
-        //         total_block: stats.total_block,
-        //         minions_slain: stats.minions_slain,
-        //         times_surrendered: stats.times_surrendered,
-        //         highest_threat: stats.highest_threat,
-        //         highest_block: stats.highest_block
-        //     }
-        // });
+        dispatch({
+            type: 'TOTAL_GAMES',
+            payload: {
+                games_won: stats.games_won,
+                games_lost: stats.games_lost,
+                total_games: stats.total_games,
+                cards_played: stats.cards_played,
+                total_damage: stats.total_damage,
+                total_block: stats.total_block,
+                minions_slain: stats.minions_slain,
+                times_surrendered: stats.times_surrendered,
+                highest_threat: stats.highest_threat,
+                highest_block: stats.highest_block
+            }
+        });
     }, []);
 
     // Gets all of the cards in the user's deck
