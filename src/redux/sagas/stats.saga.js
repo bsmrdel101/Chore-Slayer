@@ -78,21 +78,26 @@ function* newUser(action) {
 
 function* gamesWon(action) {
     try {
-        const total = action.payload.games_won + 1;
+        const response = yield axios({
+            method: 'GET',
+            url: '/api/stats'
+        })
+
+        const total = response.data.games_won + 1;
         yield axios({
             method: 'PUT',
             url: '/api/stats',
             data: {
                 games_won: total,
-                games_lost: action.payload.games_lost,
-                total_games: action.payload.total_games,
-                cards_played: action.payload.cards_played,
-                total_damage: action.payload.total_damage,
-                total_block: action.payload.total_block,
-                minions_slain: action.payload.minions_slain,
-                times_surrendered: action.payload.times_surrendered,
-                highest_threat: action.payload.highest_threat,
-                highest_block: action.payload.highest_block
+                games_lost: response.data.games_lost,
+                total_games: response.data.total_games,
+                cards_played: response.data.cards_played,
+                total_damage: response.data.total_damage,
+                total_block: response.data.total_block,
+                minions_slain: response.data.minions_slain,
+                times_surrendered: response.data.times_surrendered,
+                highest_threat: response.data.highest_threat,
+                highest_block: response.data.highest_block
             }
         })
         yield put({
@@ -105,21 +110,26 @@ function* gamesWon(action) {
 
 function* gamesLost(action) {
     try {
-        const total = action.payload.games_lost + 1;
+        const response = yield axios({
+            method: 'GET',
+            url: '/api/stats'
+        })
+
+        const total = response.data.games_lost + 1;
         yield axios({
             method: 'PUT',
             url: '/api/stats',
             data: {
-                games_won: action.payload.games_won,
+                games_won: response.data.games_won,
                 games_lost: total,
-                total_games: action.payload.total_games,
-                cards_played: action.payload.cards_played,
-                total_damage: action.payload.total_damage,
-                total_block: action.payload.total_block,
-                minions_slain: action.payload.minions_slain,
-                times_surrendered: action.payload.times_surrendered,
-                highest_threat: action.payload.highest_threat,
-                highest_block: action.payload.highest_block
+                total_games: response.data.total_games,
+                cards_played: response.data.cards_played,
+                total_damage: response.data.total_damage,
+                total_block: response.data.total_block,
+                minions_slain: response.data.minions_slain,
+                times_surrendered: response.data.times_surrendered,
+                highest_threat: response.data.highest_threat,
+                highest_block: response.data.highest_block
             }
         })
         yield put({
@@ -164,21 +174,90 @@ function* totalGames(action) {
 
 function* cardsPlayed(action) {
     try {
-        const total = action.payload.cards_played + 1;
+        const response = yield axios({
+            method: 'GET',
+            url: '/api/stats'
+        })
+
+        const total = response.data.cards_played + 1;
         yield axios({
             method: 'PUT',
             url: '/api/stats',
             data: {
-                games_won: action.payload.games_won,
-                games_lost: action.payload.games_lost,
-                total_games: action.payload.total_games,
+                games_won: response.data.games_won,
+                games_lost: response.data.games_lost,
+                total_games: response.data.total_games,
                 cards_played: total,
-                total_damage: action.payload.total_damage,
-                total_block: action.payload.total_block,
-                minions_slain: action.payload.minions_slain,
-                times_surrendered: action.payload.times_surrendered,
-                highest_threat: action.payload.highest_threat,
-                highest_block: action.payload.highest_block
+                total_damage: response.data.total_damage,
+                total_block: response.data.total_block,
+                minions_slain: response.data.minions_slain,
+                times_surrendered: response.data.times_surrendered,
+                highest_threat: response.data.highest_threat,
+                highest_block: response.data.highest_block
+            }
+        })
+        yield put({
+            type: 'FETCH_STATS'
+        });
+    } catch(err) {
+        console.error('GET error: ', err);
+    }
+}
+
+function* totalDamage(action) {
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: '/api/stats'
+        })
+
+        const total = response.data.total_damage + action.payload;
+        yield axios({
+            method: 'PUT',
+            url: '/api/stats',
+            data: {
+                games_won: response.data.games_won,
+                games_lost: response.data.games_lost,
+                total_games: response.data.total_games,
+                cards_played: response.data.cards_played,
+                total_damage: total,
+                total_block: response.data.total_block,
+                minions_slain: response.data.minions_slain,
+                times_surrendered: response.data.times_surrendered,
+                highest_threat: response.data.highest_threat,
+                highest_block: response.data.highest_block
+            }
+        })
+        yield put({
+            type: 'FETCH_STATS'
+        });
+    } catch(err) {
+        console.error('GET error: ', err);
+    }
+}
+
+function* totalBlock(action) {
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: '/api/stats'
+        })
+
+        const total = response.data.total_block + action.payload;
+        yield axios({
+            method: 'PUT',
+            url: '/api/stats',
+            data: {
+                games_won: response.data.games_won,
+                games_lost: response.data.games_lost,
+                total_games: response.data.total_games,
+                cards_played: response.data.cards_played,
+                total_damage: response.data.total_damage,
+                total_block: total,
+                minions_slain: response.data.minions_slain,
+                times_surrendered: response.data.times_surrendered,
+                highest_threat: response.data.highest_threat,
+                highest_block: response.data.highest_block
             }
         })
         yield put({
@@ -200,6 +279,8 @@ function* statsSaga() {
     yield takeLatest('GAMES_LOST', gamesLost);
     yield takeLatest('TOTAL_GAMES', totalGames);
     yield takeLatest('CARDS_PLAYED', cardsPlayed);
+    yield takeLatest('TOTAL_DAMAGE', totalDamage);
+    yield takeLatest('TOTAL_BLOCK', totalBlock);
 }
 
 export default statsSaga;

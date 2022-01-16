@@ -65,6 +65,10 @@ function Game() {
         });
         
         if (player.threat > enemyDefence && round > 0) {
+            dispatch({
+                type: 'TOTAL_DAMAGE',
+                payload: player.threat - enemyDefence
+            });
             // Deals dmg to enemy equal to players threat
             dispatch({
                 type: 'DEAL_ENEMY_DAMAGE',

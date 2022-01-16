@@ -107,6 +107,10 @@ function GameCard({card, round}) {
             type: 'ADD_PLAYER_BLOCK',
             payload: element.block_amount
         });
+        element.block_amount && dispatch({
+            type: 'TOTAL_BLOCK',
+            payload: element.block_amount
+        });
         switch (element.card_id) {
             case 5: // Swap block
                 dispatch({type: 'SWAP_BLOCK', payload: {enemyBlock: enemy.block, playerBlock: player.block}});
@@ -151,6 +155,10 @@ function GameCard({card, round}) {
                 });
                 break;
             case 22: // Rebound  
+                dispatch({
+                    type: 'TOTAL_DAMAGE',
+                    payload: round
+                });
                 dispatch({
                     type: 'DEAL_ENEMY_DAMAGE',
                     payload: round
