@@ -332,6 +332,44 @@ function* timesSurrendered(action) {
     }
 }
 
+
+function* highestThreat(action) {
+    try {
+        let total;
+        const response = yield axios({
+            method: 'GET',
+            url: '/api/stats'
+        })
+
+        if (action.payload > response.data.highest_threat) {
+            total = action.payload;
+        } else {
+            total = response.data.highest_threat;
+        }
+        yield axios({
+            method: 'PUT',
+            url: '/api/stats',
+            data: {
+                games_won: response.data.games_won,
+                games_lost: response.data.games_lost,
+                total_games: response.data.total_games,
+                cards_played: response.data.cards_played,
+                total_damage: response.data.total_damage,
+                total_block: response.data.total_block,
+                minions_slain: response.data.minions_slain,
+                times_surrendered: response.data.times_surrendered,
+                highest_threat: total,
+                highest_block: response.data.highest_block
+            }
+        })
+        yield put({
+            type: 'FETCH_STATS'
+        });
+    } catch(err) {
+        console.error('GET error: ', err);
+    }
+}
+
 function* statsSaga() {
     // axios routes
     yield takeLatest('FETCH_STATS', fetchStats);
@@ -347,6 +385,7 @@ function* statsSaga() {
     yield takeLatest('TOTAL_BLOCK', totalBlock);
     yield takeLatest('MINIONS_SLAIN', minionsSlain);
     yield takeLatest('TIMES_SURRENDERED', timesSurrendered);
+    yield takeLatest('HIGHEST_THREAT', highestThreat);
 }
 
 export default statsSaga;

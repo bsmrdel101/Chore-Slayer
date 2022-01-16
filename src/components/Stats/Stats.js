@@ -30,8 +30,8 @@ function Stats() {
                     <p>Total Block: {stats.total_block}</p>
                     <p>Minions Slain: {stats.minions_slain}</p>
                     <p>Times Surrendered: {stats.times_surrendered}</p>
-                    <p>Highest threat in game: {stats.highest_threat}</p>
-                    <p>Highest block in game: {stats.highest_block}</p>
+                    <p>Highest threat: {stats.highest_threat}</p>
+                    <p>Highest block: {stats.highest_block}</p>
                 </div>
             </div>
         </>

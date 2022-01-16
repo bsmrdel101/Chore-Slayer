@@ -44,6 +44,11 @@ function Game() {
     }
 
     const handleEndTurn = () => {
+        dispatch({
+            type: 'HIGHEST_THREAT',
+            payload: player.threat
+        });
+
         const enemyDefence = enemy.threat + enemy.block;
 
         // Activates enemy's slime machine if it exists on the board
