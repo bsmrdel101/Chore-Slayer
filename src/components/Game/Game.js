@@ -129,7 +129,10 @@ function Game() {
                     icon: 'error',
                     confirmButtonText: 'New Game'
                 }).then((result) => {
-                  document.location.reload();
+                    dispatch({
+                        type: 'TIMES_SURRENDERED'
+                    });
+                    document.location.reload();
                 })
             }
         })
