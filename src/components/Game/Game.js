@@ -48,6 +48,10 @@ function Game() {
             type: 'HIGHEST_THREAT',
             payload: player.threat
         });
+        dispatch({
+            type: 'HIGHEST_BLOCK',
+            payload: player.block
+        });
 
         const enemyDefence = enemy.threat + enemy.block;
 
