@@ -132,21 +132,26 @@ function* gamesLost(action) {
 
 function* totalGames(action) {
     try {
-        const total = action.payload.total_games + 1;
+        const response = yield axios({
+            method: 'GET',
+            url: '/api/stats'
+        })
+
+        const total = response.data.total_games + 1;
         yield axios({
             method: 'PUT',
             url: '/api/stats',
             data: {
-                games_won: action.payload.games_won,
-                games_lost: action.payload.games_lost,
+                games_won: response.data.games_won,
+                games_lost: response.data.games_lost,
                 total_games: total,
-                cards_played: action.payload.cards_played,
-                total_damage: action.payload.total_damage,
-                total_block: action.payload.total_block,
-                minions_slain: action.payload.minions_slain,
-                times_surrendered: action.payload.times_surrendered,
-                highest_threat: action.payload.highest_threat,
-                highest_block: action.payload.highest_block
+                cards_played: response.data.cards_played,
+                total_damage: response.data.total_damage,
+                total_block: response.data.total_block,
+                minions_slain: response.data.minions_slain,
+                times_surrendered: response.data.times_surrendered,
+                highest_threat: response.data.highest_threat,
+                highest_block: response.data.highest_block
             }
         })
         yield put({

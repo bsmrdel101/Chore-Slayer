@@ -13,9 +13,27 @@ function GameCard({card, round}) {
     const enemy = useSelector((store) => store.enemyStatBlock);
     const playerBoard = useSelector((store) => store.playerBoard);
     const enemyBoard = useSelector((store) => store.enemyBoard);
+    const stats = useSelector((store) => store.statsReducer);
+
     const dispatch = useDispatch();
 
     const handleClick = () => {
+        dispatch({
+            type: 'CARDS_PLAYED',
+            payload: {
+                games_won: stats.games_won,
+                games_lost: stats.games_lost,
+                total_games: stats.total_games,
+                cards_played: stats.cards_played,
+                total_damage: stats.total_damage,
+                total_block: stats.total_block,
+                minions_slain: stats.minions_slain,
+                times_surrendered: stats.times_surrendered,
+                highest_threat: stats.highest_threat,
+                highest_block: stats.highest_block
+            }
+        });
+
         if (card.type === 'minion' && playerBoard.length === 6) {
             const Toast = Swal.mixin({
                 toast: true,
