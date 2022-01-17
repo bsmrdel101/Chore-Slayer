@@ -200,6 +200,27 @@ hr {
     color: #fff;
     transform: translateY(-5px);
 }
+
+.get-started-btn {
+    width: 115px;
+    height: 43px;
+    font-size: 15px;
+    color: white;
+    background-color: rgb(51 135 150);
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+  
+.get-started-btn:hover {
+    background-color: rgb(73, 178, 197);
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+}
+
 /* -------- */
 
 
@@ -220,10 +241,6 @@ hr {
     font-size: 32px;
 }
 
-#username-input, #password-input, #register-username, #register-password {
-    color: #b0bec5;
-}
-
 .top-margin-btn {
     margin-top: 1em;
 }
@@ -232,10 +249,21 @@ hr {
     color: #b0bec5;
 }
 
+.form-input {
+    color: #b0bec5;
+    background-color: #4f4866;    
+    border: 0;
+    border-radius: 15px;
+    padding: 10px;
+    transition: linear 1s;
+}
+.form-input:focus {
+    background-color: #685d8d;
+}
+
 /* -------- */
 
 
-/* -------- */
 /* Tasks */
 .task-card {
     margin-top: 2vh;
@@ -492,7 +520,7 @@ hr {
     margin-left: 25px;
     padding-right: 26px;
     border-radius: 5px;
-    box-shadow: 0px 15px 20px rgba(26, 29, 29, 0.726);
+    box-shadow: 0px 15px 20px rgba(52, 54, 54, 0.514);
 }
 
 .minion {
@@ -514,6 +542,10 @@ hr {
     margin-left: 25px;
     padding-right: 26px;
     border-radius: 5px;
+}
+
+.threat-variant {
+    color: rgb(22, 206, 206);
 }
 
 /* -------- */

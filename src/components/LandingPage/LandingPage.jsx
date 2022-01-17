@@ -9,7 +9,7 @@ function LandingPage() {
     <>
       <h1 className="welcome-title">Chore Slayer</h1>
       <div className="welcome-btn">
-        <button className="complete-btn" onClick={() => history.push('/registration')}>Get Started</button>
+        <button className="get-started-btn" onClick={() => history.push('/registration')}>Get Started</button>
       </div>
     </>
   );

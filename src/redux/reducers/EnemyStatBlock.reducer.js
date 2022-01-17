@@ -58,7 +58,6 @@ const enemyStatBlock = (state = {block: 0, health: 20, threat: 0, energy: 5, sto
             return copyOfState;
         case 'UPDATE_ENEMY_THREAT':
             copyOfState = {...state};
-            console.log('!!!!!!!!!!', action.payload) 
             copyOfState.threat -= action.payload;
             return copyOfState;
         case 'ATTACK_ENEMY_MINION':

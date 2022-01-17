@@ -39,19 +39,17 @@ function RegisterForm() {
             {errors.loginMessage}
           </h3>
         )}
-        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+        <Box sx={{ display: 'flex', alignItems: 'flex-end', paddingBottom: '10px' }}>
           <AccountCircle sx={{ color: '#b0bec5', mr: 1, my: 0.5 }} />
-          <TextField id="register-username" label="Username" variant="standard" 
-            required
-            value={username}
-            onChange={(event) => setUsername(event.target.value)} />
+          <input className="form-input" required value={username} onChange={(event) => setUsername(event.target.value)} 
+            placeholder='Username'
+          />
         </Box>
           <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
             <VpnKeyIcon sx={{ color: '#b0bec5', mr: 1, my: 0.5 }} />
-            <TextField id="register-password" label="Password" variant="standard" type="password"
-              required
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}/>
+            <input className="form-input" required value={password} onChange={(event) => setPassword(event.target.value)} 
+              placeholder='Password' type="password"  
+            />
           </Box>
         <div className='top-margin-btn'>
           <button className="submit-btn" type="submit" value="Register">Submit</button>

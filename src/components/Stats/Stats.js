@@ -28,7 +28,7 @@ function Stats() {
                     <p>Cards Played: {stats.cards_played}</p>
                     <p>Total Damage: {stats.total_damage}</p>
                     <p>Total Block: {stats.total_block}</p>
-                    <p>Minions Slain: {stats.minions_slain}</p>
+                    {/* <p>Minions Slain: {stats.minions_slain}</p> */}
                     <p>Times Surrendered: {stats.times_surrendered}</p>
                     <p>Highest threat: {stats.highest_threat}</p>
                     <p>Highest block: {stats.highest_block}</p>

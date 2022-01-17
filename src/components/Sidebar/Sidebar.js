@@ -144,6 +144,9 @@ export default function Sidebar() {
       if (result.isConfirmed) {
         history.push(`/${page}`);
         dispatch({
+          type: 'GAMES_LOST'
+        });
+        dispatch({
           type: 'RESET_GAME'
         });
       }
