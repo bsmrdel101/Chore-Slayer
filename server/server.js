@@ -18,6 +18,7 @@ const rewardsRouter = require('./routes/rewards.router');
 const enemyDeckRouter = require('./routes/enemyDeck.router');
 const enemyHandRouter = require('./routes/enemyHand.router');
 const statsRouter = require('./routes/stats.router');
+const startingDeckRouter = require('./routes/startingDeck.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -41,6 +42,7 @@ app.use('/api/rewards', rewardsRouter);
 app.use('/api/enemyHand', enemyHandRouter);
 app.use('/api/enemyDeck', enemyDeckRouter);
 app.use('/api/stats', statsRouter);
+app.use('/api/starting', startingDeckRouter);
 
 // Serve static files
 app.use(express.static('build'));

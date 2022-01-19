@@ -24,7 +24,7 @@ function* fetchStats(action) {
                 highest_block: response.data.highest_block
             }
         })
-    } catch(err) {
+    } catch (err) {
         console.error('GET error: ', err);
     }
 }
@@ -42,7 +42,7 @@ function* checkUser(action) {
                 type: 'INITIALIZE_STATS'
             });
         }
-    } catch(err) {
+    } catch (err) {
         console.error('GET error: ', err);
     }
 }
@@ -57,7 +57,7 @@ function* initializeStats(action) {
         yield put({
             type: 'NEW_USER'
         });
-    } catch(err) {
+    } catch (err) {
         console.error('GET error: ', err);
     }
 }
@@ -68,7 +68,7 @@ function* newUser(action) {
             method: 'PUT',
             url: '/api/stats/1',
         })
-    } catch(err) {
+    } catch (err) {
         console.error('GET error: ', err);
     }
 }
@@ -103,7 +103,7 @@ function* gamesWon(action) {
         yield put({
             type: 'FETCH_STATS'
         });
-    } catch(err) {
+    } catch (err) {
         console.error('GET error: ', err);
     }
 }
@@ -135,7 +135,7 @@ function* gamesLost(action) {
         yield put({
             type: 'FETCH_STATS'
         });
-    } catch(err) {
+    } catch (err) {
         console.error('GET error: ', err);
     }
 }
@@ -167,7 +167,7 @@ function* totalGames(action) {
         yield put({
             type: 'FETCH_STATS'
         });
-    } catch(err) {
+    } catch (err) {
         console.error('GET error: ', err);
     }
 }
@@ -199,7 +199,7 @@ function* cardsPlayed(action) {
         yield put({
             type: 'FETCH_STATS'
         });
-    } catch(err) {
+    } catch (err) {
         console.error('GET error: ', err);
     }
 }
@@ -231,7 +231,7 @@ function* totalDamage(action) {
         yield put({
             type: 'FETCH_STATS'
         });
-    } catch(err) {
+    } catch (err) {
         console.error('GET error: ', err);
     }
 }
@@ -263,7 +263,7 @@ function* totalBlock(action) {
         yield put({
             type: 'FETCH_STATS'
         });
-    } catch(err) {
+    } catch (err) {
         console.error('GET error: ', err);
     }
 }
@@ -295,7 +295,7 @@ function* timesSurrendered(action) {
         yield put({
             type: 'FETCH_STATS'
         });
-    } catch(err) {
+    } catch (err) {
         console.error('GET error: ', err);
     }
 }
@@ -332,7 +332,7 @@ function* highestThreat(action) {
         yield put({
             type: 'FETCH_STATS'
         });
-    } catch(err) {
+    } catch (err) {
         console.error('GET error: ', err);
     }
 }
@@ -369,7 +369,7 @@ function* highestBlock(action) {
         yield put({
             type: 'FETCH_STATS'
         });
-    } catch(err) {
+    } catch (err) {
         console.error('GET error: ', err);
     }
 }

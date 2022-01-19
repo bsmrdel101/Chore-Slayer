@@ -26,6 +26,10 @@ function Tasks() {
         dispatch({
             type: 'FETCH_REWARD_PROGRESS'
         });
+        // Check if the user needs a starting deck
+        dispatch({
+            type: 'FILL_STARTING_DECK'
+        });
     }, [])
 
     // GET tasks

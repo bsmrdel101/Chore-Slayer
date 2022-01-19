@@ -182,15 +182,20 @@ function* startingDeck(action) {
   try {
       const response = yield axios({
         method: 'GET',
-        url: `/api/deck/1`
+        url: '/api/starting'
       })
-      console.log('RESPONSE', response.data.id);
-      const id = response.data.id;
-      yield axios({
-        method: 'POST',
-        url: '/api/deck',
-        data: {id: id, card: action.payload}
-      })
+      console.log('RESPONSE', response.data.needs_deck);
+      if (response.data.needs_deck === true) {
+        yield axios({
+          method: 'POST',
+          url: '/api/starting'
+        })
+        // Updates needs_deck to read false
+        yield axios({
+          method: 'PUT',
+          url: '/api/starting'
+        })
+      }
   } catch(err) {
     console.error('GET error: ', err);
   }
