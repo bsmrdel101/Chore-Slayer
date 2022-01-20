@@ -71,9 +71,9 @@ function Tasks() {
                         <div className='task-list'>
                             {taskReducer.map((task) => {
                                 return (
-                                    <div key={task.id}>
+                                    <center key={task.id}>
                                         <TaskCard task={task}/>
-                                    </div>
+                                    </center>
                                 );
                             })}
                         </div>
