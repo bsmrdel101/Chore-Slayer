@@ -110,7 +110,6 @@ export default function Sidebar() {
     };
 
   const handleLeaveDeck = (page) => {
-    console.log(deck.length);
     if (deck.length < 15) {
       const Toast = Swal.mixin({
         toast: true,
