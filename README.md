@@ -45,12 +45,14 @@ Chore slayer is a to-do list app that helps you track your tasks, and incentiviz
 
 ## Built With
 
+- Javascript
 - Node.js
-- Express
-- React/Redux
+- Express.js
+- React
+- Redux
 - Sagas
-- Material UI 
-- Sweet Alerts 2
+- PostgreSQL
+- MaterialUI
 
 ## Acknowledgement
 Thanks to my entire cohort at [Prime Digital Academy](www.primeacademy.io), who supported me throughout the duration of the project, and my instructor Matt who taught us the content.
