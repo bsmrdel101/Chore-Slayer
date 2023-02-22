@@ -96,7 +96,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
         req.body.highest_threat,
         req.body.highest_block
     ]
-    console.log(pool.query(sqlText, sqlValues));
+
     pool.query(sqlText, sqlValues)
         .then((dbres) => res.sendStatus(201))
         .catch((dberror) => {

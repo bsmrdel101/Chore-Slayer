@@ -25,8 +25,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log(req.body.id);
-    console.log(req.body.card);
     const sqlText = (`
         INSERT INTO "deck" ("user_id", "card_id")
         VALUES ($1, $2);

@@ -32,7 +32,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         req.body.difficulty,
         req.user.id
     ]
-  console.log('this is sqlValues', sqlValues);
+
      pool.query(sqlText, sqlValues)
       .then((dbres) => res.sendStatus(201))
       .catch((dberror) => {
@@ -50,7 +50,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     req.params.id, 
     req.user.id,     
   ]
-console.log('this is sqlValues', sqlValues);
+
    pool.query(sqlText, sqlValues)
     .then((dbres) => res.sendStatus(201))
     .catch((dberror) => {
@@ -70,7 +70,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
         req.body.description,
         req.params.id,  
     ]
-    console.log('this is sqlValues', sqlValues);
+
     pool.query(sqlText, sqlValues)
         .then((dbres) => res.sendStatus(201))
         .catch((dberror) => {

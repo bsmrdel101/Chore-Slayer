@@ -64,7 +64,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     const sqlValues = [
         req.user.id
     ]
-    console.log('this is sqlValues', sqlValues);
+    
     pool.query(sqlText, sqlValues)
         .then((dbres) => res.sendStatus(201))
         .catch((dberror) => {
